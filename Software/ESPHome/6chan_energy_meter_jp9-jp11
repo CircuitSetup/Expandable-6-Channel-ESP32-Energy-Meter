@@ -9,7 +9,7 @@ substitutions:
 # 50A/1V SCT-013-050: 15420
 # 100A/50ma SCT-013-000: 32498
   current_cal: '32498'
-#9VAC Transformer for versions > meter v1.2
+# 9VAC Transformer for versions > meter v1.2
   voltage_cal: '7305'
 
 esphome:
@@ -26,10 +26,10 @@ wifi:
     subnet: !secret ip_subnet
     dns1: !secret ip_dns1
 
-mqtt:
-  broker: !secret mqtt_broker
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
+#mqtt:
+#  broker: !secret mqtt_broker
+#  username: !secret mqtt_user
+#  password: !secret mqtt_pass
 
 # Enable logging
 logger:
