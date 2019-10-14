@@ -15,12 +15,12 @@ esphome:
 
 wifi:
   ssid: "linksys"
-  password: "jhn003021"
+  password: "PASSWORD"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "6Chan_EnergyMeter"
-    password: "gpC87UWj5kzk"
+    password: "AP_PASSWORD"
 
 # Enable logging
 logger:
