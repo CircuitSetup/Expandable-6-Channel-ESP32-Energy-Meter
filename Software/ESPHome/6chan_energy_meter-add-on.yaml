@@ -26,6 +26,11 @@ wifi:
     gateway: !secret ip_gateway
     subnet: !secret ip_subnet
     dns1: !secret ip_dns1
+    
+# mqtt:
+#  broker: !secret mqtt_broker
+#  username: !secret mqtt_user
+#  password: !secret mqtt_pass
 
 # Enable logging
 logger:
