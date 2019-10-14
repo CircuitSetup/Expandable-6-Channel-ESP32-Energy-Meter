@@ -14,13 +14,18 @@ esphome:
   board: nodemcu-32s
 
 wifi:
-  ssid: "linksys"
-  password: "PASSWORD"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_eh_nrgnode
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "6Chan_EnergyMeter"
-    password: "AP_PASSWORD"
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
 
 # Enable logging
 logger:
