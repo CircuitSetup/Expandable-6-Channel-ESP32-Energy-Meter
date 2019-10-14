@@ -77,7 +77,7 @@ sensor:
     frequency:
       name: ${disp_name} Freq A
     line_frequency: 60Hz
-    gain_pga: 2X
+    gain_pga: 1X
     update_interval: ${update_time}
 #IC2
   - platform: atm90e32
@@ -105,8 +105,9 @@ sensor:
     frequency:
       name: ${disp_name} Freq B
     line_frequency: 60Hz
-    gain_pga: 2X
+    gain_pga: 1X
     update_interval: ${update_time}
+    
 #Watts per channel
   - platform: template
     name: ${disp_name} CT1 Watts
