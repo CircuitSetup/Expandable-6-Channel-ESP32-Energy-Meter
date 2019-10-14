@@ -1,0 +1,281 @@
+# Example config for when jp9-jp11 are all bridged - this connects all the voltage channels and allows for power to be calculated by the meter directly.
+# 1 add-on board
+
+substitutions:
+# Change the disp_name to something you want  
+  disp_name: 6C
+# Interval of how often the power is updated
+  update_time: 10s
+# 30A/1V SCT-013-030: 8650
+# 50A/1V SCT-013-050: 15420
+# 100A/50ma SCT-013-000: 32498
+  current_cal: '32498'
+#9VAC Transformer for versions > meter v1.2
+  voltage_cal: '7305'
+
+esphome:
+  name: 6chan_energy_meter
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_eh_nrgnode
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+web_server:
+  port: 80
+
+spi:
+  clk_pin: 18
+  miso_pin: 19
+  mosi_pin: 23
+
+sensor:
+  - platform: wifi_signal
+    name: ${disp_name} WiFi
+    update_interval: 60s
+#IC1 Main
+  - platform: atm90e32
+    cs_pin: 5
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts A
+        id: ic1Volts
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT1 Amps
+        id: ct1Amps
+      power:
+        name: ${disp_name} CT1 Watts
+        id: ct1Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT2 Amps
+        id: ct2Amps
+       power:
+        name: ${disp_name} CT2 Watts
+        id: ct2Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT3 Amps
+        id: ct3Amps
+      power:
+        name: ${disp_name} CT3 Watts
+        id: ct3Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq A
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+#IC2 Main
+  - platform: atm90e32
+    cs_pin: 4
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts B
+        id: ic2Volts
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT4 Amps
+        id: ct4Amps
+      power:
+        name: ${disp_name} CT4 Watts
+        id: ct4Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT5 Amps
+        id: ct5Amps
+      power:
+        name: ${disp_name} CT5 Watts
+        id: ct5Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT6 Amps
+        id: ct6Amps
+      power:
+        name: ${disp_name} CT6 Watts
+        id: ct6Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq B
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+#IC1 AddOn
+  - platform: atm90e32
+    cs_pin: 0
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts A AO
+        id: ic1VoltsAO
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT7 Amps 
+        id: ct7Amps
+      power:
+        name: ${disp_name} CT7 Watts
+        id: ct7Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT8 Amps
+        id: ct8Amps
+       power:
+        name: ${disp_name} CT8 Watts
+        id: ct8Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT9 Amps
+        id: ct9Amps
+      power:
+        name: ${disp_name} CT9 Watts
+        id: ct9Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq A AO
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+#IC2 AddOn
+  - platform: atm90e32
+    cs_pin: 16
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts B AO
+        id: ic2VoltsAO
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT10 Amps
+        id: ct10Amps
+      power:
+        name: ${disp_name} CT10 Watts
+        id: ct10Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT11 Amps
+        id: ct11Amps
+      power:
+        name: ${disp_name} CT11 Watts
+        id: ct11Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT12 Amps
+        id: ct12Amps
+      power:
+        name: ${disp_name} CT12 Watts
+        id: ct12Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq B AO
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    
+#Total Amps Main
+  - platform: template
+    name: ${disp_name} Total Amps Main
+    id: totalAmpsMain
+    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    icon: "mdi:flash"
+    update_interval: ${update_time}
+#Total Amps AddOn
+  - platform: template
+    name: ${disp_name} Total Amps Add-on
+    id: totalAmpsAddOn
+    lambda: return id(ct7Amps).state + id(ct8Amps).state + id(ct9Amps).state + id(ct10Amps).state + id(ct11Amps).state + id(ct12Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    icon: "mdi:flash"
+    update_interval: ${update_time}      
+#Total Amps
+  - platform: template
+    name: ${disp_name} Total Amps
+    id: totalAmps
+    lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    icon: "mdi:flash"
+    update_interval: ${update_time}
+    
+#Total Watts Main
+  - platform: template
+    name: ${disp_name} Total Watts Main
+    id: totalWattsMain
+    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+#Total Watts AddOn
+  - platform: template
+    name: ${disp_name} Total Watts Add-on
+    id: totalWattsAddOn
+    lambda: return id(ct7Watts).state + id(ct8Watts).state + id(ct9Watts).state + id(ct10Watts).state + id(ct11Watts).state + id(ct12Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+#Total Watts
+  - platform: template
+    name: ${disp_name} Total Watts
+    id: totalWatts
+    lambda: return id(totalWattsMain).state + id(totalWattsAddOn).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+    
+#kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Total kWh
+    power_id: totalWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    
+switch:
+  - platform: restart
+    name: ${disp_name} Restart  
+time:
+  - platform: sntp
+    id: sntp_time   
