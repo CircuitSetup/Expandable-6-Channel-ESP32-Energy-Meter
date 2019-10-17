@@ -1,0 +1,291 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>emonESP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <meta name="description" content="emonESP">
+  <meta name="author" content="emonESP">
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+  <div id="page">
+    <div class="box">
+      <h1>emon<span>ESP</span></h1>
+      <h3>WiFi Emoncms Link for CircuitSetup Energy Meters</h3>
+    </div>
+
+    <div class="loading" data-bind="visible: !initialised()">
+      Loading, please wait...
+    </div>
+
+    <div id="left-hand-container" data-bind="visible: initialised" style="display: none">
+      <div id="one">
+        <h2>1. WiFi Network</h2>
+        <div class="itembody-wrapper">
+          <p><b>Mode:</b> <span id="mode" data-bind="text: status.fullMode"></span></p>
+
+          <div id="client-view" data-bind="visible: status.isWifiClient">
+            <table>
+              <tr>
+                <th>Network</th>
+                <th>RSSI dBm</th>
+              </tr>
+                <tbody id="sta-ssid">
+                  <tr>
+                    <td data-bind="text: config.ssid"></td>
+                    <td data-bind="text: status.srssi"></td>
+                  </tr>
+                </tbody>
+            </table>
+            <p><b>IP Address:</b><br><a data-bind="text: status.ipaddress, attr: {href: 'http://'+status.ipaddress()}"></a></p>
+            <button id="apoff" data-bind="visible: status.isWifiAccessPoint">Turn off Access Point</button>
+          </div>
+
+          <div id="ap-view" data-bind="visible: !status.isWifiClient() &amp;&amp; !wifiConnecting()">
+            <p>Connect to network:</p>
+            <table>
+              <tr>
+                <th>Select</th>
+                <th>Network</th>
+                <th>RSSI dBm</th>
+              </tr>
+              <tbody id="networks" data-bind="foreach: status.networks">
+                <tr>
+                  <td><input class='networkcheckbox' name='network' data-bind="checkedValue: $data, checked: $root.config.ssid"
+                      type='radio'></td>
+                  <td data-bind="text: $data"></td>
+                  <td data-bind="text: $root.status.rssi()[$index()]"></td>
+                </tr>
+              </tbody>
+            </table>
+            <p data-bind="text: config.ssid"></p>
+            <p>
+              <b>Passkey:</b><br>
+              <input type="password" data-bind="textInput: config.pass">
+              <button data-bind="click: saveNetwork, text: (saveNetworkFetching() ? 'Saving' : (saveNetworkSuccess() ? 'Saved' : 'Connect')), disable: saveNetworkFetching">Connect</button>
+            </p>
+          </div>
+
+          <div data-bind="visible: wifiConnecting">
+            <p>Connecting to WiFi Network...Please wait 10s</p>
+          </div>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="two">
+        <h2>2. Emoncms</h2>
+        <div class="itembody-wrapper">
+          <p>
+            <b>Emoncms Server*:</b><br>
+            <input type="text" data-bind="textInput: config.emoncms_server"><br/>
+            <span>
+              e.g '<a href="https://emoncms.org">emoncms.org</a>',
+              'emonpi', or '192.168.1.4'
+            </span><br/>
+          </p>
+          <p>
+            <b>Emoncms Path:</b><br>
+            <input type="text" data-bind="textInput: config.emoncms_path"><br/>
+            <span>
+              e.g '/emoncms', or empty for emoncms.org
+            </span><br/>
+          </p>
+          <p>
+            <b>Emoncms Node Name*:</b><br>
+            <input type="text" data-bind="textInput: config.emoncms_node">
+          </p>
+          <p>
+            <b>Write apikey*:</b><br>
+            <input type="text" data-bind="textInput: config.emoncms_apikey"><br>
+          </p>
+          <p>
+            <b>SSL SHA-1 Fingerprint:</b><br>
+            <input type="text" data-bind="textInput: config.emoncms_fingerprint"><br>
+            <div class="small-text">HTTPS will be enabled if present e.g:<br>
+              7D:82:15:BE:D7:BC:72:58:87:7D:8E:40:D4:80:BA:1A:9F:8B:8D:DA
+			</div><br>
+            <button data-bind="click: saveEmonCms, text: (saveEmonCmsFetching() ? 'Saving' : (saveEmonCmsSuccess() ? 'Saved' : 'Save')), disable: saveEmonCmsFetching">Save</button>
+            <b>&nbsp; Connected:&nbsp;<span data-bind="text: '1' === status.emoncms_connected() ? 'Yes' : 'No'"></span></b>
+            <span data-bind="visible: '1' === status.emoncms_connected()"></br></br><b>&nbsp; Successful messages:&nbsp;<span data-bind="text: status.packets_success()+'/'+status.packets_sent()+' '+((status.packets_success()/status.packets_sent())*100)+'%'"></span></b></span>
+          </p>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="three">
+        <h2>3. MQTT</h2>
+        <div class="itembody-wrapper">
+          <p><b>MQTT Server*:</b><br>
+            <input data-bind="textInput: config.mqtt_server" type="text"><br/>
+            <span class="small-text">e.g 'emonpi', 'test.mosquitto.org' or '192.168.1.4'</span><br>
+          </p>
+          <p><b>MQTT Base-topic*:</b><br>
+            <input data-bind="textInput: config.mqtt_topic" type="text"><br/>
+            <span class="small-text">
+              e.g 'emon/emonesp', 'emon/heatpump'<br>
+              Data will be published to sub topic e.g. 'emon/emonesp/CT1'
+            </span>
+          </p>
+          <p><b>MQTT Feed-name prefix:</b><br>
+            <input data-bind="textInput: config.mqtt_feed_prefix" type="text"><br/>
+            <span class="small-text">
+              Value to prefix the feed names with: &#60;base-topic&#62;/&#60;prefix&#62;&#60;feed-name&#62;. Required for posting to AdafruitIO.
+              Leave blank for no prefix.
+            </span>
+          </p>
+          <p><b>Username:</b><br>
+            <input data-bind="textInput: config.mqtt_user" type="text"><br/>
+            <span class="small-text">Leave blank for authentication</span>
+          </p>
+          <p><b>Password:</b><br>
+            <input data-bind="textInput: config.mqtt_pass" type="password"><br/>
+            <span class="small-text">Leave blank for no authentication</span><br>
+          <p>
+            <button data-bind="click: saveMqtt, text: (saveMqttFetching() ? 'Saving' : (saveMqttSuccess() ? 'Saved' : 'Save')), disable: saveMqttFetching">Save</button>
+            <b>&nbsp; Connected:&nbsp;<span data-bind="text: '1' === status.mqtt_connected() ? 'Yes' : 'No'"></span></b>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--//////////////////////////////////////////////////////////////////////////////////-->
+    <div id="right-hand-container" data-bind="visible: initialised" style="display: none">
+      <div id="four">
+        <h2>4. Latest Data</h2>
+        <div class="itembody-wrapper">
+          <table>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+            </tr>
+            <tbody data-bind="foreach: last.values">
+              <tr>
+                <td data-bind="text: key"></td>
+                <td data-bind="text: value"></td>
+              </tr>
+            </tbody>
+          </table><br>
+        </div>
+        <div class="small-text">
+          Input key value pairs received via serial UART (e.g "CT1:3935,CT2:325") or HTTP input API e.g.: <br>
+          <a data-bind="attr: {href: 'http://'+status.ipaddress()+'/input?string=CT1:3935,CT2:325,T0:20.5'}">http://<span data-bind="text: status.ipaddress"></span>/input?string=CT1:3935,CT2:325,T0:20.5</a>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="five">
+        <h2>5. Admin</h2>
+        <div class="itembody-wrapper">
+          <p>
+            <b>Username:</b><br>
+            <input type="text" value="admin" data-bind="textInput: config.www_username">
+          </p>
+          <p>
+            <b>Password:</b><br>
+            <input type="password" data-bind="textInput: config.www_password"><br><br>
+            <span>Web interface HTTP authentication.</span><br><br>
+            <button data-bind="click: saveAdmin, text: (saveAdminFetching() ? 'Saving' : (saveAdminSuccess() ? 'Saved' : 'Save')), disable: saveAdminFetching">Save</button>
+          </p>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="six">
+        <h2>6. Firmware</h2>
+        <div class="itembody-wrapper">
+			<span>Check the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> for the latest updates to our version of EmonESP. The Upload feature can be used to upload the latest firmware .bin files. If for some reason the update fails, you may need to connect the ESP to your computer and upload via the Arduino or Platform.io IDE.</span><br>
+
+          <button id="upload">Upload</button>
+        </div>
+      </div>
+	        <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="seven">
+        <h2>7. Calibration Settings</h2>
+        <div class="itembody-wrapper">
+		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> The default values are used unless other values are entered here.</span><br><br>
+          <p>
+            <b>Voltage1:</b><br>
+			<span class="small-text">7305 - 9v AC Transformer - Jameco 157041 (default)</span><br>
+            <input type="text" value="voltage_cal" data-bind="textInput: config.voltage_cal"><br>
+          </p>
+		  <p>
+            <b>Voltage2:</b><br>
+            <input type="text" value="voltage_cal" data-bind="textInput: config.voltage_cal"><br>
+          </p>
+          <p>
+            <b>CT1:</b><br>
+			<span class="small-text">If you are using an add-on board, CT1-CT6 will be set with the values below for all boards. If you need a seperate current calibration for an add-on board, this has to be set in software.
+			<br>30A/1V SCT-013-030: 8650
+			<br>50A/1V SCT-013-050: 15420
+			<br>100A/50ma SCT-013-000: 32498 (default)</span><br>
+            <input type="text" data-bind="textInput: config.ct1_cal"><br>
+          </p>
+		  <p>
+            <b>CT2:</b><br>
+            <input type="text" data-bind="textInput: config.ct2_cal"><br>
+          </p>
+		  <p>
+            <b>CT3:</b><br>
+            <input type="text" data-bind="textInput: config.ct3_cal"><br>
+          </p>
+		  <p>
+            <b>CT4:</b><br>
+            <input type="text" data-bind="textInput: config.ct4_cal"><br>
+          </p>
+		  <p>
+            <b>CT5:</b><br>
+            <input type="text" data-bind="textInput: config.ct5_cal"><br>
+          </p>
+		  <p>
+            <b>CT6:</b><br>
+            <input type="text" data-bind="textInput: config.ct6_cal"><br>
+          </p>
+		  <br>
+		  <p>
+		    <b>Frequency:</b><br>
+            <input type="text" data-bind="textInput: config.freq_cal"><br>
+			<span class="small-text">5231 for 60 Hz (North America Default)
+			<br>135 for 50 hz (rest of the world)</span>
+          </p>
+		  <p>
+		    <b>CT Gain (PGA):</b><br>
+            <input type="text" data-bind="textInput: config.gain_cal"><br>
+			<span class="small-text"> 0 for 0-100A (1x) (default)
+			<br>21 for 101-200A (2x) 
+			<br>42 for 201A+ (4x)</span>
+			<br><br>
+            
+            <button data-bind="click: saveCal, text: (saveCalFetching() ? 'Saving' : (saveCalSuccess() ? 'Saved' : 'Save')), disable: saveCalFetching">Save</button><br>
+			<span>After saving, the ESP will be restarted and values sent to the energy meter</span>
+          </p>
+        </div>
+      </div>
+
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="eight">
+        <h2>8. System</h2>
+        <div class="itembody-wrapper">
+          <p><b>Free RAM:</b> <span data-bind="text: scaleString(status.free_heap(), 1024, 0) + 'K'"></span></p>
+          <p><b>Flash Size:</b> <span data-bind="text: scaleString(config.espflash(), 1024, 0) + 'K'"></span></p>
+          <p><b>Version:</b> v<span data-bind="text: config.version"></span></p>
+          <button id="restart">Restart</button>
+          <button id="reset">Factory Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-small-scrn">
+    Powered by <a href="http://openenergymonitor.org"><span>Open</span>EnergyMonitor.org</a>
+  </div>
+  <div id="footer-large-scrn">
+    Powered by <a href="http://openenergymonitor.org"><span>Open</span>EnergyMonitor.org</a>
+  </div>
+  <script src="lib.js" type="text/javascript"></script>
+  <script src="config.js" type="text/javascript"></script>
+</body>
+
+</html>
