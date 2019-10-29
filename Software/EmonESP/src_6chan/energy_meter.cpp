@@ -344,7 +344,7 @@ void energy_meter_loop()
       AddOn1_current1 = AddOn1_CT1 + AddOn1_CT2 + AddOn1_CT3;
       AddOn1_current2 = AddOn1_CT4 + AddOn1_CT5 + AddOn1_CT6;
       AddOn1_totalCurrent = AddOn1_current1 + AddOn1_current2;
-      totalCurrent += AddOn1_totalCurrent
+      totalCurrent += AddOn1_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn1_totalWatts = AddOn1_1.GetTotalActivePower() + AddOn1_2.GetTotalActivePower();
@@ -374,7 +374,7 @@ void energy_meter_loop()
       AddOn2_current1 = AddOn2_CT1 + AddOn2_CT2 + AddOn2_CT3;
       AddOn2_current2 = AddOn2_CT4 + AddOn2_CT5 + AddOn2_CT6;
       AddOn2_totalCurrent = AddOn2_current1 + AddOn2_current2;
-      totalCurrent += AddOn2_totalCurrent
+      totalCurrent += AddOn2_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn2_totalWatts += AddOn2_1.GetTotalActivePower() + AddOn2_2.GetTotalActivePower();
@@ -403,7 +403,7 @@ void energy_meter_loop()
       AddOn3_current1 = AddOn3_CT1 + AddOn3_CT2 + AddOn3_CT3;
       AddOn3_current2 = AddOn3_CT4 + AddOn3_CT5 + AddOn3_CT6;
       AddOn3_totalCurrent = AddOn3_current1 + AddOn3_current2;
-      totalCurrent += AddOn3_totalCurrent
+      totalCurrent += AddOn3_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn3_totalWatts += AddOn3_1.GetTotalActivePower() + AddOn3_2.GetTotalActivePower();
@@ -432,7 +432,7 @@ void energy_meter_loop()
       AddOn4_current1 = AddOn4_CT1 + AddOn4_CT2 + AddOn4_CT3;
       AddOn4_current2 = AddOn4_CT4 + AddOn4_CT5 + AddOn4_CT6;
       AddOn4_totalCurrent = AddOn4_current1 + AddOn4_current2;
-      totalCurrent += AddOn4_totalCurrent
+      totalCurrent += AddOn4_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn4_totalWatts += AddOn4_1.GetTotalActivePower() + AddOn4_2.GetTotalActivePower();
@@ -461,7 +461,7 @@ void energy_meter_loop()
       AddOn5_current1 = AddOn5_CT1 + AddOn5_CT2 + AddOn5_CT3;
       AddOn5_current2 = AddOn5_CT4 + AddOn5_CT5 + AddOn5_CT6;
       AddOn5_totalCurrent = AddOn5_current1 + AddOn5_current2;
-      totalCurrent += AddOn5_totalCurrent
+      totalCurrent += AddOn5_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn5_totalWatts += AddOn5_1.GetTotalActivePower() + AddOn5_2.GetTotalActivePower();
@@ -490,7 +490,7 @@ void energy_meter_loop()
       AddOn6_current1 = AddOn6_CT1 + AddOn6_CT2 + AddOn6_CT3;
       AddOn6_current2 = AddOn6_CT4 + AddOn6_CT5 + AddOn6_CT6;
       AddOn6_totalCurrent = AddOn6_current1 + AddOn6_current2;
-      totalCurrent += AddOn6_totalCurrent
+      totalCurrent += AddOn6_totalCurrent;
       
       #ifdef JP9_JP11_SET
       AddOn6_totalWatts += AddOn6_1.GetTotalActivePower() + AddOn6_2.GetTotalActivePower();
