@@ -56,12 +56,12 @@ The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board c
 **Always inset the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
 
 #### **Communicating with the ESP32**
-The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. 
+The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. Each board uses 2 CS pins. 
 
 The main board uses the following SPI pins:
 * CLK - 18
 * MISO - 19
-* MODI - 23
+* MOSI - 23
 * CS1 - 5 (CT1-CT3 & Voltage 1)
 * CS2 - 4 (CT4-CT6 & Voltage 2)
 
@@ -89,6 +89,14 @@ The CS pins can be:
     * 22
     * 25
     * 26
+#### **Measuring Power & Other Metering Values**
+The Expandable 6 Channel ESP32 Energy Meter uses 2 ATM90E32AS ICs. Each IC has 3 voltage channels and 3 current channels. In order for power metering data to be calculated internally, each current channel must have a reference voltage. If the voltage is out of phase with the current, then the current and power will read as negative. 
+
+v1.1 of the meter used 1 of the voltage channels for each IC. This means that power and metering data would have to be calculated in software, or volage channels would have to be mapped via changing registers on the IC to get power and metering data from CT2, CT3, CT5, CT6. 
+
+v1.2 & v1.3 have JP8-JP11 on the back of the board, that would allow all voltage channels to be connected together, which would allow power and other metering values to be calculated. Most of v1.3 came soldered together.
+
+v1.4 removed JP8-JP11, and has voltage channels connected internally on the pcb. 
 
 #### **Measuring A Second Voltage**
 The holes labeled VA2 next to the power plug on the meter main board, and in the bottom right of the add-on board are for measuring a second voltage. To do this you must:
