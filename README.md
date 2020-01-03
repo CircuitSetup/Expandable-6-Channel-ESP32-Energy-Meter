@@ -49,13 +49,13 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
     *   Libraries for [CircuitPython](https://github.com/BitKnitting/CircuitSetup_CircuitPython) & [MicroPython](https://github.com/BitKnitting/CircuitSetup_micropython)
     
 
-#### **Setting up the Meter**
+### **Setting up the Meter**
 
-### **Plugging in the ESP32**
+#### **Plugging in the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board can be plugged directly into the meter. See the list above for compatible ESP32 dev boards. 
 **Always inset the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
 
-### **Communicating with the ESP32**
+#### **Communicating with the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. 
 
 The main board uses the following SPI pins:
@@ -90,7 +90,7 @@ The CS pins can be:
     * 25
     * 26
 
-### **Measuring A Second Voltage**
+#### **Measuring A Second Voltage**
 The holes labeled VA2 next to the power plug on the meter main board, and in the bottom right of the add-on board are for measuring a second voltage. To do this you must:
 * Sever (with a knife) JP12 and JP13 on the back of the board for v1.3+, or JP7 for prior versions
 * Use a second AC transformer, ideally one idential to the primary
