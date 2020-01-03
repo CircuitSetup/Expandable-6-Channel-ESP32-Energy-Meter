@@ -47,3 +47,56 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
     *   Our custom version of [EmonESP](https://github.com/CircuitSetup/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
     *   The current dev release of [ESPHome.](https://github.com/esphome/esphome/tree/dev) Details on [integration with Home Assistant are located here.](https://github.com/digiblur/digiNRG_ESPHome) and [here on ESPHome.io](https://next.esphome.io/components/sensor/atm90e32.html)
     *   Libraries for [CircuitPython](https://github.com/BitKnitting/CircuitSetup_CircuitPython) & [MicroPython](https://github.com/BitKnitting/CircuitSetup_micropython)
+    
+
+#### **Setting up the Meter**
+
+### **Plugging in the ESP32**
+The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board can be plugged directly into the meter. See the list above for compatible ESP32 dev boards. 
+**Always inset the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
+
+### **Communicating with the ESP32**
+The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. 
+
+The main board uses the following SPI pins:
+* CLK - 18
+* MISO - 19
+* MODI - 23
+* CS1 - 5 (CT1-CT3 & Voltage 1)
+* CS2 - 4 (CT4-CT6 & Voltage 2)
+
+The add-on board allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
+The CS pins can be:
+  * CT1-CT3 (CS):
+    * For v1.3 and under:
+      * 0
+      * 2 (*make sure that an on board LED is not used for IO2 on the ESP32) 
+      * 12 (*will cause ESP32 to not boot if used)
+      * 13
+      * 14
+      * 15
+    * For v1.4 and above:
+      * 0
+      * 27
+      * 35
+      * 13
+      * 14
+      * 15
+  * CT4-CT6 (CS2):
+    * 16
+    * 17
+    * 21
+    * 22
+    * 25
+    * 26
+
+### **Measuring A Second Voltage**
+The holes labeled VA2 next to the power plug on the meter main board, and in the bottom right of the add-on board are for measuring a second voltage. To do this you must:
+* Sever (with a knife) JP12 and JP13 on the back of the board for v1.3+, or JP7 for prior versions
+* Use a second AC transformer, ideally one idential to the primary
+* Plug in the second AC transformer to an outlet on the opposite phase to the primary
+* Solder on a pin header, 2.54mm screw connector, or pigtail on to VA2+ & VA2-
+
+When voltage jumpers are severed, the voltage reference for CT4-CT6 will be from VA2. This means that current transformers for CT4-CT6 should be hooked up to circuits that are on the same phase as VA2, and CT1-CT3 should be hooked up to circuits are are in phase with the primary voltage. If a CT is not in phase with the voltage its current and power readings will be negative. If, for example, you have 4 circuits in phase with the primary, and 2 in phase with VA2, you can reverse the current transformer on the wire to put it in phase with the voltage. 
+
+For add-on boards, the primary voltage will come from the main board. The optional secondary voltage measurement (also VA2 pins), will be in phase with CT4-CT6.
