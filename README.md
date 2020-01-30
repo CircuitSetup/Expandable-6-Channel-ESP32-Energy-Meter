@@ -58,14 +58,14 @@ The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board c
 #### **Communicating with the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. Each board uses 2 CS pins. 
 
-The main board uses the following SPI pins:
+The **main board** uses the following SPI pins:
 * CLK - 18
 * MISO - 19
 * MOSI - 23
 * CS1 - 5 (CT1-CT3 & Voltage 1)
 * CS2 - 4 (CT4-CT6 & Voltage 2)
 
-The add-on board allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
+The **add-on board** allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
 The CS pins can be:
   * CT1-CT3 (CS):
     * For v1.3 and under:
