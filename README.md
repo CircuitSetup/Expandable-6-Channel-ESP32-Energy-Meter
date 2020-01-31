@@ -31,15 +31,15 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 #### **What you'll need:**
 
 *   **Current Transformers** (depending on your application)
-    *   [SCT-013-030 30A/1V](https://amzn.to/2ZNDTQb)
-    *   [SCT-013-050 50A/1V](https://amzn.to/2NKSb1P)
+    *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/index.php/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
+    *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/index.php/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
     *   [SCT-013-000 100A/50mA](https://circuitsetup.us/index.php/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
     *   [SCT-016 120A/40mA](https://circuitsetup.us/index.php/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
     *   [Magnelab SCT-0750-100](https://amzn.to/2IF8xnY) (screw connectors - must sever burden resistor connection on the back of the board since they have a built in burden resistor).
     *   Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mA.
-*   **AC Transformer:** [Jameco Reliapro 9v](https://amzn.to/2XcWJjI) or 12v. The positive pin must be 2.5mm (some are 2.1)
+*   **AC Transformer:** [Jameco Reliapro 9v](https://circuitsetup.us/index.php/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
 *   **ESP32** (choose one):
-    *   [NodeMCU](https://amzn.to/2pCtTtz)
+    *   [NodeMCU 32s](https://circuitsetup.us/index.php/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
     *   [Espressif DevKitC](https://amzn.to/2PHvVsg)
     *   [DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32U?qs=%252BEew9%252B0nqrCEVvpkdH%2FG5Q%3D%3D) if you need better wifi reception (don't forget the antenna)
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
@@ -53,7 +53,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 #### **Plugging in the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board can be plugged directly into the meter. See the list above for compatible ESP32 dev boards. 
-**Always inset the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
+**Always insert the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
 
 #### **Communicating with the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter uses SPI to communicate with the ESP32. Each board uses 2 CS pins. 
@@ -89,6 +89,10 @@ The CS pins can be:
     * 22
     * 25
     * 26
+    
+#### **Calibrating Current Sensors & Voltage (AC Transformer)** 
+[See here for the calibration procedure.] (https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter#calibration)
+
 #### **Measuring Power & Other Metering Values**
 The Expandable 6 Channel ESP32 Energy Meter uses 2 ATM90E32AS ICs. Each IC has 3 voltage channels and 3 current channels. In order for power metering data to be calculated internally, each current channel must have a reference voltage. If the voltage is out of phase with the current, then the current and power will read as negative. 
 
