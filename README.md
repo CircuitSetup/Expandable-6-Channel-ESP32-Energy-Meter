@@ -30,7 +30,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 #### **What you'll need:**
 
-*   **Current Transformers** (depending on your application)
+*   **Current Transformers** (any combination of the following, or any current transformer that does not exceed 1V or 100mA output)
     *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/index.php/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
     *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/index.php/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
     *   [SCT-013-000 100A/50mA](https://circuitsetup.us/index.php/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
