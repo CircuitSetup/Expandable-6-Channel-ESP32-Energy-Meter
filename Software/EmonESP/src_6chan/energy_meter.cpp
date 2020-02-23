@@ -283,6 +283,15 @@ void energy_meter_loop()
     currentCT4 = main2.GetLineCurrentA();
     currentCT5 = main2.GetLineCurrentB();
     currentCT6 = main2.GetLineCurrentC();
+
+    /* determine if negative - current registers are not signed, so this is an easy way to tell */
+    if (main1.GetActivePowerA() < 0) currentCT1 *= -1;
+    if (main1.GetActivePowerB() < 0) currentCT2 *= -1;
+    if (main1.GetActivePowerC() < 0) currentCT3 *= -1;
+    if (main2.GetActivePowerA() < 0) currentCT4 *= -1;
+    if (main2.GetActivePowerB() < 0) currentCT5 *= -1;
+    if (main2.GetActivePowerC() < 0) currentCT6 *= -1;
+    
     current1 = currentCT1 + currentCT2 + currentCT3;
     current2 = currentCT4 + currentCT5 + currentCT6;
     totalCurrent = current1 + current2;
@@ -320,7 +329,7 @@ void energy_meter_loop()
     
     #ifdef JP9_JP11_SET
     #ifdef EXPORT_METERING_VALS
-    Serial.println("Power Factor:" + String(avgPF);
+    Serial.println("Power Factor:" + String(avgPF));
     Serial.println("Fundamental Power:" + String(fundPower) + "W");
     Serial.println("Harmonic Power:" + String(harPower) + "W");
     Serial.println("Reactive Power:" + String(reactPower) + "var");
@@ -508,10 +517,10 @@ void energy_meter_loop()
       Serial.println("");
     #endif
 #endif
-    Serial.println("Total Current:" + String(totalCurrent));
-    Serial.println("Total Power:" + String(totalWatts));
-    Serial.println(String(temp) + "C");
-    Serial.println("f" + String(freq) + "Hz");
+    Serial.println("Total Current:" + String(totalCurrent) + "A");
+    Serial.println("Total Power:" + String(totalWatts)+ "W");
+    Serial.println("Temp:" + String(temp) + "C");
+    Serial.println("Freq:" + String(freq) + "Hz");
 
 
 #ifdef ENABLE_OLED_DISPLAY
@@ -528,7 +537,7 @@ void energy_meter_loop()
   display.println("CT4:" + String(currentCT4) + "A");
   display.println("CT5:" + String(currentCT5) + "A");
   display.println("CT6:" + String(currentCT6) + "A");
-  display.println("W:" + String(totalWatts) + "W");
+  display.println("Total W:" + String(totalWatts) + "W");
   /*
     display.println("Freq: " + String(freq) + "Hz");
     display.println("PF: " + String(powerFactor));

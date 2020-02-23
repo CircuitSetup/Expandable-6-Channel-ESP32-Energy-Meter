@@ -142,7 +142,7 @@
           </p>
           <p><b>Username:</b><br>
             <input data-bind="textInput: config.mqtt_user" type="text"><br/>
-            <span class="small-text">Leave blank for authentication</span>
+            <span class="small-text">Leave blank for no authentication</span>
           </p>
           <p><b>Password:</b><br>
             <input data-bind="textInput: config.mqtt_pass" type="password"><br/>
@@ -206,7 +206,7 @@
       <div id="seven">
         <h2>7. Calibration Settings</h2>
         <div class="itembody-wrapper">
-		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> The default values are used unless other values are entered here.</span><br><br>
+		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> <b>The default values are used unless other values are entered here.</b></span><br><br>
           <p>
             <b>Voltage1:</b><br>
 			<span class="small-text">7305 - 9v AC Transformer - Jameco 157041 (default)</span><br>
@@ -219,9 +219,12 @@
           <p>
             <b>CT1:</b><br>
 			<span class="small-text">If you are using an add-on board, CT1-CT6 will be set with the values below for all boards. If you need a seperate current calibration for an add-on board, this has to be set in software.
-			<br>30A/1V SCT-013-030: 8650
-			<br>50A/1V SCT-013-050: 15420
-			<br>100A/50ma SCT-013-000: 32498 (default)</span><br>
+			<br>20A/25mA SCT-006: 11131
+  			<br>30A/1V SCT-013-030: 8650
+  			<br>50A/1V SCT-013-050: 15420
+  			<br>80A/26.6mA SCT-010: 41996
+  			<br>100A/50ma SCT-013-000: 27961 (default)
+  			<br>120A/40mA: SCT-016: 41880</span><br>
             <input type="text" data-bind="textInput: config.ct1_cal"><br>
           </p>
 		  <p>
@@ -248,15 +251,16 @@
 		  <p>
 		    <b>Frequency:</b><br>
             <input type="text" data-bind="textInput: config.freq_cal"><br>
-			<span class="small-text">5231 for 60 Hz (North America Default)
-			<br>135 for 50 hz (rest of the world)</span>
+			<span class="small-text">60 Hz - North America: 4231 (Default)
+			<br>50 Hz - Europe: 135</span>
           </p>
 		  <p>
 		    <b>CT Gain (PGA):</b><br>
+			<span class="small-text">Sets the CT current gain to 1x, 2x, or 4x. If your CT has a low current output use 2x or 4x.</span><br>
             <input type="text" data-bind="textInput: config.gain_cal"><br>
-			<span class="small-text"> 0 for 0-100A (1x) (default)
-			<br>21 for 101-200A (2x) 
-			<br>42 for 201A+ (4x)</span>
+			<span class="small-text"> 1x: 0 (default)
+			<br>2x: 21
+			<br>4x: 42</span>
 			<br><br>
             
             <button data-bind="click: saveCal, text: (saveCalFetching() ? 'Saving' : (saveCalSuccess() ? 'Saved' : 'Save')), disable: saveCalFetching">Save</button><br>

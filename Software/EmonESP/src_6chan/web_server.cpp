@@ -53,7 +53,7 @@ static const char _DUMMY_PASSWORD[] PROGMEM = "_DUMMY_PASSWORD";
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)
-String currentfirmware = "2.5.4"; //ESCAPEQUOTE(BUILD_TAG);
+String currentfirmware = "2.5.7"; //ESCAPEQUOTE(BUILD_TAG);
 
 void dumpRequest(AsyncWebServerRequest *request) {
   if (request->method() == HTTP_GET) {

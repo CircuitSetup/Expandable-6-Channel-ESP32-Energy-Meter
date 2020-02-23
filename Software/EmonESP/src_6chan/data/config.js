@@ -308,19 +308,15 @@ function EmonEspViewModel() {
       pass: self.config.mqtt_pass()
     };
 
-    if (mqtt.server === "") {
-      alert("Please enter MQTT server");
-    } else {
-      self.saveMqttFetching(true);
-      self.saveMqttSuccess(false);
-      $.post(baseEndpoint + "/savemqtt", mqtt, function (data) {
-        self.saveMqttSuccess(true);
-      }).fail(function () {
-        alert("Failed to save MQTT config");
-      }).always(function () {
-        self.saveMqttFetching(false);
-      });
-    }
+	  self.saveMqttFetching(true);
+	  self.saveMqttSuccess(false);
+	  $.post(baseEndpoint + "/savemqtt", mqtt, function (data) {
+		self.saveMqttSuccess(true);
+	  }).fail(function () {
+		alert("Failed to save MQTT config");
+	  }).always(function () {
+		self.saveMqttFetching(false);
+	  });
   };
   // -----------------------------------------------------------------------
   // Event: Calibration save

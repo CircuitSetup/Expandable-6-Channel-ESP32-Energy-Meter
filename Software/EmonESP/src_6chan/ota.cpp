@@ -32,15 +32,6 @@
 #include "wifi.h"
 #include "http.h"
 
-#include <FS.h>
-
-#include <ArduinoOTA.h>               // local OTA update from Arduino IDE
-#ifdef ESP32
-#include <Update.h>        // remote OTA update from server
-#elif defined(ESP8266)
-#include <ESP8266httpUpdate.h>        // remote OTA update from server
-#endif
-
 
 // -------------------------------------------------------------------
 //OTA UPDATE SETTINGS

@@ -33,6 +33,8 @@
 // -------------------------------------------------------------------
 
 #include <Arduino.h>
+#include <PubSubClient.h>             // MQTT https://github.com/knolleary/pubsubclient PlatformIO lib: 89
+#include <WiFiClient.h>
 
 // -------------------------------------------------------------------
 // Perform the background MQTT operations. Must be called in the main
