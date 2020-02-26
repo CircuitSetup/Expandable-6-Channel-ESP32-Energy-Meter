@@ -1,14 +1,18 @@
-# Example config for when jp9-jp11 are all bridged - this connects all the voltage channels and allows for power to be calculated by the meter directly.
+# Example config for when jp8-jp11 are all bridged - this connects all the voltage channels and allows for power to be calculated by the meter directly.
 
 substitutions:
 # Change the disp_name to something you want  
   disp_name: 6C
 # Interval of how often the power is updated
   update_time: 10s
+# 20A/25mA SCT-006: 11143
 # 30A/1V SCT-013-030: 8650
 # 50A/1V SCT-013-050: 15420
-# 100A/50ma SCT-013-000: 32498
-  current_cal: '32498'
+# 80A/26.6mA SCT-010: 41787
+# 100A/50ma SCT-013-000: 27858
+# 120A/40mA: SCT-016: 41787
+# 200A/100mA SCT-024: 27858
+  current_cal: '27858'
 # 9VAC Transformer for versions > meter v1.2
   voltage_cal: '7305'
 
@@ -62,6 +66,10 @@ sensor:
       current:
         name: ${disp_name} CT1 Amps
         id: ct1Amps
+# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A, 
+# divide the gain_ct by 2 (120A CT) or 4 (200A CT) and multiply the current value by 2 or 4 by uncommenting the filter below
+#        filters:
+#          - multiply: 2
       power:
         name: ${disp_name} CT1 Watts
         id: ct1Watts
@@ -94,6 +102,7 @@ sensor:
   - platform: atm90e32
     cs_pin: 4
     phase_a:
+#this voltage is only needed if monitoring 2 voltages
       voltage:
         name: ${disp_name} Volts B
         id: ic2Volts
