@@ -3,10 +3,14 @@ substitutions:
   disp_name: 6C
 # Interval of how often the power is updated
   update_time: 10s
+# 20A/25mA SCT-006: 11143
 # 30A/1V SCT-013-030: 8650
 # 50A/1V SCT-013-050: 15420
-# 100A/50ma SCT-013-000: 32498
-  current_cal: '32498'
+# 80A/26.6mA SCT-010: 41787
+# 100A/50ma SCT-013-000: 27858
+# 120A/40mA: SCT-016: 41787
+# 200A/100mA SCT-024: 27858
+  current_cal: '27858'
 
 esphome:
   name: 6chan_energy_meter
@@ -60,7 +64,11 @@ sensor:
       current:
         name: ${disp_name} CT1 Amps
         id: ct1Amps
-      gain_voltage: 7305
+# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A, 
+# divide the gain_ct by 2 (120A CT) or 4 (200A CT) and multiply the current value by 2 or 4 by uncommenting the filter below
+#        filters:
+#          - multiply: 2.0
+      gain_voltage: 42620
 # Voltage using a 9VAC power transformer
 # Note: If you can not get the voltage correct with the highest gain of 65535, uncomment the 2.0 multiply filter above and lower the gain as needed
       gain_ct: ${current_cal}
@@ -90,7 +98,7 @@ sensor:
       current:
         name: ${disp_name} CT4 Amps
         id: ct4Amps
-      gain_voltage: 7305
+      gain_voltage: 42620
       gain_ct: ${current_cal}
     phase_b:
       current:
