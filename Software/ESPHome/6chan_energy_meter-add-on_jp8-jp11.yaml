@@ -7,15 +7,19 @@ substitutions:
   disp_name: 6C
 # Interval of how often the power is updated
   update_time: 10s
-# 20A/25mA SCT-006: 11143
-# 30A/1V SCT-013-030: 8650
-# 50A/1V SCT-013-050: 15420
-# 80A/26.6mA SCT-010: 41787
-# 100A/50ma SCT-013-000: 27858
-# 120A/40mA: SCT-016: 41787
-# 200A/100mA SCT-024: 27858
+# Current Transformers:
+#  20A/25mA SCT-006: 11143
+#  30A/1V SCT-013-030: 8650
+#  50A/1V SCT-013-050: 15420
+#  80A/26.6mA SCT-010: 41892
+#  100A/50ma SCT-013-000: 27858
+#  120A/40mA: SCT-016: 41787
+#  200A/100mA SCT-024: 27858
   current_cal: '27858'
-#9VAC Transformer for versions > meter v1.2
+# Jameco 9VAC Transformer: 
+#  For meter versions: 
+#  >= v1.3: 7305
+#  <= v1.2: 42620
   voltage_cal: '7305'
 
 esphome:
