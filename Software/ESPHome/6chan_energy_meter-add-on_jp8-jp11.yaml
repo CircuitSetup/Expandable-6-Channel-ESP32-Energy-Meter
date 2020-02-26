@@ -68,9 +68,15 @@ sensor:
       current:
         name: ${disp_name} CT1 Amps
         id: ct1Amps
+# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A, 
+# divide the gain_ct by 2 (120A CT) or 4 (200A CT) and multiply the current and power values by 2 or 4 by uncommenting the filter below
+#        filters:
+#          - multiply: 2
       power:
         name: ${disp_name} CT1 Watts
         id: ct1Watts
+#        filters:
+#          - multiply: 2
       gain_voltage: ${voltage_cal}
       gain_ct: ${current_cal}
     phase_b:
