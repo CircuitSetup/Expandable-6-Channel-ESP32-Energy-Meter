@@ -1,4 +1,4 @@
-##Expandable 6 Channel Energy Meter Change Log##
+## Expandable 6 Channel Energy Meter Change Log
 **3/2/2020 - v1.4 rev1**
 - Changed micro-hdmi connector to through-hole
 - Changed spacing on VA2+/VA2- (voltage 2 connection) to 3.5mm spacing
