@@ -91,7 +91,23 @@ The CS pins can be:
     * 26
     
 #### **Calibrating Current Sensors & Voltage (AC Transformer)** 
-[See here for the calibration procedure.] (https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter#calibration)
+[See here for the calibration procedure](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter#calibration),
+[or here for a video](https://youtu.be/BOgy6QbfeZk?t=1261)
+
+##### **Common Calibration Values**
+ * Current Transformers:
+    * 20A/25mA SCT-006: 11143
+    * 30A/1V SCT-013-030: 8650
+    * 50A/1V SCT-013-050: 15420
+    * 80A/26.6mA SCT-010: 41660
+    * 100A/50ma SCT-013-000: 27518
+    * 120A/40mA: SCT-016: 41787
+    * 200A/100mA SCT-024: 27518
+* AC Transformers
+    * Jameco 9VAC Transformer 157041: 
+      * For meter versions: 
+        * >= v1.3: 7305
+        * v1.2: 42620
 
 #### **Measuring Power & Other Metering Values**
 The Expandable 6 Channel ESP32 Energy Meter uses 2 ATM90E32AS ICs. Each IC has 3 voltage channels and 3 current channels. In order for power metering data to be calculated internally, each current channel must have a reference voltage. If the voltage is out of phase with the current, then the current and power will read as negative. 
