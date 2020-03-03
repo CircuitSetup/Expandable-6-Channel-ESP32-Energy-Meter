@@ -5,6 +5,7 @@
 
 **12/16/2019 – v1.4**
 - Added optional micro-hdmi connection to connect the current transformer remote board. This allows for all 6 current transformer connections to connect to a remote pcb, which then connects to the main board via 1 micro-hdmi cable. Instead of 6 wires coming out of the meter, there can now be 1.
+- Added current transformer remote pcb
 - Removed JP8-JP11 and connected all voltage channels together for each ATM90E32
 
 **10/15/2019 – v1.3 rev1**
