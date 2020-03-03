@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="10" altunitdist="mil" altunit="mil"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -17154,13 +17154,6 @@ diameter 7 mm, grid 2.54 mm</description>
 <packageinstance name="TT2D7L"/>
 </packageinstances>
 </package3d>
-<package3d name="TT2D7" urn="urn:adsk.eagle:package:23319/1" type="box" library_version="7">
-<description>ELECTROLYTIC CAPACITOR
-diameter 7 mm, grid 2.54 mm</description>
-<packageinstances>
-<packageinstance name="TT2D7"/>
-</packageinstances>
-</package3d>
 <package3d name="TT5D10" urn="urn:adsk.eagle:package:23302/1" type="box" library_version="7">
 <description>ELECTROLYTIC CAPACITOR
 diameter 10 mm, grid 5.08 mm</description>
@@ -17528,13 +17521,6 @@ grid 45.72 mm, diameter 25 mm</description>
 <packageinstance name="E45-25"/>
 </packageinstances>
 </package3d>
-<package3d name="E5-10,5" urn="urn:adsk.eagle:package:23372/1" type="box" library_version="7">
-<description>ELECTROLYTIC CAPACITOR
-grid 5.08 mm, diameter 10.5 mm</description>
-<packageinstances>
-<packageinstance name="E5-10,5"/>
-</packageinstances>
-</package3d>
 <package3d name="E5-13" urn="urn:adsk.eagle:package:23375/1" type="box" library_version="7">
 <description>ELECTROLYTIC CAPACITOR
 grid 5.08 mm, diameter 13 mm</description>
@@ -17670,180 +17656,12 @@ http://www.bccomponents.com/</description>
 <packageinstance name="085CS_1W"/>
 </packageinstances>
 </package3d>
-<package3d name="085CS_1AR" urn="urn:adsk.eagle:package:23396/2" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors reflow soldering
-SMD (Chip) Standard 085 CS
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="085CS_1AR"/>
-</packageinstances>
-</package3d>
 <package3d name="085CS_1AW" urn="urn:adsk.eagle:package:23385/1" type="box" library_version="7">
 <description>Aluminum electrolytic capacitors wave soldering
 SMD (Chip) Standard 085 CS
 http://www.bccomponents.com/</description>
 <packageinstances>
 <packageinstance name="085CS_1AW"/>
-</packageinstances>
-</package3d>
-<package3d name="139CLL-2R" urn="urn:adsk.eagle:package:23387/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors reflow soldering
-SMD (Chip) Long Life 139 CLL
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="139CLL-2R"/>
-</packageinstances>
-</package3d>
-<package3d name="139CLL-2W" urn="urn:adsk.eagle:package:23386/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors wave soldering
-SMD (Chip) Long Life 139 CLL
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="139CLL-2W"/>
-</packageinstances>
-</package3d>
-<package3d name="139CLL-3R" urn="urn:adsk.eagle:package:23388/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors reflow soldering
-SMD (Chip) Long Life 139 CLL
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="139CLL-3R"/>
-</packageinstances>
-</package3d>
-<package3d name="139CLL-3W" urn="urn:adsk.eagle:package:23390/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors wave soldering
-SMD (Chip) Long Life 139 CLL
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="139CLL-3W"/>
-</packageinstances>
-</package3d>
-<package3d name="140CLH-0810" urn="urn:adsk.eagle:package:23392/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, High temperature 140 CLH
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="140CLH-0810"/>
-</packageinstances>
-</package3d>
-<package3d name="140CLH-1010" urn="urn:adsk.eagle:package:23391/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, High temperature 140 CLH
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="140CLH-1010"/>
-</packageinstances>
-</package3d>
-<package3d name="140CLH-1014" urn="urn:adsk.eagle:package:23393/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, High temperature 140 CLH
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="140CLH-1014"/>
-</packageinstances>
-</package3d>
-<package3d name="150CLZ-0810" urn="urn:adsk.eagle:package:23394/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, very low impedance 150 CLZ
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="150CLZ-0810"/>
-</packageinstances>
-</package3d>
-<package3d name="150CLZ-1010" urn="urn:adsk.eagle:package:23403/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, very low impedance 150 CLZ
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="150CLZ-1010"/>
-</packageinstances>
-</package3d>
-<package3d name="150CLZ-1014" urn="urn:adsk.eagle:package:23405/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors SMD (Chip)
-Long life base plate, very low impedance 150 CLZ
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="150CLZ-1014"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-0405" urn="urn:adsk.eagle:package:23397/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-0405"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-0505" urn="urn:adsk.eagle:package:23402/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-0505"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-0605" urn="urn:adsk.eagle:package:23398/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-0605"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-0807" urn="urn:adsk.eagle:package:23400/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-0807"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-0810" urn="urn:adsk.eagle:package:23401/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-0810"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-1010" urn="urn:adsk.eagle:package:23413/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-1010"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-1012" urn="urn:adsk.eagle:package:23404/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-1012"/>
-</packageinstances>
-</package3d>
-<package3d name="153CLV-1014" urn="urn:adsk.eagle:package:23406/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-SMD (Chip) Long Life Vertical 153 CLV
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="153CLV-1014"/>
-</packageinstances>
-</package3d>
-<package3d name="175TMP-0808" urn="urn:adsk.eagle:package:23412/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-High Temperature solid electrolytic SMD 175 TMP
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="175TMP-0808"/>
-</packageinstances>
-</package3d>
-<package3d name="175TMP-0810" urn="urn:adsk.eagle:package:23407/1" type="box" library_version="7">
-<description>Aluminum electrolytic capacitors
-High Temperature solid electrolytic SMD 175 TMP
-http://www.bccomponents.com/</description>
-<packageinstances>
-<packageinstance name="175TMP-0810"/>
 </packageinstances>
 </package3d>
 <package3d name="A/3216-18R" urn="urn:adsk.eagle:package:23410/2" type="model" library_version="7">
@@ -17870,12 +17688,6 @@ KEMET S / EIA 3216-12</description>
 KEMET T / EIA 3528-12</description>
 <packageinstances>
 <packageinstance name="B/3528-21W"/>
-</packageinstances>
-</package3d>
-<package3d name="C/6032-28R" urn="urn:adsk.eagle:package:23415/1" type="box" library_version="7">
-<description>Chip Capacitor Type KEMET C / EIA 6032-28 reflow solderKEMET U / EIA 6032-15</description>
-<packageinstances>
-<packageinstance name="C/6032-28R"/>
 </packageinstances>
 </package3d>
 <package3d name="C/6032-28W" urn="urn:adsk.eagle:package:23420/2" type="model" library_version="7">
@@ -17908,12 +17720,6 @@ KEMET V / EIA 7343-20, KEMET X / EIA 7343-43 Wafe solder</description>
 <description>Chip Capacitor Type KEMET E / EIA 7260-38 Wafe solder</description>
 <packageinstances>
 <packageinstance name="E/7260-38W"/>
-</packageinstances>
-</package3d>
-<package3d name="R/2012-12R" urn="urn:adsk.eagle:package:23426/1" type="box" library_version="7">
-<description>Chip Capacitor Type KEMET R/EIA 2012-12 reflow solder</description>
-<packageinstances>
-<packageinstance name="R/2012-12R"/>
 </packageinstances>
 </package3d>
 <package3d name="R/2012-12W" urn="urn:adsk.eagle:package:23419/2" type="model" library_version="7">
@@ -17976,62 +17782,6 @@ diameter 5 mm, grid 2.54 mm</description>
 grid 2.54 mm, diameter 6 mm</description>
 <packageinstances>
 <packageinstance name="E2,5-6E"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_A" urn="urn:adsk.eagle:package:25926/1" type="box" library_version="7">
-<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194, B 45 197, B 45 198
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_A"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_Z" urn="urn:adsk.eagle:package:25927/1" type="box" library_version="7">
-<description>Chip Capacitor Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_Z"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_P" urn="urn:adsk.eagle:package:25919/1" type="box" library_version="7">
-<description>Chip Capacitor Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_P"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_B" urn="urn:adsk.eagle:package:25920/1" type="box" library_version="7">
-<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194, B 45 197, B 45 198
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_B"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_C" urn="urn:adsk.eagle:package:25921/1" type="box" library_version="7">
-<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194, B 45 197, B 45 198
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_C"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_D" urn="urn:adsk.eagle:package:25923/1" type="box" library_version="7">
-<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194, B 45 197, B 45 198
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_D"/>
-</packageinstances>
-</package3d>
-<package3d name="SMC_E" urn="urn:adsk.eagle:package:25922/1" type="box" library_version="7">
-<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
-Siemens Matsushita Components B 45 194, B 45 197, B 45 198
-Source: www.farnell.com/datasheets/247.pdf</description>
-<packageinstances>
-<packageinstance name="SMC_E"/>
 </packageinstances>
 </package3d>
 <package3d name="SANYO-OSCON_9E" urn="urn:adsk.eagle:package:23439/1" type="box" library_version="7">
@@ -18524,6 +18274,256 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <packageinstance name="R01005"/>
 </packageinstances>
 </package3d>
+<package3d name="TT2D7" urn="urn:adsk.eagle:package:23319/2" type="model" library_version="11">
+<description>ELECTROLYTIC CAPACITOR
+diameter 7 mm, grid 2.54 mm</description>
+<packageinstances>
+<packageinstance name="TT2D7"/>
+</packageinstances>
+</package3d>
+<package3d name="E5-10,5" urn="urn:adsk.eagle:package:23372/2" type="model" library_version="11">
+<description>ELECTROLYTIC CAPACITOR
+grid 5.08 mm, diameter 10.5 mm</description>
+<packageinstances>
+<packageinstance name="E5-10,5"/>
+</packageinstances>
+</package3d>
+<package3d name="085CS_1AR" urn="urn:adsk.eagle:package:23396/3" type="box" library_version="11">
+<description>Aluminum electrolytic capacitors reflow soldering
+SMD (Chip) Standard 085 CS
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="085CS_1AR"/>
+</packageinstances>
+</package3d>
+<package3d name="139CLL-2R" urn="urn:adsk.eagle:package:23387/3" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors reflow soldering
+SMD (Chip) Long Life 139 CLL
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="139CLL-2R"/>
+</packageinstances>
+</package3d>
+<package3d name="139CLL-2W" urn="urn:adsk.eagle:package:23386/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors wave soldering
+SMD (Chip) Long Life 139 CLL
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="139CLL-2W"/>
+</packageinstances>
+</package3d>
+<package3d name="139CLL-3R" urn="urn:adsk.eagle:package:23388/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors reflow soldering
+SMD (Chip) Long Life 139 CLL
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="139CLL-3R"/>
+</packageinstances>
+</package3d>
+<package3d name="139CLL-3W" urn="urn:adsk.eagle:package:23390/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors wave soldering
+SMD (Chip) Long Life 139 CLL
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="139CLL-3W"/>
+</packageinstances>
+</package3d>
+<package3d name="140CLH-0810" urn="urn:adsk.eagle:package:23392/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, High temperature 140 CLH
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="140CLH-0810"/>
+</packageinstances>
+</package3d>
+<package3d name="140CLH-1010" urn="urn:adsk.eagle:package:23391/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, High temperature 140 CLH
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="140CLH-1010"/>
+</packageinstances>
+</package3d>
+<package3d name="140CLH-1014" urn="urn:adsk.eagle:package:23393/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, High temperature 140 CLH
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="140CLH-1014"/>
+</packageinstances>
+</package3d>
+<package3d name="150CLZ-0810" urn="urn:adsk.eagle:package:23394/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, very low impedance 150 CLZ
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="150CLZ-0810"/>
+</packageinstances>
+</package3d>
+<package3d name="150CLZ-1010" urn="urn:adsk.eagle:package:23403/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, very low impedance 150 CLZ
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="150CLZ-1010"/>
+</packageinstances>
+</package3d>
+<package3d name="150CLZ-1014" urn="urn:adsk.eagle:package:23405/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors SMD (Chip)
+Long life base plate, very low impedance 150 CLZ
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="150CLZ-1014"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-0405" urn="urn:adsk.eagle:package:23397/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-0405"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-0505" urn="urn:adsk.eagle:package:23402/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-0505"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-0605" urn="urn:adsk.eagle:package:23398/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-0605"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-0807" urn="urn:adsk.eagle:package:23400/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-0807"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-0810" urn="urn:adsk.eagle:package:23401/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-0810"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-1010" urn="urn:adsk.eagle:package:23413/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-1010"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-1012" urn="urn:adsk.eagle:package:23404/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-1012"/>
+</packageinstances>
+</package3d>
+<package3d name="153CLV-1014" urn="urn:adsk.eagle:package:23406/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+SMD (Chip) Long Life Vertical 153 CLV
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="153CLV-1014"/>
+</packageinstances>
+</package3d>
+<package3d name="175TMP-0808" urn="urn:adsk.eagle:package:23412/2" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+High Temperature solid electrolytic SMD 175 TMP
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="175TMP-0808"/>
+</packageinstances>
+</package3d>
+<package3d name="175TMP-0810" urn="urn:adsk.eagle:package:23407/3" type="model" library_version="11">
+<description>Aluminum electrolytic capacitors
+High Temperature solid electrolytic SMD 175 TMP
+http://www.bccomponents.com/</description>
+<packageinstances>
+<packageinstance name="175TMP-0810"/>
+</packageinstances>
+</package3d>
+<package3d name="C/6032-28R" urn="urn:adsk.eagle:package:23415/2" type="model" library_version="11">
+<description>Chip Capacitor Type KEMET C / EIA 6032-28 reflow solderKEMET U / EIA 6032-15</description>
+<packageinstances>
+<packageinstance name="C/6032-28R"/>
+</packageinstances>
+</package3d>
+<package3d name="R/2012-12R" urn="urn:adsk.eagle:package:23426/2" type="model" library_version="11">
+<description>Chip Capacitor Type KEMET R/EIA 2012-12 reflow solder</description>
+<packageinstances>
+<packageinstance name="R/2012-12R"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_A" urn="urn:adsk.eagle:package:25926/3" type="model" library_version="11">
+<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194, B 45 197, B 45 198
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_A"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_Z" urn="urn:adsk.eagle:package:25927/3" type="model" library_version="11">
+<description>Chip Capacitor Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_Z"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_P" urn="urn:adsk.eagle:package:25919/2" type="model" library_version="11">
+<description>Chip Capacitor Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_P"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_B" urn="urn:adsk.eagle:package:25920/5" type="model" library_version="11">
+<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194, B 45 197, B 45 198
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_B"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_C" urn="urn:adsk.eagle:package:25921/2" type="model" library_version="11">
+<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194, B 45 197, B 45 198
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_C"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_D" urn="urn:adsk.eagle:package:25923/2" type="model" library_version="11">
+<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194, B 45 197, B 45 198
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_D"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC_E" urn="urn:adsk.eagle:package:25922/2" type="model" library_version="11">
+<description>Chip Capacitor  Polar tantalum capacitors with solid electrolyte
+Siemens Matsushita Components B 45 194, B 45 197, B 45 198
+Source: www.farnell.com/datasheets/247.pdf</description>
+<packageinstances>
+<packageinstance name="SMC_E"/>
+</packageinstances>
+</package3d>
 </packages3d>
 <symbols>
 <symbol name="R-US" urn="urn:adsk.eagle:symbol:23200/1" library_version="3">
@@ -18565,7 +18565,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="R-US_" urn="urn:adsk.eagle:component:23792/21" prefix="R" uservalue="yes" library_version="10">
+<deviceset name="R-US_" urn="urn:adsk.eagle:component:23792/22" prefix="R" uservalue="yes" library_version="11">
 <description>&lt;B&gt;RESISTOR&lt;/B&gt;, American symbol</description>
 <gates>
 <gate name="G$1" symbol="R-US" x="0" y="0"/>
@@ -18581,6 +18581,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="34" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18595,6 +18596,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="77" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18609,6 +18611,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="85" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18623,6 +18626,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18637,6 +18641,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="19" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18651,6 +18656,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18665,6 +18671,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18679,6 +18686,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18693,6 +18701,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18707,6 +18716,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18721,6 +18731,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18735,6 +18746,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18749,6 +18761,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18763,6 +18776,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18777,6 +18791,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18791,6 +18806,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18805,6 +18821,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18819,6 +18836,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18833,6 +18851,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18847,6 +18866,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18861,6 +18881,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18875,6 +18896,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18889,6 +18911,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="45" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18903,6 +18926,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="22" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18917,6 +18941,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18931,6 +18956,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18945,6 +18971,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18959,6 +18986,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18973,6 +19001,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -18987,6 +19016,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19001,6 +19031,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="18" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19015,6 +19046,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="48" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19029,6 +19061,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="36" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19043,6 +19076,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19057,6 +19091,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19071,6 +19106,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19085,6 +19121,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19099,6 +19136,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="22" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19113,6 +19151,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19127,6 +19166,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19141,6 +19181,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19155,6 +19196,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19169,6 +19211,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19183,6 +19226,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19197,6 +19241,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19211,6 +19256,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19225,6 +19271,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19239,6 +19286,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19253,6 +19301,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19267,6 +19316,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19281,6 +19331,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19295,6 +19346,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19309,6 +19361,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19323,6 +19376,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19337,6 +19391,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19351,6 +19406,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19365,6 +19421,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19379,6 +19436,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19393,6 +19451,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19407,6 +19466,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19421,6 +19481,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19435,6 +19496,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19449,6 +19511,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19463,6 +19526,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19477,6 +19541,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19491,6 +19556,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19505,6 +19571,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19519,6 +19586,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19533,6 +19601,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19547,6 +19616,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19561,6 +19631,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19575,6 +19646,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19589,6 +19661,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19603,6 +19676,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19617,6 +19691,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19631,6 +19706,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19645,6 +19721,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19659,6 +19736,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19673,6 +19751,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19687,6 +19766,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19701,6 +19781,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19715,6 +19796,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19729,6 +19811,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19743,6 +19826,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19757,6 +19841,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="R" constant="no"/>
 </technology>
 </technologies>
@@ -19769,7 +19854,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </pinmapping>
 </spice>
 </deviceset>
-<deviceset name="C-US" urn="urn:adsk.eagle:component:23794/43" prefix="C" uservalue="yes" library_version="7">
+<deviceset name="C-US" urn="urn:adsk.eagle:component:23794/44" prefix="C" uservalue="yes" library_version="11">
 <description>&lt;B&gt;CAPACITOR&lt;/B&gt;, American symbol</description>
 <gates>
 <gate name="G$1" symbol="C-US" x="0" y="0"/>
@@ -19785,6 +19870,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="16" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19799,6 +19885,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19813,6 +19900,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="37" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19827,6 +19915,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="63" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19841,6 +19930,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="24" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19855,6 +19945,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="6" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19869,6 +19960,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19883,6 +19975,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19897,6 +19990,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19911,6 +20005,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19925,6 +20020,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19939,6 +20035,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19953,6 +20050,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19967,6 +20065,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19981,6 +20080,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -19995,6 +20095,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="17" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20009,6 +20110,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20023,6 +20125,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20037,6 +20140,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20051,6 +20155,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20065,6 +20170,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20079,6 +20185,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20093,6 +20200,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20107,6 +20215,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20121,6 +20230,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20135,6 +20245,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20149,6 +20260,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="14" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20163,6 +20275,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20177,6 +20290,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20191,6 +20305,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20205,6 +20320,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20219,6 +20335,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20233,6 +20350,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20247,6 +20365,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20261,6 +20380,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20275,6 +20395,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20289,6 +20410,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20303,6 +20425,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20317,6 +20440,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20331,6 +20455,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20345,6 +20470,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20359,6 +20485,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20373,6 +20500,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20387,6 +20515,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20401,6 +20530,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20415,6 +20545,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20429,6 +20560,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20443,6 +20575,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20457,6 +20590,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20471,6 +20605,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20485,6 +20620,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20499,6 +20635,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20513,6 +20650,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20527,6 +20665,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20541,6 +20680,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20555,6 +20695,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20569,6 +20710,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20583,6 +20725,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20597,6 +20740,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20611,6 +20755,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20625,6 +20770,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20639,6 +20785,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20653,6 +20800,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20667,6 +20815,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20681,6 +20830,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20695,6 +20845,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20709,6 +20860,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20723,6 +20875,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="19" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20737,6 +20890,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20751,6 +20905,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20765,6 +20920,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20779,6 +20935,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20793,6 +20950,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20807,6 +20965,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20821,6 +20980,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20835,6 +20995,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20849,6 +21010,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20863,6 +21025,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20875,7 +21038,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </pinmapping>
 </spice>
 </deviceset>
-<deviceset name="CPOL-US" urn="urn:adsk.eagle:component:23788/25" prefix="C" uservalue="yes" library_version="7">
+<deviceset name="CPOL-US" urn="urn:adsk.eagle:component:23788/29" prefix="C" uservalue="yes" library_version="11">
 <description>&lt;B&gt;POLARIZED CAPACITOR&lt;/B&gt;, American symbol</description>
 <gates>
 <gate name="G$1" symbol="CPOL-US" x="0" y="0"/>
@@ -20891,6 +21054,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20905,6 +21069,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20919,6 +21084,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20933,6 +21099,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20947,6 +21114,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20961,6 +21129,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20975,6 +21144,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -20989,6 +21159,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21003,6 +21174,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21017,6 +21189,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21031,6 +21204,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21045,6 +21219,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21059,6 +21234,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21073,6 +21249,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21083,10 +21260,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23319/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23319/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21101,6 +21279,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21115,6 +21294,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21129,6 +21309,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21143,6 +21324,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21157,6 +21339,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21171,6 +21354,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21185,6 +21369,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21199,6 +21384,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21213,6 +21399,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21227,6 +21414,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21241,6 +21429,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21255,6 +21444,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21269,6 +21459,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21283,6 +21474,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21297,6 +21489,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21311,6 +21504,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21325,6 +21519,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21339,6 +21534,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21353,6 +21549,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21367,6 +21564,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21381,6 +21579,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21395,6 +21594,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21409,6 +21609,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21423,6 +21624,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="6" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21437,6 +21639,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21451,6 +21654,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21465,6 +21669,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21479,6 +21684,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21493,6 +21699,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21507,6 +21714,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="14" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21521,6 +21729,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21535,6 +21744,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21549,6 +21759,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21563,6 +21774,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21577,6 +21789,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21591,6 +21804,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21605,6 +21819,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21619,6 +21834,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="6" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21633,6 +21849,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21647,6 +21864,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21661,6 +21879,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="9" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21675,6 +21894,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21689,6 +21909,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21703,6 +21924,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21717,6 +21939,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21731,6 +21954,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21745,6 +21969,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21759,6 +21984,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21773,6 +21999,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21787,6 +22014,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21801,6 +22029,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21815,6 +22044,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21829,6 +22059,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21839,10 +22070,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23372/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23372/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="12" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21857,6 +22089,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21871,6 +22104,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21885,6 +22119,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21899,6 +22134,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21913,6 +22149,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21927,6 +22164,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21941,6 +22179,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21955,6 +22194,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21969,6 +22209,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21983,6 +22224,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -21997,6 +22239,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22011,6 +22254,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22025,6 +22269,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22039,6 +22284,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22053,6 +22299,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22067,6 +22314,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22081,6 +22329,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22095,6 +22344,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22109,6 +22359,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22119,10 +22370,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23396/2"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23396/3"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22137,6 +22389,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22147,10 +22400,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23387/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23387/3"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22161,10 +22415,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23386/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23386/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22175,10 +22430,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23388/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23388/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22189,10 +22445,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23390/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23390/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22203,10 +22460,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23392/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23392/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22217,10 +22475,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23391/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23391/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22231,10 +22490,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23393/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23393/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22245,10 +22505,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23394/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23394/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22259,10 +22520,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23403/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23403/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22273,10 +22535,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23405/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23405/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22287,10 +22550,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23397/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23397/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22301,10 +22565,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23402/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23402/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22315,10 +22580,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23398/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23398/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22329,10 +22595,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23400/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23400/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22343,10 +22610,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23401/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23401/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22357,10 +22625,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23413/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23413/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22371,10 +22640,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23404/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23404/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22385,10 +22655,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23406/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23406/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22399,10 +22670,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23412/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23412/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22413,10 +22685,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23407/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23407/3"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22431,6 +22704,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22445,6 +22719,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22459,6 +22734,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22473,6 +22749,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22483,10 +22760,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23415/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23415/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22501,6 +22779,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22515,6 +22794,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22529,6 +22809,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22543,6 +22824,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22557,6 +22839,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22567,10 +22850,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:23426/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:23426/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22585,6 +22869,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22599,6 +22884,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22613,6 +22899,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22627,6 +22914,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22641,6 +22929,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22655,6 +22944,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22669,6 +22959,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22683,6 +22974,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22697,6 +22989,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22711,6 +23004,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22721,10 +23015,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25926/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25926/3"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22735,10 +23030,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25927/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25927/3"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22749,10 +23045,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25919/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25919/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22763,10 +23060,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25920/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25920/5"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22777,10 +23075,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25921/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25921/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22791,10 +23090,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25923/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25923/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22805,10 +23105,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <connect gate="G$1" pin="-" pad="-"/>
 </connects>
 <package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:25922/1"/>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:25922/2"/>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22823,6 +23124,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22837,6 +23139,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22851,6 +23154,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22865,6 +23169,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22879,6 +23184,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22893,6 +23199,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22907,6 +23214,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22921,6 +23229,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22935,6 +23244,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22949,6 +23259,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22963,6 +23274,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22977,6 +23289,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -22991,6 +23304,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23005,6 +23319,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23019,6 +23334,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23033,6 +23349,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23047,6 +23364,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23061,6 +23379,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23075,6 +23394,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23089,6 +23409,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23103,6 +23424,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23117,6 +23439,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23131,6 +23454,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23145,6 +23469,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23159,6 +23484,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23173,6 +23499,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23187,6 +23514,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23201,6 +23529,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23215,6 +23544,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23229,6 +23559,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23243,6 +23574,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23257,6 +23589,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23271,6 +23604,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23285,6 +23619,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23299,6 +23634,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23313,6 +23649,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
@@ -23327,11 +23664,18 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </package3dinstances>
 <technologies>
 <technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 <attribute name="SPICEPREFIX" value="C" constant="no"/>
 </technology>
 </technologies>
 </device>
 </devices>
+<spice>
+<pinmapping spiceprefix="C">
+<pinmap gate="G$1" pin="+" pinorder="1"/>
+<pinmap gate="G$1" pin="-" pinorder="2"/>
+</pinmapping>
+</spice>
 </deviceset>
 </devicesets>
 </library>
@@ -24231,7 +24575,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="WIREPAD" urn="urn:adsk.eagle:component:30861/1" prefix="PAD" library_version="1">
+<deviceset name="WIREPAD" urn="urn:adsk.eagle:component:30861/2" prefix="PAD" library_version="2">
 <description>&lt;b&gt;Wire PAD&lt;/b&gt; connect wire on PCB</description>
 <gates>
 <gate name="G$1" symbol="PAD" x="0" y="0"/>
@@ -24245,7 +24589,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30830/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="1,6/0,9" package="1,6/0,9">
@@ -24256,7 +24602,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30840/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="2,15/1,0" package="2,15/1,0">
@@ -24267,7 +24615,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30831/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="2,54/0,8" package="2,54/0,8">
@@ -24278,7 +24628,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30838/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="2,54/0,9" package="2,54/0,9">
@@ -24289,7 +24641,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30847/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="6" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="2,54/1,0" package="2,54/1,0">
@@ -24300,7 +24654,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30828/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="2,54/1,1" package="2,54/1,1">
@@ -24311,7 +24667,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30836/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,17/1,1" package="3,17/1,1">
@@ -24322,7 +24680,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30832/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,17/1,2" package="3,17/1,2">
@@ -24333,7 +24693,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30842/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,17/1,3" package="3,17/1,3">
@@ -24344,7 +24706,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30833/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,81/1,1" package="3,81/1,1">
@@ -24355,7 +24719,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30829/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,81/1,3" package="3,81/1,3">
@@ -24366,7 +24732,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30834/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="3,81/1,4" package="3,81/1,4">
@@ -24377,7 +24745,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30835/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="4,16O1,6" package="4,16O1,6">
@@ -24388,7 +24758,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30843/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="SMD5-1,8" package="5-1,8">
@@ -24399,7 +24771,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30844/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="SMD5-2,5" package="5-2,5">
@@ -24410,7 +24784,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30845/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="SMD1,27-254" package="SMD1,27-2,54">
@@ -24421,7 +24797,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30839/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="11" constant="no"/>
+</technology>
 </technologies>
 </device>
 <device name="SMD2,54-5,08" package="SMD2,54-5,08">
@@ -24432,7 +24810,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3dinstance package3d_urn="urn:adsk.eagle:package:30841/1"/>
 </package3dinstances>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -24663,25 +25043,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <library name="SamacSys_Parts">
 <description>&lt;b&gt;https://eagle.componentsearchengine.com&lt;/b&gt;&lt;p&gt;&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
 <packages>
-<package name="DIOM5226X240N">
-<description>&lt;b&gt;SMA&lt;/b&gt;&lt;br&gt;
-</description>
-<smd name="1" x="-2.15" y="0" dx="2.35" dy="1.55" layer="1"/>
-<smd name="2" x="2.15" y="0" dx="2.35" dy="1.55" layer="1"/>
-<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="-3.575" y1="1.71" x2="3.575" y2="1.71" width="0.05" layer="51"/>
-<wire x1="3.575" y1="1.71" x2="3.575" y2="-1.71" width="0.05" layer="51"/>
-<wire x1="3.575" y1="-1.71" x2="-3.575" y2="-1.71" width="0.05" layer="51"/>
-<wire x1="-3.575" y1="-1.71" x2="-3.575" y2="1.71" width="0.05" layer="51"/>
-<wire x1="-2.598" y1="1.302" x2="2.598" y2="1.302" width="0.1" layer="51"/>
-<wire x1="2.598" y1="1.302" x2="2.598" y2="-1.302" width="0.1" layer="51"/>
-<wire x1="2.598" y1="-1.302" x2="-2.598" y2="-1.302" width="0.1" layer="51"/>
-<wire x1="-2.598" y1="-1.302" x2="-2.598" y2="1.302" width="0.1" layer="51"/>
-<wire x1="-2.598" y1="0.528" x2="-1.822" y2="1.302" width="0.1" layer="51"/>
-<wire x1="2.598" y1="1.302" x2="-2.925" y2="1.302" width="0.2" layer="21"/>
-<wire x1="-2.598" y1="-1.302" x2="2.598" y2="-1.302" width="0.2" layer="21"/>
-</package>
 <package name="SOP270P700X270-4" urn="urn:adsk.eagle:footprint:8170601/1">
 <description>4-SOP, 2.70 mm pitch, 7.00 mm span, 4.70 X 4.00 X 2.70 mm body
 &lt;p&gt;4-pin SOP package with 2.70 mm pitch, 7.00 mm span with body size 4.70 X 4.00 X 2.70 mm&lt;/p&gt;</description>
@@ -24702,21 +25063,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <smd name="4" x="3.0045" y="1.35" dx="1.8028" dy="0.8802" layer="1"/>
 <text x="0" y="3.1791" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
 <text x="0" y="-3.085" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="DIOM4326X240" urn="urn:adsk.eagle:footprint:8314669/1">
-<description>Molded Body, 4.30 X 2.60 X 2.40 mm body
-&lt;p&gt;Molded Body package with body size 4.30 X 2.60 X 2.40 mm&lt;/p&gt;</description>
-<wire x1="2.3" y1="1.46" x2="-3.1192" y2="1.46" width="0.12" layer="21"/>
-<wire x1="-3.1192" y1="1.46" x2="-3.1192" y2="-1.46" width="0.12" layer="21"/>
-<wire x1="-3.1192" y1="-1.46" x2="2.3" y2="-1.46" width="0.12" layer="21"/>
-<wire x1="2.3" y1="-1.46" x2="-2.3" y2="-1.46" width="0.12" layer="51"/>
-<wire x1="-2.3" y1="-1.46" x2="-2.3" y2="1.46" width="0.12" layer="51"/>
-<wire x1="-2.3" y1="1.46" x2="2.3" y2="1.46" width="0.12" layer="51"/>
-<wire x1="2.3" y1="1.46" x2="2.3" y2="-1.46" width="0.12" layer="51"/>
-<smd name="1" x="-1.6774" y="0" dx="2.2554" dy="1.547" layer="1"/>
-<smd name="2" x="1.6774" y="0" dx="2.2554" dy="1.547" layer="1"/>
-<text x="0" y="2.095" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-2.095" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
 </package>
 <package name="SOIC127P600X170-9N">
 <description>&lt;b&gt;DDA (R-PDSO-G8)&lt;/b&gt;&lt;br&gt;
@@ -24761,46 +25107,82 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="4" y1="4.075" x2="-4" y2="4.075" width="0.2" layer="21"/>
 <wire x1="-4" y1="-4.075" x2="4" y2="-4.075" width="0.2" layer="21"/>
 </package>
+<package name="PKS01940110">
+<description>&lt;b&gt;PKS019-4011-0-1&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="3.6" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="2" x="3.2" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="3" x="2.8" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="4" x="2.4" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="5" x="2" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="6" x="1.6" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="7" x="1.2" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="8" x="0.8" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="9" x="0.4" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="10" x="0" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="11" x="-0.4" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="12" x="-0.8" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="13" x="-1.2" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="14" x="-1.6" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="15" x="-2" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="16" x="-2.4" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="17" x="-2.8" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="18" x="-3.2" y="5.7" dx="1" dy="0.23" layer="1" rot="R90"/>
+<smd name="19" x="-3.6" y="5.825" dx="0.75" dy="0.23" layer="1" rot="R90"/>
+<smd name="21" x="-1.4" y="2.9" dx="3" dy="1.8" layer="1" rot="R90"/>
+<smd name="22" x="1.4" y="2.9" dx="3" dy="1.8" layer="1" rot="R90"/>
+<text x="0" y="3.3" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="3.3" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-3.825" y1="6" x2="3.825" y2="6" width="0.2" layer="51"/>
+<wire x1="3.825" y1="6" x2="3.825" y2="0" width="0.2" layer="51"/>
+<wire x1="3.825" y1="0" x2="-3.825" y2="0" width="0.2" layer="51"/>
+<wire x1="-3.825" y1="0" x2="-3.825" y2="6" width="0.2" layer="51"/>
+<wire x1="-4.825" y1="7.6" x2="4.825" y2="7.6" width="0.1" layer="51"/>
+<wire x1="4.825" y1="7.6" x2="4.825" y2="-1" width="0.1" layer="51"/>
+<wire x1="4.825" y1="-1" x2="-4.825" y2="-1" width="0.1" layer="51"/>
+<wire x1="-4.825" y1="-1" x2="-4.825" y2="7.6" width="0.1" layer="51"/>
+<wire x1="-3.825" y1="5" x2="-3.825" y2="4" width="0.1" layer="21"/>
+<wire x1="3.825" y1="5" x2="3.825" y2="4" width="0.1" layer="21"/>
+<wire x1="-3.825" y1="1" x2="-3.825" y2="0" width="0.1" layer="21"/>
+<wire x1="-3.825" y1="0" x2="3.825" y2="0" width="0.1" layer="21"/>
+<wire x1="3.825" y1="0" x2="3.825" y2="1" width="0.1" layer="21"/>
+<wire x1="3.5" y1="6.5" x2="3.7" y2="6.5" width="0.2" layer="21" curve="-180"/>
+<wire x1="3.7" y1="6.5" x2="3.5" y2="6.5" width="0.2" layer="21" curve="-180"/>
+<wire x1="-5.0419" y1="0.8763" x2="5.08" y2="0.889" width="0.1524" layer="51"/>
+<dimension x1="-3.825" y1="0" x2="3.81" y2="0" x3="-0.0075" y3="-2.54" textsize="0.4064" layer="47" dtype="horizontal" width="0.05"/>
+<dimension x1="-3.825" y1="0" x2="-3.825" y2="6" x3="-6.35" y3="3" textsize="0.4064" layer="47" dtype="horizontal" width="0.05"/>
+<pad name="P$1" x="-3.375" y="2.875" drill="0.5" diameter="1.25" shape="long" rot="R90"/>
+<pad name="P$2" x="3.375" y="2.875" drill="0.5" diameter="1.25" shape="long" rot="R90"/>
+<dimension x1="-3.375" y1="2.875" x2="3.375" y2="2.875" x3="0" y3="-0.635" textsize="0.4064" layer="47" dtype="horizontal" width="0"/>
+<wire x1="-3.625" y1="3.625" x2="-3.125" y2="3.625" width="0.0762" layer="46" curve="-126.869898"/>
+<wire x1="-3.625" y1="3.625" x2="-3.625" y2="2.125" width="0.0762" layer="46"/>
+<wire x1="-3.125" y1="2.125" x2="-3.625" y2="2.125" width="0.0762" layer="46" curve="-126.869898"/>
+<wire x1="-3.125" y1="3.625" x2="-3.125" y2="2.125" width="0.0762" layer="46"/>
+<rectangle x1="-3.625" y1="2.125" x2="-3.125" y2="3.625" layer="46"/>
+<rectangle x1="-3.625" y1="2.0828" x2="-3.1623" y2="2.125" layer="46"/>
+<rectangle x1="-3.556" y1="2.0066" x2="-3.1877" y2="2.0828" layer="46"/>
+<rectangle x1="-3.625" y1="3.625" x2="-3.1242" y2="3.683" layer="46"/>
+<rectangle x1="-3.5306" y1="3.6703" x2="-3.2131" y2="3.7084" layer="46"/>
+<rectangle x1="-3.5179" y1="3.683" x2="-3.2385" y2="3.7592" layer="46"/>
+<rectangle x1="3.125" y1="2.125" x2="3.625" y2="3.625" layer="46"/>
+<wire x1="3.125" y1="3.625" x2="3.625" y2="3.625" width="0.0762" layer="46" curve="-126.869898"/>
+<wire x1="3.125" y1="3.625" x2="3.125" y2="2.125" width="0.0762" layer="46"/>
+<wire x1="3.625" y1="3.625" x2="3.625" y2="2.125" width="0.0762" layer="46"/>
+<wire x1="3.625" y1="2.125" x2="3.125" y2="2.125" width="0.0762" layer="46" curve="-126.869898"/>
+<rectangle x1="3.194" y1="2.0066" x2="3.5623" y2="2.0828" layer="46"/>
+<rectangle x1="3.125" y1="2.0828" x2="3.5877" y2="2.125" layer="46"/>
+<rectangle x1="3.1504" y1="3.6209" x2="3.6131" y2="3.6631" layer="46"/>
+<rectangle x1="3.1845" y1="3.6642" x2="3.5528" y2="3.7404" layer="46"/>
+<dimension x1="3.7211" y1="6.1976" x2="3.375" y2="2.875" x3="4.5" y3="4.5363" textsize="0.4064" layer="47" dtype="vertical" width="0"/>
+</package>
 </packages>
-<packages3d>
-<package3d name="SOP270P700X270-4" urn="urn:adsk.eagle:package:8170595/1" type="model">
-<description>4-SOP, 2.70 mm pitch, 7.00 mm span, 4.70 X 4.00 X 2.70 mm body
-&lt;p&gt;4-pin SOP package with 2.70 mm pitch, 7.00 mm span with body size 4.70 X 4.00 X 2.70 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="SOP270P700X270-4"/>
-</packageinstances>
-</package3d>
-<package3d name="DIOM4326X240" urn="urn:adsk.eagle:package:8314666/1" type="model">
-<description>Molded Body, 4.30 X 2.60 X 2.40 mm body
-&lt;p&gt;Molded Body package with body size 4.30 X 2.60 X 2.40 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="DIOM4326X240"/>
-</packageinstances>
-</package3d>
-</packages3d>
 <symbols>
-<symbol name="B340A-13-F">
-<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.254" layer="94"/>
-<text x="1.27" y="2.54" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="1.27" y="-2.54" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="K" x="0" y="0" visible="pad" length="short"/>
-<pin name="A" x="7.874" y="0" visible="pad" length="short" rot="R180"/>
-<wire x1="2.54" y1="1.27" x2="2.032" y2="1.27" width="0.254" layer="94"/>
-<wire x1="2.032" y1="1.27" x2="2.032" y2="1.016" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-1.27" x2="3.048" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="3.048" y1="-1.27" x2="3.048" y2="-1.016" width="0.254" layer="94"/>
-<polygon width="0.254" layer="94">
-<vertex x="2.54" y="0"/>
-<vertex x="5.334" y="-1.27"/>
-<vertex x="5.334" y="1.27"/>
-</polygon>
-</symbol>
 <symbol name="CDBHM240L-HF">
 <text x="-11.43" y="5.08" size="1.778" layer="95" align="center-left">&gt;NAME</text>
 <text x="-11.43" y="-5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="~_1" x="7.62" y="0" length="short" rot="R180"/>
-<pin name="~_2" x="0" y="-7.62" length="short" rot="R90"/>
-<pin name="-" x="-7.62" y="0" length="short"/>
+<pin name="~1" x="7.62" y="0" length="short" rot="R180"/>
+<pin name="~" x="-7.62" y="0" length="short"/>
+<pin name="-" x="0" y="-7.62" length="short" rot="R90"/>
 <pin name="+" x="0" y="7.62" length="short" rot="R270"/>
 <wire x1="-5.08" y1="0" x2="0" y2="5.08" width="0.1524" layer="94"/>
 <wire x1="0" y1="5.08" x2="5.08" y2="0" width="0.1524" layer="94"/>
@@ -24858,49 +25240,39 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pin name="1" x="0" y="0" visible="pad" length="middle" direction="pwr"/>
 <pin name="2" x="20.32" y="0" visible="pad" length="middle" direction="pwr" rot="R180"/>
 </symbol>
+<symbol name="PKS019-4011-0">
+<wire x1="5.08" y1="2.54" x2="17.78" y2="2.54" width="0.254" layer="94"/>
+<wire x1="17.78" y1="-30.48" x2="17.78" y2="2.54" width="0.254" layer="94"/>
+<wire x1="17.78" y1="-30.48" x2="5.08" y2="-30.48" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-30.48" width="0.254" layer="94"/>
+<text x="19.05" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="19.05" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="1" x="0" y="0" length="middle"/>
+<pin name="2" x="0" y="-2.54" length="middle"/>
+<pin name="3" x="0" y="-5.08" length="middle"/>
+<pin name="4" x="0" y="-7.62" length="middle"/>
+<pin name="5" x="0" y="-10.16" length="middle"/>
+<pin name="6" x="0" y="-12.7" length="middle"/>
+<pin name="7" x="0" y="-15.24" length="middle"/>
+<pin name="8" x="0" y="-17.78" length="middle"/>
+<pin name="9" x="0" y="-20.32" length="middle"/>
+<pin name="10" x="0" y="-22.86" length="middle"/>
+<pin name="11" x="0" y="-25.4" length="middle"/>
+<pin name="12" x="0" y="-27.94" length="middle"/>
+<pin name="13" x="22.86" y="0" length="middle" rot="R180"/>
+<pin name="14" x="22.86" y="-2.54" length="middle" rot="R180"/>
+<pin name="15" x="22.86" y="-5.08" length="middle" rot="R180"/>
+<pin name="16" x="22.86" y="-7.62" length="middle" rot="R180"/>
+<pin name="17" x="22.86" y="-10.16" length="middle" rot="R180"/>
+<pin name="18" x="22.86" y="-12.7" length="middle" rot="R180"/>
+<pin name="19" x="22.86" y="-15.24" length="middle" rot="R180"/>
+<pin name="20" x="22.86" y="-17.78" length="middle" rot="R180"/>
+<pin name="21" x="22.86" y="-20.32" length="middle" rot="R180"/>
+<pin name="22" x="22.86" y="-22.86" length="middle" rot="R180"/>
+<pin name="23" x="22.86" y="-25.4" length="middle" rot="R180"/>
+</symbol>
 </symbols>
 <devicesets>
-<deviceset name="B340A-13-F" prefix="D">
-<description>&lt;b&gt;Schottky Diode 3A 40V 0.5Vf SMA Diodes Inc B340A-13-F, SMT Schottky Diode, 40V 3A, 2-Pin DO-214AC&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href="http://www.diodes.com/_files/datasheets/ds30891.pdf"&gt; Datasheet &lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="B340A-13-F" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="DIOM5226X240N">
-<connects>
-<connect gate="G$1" pin="A" pad="2"/>
-<connect gate="G$1" pin="K" pad="1"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="ALLIED_NUMBER" value="70437566" constant="no"/>
-<attribute name="ALLIED_PRICE-STOCK" value="http://www.alliedelec.com/diodes-inc-b340a-13-f/70437566/" constant="no"/>
-<attribute name="DESCRIPTION" value="Schottky Diode 3A 40V 0.5Vf SMA Diodes Inc B340A-13-F, SMT Schottky Diode, 40V 3A, 2-Pin DO-214AC" constant="no"/>
-<attribute name="HEIGHT" value="2.4mm" constant="no"/>
-<attribute name="MANUFACTURER_NAME" value="Diodes Inc." constant="no"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="B340A-13-F" constant="no"/>
-<attribute name="MOUSER_PART_NUMBER" value="621-B340A-F" constant="no"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=621-B340A-F" constant="no"/>
-<attribute name="RS_PART_NUMBER" value="7384778P" constant="no"/>
-<attribute name="RS_PRICE-STOCK" value="http://uk.rs-online.com/web/p/products/7384778P" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="SMA" package="DIOM4326X240">
-<connects>
-<connect gate="G$1" pin="A" pad="2"/>
-<connect gate="G$1" pin="K" pad="1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:8314666/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="CDBHM240L-HF" prefix="BR">
 <description>&lt;b&gt;COMCHIP TECHNOLOGY CDBHM240L-HF, Bridge Rectifier, 40V, 4-Pin MBS-2&lt;/b&gt;&lt;p&gt;
 Source: &lt;a href="http://www.comchiptech.com/admin/files/product/CDBHM220L-HF Thru. CDBHM2100L-HF  RevB.pdf"&gt; Datasheet &lt;/a&gt;</description>
@@ -24912,12 +25284,9 @@ Source: &lt;a href="http://www.comchiptech.com/admin/files/product/CDBHM220L-HF 
 <connects>
 <connect gate="G$1" pin="+" pad="3"/>
 <connect gate="G$1" pin="-" pad="4"/>
-<connect gate="G$1" pin="~_1" pad="1"/>
-<connect gate="G$1" pin="~_2" pad="2"/>
+<connect gate="G$1" pin="~" pad="2"/>
+<connect gate="G$1" pin="~1" pad="1"/>
 </connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:8170595/1"/>
-</package3dinstances>
 <technologies>
 <technology name="">
 <attribute name="ALLIED_NUMBER" value="70426672" constant="no"/>
@@ -24996,6 +25365,54 @@ Source: &lt;a href="https://www.arrow.com/en/products/1273as-h-3r3np3/murata-man
 </device>
 </devices>
 </deviceset>
+<deviceset name="PKS019-4011-0" prefix="J">
+<description>&lt;b&gt;HDMI, Displayport &amp; DVI Connectors Type D HDMI SMT Sngl Row Cnt Design&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://www.mouser.com/catalog/specsheets/PKS019-4011-0 Drawing.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="PKS019-4011-0" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="PKS01940110">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="10" pad="10"/>
+<connect gate="G$1" pin="11" pad="11"/>
+<connect gate="G$1" pin="12" pad="12"/>
+<connect gate="G$1" pin="13" pad="13"/>
+<connect gate="G$1" pin="14" pad="14"/>
+<connect gate="G$1" pin="15" pad="15"/>
+<connect gate="G$1" pin="16" pad="16"/>
+<connect gate="G$1" pin="17" pad="17"/>
+<connect gate="G$1" pin="18" pad="18"/>
+<connect gate="G$1" pin="19" pad="19"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="20" pad="P$1"/>
+<connect gate="G$1" pin="21" pad="21"/>
+<connect gate="G$1" pin="22" pad="22"/>
+<connect gate="G$1" pin="23" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="3"/>
+<connect gate="G$1" pin="4" pad="4"/>
+<connect gate="G$1" pin="5" pad="5"/>
+<connect gate="G$1" pin="6" pad="6"/>
+<connect gate="G$1" pin="7" pad="7"/>
+<connect gate="G$1" pin="8" pad="8"/>
+<connect gate="G$1" pin="9" pad="9"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="HDMI, Displayport &amp; DVI Connectors Type D HDMI SMT Sngl Row Cnt Design" constant="no"/>
+<attribute name="HEIGHT" value="3.27mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Yamaichi" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="PKS019-4011-0" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="945-PKS019-4011-0" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=945-PKS019-4011-0" constant="no"/>
+<attribute name="RS_PART_NUMBER" value="" constant="no"/>
+<attribute name="RS_PRICE-STOCK" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="SparkFun-Connectors" urn="urn:adsk.eagle:library:8231346">
@@ -25013,6 +25430,45 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
+<package name="SCREWTERMINAL-3.5MM-2" urn="urn:adsk.eagle:footprint:8231652/1" library_version="1">
+<description>&lt;h3&gt;Screw Terminal  3.5mm Pitch - 2 Pin PTH&lt;/h3&gt;
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
+&lt;li&gt;Pin pitch: 3.5mm/138mil&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=”https://www.sparkfun.com/datasheets/Prototyping/Screw-Terminal-3.5mm.pdf”&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Example device(s):
+&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<circle x="2" y="3" radius="0.2828" width="0.127" layer="51"/>
+<wire x1="-1.75" y1="3.4" x2="5.25" y2="3.4" width="0.2032" layer="21"/>
+<wire x1="5.25" y1="3.4" x2="5.25" y2="-2.8" width="0.2032" layer="21"/>
+<wire x1="5.25" y1="-2.8" x2="5.25" y2="-3.6" width="0.2032" layer="21"/>
+<wire x1="5.25" y1="-3.6" x2="-1.75" y2="-3.6" width="0.2032" layer="21"/>
+<wire x1="-1.75" y1="-3.6" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
+<wire x1="-1.75" y1="-2.8" x2="-1.75" y2="3.4" width="0.2032" layer="21"/>
+<wire x1="5.25" y1="-2.8" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
+<wire x1="-1.75" y1="-1.35" x2="-2.25" y2="-1.35" width="0.2032" layer="51"/>
+<wire x1="-2.25" y1="-1.35" x2="-2.25" y2="-2.35" width="0.2032" layer="51"/>
+<wire x1="-2.25" y1="-2.35" x2="-1.75" y2="-2.35" width="0.2032" layer="51"/>
+<wire x1="5.25" y1="3.15" x2="5.75" y2="3.15" width="0.2032" layer="51"/>
+<wire x1="5.75" y1="3.15" x2="5.75" y2="2.15" width="0.2032" layer="51"/>
+<wire x1="5.75" y1="2.15" x2="5.25" y2="2.15" width="0.2032" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.2" diameter="2.032" shape="square"/>
+<pad name="2" x="3.5" y="0" drill="1.2" diameter="2.032"/>
+<text x="-1.27" y="2.54" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
+<text x="-1.27" y="1.27" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
+</package>
+<package name="1X02_RA_PTH_FEMALE" urn="urn:adsk.eagle:footprint:8232191/1" library_version="1">
+<wire x1="-2.79" y1="4.25" x2="-2.79" y2="-4.25" width="0.1778" layer="21"/>
+<wire x1="2.79" y1="4.25" x2="2.79" y2="-4.25" width="0.1778" layer="21"/>
+<wire x1="-2.79" y1="4.25" x2="2.79" y2="4.25" width="0.1778" layer="21"/>
+<wire x1="-2.79" y1="-4.25" x2="2.79" y2="-4.25" width="0.1778" layer="21"/>
+<text x="-1.397" y="0.762" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
+<text x="-1.524" y="-1.27" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
+<pad name="2" x="-1.27" y="-5.85" drill="0.8"/>
+<pad name="1" x="1.27" y="-5.85" drill="0.8"/>
+</package>
 <package name="1X02" urn="urn:adsk.eagle:footprint:8231648/1" library_version="1">
 <description>&lt;h3&gt;Plated Through Hole&lt;/h3&gt;
 &lt;p&gt;Specifications:
@@ -25066,35 +25522,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pad name="2" x="2.54" y="0" drill="1.016" diameter="1.8796"/>
 <text x="-1.27" y="3.302" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
 <text x="-1.27" y="-2.794" size="0.6096" layer="27" font="vector" ratio="20" align="top-left">&gt;VALUE</text>
-</package>
-<package name="SCREWTERMINAL-3.5MM-2" urn="urn:adsk.eagle:footprint:8231652/1" library_version="1">
-<description>&lt;h3&gt;Screw Terminal  3.5mm Pitch - 2 Pin PTH&lt;/h3&gt;
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
-&lt;li&gt;Pin pitch: 3.5mm/138mil&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=”https://www.sparkfun.com/datasheets/Prototyping/Screw-Terminal-3.5mm.pdf”&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<circle x="2" y="3" radius="0.2828" width="0.127" layer="51"/>
-<wire x1="-1.75" y1="3.4" x2="5.25" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="3.4" x2="5.25" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-2.8" x2="5.25" y2="-3.6" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-3.6" x2="-1.75" y2="-3.6" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-3.6" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-2.8" x2="-1.75" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-2.8" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-1.35" x2="-2.25" y2="-1.35" width="0.2032" layer="51"/>
-<wire x1="-2.25" y1="-1.35" x2="-2.25" y2="-2.35" width="0.2032" layer="51"/>
-<wire x1="-2.25" y1="-2.35" x2="-1.75" y2="-2.35" width="0.2032" layer="51"/>
-<wire x1="5.25" y1="3.15" x2="5.75" y2="3.15" width="0.2032" layer="51"/>
-<wire x1="5.75" y1="3.15" x2="5.75" y2="2.15" width="0.2032" layer="51"/>
-<wire x1="5.75" y1="2.15" x2="5.25" y2="2.15" width="0.2032" layer="51"/>
-<pad name="1" x="0" y="0" drill="1.2" diameter="2.032" shape="square"/>
-<pad name="2" x="3.5" y="0" drill="1.2" diameter="2.032"/>
-<text x="-1.27" y="2.54" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
-<text x="-1.27" y="1.27" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
 </package>
 <package name="JST-2-SMD" urn="urn:adsk.eagle:footprint:8231654/1" library_version="1">
 <description>&lt;h3&gt;JST-Right Angle Male Header SMT&lt;/h3&gt;
@@ -25580,18 +26007,27 @@ part number 2062-2P from STA</description>
 <text x="0.635" y="-1.905" size="0.4064" layer="27">&gt;VALUE</text>
 <text x="-7.239" y="-1.397" size="0.3048" layer="51" rot="R90">BOARD EDGE</text>
 </package>
-<package name="1X02_RA_PTH_FEMALE" urn="urn:adsk.eagle:footprint:8232191/1" library_version="1">
-<wire x1="-2.79" y1="4.25" x2="-2.79" y2="-4.25" width="0.1778" layer="21"/>
-<wire x1="2.79" y1="4.25" x2="2.79" y2="-4.25" width="0.1778" layer="21"/>
-<wire x1="-2.79" y1="4.25" x2="2.79" y2="4.25" width="0.1778" layer="21"/>
-<wire x1="-2.79" y1="-4.25" x2="2.79" y2="-4.25" width="0.1778" layer="21"/>
-<text x="-1.397" y="0.762" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
-<text x="-1.524" y="-1.27" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
-<pad name="2" x="-1.27" y="-5.85" drill="0.8"/>
-<pad name="1" x="1.27" y="-5.85" drill="0.8"/>
-</package>
 </packages>
 <packages3d>
+<package3d name="SCREWTERMINAL-3.5MM-2" urn="urn:adsk.eagle:package:8232313/1" type="box" library_version="1">
+<description>&lt;h3&gt;Screw Terminal  3.5mm Pitch - 2 Pin PTH&lt;/h3&gt;
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
+&lt;li&gt;Pin pitch: 3.5mm/138mil&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=”https://www.sparkfun.com/datasheets/Prototyping/Screw-Terminal-3.5mm.pdf”&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Example device(s):
+&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<packageinstances>
+<packageinstance name="SCREWTERMINAL-3.5MM-2"/>
+</packageinstances>
+</package3d>
+<package3d name="1X02_RA_PTH_FEMALE" urn="urn:adsk.eagle:package:8232912/1" type="box" library_version="1">
+<packageinstances>
+<packageinstance name="1X02_RA_PTH_FEMALE"/>
+</packageinstances>
+</package3d>
 <package3d name="1X02" urn="urn:adsk.eagle:package:8232308/1" type="box" library_version="1">
 <description>&lt;h3&gt;Plated Through Hole&lt;/h3&gt;
 &lt;p&gt;Specifications:
@@ -25617,20 +26053,6 @@ part number 2062-2P from STA</description>
 &lt;/ul&gt;&lt;/p&gt;</description>
 <packageinstances>
 <packageinstance name="MOLEX-1X2"/>
-</packageinstances>
-</package3d>
-<package3d name="SCREWTERMINAL-3.5MM-2" urn="urn:adsk.eagle:package:8232313/1" type="box" library_version="1">
-<description>&lt;h3&gt;Screw Terminal  3.5mm Pitch - 2 Pin PTH&lt;/h3&gt;
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
-&lt;li&gt;Pin pitch: 3.5mm/138mil&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=”https://www.sparkfun.com/datasheets/Prototyping/Screw-Terminal-3.5mm.pdf”&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="SCREWTERMINAL-3.5MM-2"/>
 </packageinstances>
 </package3d>
 <package3d name="JST-2-SMD" urn="urn:adsk.eagle:package:8232314/1" type="box" library_version="1">
@@ -25895,11 +26317,6 @@ tDocu marks the spring arms
 part number 2062-2P from STA</description>
 <packageinstances>
 <packageinstance name="1X02_POKEHOME"/>
-</packageinstances>
-</package3d>
-<package3d name="1X02_RA_PTH_FEMALE" urn="urn:adsk.eagle:package:8232912/1" type="box" library_version="1">
-<packageinstances>
-<packageinstance name="1X02_RA_PTH_FEMALE"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -27809,117 +28226,2787 @@ Source: http://www.osram.convergy.de/</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="46765-0001">
+<library name="diode" urn="urn:adsk.eagle:library:210">
+<description>&lt;b&gt;Diodes&lt;/b&gt;&lt;p&gt;
+Based on the following sources:
+&lt;ul&gt;
+&lt;li&gt;Motorola : www.onsemi.com
+&lt;li&gt;Fairchild : www.fairchildsemi.com
+&lt;li&gt;Philips : www.semiconductors.com
+&lt;li&gt;Vishay : www.vishay.de
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="46765-0001">
-<description>&lt;b&gt;46765-0001&lt;/b&gt;&lt;br&gt;
-</description>
-<text x="-0.35228125" y="2.36856875" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="-0.35228125" y="2.36856875" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="-3.25" y1="7.5" x2="3.25" y2="7.5" width="0.2" layer="51"/>
-<wire x1="3.25" y1="7.5" x2="3.25" y2="0" width="0.2" layer="51"/>
-<wire x1="3.25" y1="0" x2="-3.25" y2="0" width="0.2" layer="51"/>
-<wire x1="-3.25" y1="0" x2="-3.25" y2="7.5" width="0.2" layer="51"/>
-<wire x1="-3.25" y1="0" x2="3.25" y2="0" width="0.2" layer="21"/>
-<wire x1="-3.25" y1="0" x2="-3.25" y2="1.177" width="0.2" layer="21"/>
-<wire x1="3.25" y1="0" x2="3.25" y2="1.177" width="0.2" layer="21"/>
-<wire x1="-3.25" y1="7.5" x2="-2.2" y2="7.5" width="0.2" layer="21"/>
-<wire x1="3.25" y1="7.5" x2="2.2" y2="7.5" width="0.2" layer="21"/>
-<wire x1="-3.25" y1="4.8" x2="-3.25" y2="3.7" width="0.2" layer="21"/>
-<wire x1="3.25" y1="4.8" x2="3.25" y2="3.7" width="0.2" layer="21"/>
-<circle x="1.803" y="8.142" radius="0.05048125" width="0.2" layer="25"/>
-<smd name="1" x="1.8" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="2" x="1.6" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="3" x="1.4" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="4" x="1.2" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="5" x="1" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="6" x="0.8" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="7" x="0.6" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="8" x="0.4" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="9" x="0.2" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="10" x="0" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="11" x="-0.2" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="12" x="-0.4" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="13" x="-0.6" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="14" x="-0.8" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="15" x="-1" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="16" x="-1.2" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="17" x="-1.4" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="18" x="-1.6" y="5.95" dx="1" dy="0.23" layer="1" rot="R90"/>
-<smd name="19" x="-1.8" y="7.175" dx="0.85" dy="0.23" layer="1" rot="R90"/>
-<smd name="20" x="-2.85" y="5.76" dx="1.8" dy="1.38" layer="1"/>
-<smd name="21" x="2.85" y="5.76" dx="1.8" dy="1.38" layer="1"/>
-<smd name="22" x="2.9" y="2.4" dx="2" dy="1.7" layer="1" rot="R90"/>
-<smd name="23" x="-2.9" y="2.4" dx="2" dy="1.7" layer="1" rot="R90"/>
+<package name="DO41-10" urn="urn:adsk.eagle:footprint:43094/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2.54 mm, horizontal, grid 10.16 mm</description>
+<wire x1="2.032" y1="-1.27" x2="-2.032" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="-1.27" x2="2.032" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.27" x2="2.032" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.27" x2="-2.032" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="A" x="5.08" y="0" drill="1.1176"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176"/>
+<text x="-2.032" y="1.651" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.032" y="-2.794" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.651" y1="-1.27" x2="-1.143" y2="1.27" layer="21"/>
+<rectangle x1="2.032" y1="-0.381" x2="3.937" y2="0.381" layer="21"/>
+<rectangle x1="-3.937" y1="-0.381" x2="-2.032" y2="0.381" layer="21"/>
+</package>
+<package name="DO35-10" urn="urn:adsk.eagle:footprint:43092/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2 mm, horizontal, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="4.191" y2="0" width="0.508" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.191" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="1.016" x2="2.286" y2="0.762" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-2.286" y1="0.762" x2="-2.032" y2="1.016" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-2.286" y1="-0.762" x2="-2.032" y2="-1.016" width="0.1524" layer="21" curve="90"/>
+<wire x1="2.032" y1="-1.016" x2="2.286" y2="-0.762" width="0.1524" layer="21" curve="90"/>
+<wire x1="2.286" y1="-0.762" x2="2.286" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-2.286" y1="0.762" x2="-2.286" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="1.016" x2="2.032" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="-1.016" x2="2.032" y2="-1.016" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="0.8128" shape="long"/>
+<text x="-2.159" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.159" y="-2.667" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.905" y1="-1.016" x2="-1.397" y2="1.016" layer="21"/>
+<rectangle x1="2.286" y1="-0.254" x2="4.191" y2="0.254" layer="21"/>
+<rectangle x1="-4.191" y1="-0.254" x2="-2.286" y2="0.254" layer="21"/>
+</package>
+<package name="DO204-10" urn="urn:adsk.eagle:footprint:43129/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 4 mm, horizontal, grid 10 mm</description>
+<wire x1="2.54" y1="0.635" x2="2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="2.5255" y2="0.6542" width="0.1524" layer="21" curve="-105.826017"/>
+<wire x1="-2.5255" y1="-0.6542" x2="2.54" y2="-0.635" width="0.1524" layer="21" curve="105.826017"/>
+<wire x1="2.54" y1="0.635" x2="2.921" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="3.048" y1="0.508" x2="2.921" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.635" x2="2.921" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="3.048" y1="-0.508" x2="2.921" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="3.048" y1="-0.508" x2="3.048" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.921" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-3.048" y1="0.508" x2="-2.921" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.635" x2="-2.921" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.048" y1="-0.508" x2="-2.921" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.048" y1="-0.508" x2="-3.048" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-1.778" y1="1.016" x2="-1.778" y2="-1.016" width="0.6096" layer="21"/>
+<wire x1="-2.286" y1="0.508" x2="-2.286" y2="-0.508" width="0.6096" layer="21"/>
+<wire x1="-2.032" y1="-0.762" x2="-2.286" y2="-0.508" width="0.6096" layer="21"/>
+<wire x1="-2.286" y1="0.508" x2="-2.032" y2="0.762" width="0.6096" layer="21"/>
+<wire x1="-2.794" y1="0.381" x2="-2.794" y2="-0.381" width="0.6096" layer="21"/>
+<wire x1="2.794" y1="0.381" x2="2.794" y2="-0.381" width="0.6096" layer="21"/>
+<wire x1="5.08" y1="0" x2="3.683" y2="0" width="0.8128" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-3.683" y2="0" width="0.8128" layer="51"/>
+<wire x1="-0.889" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.508" x2="0.508" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.508" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.889" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.508" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.508" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1176" shape="long"/>
+<text x="-2.54" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.556" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="3.048" y1="-0.4064" x2="3.6068" y2="0.4064" layer="21"/>
+<rectangle x1="-3.6068" y1="-0.4064" x2="-3.048" y2="0.4064" layer="21"/>
+</package>
+<package name="DO15-12" urn="urn:adsk.eagle:footprint:43132/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, horizontal, grid 12.7 mm</description>
+<wire x1="-3.81" y1="-1.778" x2="3.81" y2="-1.778" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="1.778" x2="-3.81" y2="1.778" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="-1.778" x2="3.81" y2="1.778" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="1.778" x2="-3.81" y2="-1.778" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0" x2="5.334" y2="0" width="0.762" layer="51"/>
+<wire x1="-6.35" y1="0" x2="-5.334" y2="0" width="0.762" layer="51"/>
+<pad name="C" x="-6.35" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="6.35" y="0" drill="1.1176" shape="long"/>
+<text x="-3.683" y="2.159" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.159" y="-1.397" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.048" y1="-1.778" x2="-2.413" y2="1.778" layer="21"/>
+<rectangle x1="-5.207" y1="-0.381" x2="-3.81" y2="0.381" layer="21"/>
+<rectangle x1="3.81" y1="-0.381" x2="5.207" y2="0.381" layer="21"/>
+</package>
+<package name="SOD57-10" urn="urn:adsk.eagle:footprint:43130/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 4 mm, vertical, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="3.81" y2="0" width="0.8128" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-3.81" y2="0" width="0.8128" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.286" y1="1.016" x2="-2.286" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="2.286" y1="-1.016" x2="2.286" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="1.016" x2="1.397" y2="1.016" width="0.1524" layer="21" curve="-131.11209"/>
+<wire x1="-1.397" y1="-1.016" x2="1.397" y2="-1.016" width="0.1524" layer="21" curve="131.11209"/>
+<wire x1="-2.286" y1="1.016" x2="-1.397" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="2.286" y1="1.016" x2="1.397" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="-2.286" y1="-1.016" x2="-1.397" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="-1.016" x2="2.286" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.1938" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1938" shape="long"/>
+<text x="-2.286" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.286" y="-3.556" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.905" y1="-1.016" x2="-1.397" y2="1.016" layer="21"/>
+<rectangle x1="-3.8354" y1="-0.4064" x2="-2.286" y2="0.4064" layer="21"/>
+<rectangle x1="2.286" y1="-0.4064" x2="3.8354" y2="0.4064" layer="21"/>
+</package>
+<package name="DO201-15" urn="urn:adsk.eagle:footprint:43127/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 5.6 mm, horizontal, grid 15.24 mm</description>
+<wire x1="-1.27" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.5842" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.143" y2="0.5842" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="0.5842" x2="1.143" y2="-0.5842" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="-0.5842" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="2.286" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.5842" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-2.794" x2="-5.08" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="2.794" x2="5.08" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="2.794" x2="5.08" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-2.794" x2="-5.08" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.223" y2="0" width="1.27" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.223" y2="0" width="1.27" layer="51"/>
+<pad name="C" x="-7.62" y="0" drill="1.4986" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="1.4986" shape="long"/>
+<text x="-5.08" y="3.175" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-4.191" y1="-2.794" x2="-3.429" y2="2.794" layer="21"/>
+<rectangle x1="-5.969" y1="-0.635" x2="-5.08" y2="0.635" layer="21"/>
+<rectangle x1="5.08" y1="-0.635" x2="5.969" y2="0.635" layer="21"/>
+</package>
+<package name="DO07" urn="urn:adsk.eagle:footprint:43160/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2.54 mm, horizontal, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="4.191" y2="0" width="0.508" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.191" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="3.302" y1="1.27" x2="3.556" y2="1.016" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-3.556" y1="1.016" x2="-3.302" y2="1.27" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-3.556" y1="-1.016" x2="-3.302" y2="-1.27" width="0.1524" layer="21" curve="90"/>
+<wire x1="3.302" y1="-1.27" x2="3.556" y2="-1.016" width="0.1524" layer="21" curve="90"/>
+<wire x1="3.556" y1="-1.016" x2="3.556" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="-3.556" y1="1.016" x2="-3.556" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-3.302" y1="1.27" x2="3.302" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-3.302" y1="-1.27" x2="3.302" y2="-1.27" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="0.8128" shape="long"/>
+<text x="-3.429" y="1.524" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.429" y="-2.921" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="1.27" layer="21"/>
+<rectangle x1="3.556" y1="-0.254" x2="4.191" y2="0.254" layer="21"/>
+<rectangle x1="-4.191" y1="-0.254" x2="-3.556" y2="0.254" layer="21"/>
+</package>
+<package name="P1-10" urn="urn:adsk.eagle:footprint:43138/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3 mm, horizontal, grid 10.16 mm</description>
+<wire x1="-3.175" y1="-1.524" x2="3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="1.524" x2="-3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="-1.524" x2="3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="1.524" x2="-3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.762" layer="51"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1176" shape="long"/>
+<text x="-3.048" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.175" y="-3.048" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.794" y1="-1.524" x2="-2.032" y2="1.524" layer="21"/>
+<rectangle x1="-3.937" y1="-0.381" x2="-3.175" y2="0.381" layer="21"/>
+<rectangle x1="3.175" y1="-0.381" x2="3.937" y2="0.381" layer="21"/>
+</package>
+<package name="P2-15" urn="urn:adsk.eagle:footprint:43106/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 5 mm, horizontal, grid 12.7 mm</description>
+<wire x1="-4.826" y1="-2.54" x2="-4.826" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="2.54" x2="4.826" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="2.54" x2="4.826" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-2.54" x2="-4.826" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="2.54" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.223" y2="0" width="1.27" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.223" y2="0" width="1.27" layer="51"/>
+<pad name="C" x="-7.62" y="0" drill="1.4986" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="1.4986" shape="long"/>
+<text x="-4.8006" y="2.8194" size="1.778" layer="25" ratio="10">&gt;NAME</text>
+<text x="-4.9022" y="-4.699" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.429" y1="-2.54" x2="-2.921" y2="2.54" layer="21"/>
+<rectangle x1="4.826" y1="-0.635" x2="5.969" y2="0.635" layer="21"/>
+<rectangle x1="-5.969" y1="-0.635" x2="-4.826" y2="0.635" layer="21"/>
+</package>
+<package name="DO34-7" urn="urn:adsk.eagle:footprint:43109/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 1.8 mm, horizontal, grid 7.62 mm</description>
+<wire x1="-1.524" y1="-0.889" x2="1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="0.889" x2="-1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-0.889" x2="1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="0.889" x2="-1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="0" x2="2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-3.81" y1="0" x2="-2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.508" y1="0" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="0.508" x2="0.889" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="-0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="1.27" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="0.889" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="-0.127" y2="-0.508" width="0.1524" layer="21"/>
+<pad name="C" x="-3.81" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="3.81" y="0" drill="0.8128" shape="long"/>
+<text x="-1.524" y="1.143" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.524" y="-2.413" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.143" y1="-0.889" x2="-0.762" y2="0.889" layer="21"/>
+<rectangle x1="1.524" y1="-0.254" x2="2.921" y2="0.254" layer="21"/>
+<rectangle x1="-2.921" y1="-0.254" x2="-1.524" y2="0.254" layer="21"/>
+</package>
+<package name="SOT54H" urn="urn:adsk.eagle:footprint:43111/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead plastic, vertical</description>
+<wire x1="-1.651" y1="2.032" x2="1.651" y2="2.032" width="0.1524" layer="21" curve="280.388858"/>
+<wire x1="1.651" y1="2.032" x2="-1.651" y2="2.032" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-1.905" x2="0.508" y2="-0.635" width="0.2032" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.381" y2="-1.27" width="0.2032" layer="21"/>
+<wire x1="-0.381" y1="-1.27" x2="0.508" y2="-1.905" width="0.2032" layer="21"/>
+<wire x1="-0.508" y1="-1.905" x2="-0.508" y2="-0.635" width="0.2032" layer="21"/>
+<pad name="A" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="C" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="3.175" y="0.635" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.175" y="-1.27" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+<package name="SOD523" urn="urn:adsk.eagle:footprint:43179/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;</description>
+<wire x1="-0.59" y1="0.4" x2="0.59" y2="0.4" width="0.1016" layer="51"/>
+<wire x1="0.59" y1="0.4" x2="0.59" y2="-0.4" width="0.1016" layer="51"/>
+<wire x1="0.59" y1="-0.4" x2="-0.59" y2="-0.4" width="0.1016" layer="51"/>
+<wire x1="-0.59" y1="-0.4" x2="-0.59" y2="0.4" width="0.1016" layer="51"/>
+<smd name="A" x="0.7" y="0" dx="0.7" dy="0.5" layer="1"/>
+<smd name="C" x="-0.6" y="0" dx="0.7" dy="0.5" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.75" y1="-0.17" x2="-0.54" y2="0.17" layer="51"/>
+<rectangle x1="0.54" y1="-0.17" x2="0.75" y2="0.17" layer="51"/>
+<rectangle x1="-0.59" y1="-0.4" x2="-0.3" y2="0.4" layer="51"/>
+</package>
+<package name="TO18D" urn="urn:adsk.eagle:footprint:43190/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead metall, vertical</description>
+<wire x1="1.651" y1="-2.286" x2="2.286" y2="-2.921" width="0.1524" layer="21"/>
+<wire x1="2.286" y1="-2.921" x2="2.921" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="-2.286" x2="2.286" y2="-1.651" width="0.1524" layer="21"/>
+<circle x="0" y="0.0254" radius="2.7686" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="2.54" width="0.0508" layer="21"/>
+<pad name="A" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="C" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="3.175" y="0.762" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.175" y="-1.143" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+<package name="C1702-05" urn="urn:adsk.eagle:footprint:43191/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 5.08 mm</description>
+<wire x1="2.54" y1="0" x2="0.762" y2="0" width="1.0668" layer="51"/>
+<wire x1="-2.54" y1="0" x2="-0.889" y2="0" width="1.0668" layer="51"/>
+<circle x="-2.54" y="0" radius="1.778" width="0.1524" layer="21"/>
+<pad name="C" x="-2.54" y="0" drill="1.397" shape="octagon"/>
+<pad name="A" x="2.54" y="0" drill="1.397" shape="octagon"/>
+<text x="-4.318" y="2.032" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-4.318" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-0.7366" y1="-0.5334" x2="0.635" y2="0.5334" layer="21"/>
+</package>
+<package name="C1702-15" urn="urn:adsk.eagle:footprint:43117/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, horizontal, grid 15.24 mm</description>
+<wire x1="-4.572" y1="-1.778" x2="-4.572" y2="1.778" width="0.1524" layer="21"/>
+<wire x1="4.572" y1="1.778" x2="-4.572" y2="1.778" width="0.1524" layer="21"/>
+<wire x1="4.572" y1="1.778" x2="4.572" y2="-1.778" width="0.1524" layer="21"/>
+<wire x1="-4.572" y1="-1.778" x2="4.572" y2="-1.778" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.096" y2="0" width="1.1176" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.096" y2="0" width="1.1176" layer="51"/>
+<pad name="C" x="-7.62" y="0" drill="1.397" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="1.397" shape="long"/>
+<text x="-4.572" y="2.159" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.794" y="-1.397" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.81" y1="-1.778" x2="-3.302" y2="1.778" layer="21"/>
+<rectangle x1="4.572" y1="-0.5334" x2="5.9436" y2="0.5334" layer="21"/>
+<rectangle x1="-5.9436" y1="-0.5334" x2="-4.572" y2="0.5334" layer="21"/>
+</package>
+<package name="SGA-10" urn="urn:adsk.eagle:footprint:43154/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 4 mm, vertical, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="3.175" y2="0" width="0.8128" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-3.175" y2="0" width="0.8128" layer="51"/>
+<wire x1="-0.762" y1="0" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="0.508" x2="0.635" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-0.508" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="0.635" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0.508" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="-0.381" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="2.032" y1="0.381" x2="2.032" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="1.1938" x2="-1.397" y2="-1.1938" width="0.254" layer="21"/>
+<wire x1="-1.5748" y1="1.0414" x2="-1.5748" y2="-1.016" width="0.254" layer="21"/>
+<wire x1="-2.032" y1="0.381" x2="-2.032" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.032" y1="0.381" x2="2.032" y2="0.381" width="0.1524" layer="21" curve="-145.291951"/>
+<wire x1="-2.032" y1="-0.381" x2="2.032" y2="-0.381" width="0.1524" layer="21" curve="145.291951"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1176" shape="long"/>
+<text x="-2.54" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.556" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="2.032" y1="-0.4064" x2="3.8608" y2="0.4064" layer="21"/>
+<rectangle x1="-3.8608" y1="-0.4064" x2="-2.032" y2="0.4064" layer="21"/>
+</package>
+<package name="SOD64-10" urn="urn:adsk.eagle:footprint:43140/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 4.8 mm, vertical, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="3.556" y2="0" width="1.3716" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-3.556" y2="0" width="1.3716" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="1.397" x2="-2.54" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-1.397" x2="2.54" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="1.397" x2="1.397" y2="1.397" width="0.1524" layer="21" curve="-131.11209"/>
+<wire x1="-1.397" y1="-1.397" x2="1.397" y2="-1.397" width="0.1524" layer="21" curve="131.11209"/>
+<wire x1="-2.54" y1="1.397" x2="-1.397" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="1.397" x2="1.397" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-1.397" x2="-1.397" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="-1.397" x2="2.54" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.6002" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.6002" shape="long"/>
+<text x="-2.54" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.905" y1="-1.397" x2="-1.397" y2="1.397" layer="21"/>
+<rectangle x1="2.54" y1="-0.6604" x2="3.3274" y2="0.6604" layer="21"/>
+<rectangle x1="-3.3274" y1="-0.6604" x2="-2.54" y2="0.6604" layer="21"/>
+</package>
+<package name="SOD61A" urn="urn:adsk.eagle:footprint:43141/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 10.16 mm</description>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.6604" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.6604" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.921" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.54" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-2.921" y1="0.381" x2="-2.921" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.921" y1="-0.381" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.635" x2="2.921" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="0.381" x2="2.921" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.635" x2="2.921" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.635" x2="2.54" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="-0.381" x2="2.794" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.508" x2="2.794" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.508" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="0.381" x2="2.794" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.508" x2="2.794" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.508" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.921" y1="0.381" x2="-2.794" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.508" x2="-2.794" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.508" x2="-2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.921" y1="-0.381" x2="-2.794" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.508" x2="-2.794" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.508" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.794" y1="0.381" x2="2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.381" x2="2.54" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="2.794" y1="-0.381" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.381" x2="2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.794" y1="-0.381" x2="-2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.381" x2="-2.54" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-2.794" y1="0.381" x2="-2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.381" x2="-2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="2.5178" y2="0.655" width="0.1524" layer="21" curve="-84.093979"/>
+<wire x1="-2.5178" y1="-0.655" x2="2.54" y2="-0.635" width="0.1524" layer="21" curve="84.093979"/>
+<pad name="C" x="-5.08" y="0" drill="0.9144" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="0.9144" shape="long"/>
+<text x="-2.54" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.048" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="2.921" y1="-0.3302" x2="4.0132" y2="0.3302" layer="21"/>
+<rectangle x1="-4.0132" y1="-0.3302" x2="-2.921" y2="0.3302" layer="21"/>
+<rectangle x1="2.54" y1="-0.381" x2="2.921" y2="0.381" layer="21"/>
+<rectangle x1="-2.921" y1="-0.381" x2="-2.54" y2="0.381" layer="21"/>
+</package>
+<package name="SOD61B" urn="urn:adsk.eagle:footprint:43142/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 15.24 mm</description>
+<wire x1="7.62" y1="0" x2="6.604" y2="0" width="0.6604" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.604" y2="0" width="0.6604" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.635" x2="-4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.635" x2="-4.445" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.381" x2="-4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="-0.381" x2="-4.445" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="0.635" x2="4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.381" x2="4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="-0.635" x2="4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="-0.635" x2="4.445" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.381" x2="4.699" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="-0.508" x2="4.699" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="-0.508" x2="4.445" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.381" x2="4.699" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="0.508" x2="4.699" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="0.508" x2="4.445" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.381" x2="-4.699" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.508" x2="-4.699" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.508" x2="-4.445" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="-0.381" x2="-4.699" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="-0.508" x2="-4.699" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="-0.508" x2="-4.445" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="0.381" x2="4.445" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="0.381" x2="4.445" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-0.381" x2="4.445" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.445" y1="-0.381" x2="4.445" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.699" y1="-0.381" x2="-4.445" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="-0.381" x2="-4.445" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-4.699" y1="0.381" x2="-4.445" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.381" x2="-4.445" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.445" y1="0.635" x2="4.4429" y2="0.636" width="0.1524" layer="21" curve="-52.21463"/>
+<wire x1="-4.4429" y1="-0.636" x2="4.445" y2="-0.635" width="0.1524" layer="21" curve="52.21463"/>
+<pad name="C" x="-7.62" y="0" drill="0.9144" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="0.9144" shape="long"/>
+<text x="-2.794" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.794" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="4.445" y1="-0.381" x2="4.826" y2="0.381" layer="21"/>
+<rectangle x1="-4.826" y1="-0.381" x2="-4.445" y2="0.381" layer="21"/>
+<rectangle x1="4.826" y1="-0.3302" x2="6.5278" y2="0.3302" layer="21"/>
+<rectangle x1="-6.5278" y1="-0.3302" x2="-4.826" y2="0.3302" layer="21"/>
+</package>
+<package name="SOD61C" urn="urn:adsk.eagle:footprint:43143/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 17.78 mm</description>
+<wire x1="8.89" y1="0" x2="7.874" y2="0" width="0.6604" layer="51"/>
+<wire x1="-8.89" y1="0" x2="-7.874" y2="0" width="0.6604" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="0.635" x2="-5.969" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="0.635" x2="-5.588" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-5.969" y1="0.381" x2="-5.969" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.969" y1="-0.381" x2="-5.588" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="0.635" x2="5.969" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="5.969" y1="0.381" x2="5.969" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="-0.635" x2="5.969" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="-0.635" x2="5.588" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="5.969" y1="-0.381" x2="5.842" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="-0.508" x2="5.842" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="-0.508" x2="5.588" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.969" y1="0.381" x2="5.842" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="0.508" x2="5.842" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="0.508" x2="5.588" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-5.969" y1="0.381" x2="-5.842" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="0.508" x2="-5.842" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="0.508" x2="-5.588" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.969" y1="-0.381" x2="-5.842" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="-0.508" x2="-5.842" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="-0.508" x2="-5.588" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="5.842" y1="0.381" x2="5.588" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="0.381" x2="5.588" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="5.842" y1="-0.381" x2="5.588" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.588" y1="-0.381" x2="5.588" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.842" y1="-0.381" x2="-5.588" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="-0.381" x2="-5.588" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-5.842" y1="0.381" x2="-5.588" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.588" y1="0.381" x2="-5.588" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.55" y1="0.65" x2="-4.55" y2="1" width="0.1524" layer="21"/>
+<wire x1="-4.55" y1="1" x2="-3.4" y2="1.3" width="0.1524" layer="21"/>
+<wire x1="-3.4" y1="1.3" x2="-2.05" y2="1.55" width="0.1524" layer="21"/>
+<wire x1="-2.05" y1="1.55" x2="-1" y2="1.65" width="0.1524" layer="21"/>
+<wire x1="-1" y1="1.65" x2="0" y2="1.7" width="0.1524" layer="21"/>
+<wire x1="5.55" y1="-0.65" x2="4.55" y2="-1" width="0.1524" layer="21"/>
+<wire x1="4.55" y1="-1" x2="3.4" y2="-1.3" width="0.1524" layer="21"/>
+<wire x1="3.4" y1="-1.3" x2="2.05" y2="-1.55" width="0.1524" layer="21"/>
+<wire x1="2.05" y1="-1.55" x2="1" y2="-1.65" width="0.1524" layer="21"/>
+<wire x1="1" y1="-1.65" x2="0" y2="-1.7" width="0.1524" layer="21"/>
+<wire x1="5.55" y1="0.65" x2="4.55" y2="1" width="0.1524" layer="21"/>
+<wire x1="4.55" y1="1" x2="3.4" y2="1.3" width="0.1524" layer="21"/>
+<wire x1="3.4" y1="1.3" x2="2.05" y2="1.55" width="0.1524" layer="21"/>
+<wire x1="2.05" y1="1.55" x2="1" y2="1.65" width="0.1524" layer="21"/>
+<wire x1="1" y1="1.65" x2="0" y2="1.7" width="0.1524" layer="21"/>
+<wire x1="-5.55" y1="-0.65" x2="-4.55" y2="-1" width="0.1524" layer="21"/>
+<wire x1="-4.55" y1="-1" x2="-3.4" y2="-1.3" width="0.1524" layer="21"/>
+<wire x1="-3.4" y1="-1.3" x2="-2.05" y2="-1.55" width="0.1524" layer="21"/>
+<wire x1="-2.05" y1="-1.55" x2="-1" y2="-1.65" width="0.1524" layer="21"/>
+<wire x1="-1" y1="-1.65" x2="0" y2="-1.7" width="0.1524" layer="21"/>
+<pad name="C" x="-8.89" y="0" drill="0.9144" shape="long"/>
+<pad name="A" x="8.89" y="0" drill="0.9144" shape="long"/>
+<text x="-2.286" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.286" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="5.588" y1="-0.381" x2="5.969" y2="0.381" layer="21"/>
+<rectangle x1="-5.969" y1="-0.381" x2="-5.588" y2="0.381" layer="21"/>
+<rectangle x1="5.969" y1="-0.3302" x2="7.8232" y2="0.3302" layer="21"/>
+<rectangle x1="-7.8232" y1="-0.3302" x2="-5.969" y2="0.3302" layer="21"/>
+</package>
+<package name="SOD61D" urn="urn:adsk.eagle:footprint:43144/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 15.24 mm</description>
+<wire x1="7.62" y1="0" x2="6.604" y2="0" width="0.6604" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.604" y2="0" width="0.6604" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.635" x2="-5.207" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.635" x2="-4.826" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="0.381" x2="-5.207" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="-0.381" x2="-4.826" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.635" x2="5.207" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="0.381" x2="5.207" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.635" x2="5.207" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.635" x2="4.826" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="-0.381" x2="5.08" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.508" x2="5.08" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.508" x2="4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="0.381" x2="5.08" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.508" x2="5.08" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.508" x2="4.826" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="0.381" x2="-5.08" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.508" x2="-5.08" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.508" x2="-4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="-0.381" x2="-5.08" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="-0.508" x2="-5.08" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="-0.508" x2="-4.826" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0.381" x2="4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="0.381" x2="4.826" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-0.381" x2="4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-0.381" x2="4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-0.381" x2="-4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="-0.381" x2="-4.826" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="0.381" x2="-4.826" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.381" x2="-4.826" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="0.635" x2="4.8254" y2="0.6353" width="0.1524" layer="21" curve="-49.511667"/>
+<wire x1="-4.8254" y1="-0.6353" x2="4.826" y2="-0.635" width="0.1524" layer="21" curve="49.511667"/>
+<pad name="C" x="-7.62" y="0" drill="0.9144" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="0.9144" shape="long"/>
+<text x="-2.54" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="4.826" y1="-0.381" x2="5.207" y2="0.381" layer="21"/>
+<rectangle x1="-5.207" y1="-0.381" x2="-4.826" y2="0.381" layer="21"/>
+<rectangle x1="5.207" y1="-0.3302" x2="6.5278" y2="0.3302" layer="21"/>
+<rectangle x1="-6.5278" y1="-0.3302" x2="-5.207" y2="0.3302" layer="21"/>
+</package>
+<package name="SOD61E" urn="urn:adsk.eagle:footprint:43145/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.5 mm, vertical, grid 20.32 mm</description>
+<wire x1="10.16" y1="0" x2="9.144" y2="0" width="0.6604" layer="51"/>
+<wire x1="-10.16" y1="0" x2="-9.144" y2="0" width="0.6604" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.635" x2="-6.731" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.635" x2="-6.35" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-6.731" y1="0.381" x2="-6.731" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-6.731" y1="-0.381" x2="-6.35" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0.635" x2="6.731" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="6.731" y1="0.381" x2="6.731" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="-0.635" x2="6.731" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="-0.635" x2="6.35" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="6.731" y1="-0.381" x2="6.604" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="-0.508" x2="6.604" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="-0.508" x2="6.35" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.731" y1="0.381" x2="6.604" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0.508" x2="6.604" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0.508" x2="6.35" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-6.731" y1="0.381" x2="-6.604" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.508" x2="-6.604" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.508" x2="-6.35" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.731" y1="-0.381" x2="-6.604" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="-0.508" x2="-6.604" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="-0.508" x2="-6.35" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="6.604" y1="0.381" x2="6.35" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0.381" x2="6.35" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="6.604" y1="-0.381" x2="6.35" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="-0.381" x2="6.35" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.604" y1="-0.381" x2="-6.35" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="-0.381" x2="-6.35" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-6.604" y1="0.381" x2="-6.35" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.381" x2="-6.35" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-6.35" y1="0.635" x2="6.3161" y2="0.6464" width="0.1524" layer="21" curve="-37.137105"/>
+<wire x1="-6.3161" y1="-0.6464" x2="6.35" y2="-0.635" width="0.1524" layer="21" curve="37.137105"/>
+<pad name="C" x="-10.16" y="0" drill="0.9144" shape="long"/>
+<pad name="A" x="10.16" y="0" drill="0.9144" shape="long"/>
+<text x="-3.048" y="2.159" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.048" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="6.35" y1="-0.381" x2="6.731" y2="0.381" layer="21"/>
+<rectangle x1="-6.731" y1="-0.381" x2="-6.35" y2="0.381" layer="21"/>
+<rectangle x1="6.731" y1="-0.3302" x2="9.0678" y2="0.3302" layer="21"/>
+<rectangle x1="-9.0678" y1="-0.3302" x2="-6.731" y2="0.3302" layer="21"/>
+</package>
+<package name="DO27-15" urn="urn:adsk.eagle:footprint:43095/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 5 mm, horizontal, grid 15.24 mm</description>
+<wire x1="-1.27" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.5842" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.143" y2="0.5842" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="0.5842" x2="1.143" y2="-0.5842" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="-0.5842" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="2.286" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.5842" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-2.54" x2="-5.08" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="2.54" x2="5.08" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-2.54" x2="-5.08" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.223" y2="0" width="1.27" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.223" y2="0" width="1.27" layer="51"/>
+<pad name="C" x="-7.62" y="0" drill="1.4986" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="1.4986" shape="long"/>
+<text x="-5.08" y="2.921" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-4.191" y1="-2.54" x2="-3.429" y2="2.54" layer="21"/>
+<rectangle x1="-5.969" y1="-0.635" x2="-5.08" y2="0.635" layer="21"/>
+<rectangle x1="5.08" y1="-0.635" x2="5.969" y2="0.635" layer="21"/>
+</package>
+<package name="SOD81" urn="urn:adsk.eagle:footprint:43125/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 2.3 mm, vertical, grid 10.16 mm</description>
+<wire x1="-1.905" y1="1.143" x2="1.905" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.159" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.381" x2="-2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.381" x2="-2.159" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.635" x2="-2.159" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.635" x2="2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.381" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.159" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.381" x2="2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.508" x2="2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.508" x2="2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.381" x2="2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.508" x2="2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.508" x2="2.159" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.381" x2="-2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.508" x2="-2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.508" x2="-2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.381" x2="-2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.508" x2="-2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.508" x2="-2.159" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.413" y1="0.381" x2="2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.381" x2="2.159" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="2.413" y1="-0.381" x2="2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.381" x2="2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="-0.381" x2="-2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.381" x2="-2.159" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="0.381" x2="-2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.381" x2="-2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.143" x2="2.159" y2="-0.889" width="0.1524" layer="21" curve="90"/>
+<wire x1="-2.159" y1="0.889" x2="-1.905" y2="1.143" width="0.1524" layer="21" curve="-90"/>
+<wire x1="1.905" y1="1.143" x2="2.159" y2="0.889" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-2.159" y1="-0.889" x2="-1.905" y2="-1.143" width="0.1524" layer="21" curve="90"/>
+<wire x1="-1.905" y1="-1.143" x2="1.905" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.159" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.635" x2="2.159" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.159" y2="0.889" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1176" shape="long"/>
+<text x="-2.032" y="1.397" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.032" y="-2.794" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.651" y1="-1.143" x2="-1.143" y2="1.143" layer="21"/>
+<rectangle x1="-3.937" y1="-0.381" x2="-2.159" y2="0.381" layer="21"/>
+<rectangle x1="2.159" y1="-0.381" x2="3.937" y2="0.381" layer="21"/>
+</package>
+<package name="SOD84" urn="urn:adsk.eagle:footprint:43139/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3.3 mm, vertical, grid 10.16 mm</description>
+<wire x1="-1.905" y1="1.651" x2="1.905" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-4.064" y2="0" width="0.762" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.159" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.381" x2="-2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.381" x2="-2.159" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.635" x2="-2.159" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.635" x2="2.54" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.381" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.54" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.159" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.381" x2="2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.508" x2="2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.508" x2="2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.381" x2="2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.508" x2="2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.508" x2="2.159" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.381" x2="-2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.508" x2="-2.413" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.508" x2="-2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.381" x2="-2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.508" x2="-2.413" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.508" x2="-2.159" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.413" y1="0.381" x2="2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.381" x2="2.159" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="2.413" y1="-0.381" x2="2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.381" x2="2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="-0.381" x2="-2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="-0.381" x2="-2.159" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="0.381" x2="-2.159" y2="0.381" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.381" x2="-2.159" y2="-0.381" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.651" x2="2.159" y2="-1.397" width="0.1524" layer="21" curve="90"/>
+<wire x1="-2.159" y1="1.397" x2="-1.905" y2="1.651" width="0.1524" layer="21" curve="-90"/>
+<wire x1="1.905" y1="1.651" x2="2.159" y2="1.397" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-2.159" y1="-1.397" x2="-1.905" y2="-1.651" width="0.1524" layer="21" curve="90"/>
+<wire x1="-1.905" y1="-1.651" x2="1.905" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="-0.635" x2="2.159" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="2.159" y1="0.635" x2="2.159" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="-2.159" y1="0.635" x2="-2.159" y2="1.397" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.1176" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.1176" shape="long"/>
+<text x="-2.032" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.032" y="-3.302" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.937" y1="-0.381" x2="-2.159" y2="0.381" layer="21"/>
+<rectangle x1="2.159" y1="-0.381" x2="3.937" y2="0.381" layer="21"/>
+<rectangle x1="-1.651" y1="-1.651" x2="-1.143" y2="1.651" layer="21"/>
+</package>
+<package name="F126-10" urn="urn:adsk.eagle:footprint:43161/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 3 mm, horizontal, grid 10.16 mm</description>
+<wire x1="-3.175" y1="-1.524" x2="3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="1.524" x2="-3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="-1.524" x2="3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="1.524" x2="-3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="0" x2="3.81" y2="0" width="0.8128" layer="51"/>
+<wire x1="-5.08" y1="0" x2="-3.81" y2="0" width="0.8128" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<pad name="C" x="-5.08" y="0" drill="1.016" shape="long"/>
+<pad name="A" x="5.08" y="0" drill="1.016" shape="long"/>
+<text x="-3.175" y="1.778" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.175" y="-3.048" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.54" y1="-1.524" x2="-1.778" y2="1.524" layer="21"/>
+<rectangle x1="3.175" y1="-0.4064" x2="3.7338" y2="0.4064" layer="21"/>
+<rectangle x1="-3.7338" y1="-0.4064" x2="-3.175" y2="0.4064" layer="21"/>
+</package>
+<package name="DO220S" urn="urn:adsk.eagle:footprint:43133/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead molded, vertical</description>
+<wire x1="5.08" y1="-1.143" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.318" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.318" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-5.08" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="-4.4958" y="-3.7084" radius="0.254" width="0" layer="21"/>
+<pad name="C" x="-2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="A" x="2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<text x="-4.572" y="-6.0452" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-4.572" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-5.334" y1="-0.762" x2="5.334" y2="0" layer="21"/>
+<rectangle x1="-5.334" y1="-1.27" x2="-3.429" y2="-0.762" layer="21"/>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="-0.762" layer="51"/>
+<rectangle x1="3.429" y1="-1.27" x2="5.334" y2="-0.762" layer="21"/>
+<rectangle x1="1.651" y1="-1.27" x2="3.429" y2="-0.762" layer="51"/>
+<rectangle x1="-1.651" y1="-1.27" x2="1.651" y2="-0.762" layer="21"/>
+</package>
+<package name="TO220AC" urn="urn:adsk.eagle:footprint:43128/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead molded, horizontal</description>
+<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="14.605" x2="-5.207" y2="14.605" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="-1.27" x2="5.207" y2="11.176" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="11.176" x2="4.318" y2="11.176" width="0.1524" layer="21"/>
+<wire x1="4.318" y1="11.176" x2="4.318" y2="12.7" width="0.1524" layer="21"/>
+<wire x1="4.318" y1="12.7" x2="5.207" y2="12.7" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="12.7" x2="5.207" y2="14.605" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="11.176" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="11.176" x2="-4.318" y2="11.176" width="0.1524" layer="21"/>
+<wire x1="-4.318" y1="11.176" x2="-4.318" y2="12.7" width="0.1524" layer="21"/>
+<wire x1="-4.318" y1="12.7" x2="-5.207" y2="12.7" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="12.7" x2="-5.207" y2="14.605" width="0.1524" layer="21"/>
+<wire x1="-4.572" y1="-0.635" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
+<wire x1="4.572" y1="7.62" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
+<wire x1="4.572" y1="7.62" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
+<wire x1="-4.572" y1="-0.635" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
+<circle x="0" y="11.176" radius="1.8034" width="0.1524" layer="21"/>
+<circle x="0" y="11.176" radius="2.921" width="0" layer="42"/>
+<circle x="0" y="11.176" radius="2.921" width="0" layer="43"/>
+<pad name="C" x="-2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
+<pad name="A" x="2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
+<text x="-5.461" y="-1.27" size="1.778" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="-3.937" y="2.54" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-4.445" y="7.874" size="0.9906" layer="21" ratio="10">A17,5mm</text>
+<rectangle x1="2.159" y1="-4.445" x2="2.921" y2="-3.81" layer="21"/>
+<rectangle x1="-2.921" y1="-4.445" x2="-2.159" y2="-3.81" layer="21"/>
+<rectangle x1="-3.175" y1="-3.81" x2="-1.905" y2="-1.27" layer="21"/>
+<rectangle x1="1.905" y1="-3.81" x2="3.175" y2="-1.27" layer="21"/>
+<rectangle x1="2.159" y1="-6.35" x2="2.921" y2="-4.445" layer="51"/>
+<rectangle x1="-2.921" y1="-6.35" x2="-2.159" y2="-4.445" layer="51"/>
+<hole x="0" y="11.176" drill="3.302"/>
+</package>
+<package name="TO220ACS" urn="urn:adsk.eagle:footprint:43137/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead molded, vertical</description>
+<wire x1="5.08" y1="-1.143" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.318" x2="4.953" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.318" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-4.699" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-4.953" y1="-4.064" x2="-5.08" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="-4.4958" y="-3.7084" radius="0.254" width="0" layer="21"/>
+<pad name="C" x="-2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="A" x="2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<text x="-5.08" y="-6.0452" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-5.334" y1="-0.762" x2="5.334" y2="0" layer="21"/>
+<rectangle x1="-5.334" y1="-1.27" x2="-3.429" y2="-0.762" layer="21"/>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="-0.762" layer="51"/>
+<rectangle x1="3.429" y1="-1.27" x2="5.334" y2="-0.762" layer="21"/>
+<rectangle x1="1.651" y1="-1.27" x2="3.429" y2="-0.762" layer="51"/>
+<rectangle x1="-1.651" y1="-1.27" x2="1.651" y2="-0.762" layer="21"/>
+</package>
+<package name="G4-12" urn="urn:adsk.eagle:footprint:43131/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 7.62 mm, horizontal, grid 12.7 mm</description>
+<wire x1="3.556" y1="1.27" x2="3.556" y2="-1.27" width="0.1524" layer="21" curve="-180"/>
+<wire x1="-3.556" y1="-1.27" x2="-3.556" y2="1.27" width="0.1524" layer="21" curve="-180"/>
+<wire x1="6.35" y1="0" x2="5.08" y2="0" width="1.27" layer="51"/>
+<wire x1="-6.35" y1="0" x2="-5.08" y2="0" width="1.27" layer="51"/>
+<wire x1="3.937" y1="0.889" x2="4.318" y2="0.508" width="0.6096" layer="21"/>
+<wire x1="4.318" y1="-0.508" x2="3.937" y2="-0.889" width="0.6096" layer="21"/>
+<wire x1="-4.318" y1="0.508" x2="-3.937" y2="0.889" width="0.6096" layer="21"/>
+<wire x1="-4.318" y1="-0.508" x2="-3.937" y2="-0.889" width="0.6096" layer="21"/>
+<wire x1="-2.667" y1="-2.286" x2="-2.667" y2="2.286" width="0.6096" layer="21"/>
+<wire x1="-3.175" y1="1.524" x2="-3.175" y2="-1.524" width="0.6096" layer="21"/>
+<wire x1="-3.556" y1="1.016" x2="-3.556" y2="-1.016" width="0.6096" layer="21"/>
+<wire x1="-3.175" y1="-1.524" x2="-2.921" y2="-2.032" width="0.6096" layer="21"/>
+<wire x1="-2.921" y1="2.032" x2="-3.175" y2="1.524" width="0.6096" layer="21"/>
+<wire x1="-0.762" y1="0" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="0.508" x2="0.635" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-0.508" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="0.635" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0.508" x2="-0.381" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.381" y1="0" x2="-0.381" y2="-0.508" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="3.81" width="0.1524" layer="21"/>
+<pad name="C" x="-6.35" y="0" drill="1.6002" shape="long"/>
+<pad name="A" x="6.35" y="0" drill="1.6002" shape="long"/>
+<text x="-3.429" y="4.064" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.905" y="-2.54" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="3.81" y1="-0.635" x2="4.953" y2="0.635" layer="21"/>
+<rectangle x1="-4.953" y1="-0.635" x2="-3.81" y2="0.635" layer="21"/>
+</package>
+<package name="SOD83-12" urn="urn:adsk.eagle:footprint:43146/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 4.8 mm, vertical, grid 12.7 mm</description>
+<wire x1="6.35" y1="0" x2="4.826" y2="0" width="1.3716" layer="51"/>
+<wire x1="-6.35" y1="0" x2="-4.826" y2="0" width="1.3716" layer="51"/>
+<wire x1="-1.143" y1="0" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="0.635" x2="0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="1.016" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="1.397" x2="-3.81" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="-1.397" x2="3.81" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="1.397" x2="-2.667" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="1.397" x2="2.667" y2="1.397" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="-1.397" x2="-2.667" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="2.667" y1="-1.397" x2="3.81" y2="-1.397" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.635" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-2.667" y1="1.397" x2="2.6841" y2="1.3841" width="0.1524" layer="21" curve="-74.015899"/>
+<wire x1="-2.6841" y1="-1.3841" x2="2.667" y2="-1.397" width="0.1524" layer="21" curve="74.015899"/>
+<pad name="C" x="-6.35" y="0" drill="1.6002" shape="long"/>
+<pad name="A" x="6.35" y="0" drill="1.6002" shape="long"/>
+<text x="-2.54" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.175" y1="-1.397" x2="-2.667" y2="1.397" layer="21"/>
+<rectangle x1="3.81" y1="-0.6604" x2="4.6228" y2="0.6604" layer="21"/>
+<rectangle x1="-4.6228" y1="-0.6604" x2="-3.81" y2="0.6604" layer="21"/>
+</package>
+<package name="SMB" urn="urn:adsk.eagle:footprint:43181/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;</description>
+<wire x1="-2.2606" y1="1.905" x2="2.2606" y2="1.905" width="0.1016" layer="21"/>
+<wire x1="-2.2606" y1="-1.905" x2="2.2606" y2="-1.905" width="0.1016" layer="21"/>
+<wire x1="-2.2606" y1="-1.905" x2="-2.2606" y2="1.905" width="0.1016" layer="51"/>
+<wire x1="2.2606" y1="-1.905" x2="2.2606" y2="1.905" width="0.1016" layer="51"/>
+<wire x1="0.193" y1="1" x2="-0.83" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.83" y1="0" x2="0.193" y2="-1" width="0.2032" layer="21"/>
+<wire x1="0.193" y1="-1" x2="0.193" y2="1" width="0.2032" layer="21"/>
+<smd name="C" x="-2.2" y="0" dx="2.4" dy="2.4" layer="1"/>
+<smd name="A" x="2.2" y="0" dx="2.4" dy="2.4" layer="1"/>
+<text x="-2.159" y="2.159" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.159" y="-3.429" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.794" y1="-1.0922" x2="-2.2606" y2="1.0922" layer="51"/>
+<rectangle x1="2.2606" y1="-1.0922" x2="2.794" y2="1.0922" layer="51"/>
+<rectangle x1="-1.35" y1="-1.9" x2="-0.8" y2="1.9" layer="51"/>
+</package>
+<package name="P6-15" urn="urn:adsk.eagle:footprint:43097/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 9 mm, horizontal, grid 15.24 mm</description>
+<wire x1="-4.699" y1="-4.572" x2="-4.699" y2="4.572" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="4.572" x2="4.699" y2="-4.572" width="0.1524" layer="21"/>
+<wire x1="-4.699" y1="4.572" x2="4.699" y2="4.572" width="0.1524" layer="21"/>
+<wire x1="4.699" y1="-4.572" x2="-4.699" y2="-4.572" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="2.54" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.223" y2="0" width="1.27" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.223" y2="0" width="1.27" layer="51"/>
+<pad name="C" x="-7.62" y="0" drill="1.6002" shape="long"/>
+<pad name="A" x="7.62" y="0" drill="1.6002" shape="long"/>
+<text x="-4.6736" y="4.8514" size="1.778" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.3622" y="-3.302" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.429" y1="-4.572" x2="-2.921" y2="4.572" layer="21"/>
+<rectangle x1="4.699" y1="-0.635" x2="5.969" y2="0.635" layer="21"/>
+<rectangle x1="-5.969" y1="-0.635" x2="-4.699" y2="0.635" layer="21"/>
+</package>
+<package name="C2673" urn="urn:adsk.eagle:footprint:43156/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 5.2 mm, horizontal, grid 15.24 mm</description>
+<wire x1="4.826" y1="-2.667" x2="-4.826" y2="-2.667" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-2.667" x2="4.826" y2="2.667" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="2.667" x2="4.826" y2="2.667" width="0.1524" layer="21"/>
+<wire x1="-4.826" y1="2.667" x2="-4.826" y2="-2.667" width="0.1524" layer="21"/>
+<wire x1="7.62" y1="0" x2="6.096" y2="0" width="1.27" layer="51"/>
+<wire x1="-7.62" y1="0" x2="-6.096" y2="0" width="1.27" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="A" x="7.62" y="0" drill="1.4986" shape="long"/>
+<pad name="C" x="-7.62" y="0" drill="1.4986" shape="long"/>
+<text x="-4.699" y="3.048" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.159" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-3.937" y1="-2.667" x2="-2.54" y2="2.667" layer="21"/>
+<rectangle x1="4.826" y1="-0.635" x2="5.969" y2="0.635" layer="21"/>
+<rectangle x1="-5.969" y1="-0.635" x2="-4.826" y2="0.635" layer="21"/>
+</package>
+<package name="C221B1A" urn="urn:adsk.eagle:footprint:43158/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+2-lead molded, horizontal</description>
+<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="14.478" x2="-5.207" y2="14.478" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="8.001" x2="-5.207" y2="8.001" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="8.001" x2="5.207" y2="14.478" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="8.001" x2="-5.207" y2="14.478" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="-1.27" x2="5.207" y2="8.001" width="0.1524" layer="21"/>
+<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="8.001" width="0.1524" layer="21"/>
+<wire x1="4.953" y1="6.731" x2="4.953" y2="-1.016" width="0.0508" layer="21"/>
+<wire x1="4.953" y1="6.731" x2="-4.953" y2="6.731" width="0.0508" layer="21"/>
+<wire x1="4.953" y1="-1.016" x2="-4.953" y2="-1.016" width="0.0508" layer="21"/>
+<wire x1="-4.953" y1="6.731" x2="-4.953" y2="-1.016" width="0.0508" layer="21"/>
+<wire x1="-2.794" y1="-4.191" x2="-3.175" y2="-3.81" width="0.508" layer="21"/>
+<wire x1="3.175" y1="-3.81" x2="2.794" y2="-4.191" width="0.508" layer="21"/>
+<circle x="0" y="11.176" radius="1.8034" width="0.1524" layer="21"/>
+<circle x="0" y="11.176" radius="2.921" width="0" layer="42"/>
+<circle x="0" y="11.176" radius="2.921" width="0" layer="43"/>
+<pad name="C" x="-2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
+<pad name="A" x="2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
+<text x="-2.54" y="4.191" size="1.778" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.81" y="1.651" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-4.826" y="8.382" size="0.9906" layer="21" ratio="10">A17,5mm</text>
+<rectangle x1="2.159" y1="-4.445" x2="2.921" y2="-3.81" layer="21"/>
+<rectangle x1="-2.921" y1="-4.445" x2="-2.159" y2="-3.81" layer="21"/>
+<rectangle x1="-3.429" y1="-3.81" x2="-2.159" y2="-1.27" layer="21"/>
+<rectangle x1="2.159" y1="-3.81" x2="3.429" y2="-1.27" layer="21"/>
+<rectangle x1="2.159" y1="-6.35" x2="2.921" y2="-4.445" layer="51"/>
+<rectangle x1="-2.921" y1="-6.35" x2="-2.159" y2="-4.445" layer="51"/>
+<hole x="0" y="11.176" drill="3.302"/>
+</package>
+<package name="SOD80C" urn="urn:adsk.eagle:footprint:43180/1" library_version="8">
+<description>&lt;B&gt;DIODE&lt;/B&gt;</description>
+<wire x1="1.3208" y1="0.7874" x2="-1.3208" y2="0.7874" width="0.1524" layer="51"/>
+<wire x1="1.3208" y1="-0.7874" x2="-1.3208" y2="-0.7874" width="0.1524" layer="51"/>
+<wire x1="0.627" y1="0.6" x2="-0.373" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.373" y1="0" x2="0.627" y2="-0.6" width="0.2032" layer="21"/>
+<wire x1="0.627" y1="-0.6" x2="0.627" y2="0.6" width="0.2032" layer="21"/>
+<smd name="C" x="-1.7" y="0" dx="1.4" dy="1.8" layer="1"/>
+<smd name="A" x="1.7" y="0" dx="1.4" dy="1.8" layer="1"/>
+<text x="-1.524" y="1.143" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.524" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.8542" y1="-0.8636" x2="-1.2954" y2="0.8636" layer="51"/>
+<rectangle x1="1.2954" y1="-0.8636" x2="1.8542" y2="0.8636" layer="51"/>
+<rectangle x1="-0.8636" y1="-0.7874" x2="-0.254" y2="0.7874" layer="21"/>
+</package>
+<package name="D-10" urn="urn:adsk.eagle:footprint:43192/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="3.175" y1="1.524" x2="-3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="-1.524" x2="3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="0" x2="-3.937" y2="0" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="1.524" x2="-3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="3.937" y1="0" x2="3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="-1.524" x2="3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="0" x2="-3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="0" x2="3.175" y2="1.524" width="0.1524" layer="21"/>
+<pad name="A" x="5.08" y="0" drill="0.8128" shape="long"/>
+<pad name="C" x="-5.08" y="0" drill="0.8128" shape="long"/>
+<text x="-3.175" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.175" y="-3.175" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.286" y1="-1.524" x2="-1.524" y2="1.524" layer="21"/>
+</package>
+<package name="D-12.5" urn="urn:adsk.eagle:footprint:43193/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="3.175" y1="1.524" x2="-3.175" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="-1.524" x2="3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="0" x2="-5.207" y2="0" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="1.524" x2="-3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="5.207" y1="0" x2="3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="-1.524" x2="3.175" y2="0" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="0" x2="-3.175" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="0" x2="3.175" y2="1.524" width="0.1524" layer="21"/>
+<pad name="A" x="6.35" y="0" drill="0.8128" shape="long"/>
+<pad name="C" x="-6.35" y="0" drill="0.8128" shape="long"/>
+<text x="-3.175" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.175" y="-3.175" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.286" y1="-1.524" x2="-1.524" y2="1.524" layer="21"/>
+<rectangle x1="-2.286" y1="-1.524" x2="-1.524" y2="1.524" layer="21"/>
+</package>
+<package name="D-2.5" urn="urn:adsk.eagle:footprint:43194/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="0.508" y1="0.762" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0.762" x2="-0.508" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="0" x2="-1.27" y2="0" width="0.1524" layer="51"/>
+<wire x1="-0.508" y1="0" x2="-0.508" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0" x2="0.508" y2="0" width="0.1524" layer="51"/>
+<wire x1="0.508" y1="-0.762" x2="0.508" y2="0.762" width="0.1524" layer="21"/>
+<pad name="A" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="C" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="-1.651" y="1.143" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.651" y="-2.413" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+<package name="D-5" urn="urn:adsk.eagle:footprint:43195/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="1.397" y1="0.889" x2="-1.397" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="-0.889" x2="1.397" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="0" x2="-1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="0.889" x2="-1.397" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="0" x2="1.397" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="-0.889" x2="1.397" y2="0" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="0" x2="-1.397" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="0" x2="1.397" y2="0.889" width="0.1524" layer="21"/>
+<pad name="A" x="2.54" y="0" drill="0.8128" shape="octagon"/>
+<pad name="C" x="-2.54" y="0" drill="0.8128" shape="octagon"/>
+<text x="-1.905" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.905" y="-2.54" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.016" y1="-0.889" x2="-0.508" y2="0.889" layer="21"/>
+</package>
+<package name="D-7.5" urn="urn:adsk.eagle:footprint:43196/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="1.905" y1="0.889" x2="-1.905" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-0.889" x2="1.905" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="0" x2="-2.794" y2="0" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="0.889" x2="-1.905" y2="0" width="0.1524" layer="21"/>
+<wire x1="2.794" y1="0" x2="1.905" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-0.889" x2="1.905" y2="0" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="0" x2="-1.905" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="0" x2="1.905" y2="0.889" width="0.1524" layer="21"/>
+<pad name="A" x="3.81" y="0" drill="0.8128" shape="long"/>
+<pad name="C" x="-3.81" y="0" drill="0.8128" shape="long"/>
+<text x="-1.905" y="1.27" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.905" y="-2.54" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.27" y1="-0.889" x2="-0.762" y2="0.889" layer="21"/>
+</package>
+<package name="SOD106-R" urn="urn:adsk.eagle:footprint:43197/1" library_version="8">
+<description>&lt;b&gt;SOD106 Reflow soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="1.8208" y1="0.7874" x2="-1.8208" y2="0.7874" width="0.1524" layer="51"/>
+<wire x1="1.8208" y1="-0.7874" x2="-1.8208" y2="-0.7874" width="0.1524" layer="51"/>
+<wire x1="0.127" y1="0.6" x2="-0.873" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.873" y1="0" x2="0.127" y2="-0.6" width="0.2032" layer="21"/>
+<wire x1="0.127" y1="-0.6" x2="0.127" y2="0.6" width="0.2032" layer="21"/>
+<smd name="C" x="-2.25" y="0" dx="1.6" dy="2.1" layer="1"/>
+<smd name="A" x="2.25" y="0" dx="1.6" dy="2.1" layer="1"/>
+<text x="-1.524" y="1.293" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.524" y="-2.563" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.3542" y1="-0.8636" x2="-1.7954" y2="0.8636" layer="51"/>
+<rectangle x1="1.7954" y1="-0.8636" x2="2.3542" y2="0.8636" layer="51"/>
+<rectangle x1="-1.3636" y1="-0.7874" x2="-0.754" y2="0.7874" layer="21"/>
+</package>
+<package name="SMC" urn="urn:adsk.eagle:footprint:43198/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="-3.5606" y1="3.105" x2="3.5606" y2="3.105" width="0.1016" layer="21"/>
+<wire x1="-3.5606" y1="-3.105" x2="3.5606" y2="-3.105" width="0.1016" layer="21"/>
+<wire x1="-3.5606" y1="-3.105" x2="-3.5606" y2="3.105" width="0.1016" layer="51"/>
+<wire x1="3.5606" y1="-3.105" x2="3.5606" y2="3.105" width="0.1016" layer="51"/>
+<wire x1="0.543" y1="1" x2="-0.83" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.83" y1="0" x2="0.543" y2="-1" width="0.2032" layer="21"/>
+<wire x1="0.543" y1="-1" x2="0.543" y2="1" width="0.2032" layer="21"/>
+<smd name="C" x="-3.7" y="0" dx="2.8" dy="3.8" layer="1"/>
+<smd name="A" x="3.7" y="0" dx="2.8" dy="3.8" layer="1"/>
+<text x="-3.459" y="3.359" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.459" y="-4.629" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-4.094" y1="-1.0922" x2="-3.5606" y2="1.0922" layer="51"/>
+<rectangle x1="3.5606" y1="-1.0922" x2="4.094" y2="1.0922" layer="51"/>
+<rectangle x1="-2.1" y1="-3.1" x2="-0.85" y2="3.1" layer="21"/>
+</package>
+<package name="SOD106-W" urn="urn:adsk.eagle:footprint:43199/1" library_version="8">
+<description>&lt;b&gt;SOD106 Wave soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="1.8208" y1="0.7874" x2="-1.8208" y2="0.7874" width="0.1524" layer="51"/>
+<wire x1="1.8208" y1="-0.7874" x2="-1.8208" y2="-0.7874" width="0.1524" layer="51"/>
+<wire x1="0.127" y1="0.6" x2="-0.873" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.873" y1="0" x2="0.127" y2="-0.6" width="0.2032" layer="21"/>
+<wire x1="0.127" y1="-0.6" x2="0.127" y2="0.6" width="0.2032" layer="21"/>
+<smd name="C" x="-2.85" y="0" dx="2.3" dy="3.2" layer="1"/>
+<smd name="A" x="2.85" y="0" dx="2.3" dy="3.2" layer="1"/>
+<text x="-3.374" y="1.793" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.324" y="-3.163" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.3542" y1="-0.8636" x2="-1.7954" y2="0.8636" layer="51"/>
+<rectangle x1="1.7954" y1="-0.8636" x2="2.3542" y2="0.8636" layer="51"/>
+<rectangle x1="-1.3636" y1="-0.7874" x2="-0.754" y2="0.7874" layer="21"/>
+</package>
+<package name="SOD106A-R" urn="urn:adsk.eagle:footprint:43200/1" library_version="8">
+<description>&lt;b&gt;SOD106A Reflow soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="1.8208" y1="0.7874" x2="-1.8208" y2="0.7874" width="0.1524" layer="51"/>
+<wire x1="1.8208" y1="-0.7874" x2="-1.8208" y2="-0.7874" width="0.1524" layer="51"/>
+<wire x1="0.127" y1="0.6" x2="-0.873" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.873" y1="0" x2="0.127" y2="-0.6" width="0.2032" layer="21"/>
+<wire x1="0.127" y1="-0.6" x2="0.127" y2="0.6" width="0.2032" layer="21"/>
+<smd name="C" x="-2.2" y="0" dx="1.7" dy="2.1" layer="1"/>
+<smd name="A" x="2.2" y="0" dx="1.7" dy="2.1" layer="1"/>
+<text x="-2.374" y="1.293" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.374" y="-2.513" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.3542" y1="-0.8636" x2="-1.7954" y2="0.8636" layer="51"/>
+<rectangle x1="1.7954" y1="-0.8636" x2="2.3542" y2="0.8636" layer="51"/>
+<rectangle x1="-1.3636" y1="-0.7874" x2="-0.754" y2="0.7874" layer="51"/>
+</package>
+<package name="SOD110-W" urn="urn:adsk.eagle:footprint:43201/1" library_version="8">
+<description>&lt;b&gt;SOD110 Wave soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="-1" y1="0.5" x2="1.05" y2="0.5" width="0.1016" layer="51"/>
+<wire x1="1.05" y1="0.5" x2="1.05" y2="-0.5" width="0.1016" layer="51"/>
+<wire x1="1.05" y1="-0.5" x2="-1" y2="-0.5" width="0.1016" layer="51"/>
+<wire x1="-1" y1="-0.5" x2="-1" y2="0.5" width="0.1016" layer="51"/>
+<smd name="C" x="-1.15" y="0" dx="1" dy="1.2" layer="1"/>
+<smd name="A" x="1.15" y="0" dx="1" dy="1.2" layer="1"/>
+<text x="-1.524" y="1.143" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.524" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.65" y1="-0.45" x2="-0.4" y2="0.45" layer="51"/>
+</package>
+<package name="SOD110-R" urn="urn:adsk.eagle:footprint:43202/1" library_version="8">
+<description>&lt;b&gt;SOD110 Reflow soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="-1" y1="0.5" x2="1.05" y2="0.5" width="0.1016" layer="51"/>
+<wire x1="1.05" y1="0.5" x2="1.05" y2="-0.5" width="0.1016" layer="51"/>
+<wire x1="1.05" y1="-0.5" x2="-1" y2="-0.5" width="0.1016" layer="51"/>
+<wire x1="-1" y1="-0.5" x2="-1" y2="0.5" width="0.1016" layer="51"/>
+<smd name="C" x="-0.95" y="0" dx="0.8" dy="1" layer="1"/>
+<smd name="A" x="0.95" y="0" dx="0.8" dy="1" layer="1"/>
+<text x="-1.524" y="1.143" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.524" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.65" y1="-0.45" x2="-0.4" y2="0.45" layer="51"/>
+</package>
+<package name="SOD123" urn="urn:adsk.eagle:footprint:43203/1" library_version="8">
+<description>&lt;b&gt;Diode&lt;/b&gt;</description>
+<wire x1="-1.1" y1="0.7" x2="1.1" y2="0.7" width="0.254" layer="51"/>
+<wire x1="1.1" y1="0.7" x2="1.1" y2="-0.7" width="0.254" layer="51"/>
+<wire x1="1.1" y1="-0.7" x2="-1.1" y2="-0.7" width="0.254" layer="51"/>
+<wire x1="-1.1" y1="-0.7" x2="-1.1" y2="0.7" width="0.254" layer="51"/>
+<smd name="C" x="-1.9" y="0" dx="1.4" dy="1.4" layer="1"/>
+<smd name="A" x="1.9" y="0" dx="1.4" dy="1.4" layer="1"/>
+<text x="-1.1" y="1" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.1" y="-2.3" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.95" y1="-0.45" x2="-1.2" y2="0.4" layer="51"/>
+<rectangle x1="1.2" y1="-0.45" x2="1.95" y2="0.4" layer="51"/>
+<rectangle x1="-1.05" y1="-0.65" x2="-0.15" y2="0.7" layer="51"/>
+</package>
+<package name="SOD323-R" urn="urn:adsk.eagle:footprint:43204/1" library_version="8">
+<description>&lt;b&gt;SOD323 Reflow soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="-1" y1="0.7" x2="1" y2="0.7" width="0.1524" layer="21"/>
+<wire x1="1" y1="0.7" x2="1" y2="-0.7" width="0.1524" layer="51"/>
+<wire x1="1" y1="-0.7" x2="-1" y2="-0.7" width="0.1524" layer="21"/>
+<wire x1="-1" y1="-0.7" x2="-1" y2="0.7" width="0.1524" layer="51"/>
+<wire x1="-0.5" y1="0" x2="0.1" y2="0.4" width="0.1524" layer="21"/>
+<wire x1="0.1" y1="0.4" x2="0.1" y2="-0.4" width="0.1524" layer="21"/>
+<wire x1="0.1" y1="-0.4" x2="-0.5" y2="0" width="0.1524" layer="21"/>
+<smd name="C" x="-1.1" y="0" dx="0.6" dy="0.6" layer="1"/>
+<smd name="A" x="1.1" y="0" dx="0.6" dy="0.6" layer="1"/>
+<text x="-1.1" y="1" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.1" y="-2.3" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.7" y1="-0.7" x2="-0.5" y2="0.7" layer="51"/>
+</package>
+<package name="SOD323-W" urn="urn:adsk.eagle:footprint:43205/1" library_version="8">
+<description>&lt;b&gt;SOD323 Wave soldering&lt;/b&gt; Philips SC01_Mounting_1996.pdf</description>
+<wire x1="-1" y1="0.7" x2="1" y2="0.7" width="0.1524" layer="51"/>
+<wire x1="1" y1="0.7" x2="1" y2="-0.7" width="0.1524" layer="51"/>
+<wire x1="1" y1="-0.7" x2="-1" y2="-0.7" width="0.1524" layer="51"/>
+<wire x1="-1" y1="-0.7" x2="-1" y2="0.7" width="0.1524" layer="51"/>
+<wire x1="-0.5" y1="0" x2="0.1" y2="0.4" width="0.1524" layer="21"/>
+<wire x1="0.1" y1="0.4" x2="0.1" y2="-0.4" width="0.1524" layer="21"/>
+<wire x1="0.1" y1="-0.4" x2="-0.5" y2="0" width="0.1524" layer="21"/>
+<smd name="C" x="-1.45" y="0" dx="1.5" dy="1.2" layer="1"/>
+<smd name="A" x="1.45" y="0" dx="1.5" dy="1.2" layer="1"/>
+<text x="-1.1" y="1" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.1" y="-2.3" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.7" y1="-0.7" x2="-0.5" y2="0.7" layer="51"/>
+</package>
+<package name="GF1" urn="urn:adsk.eagle:footprint:43206/1" library_version="8">
+<description>&lt;b&gt;GF1&lt;/b&gt;&lt;p&gt;
+General Semiconductor</description>
+<wire x1="-2.24" y1="1.32" x2="2.24" y2="1.32" width="0.254" layer="21"/>
+<wire x1="2.24" y1="1.32" x2="2.24" y2="-1.32" width="0.254" layer="21"/>
+<wire x1="2.24" y1="-1.32" x2="-2.24" y2="-1.32" width="0.254" layer="21"/>
+<wire x1="-2.24" y1="-1.32" x2="-2.24" y2="1.32" width="0.254" layer="21"/>
+<smd name="C" x="-2.12" y="0" dx="1.32" dy="1.68" layer="1"/>
+<smd name="A" x="1.87" y="0" dx="1.85" dy="1.68" layer="1"/>
+<text x="-2.54" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.86" y1="-0.84" x2="-2.32" y2="0.84" layer="51"/>
+<rectangle x1="2.34" y1="-0.84" x2="2.86" y2="0.84" layer="51"/>
+<rectangle x1="-1.9" y1="-1.05" x2="-1.25" y2="1.05" layer="51"/>
+<rectangle x1="-1.4" y1="-1.05" x2="-1.25" y2="1.05" layer="21"/>
+</package>
+<package name="MINIMELF" urn="urn:adsk.eagle:footprint:43207/1" library_version="8">
+<description>&lt;b&gt;Mini Melf Diode&lt;/b&gt;</description>
+<wire x1="1.3208" y1="0.7874" x2="-1.3208" y2="0.7874" width="0.1524" layer="51"/>
+<wire x1="1.3208" y1="-0.7874" x2="-1.3208" y2="-0.7874" width="0.1524" layer="51"/>
+<wire x1="0.5" y1="0.5" x2="-0.5" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.5" y1="0" x2="0.5" y2="-0.5" width="0.2032" layer="21"/>
+<wire x1="0.5" y1="-0.5" x2="0.5" y2="0.5" width="0.2032" layer="21"/>
+<smd name="C" x="-1.7" y="0" dx="1.4" dy="1.8" layer="1"/>
+<smd name="A" x="1.7" y="0" dx="1.4" dy="1.8" layer="1"/>
+<text x="-1.651" y="1.143" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.651" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.8542" y1="-0.8636" x2="-1.2954" y2="0.8636" layer="51"/>
+<rectangle x1="1.2954" y1="-0.8636" x2="1.8542" y2="0.8636" layer="51"/>
+<rectangle x1="-0.8636" y1="-0.7874" x2="-0.254" y2="0.7874" layer="21"/>
+</package>
+<package name="MELF-MLL41" urn="urn:adsk.eagle:footprint:43208/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;&lt;p&gt;
+Package DO-213AB = http://www.diotec.com/pdf/sm4001.pdf</description>
+<wire x1="2.0828" y1="1.1938" x2="-2.159" y2="1.1938" width="0.1524" layer="51"/>
+<wire x1="2.0828" y1="-1.1938" x2="-2.1336" y2="-1.1938" width="0.1524" layer="51"/>
+<wire x1="0.627" y1="1" x2="-0.746" y2="0" width="0.2032" layer="21"/>
+<wire x1="-0.746" y1="0" x2="0.627" y2="-1" width="0.2032" layer="21"/>
+<wire x1="0.627" y1="-1" x2="0.627" y2="1" width="0.2032" layer="21"/>
+<wire x1="1.1208" y1="1.1938" x2="-1.097" y2="1.1938" width="0.1524" layer="21"/>
+<wire x1="1.1208" y1="-1.1938" x2="-1.0716" y2="-1.1938" width="0.1524" layer="21"/>
+<smd name="C" x="-2.625" y="0" dx="2.5" dy="3" layer="1"/>
+<smd name="A" x="2.625" y="0" dx="2.5" dy="3" layer="1"/>
+<text x="-2.663" y="1.724" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.663" y="-2.994" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="2.0574" y1="-1.27" x2="2.5654" y2="1.27" layer="51"/>
+<rectangle x1="-2.6162" y1="-1.27" x2="-2.1082" y2="1.27" layer="51"/>
+<rectangle x1="-1.4478" y1="-1.1938" x2="-0.5588" y2="1.1938" layer="51"/>
+</package>
+<package name="MICROMELF-R" urn="urn:adsk.eagle:footprint:43209/1" library_version="8">
+<description>&lt;b&gt;Micro Melf Diode Reflow soldering&lt;/b&gt; VISHAY mcl4148.pdf</description>
+<wire x1="-0.65" y1="0.55" x2="0.65" y2="0.55" width="0.1524" layer="51"/>
+<wire x1="-0.65" y1="-0.55" x2="0.65" y2="-0.55" width="0.1524" layer="51"/>
+<smd name="C" x="-0.8" y="0" dx="0.8" dy="1.2" layer="1"/>
+<smd name="A" x="0.8" y="0" dx="0.8" dy="1.2" layer="1"/>
+<text x="-1.201" y="0.843" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.201" y="-2.063" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.95" y1="-0.65" x2="-0.65" y2="0.65" layer="51"/>
+<rectangle x1="0.65" y1="-0.65" x2="0.95" y2="0.65" layer="51"/>
+<rectangle x1="-0.5" y1="-0.55" x2="-0.2" y2="0.55" layer="51"/>
+</package>
+<package name="MICROMELF-W" urn="urn:adsk.eagle:footprint:43210/1" library_version="8">
+<description>&lt;b&gt;Micro Melf Diode Wave soldering&lt;/b&gt; VISHAY mcl4148.pdf</description>
+<wire x1="-0.65" y1="0.55" x2="0.65" y2="0.55" width="0.1524" layer="51"/>
+<wire x1="-0.65" y1="-0.55" x2="0.65" y2="-0.55" width="0.1524" layer="51"/>
+<smd name="C" x="-0.95" y="0" dx="0.9" dy="1.4" layer="1"/>
+<smd name="A" x="0.95" y="0" dx="0.9" dy="1.4" layer="1"/>
+<text x="-1.201" y="0.843" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.201" y="-2.063" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.95" y1="-0.65" x2="-0.65" y2="0.65" layer="51"/>
+<rectangle x1="0.65" y1="-0.65" x2="0.95" y2="0.65" layer="51"/>
+<rectangle x1="-0.5" y1="-0.5" x2="-0.2" y2="0.55" layer="51"/>
+</package>
+<package name="SC79_INFINEON" urn="urn:adsk.eagle:footprint:43211/1" library_version="8">
+<description>&lt;b&gt;Diode Package&lt;/b&gt; Reflow soldering&lt;p&gt;
+INFINEON, www.infineon.com/cmc_upload/0/000/010/257/eh_db_5b.pdf</description>
+<wire x1="-0.55" y1="0.35" x2="0.55" y2="0.35" width="0.1016" layer="21"/>
+<wire x1="0.55" y1="0.35" x2="0.55" y2="-0.35" width="0.1016" layer="51"/>
+<wire x1="0.55" y1="-0.35" x2="-0.55" y2="-0.35" width="0.1016" layer="21"/>
+<wire x1="-0.55" y1="-0.35" x2="-0.55" y2="0.35" width="0.1016" layer="51"/>
+<smd name="C" x="-0.675" y="0" dx="0.35" dy="0.35" layer="1"/>
+<smd name="A" x="0.675" y="0" dx="0.35" dy="0.35" layer="1"/>
+<text x="-0.8" y="0.6" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.8" y="-1.8" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.8" y1="-0.15" x2="-0.55" y2="0.15" layer="51"/>
+<rectangle x1="0.55" y1="-0.15" x2="0.8" y2="0.15" layer="51"/>
+<rectangle x1="-0.55" y1="-0.35" x2="0" y2="0.35" layer="51"/>
+</package>
+<package name="SCD80_INFINEON" urn="urn:adsk.eagle:footprint:43212/1" library_version="8">
+<description>&lt;b&gt;Diode Package&lt;/b&gt; Reflow soldering&lt;p&gt;
+INFINEON, www.infineon.com/cmc_upload/0/000/010/257/eh_db_5b.pdf</description>
+<wire x1="-0.6" y1="0.35" x2="-0.6" y2="-0.35" width="0.1016" layer="51"/>
+<wire x1="-0.6" y1="-0.35" x2="0.6" y2="-0.35" width="0.1016" layer="21"/>
+<wire x1="0.6" y1="-0.35" x2="0.6" y2="0.35" width="0.1016" layer="51"/>
+<wire x1="0.6" y1="0.35" x2="-0.6" y2="0.35" width="0.1016" layer="21"/>
+<smd name="C" x="-0.725" y="0" dx="0.35" dy="0.35" layer="1"/>
+<smd name="A" x="0.725" y="0" dx="0.35" dy="0.35" layer="1"/>
+<text x="-0.9" y="0.5" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.9" y="-1.8" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.6" y1="-0.35" x2="0" y2="0.35" layer="51"/>
+<rectangle x1="-0.85" y1="-0.15" x2="-0.6" y2="0.15" layer="51"/>
+<rectangle x1="0.6" y1="-0.15" x2="0.85" y2="0.15" layer="51"/>
+</package>
+<package name="DO214AA" urn="urn:adsk.eagle:footprint:43213/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="-2.4" y1="1.1" x2="2.4" y2="1.1" width="0.254" layer="51"/>
+<wire x1="2.4" y1="1.1" x2="2.4" y2="-1.1" width="0.254" layer="51"/>
+<wire x1="2.4" y1="-1.1" x2="-2.4" y2="-1.1" width="0.254" layer="51"/>
+<wire x1="-2.4" y1="-1.1" x2="-2.4" y2="1.1" width="0.254" layer="51"/>
+<wire x1="-1.2" y1="0" x2="0.05" y2="0.7" width="0.254" layer="21"/>
+<wire x1="0.05" y1="0.7" x2="0.05" y2="-0.7" width="0.254" layer="21"/>
+<wire x1="0.05" y1="-0.7" x2="-1.2" y2="0" width="0.254" layer="21"/>
+<smd name="C" x="-2.55" y="0" dx="1.8" dy="2.2" layer="1"/>
+<smd name="A" x="2.55" y="0" dx="1.8" dy="2.2" layer="1"/>
+<text x="-2.64" y="1.436" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.64" y="-2.706" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.75" y1="-0.7" x2="-2.5" y2="0.65" layer="51"/>
+<rectangle x1="2.5" y1="-0.7" x2="2.75" y2="0.65" layer="51"/>
+<rectangle x1="-1.4" y1="-1.05" x2="-1.1" y2="1.05" layer="21"/>
+</package>
+<package name="DO214AC" urn="urn:adsk.eagle:footprint:43214/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="-2.3" y1="1" x2="2.3" y2="1" width="0.254" layer="51"/>
+<wire x1="2.3" y1="1" x2="2.3" y2="-0.95" width="0.254" layer="51"/>
+<wire x1="2.3" y1="-0.95" x2="-2.3" y2="-0.95" width="0.254" layer="51"/>
+<wire x1="-2.3" y1="-0.95" x2="-2.3" y2="1" width="0.254" layer="51"/>
+<wire x1="-0.8" y1="0" x2="0.25" y2="0.75" width="0.254" layer="21"/>
+<wire x1="0.25" y1="0.75" x2="0.25" y2="-0.7" width="0.254" layer="21"/>
+<wire x1="0.25" y1="-0.7" x2="-0.8" y2="0" width="0.254" layer="21"/>
+<smd name="C" x="-2.05" y="0" dx="1.8" dy="1.7" layer="1"/>
+<smd name="A" x="2.05" y="0" dx="1.8" dy="1.7" layer="1"/>
+<text x="-2.64" y="1.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.64" y="-2.556" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.65" y1="-0.7" x2="-2.4" y2="0.65" layer="51"/>
+<rectangle x1="2.4" y1="-0.7" x2="2.65" y2="0.65" layer="51"/>
+<rectangle x1="-1" y1="-1.05" x2="-0.7" y2="1.05" layer="21"/>
+</package>
+<package name="DO214BA" urn="urn:adsk.eagle:footprint:43215/1" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
+<wire x1="-2.5" y1="1.35" x2="2.5" y2="1.35" width="0.254" layer="51"/>
+<wire x1="2.5" y1="1.35" x2="2.5" y2="-1.35" width="0.254" layer="51"/>
+<wire x1="2.5" y1="-1.35" x2="-2.5" y2="-1.35" width="0.254" layer="51"/>
+<wire x1="-2.5" y1="-1.35" x2="-2.5" y2="1.35" width="0.254" layer="51"/>
+<wire x1="-0.8" y1="0" x2="0.65" y2="0.95" width="0.254" layer="21"/>
+<wire x1="0.65" y1="0.95" x2="0.65" y2="-0.95" width="0.254" layer="21"/>
+<wire x1="0.65" y1="-0.95" x2="-0.8" y2="0" width="0.254" layer="21"/>
+<smd name="C" x="-2.05" y="0" dx="1.8" dy="1.7" layer="1"/>
+<smd name="A" x="2.05" y="0" dx="1.8" dy="1.7" layer="1"/>
+<text x="-2.64" y="1.736" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.64" y="-3.056" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.85" y1="-0.7" x2="-2.6" y2="0.65" layer="51"/>
+<rectangle x1="2.6" y1="-0.7" x2="2.85" y2="0.65" layer="51"/>
+<rectangle x1="-1" y1="-1.05" x2="-0.7" y2="1.05" layer="21"/>
+</package>
+<package name="DO-214AC" urn="urn:adsk.eagle:footprint:43216/1" library_version="8">
+<description>&lt;b&gt;SURFACE MOUNT GENERAL RECTIFIER&lt;/b&gt; JEDEC DO-214AC molded platic body&lt;p&gt;
+Method 2026&lt;br&gt;
+Source: http://www.kingtronics.com/SMD_M7/M7_SMD_4007.pdf</description>
+<wire x1="-2.15" y1="1.3" x2="2.15" y2="1.3" width="0.2032" layer="51"/>
+<wire x1="2.15" y1="1.3" x2="2.15" y2="-1.3" width="0.2032" layer="51"/>
+<wire x1="2.15" y1="-1.3" x2="-2.15" y2="-1.3" width="0.2032" layer="51"/>
+<wire x1="-2.15" y1="-1.3" x2="-2.15" y2="1.3" width="0.2032" layer="51"/>
+<wire x1="-1.035" y1="1.3" x2="1.025" y2="1.3" width="0.2032" layer="21"/>
+<wire x1="1.025" y1="-1.3" x2="-1.035" y2="-1.3" width="0.2032" layer="21"/>
+<smd name="C" x="-2.025" y="0" dx="1.8" dy="2.4" layer="1"/>
+<smd name="A" x="2.025" y="0" dx="1.8" dy="2.4" layer="1" rot="R180"/>
+<text x="-2.54" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-2.825" y1="-1.1" x2="-2.175" y2="1.1" layer="51"/>
+<rectangle x1="2.175" y1="-1.1" x2="2.825" y2="1.1" layer="51" rot="R180"/>
+<rectangle x1="-1.065" y1="-1.225" x2="-0.39" y2="1.225" layer="21"/>
+<rectangle x1="-1.75" y1="-1.225" x2="-1.075" y2="1.225" layer="51"/>
+</package>
+<package name="DO41-7.6" urn="urn:adsk.eagle:footprint:43217/1" library_version="8">
+<description>&lt;b&gt;DO41&lt;/b&gt; 7.6mm x 2mm&lt;p&gt;
+Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
+<wire x1="2.082" y1="-0.92" x2="-2.082" y2="-0.92" width="0.1524" layer="21"/>
+<wire x1="2.082" y1="-0.92" x2="2.082" y2="0.92" width="0.1524" layer="21"/>
+<wire x1="-2.082" y1="0.92" x2="2.082" y2="0.92" width="0.1524" layer="21"/>
+<wire x1="-2.082" y1="0.92" x2="-2.082" y2="-0.92" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="0" x2="2.494" y2="0" width="0.85" layer="51"/>
+<wire x1="-3.81" y1="0" x2="-2.519" y2="0" width="0.85" layer="51"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0.635" x2="1.016" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.524" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="1.016" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="0" width="0.1524" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="C" x="-3.81" y="0" drill="1.1" diameter="1.7"/>
+<pad name="A" x="3.81" y="0" drill="1.1" diameter="1.7"/>
+<text x="-2.032" y="1.651" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.032" y="-2.921" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.651" y1="-0.95" x2="-1.143" y2="0.92" layer="21"/>
+<rectangle x1="2.082" y1="-0.425" x2="2.717" y2="0.425" layer="21"/>
+<rectangle x1="-2.717" y1="-0.425" x2="-2.082" y2="0.425" layer="21"/>
 </package>
 </packages>
+<packages3d>
+<package3d name="DO41-10" urn="urn:adsk.eagle:package:43336/1" type="box" library_version="8">
+<description>DIODE
+diameter 2.54 mm, horizontal, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="DO41-10"/>
+</packageinstances>
+</package3d>
+<package3d name="DO35-10" urn="urn:adsk.eagle:package:43344/2" type="model" library_version="8">
+<description>DIODE
+diameter 2 mm, horizontal, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="DO35-10"/>
+</packageinstances>
+</package3d>
+<package3d name="DO204-10" urn="urn:adsk.eagle:package:43366/1" type="box" library_version="8">
+<description>DIODE
+diameter 4 mm, horizontal, grid 10 mm</description>
+<packageinstances>
+<packageinstance name="DO204-10"/>
+</packageinstances>
+</package3d>
+<package3d name="DO15-12" urn="urn:adsk.eagle:package:43369/2" type="model" library_version="8">
+<description>DIODE
+diameter 3.5 mm, horizontal, grid 12.7 mm</description>
+<packageinstances>
+<packageinstance name="DO15-12"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD57-10" urn="urn:adsk.eagle:package:43367/1" type="box" library_version="8">
+<description>DIODE
+diameter 4 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SOD57-10"/>
+</packageinstances>
+</package3d>
+<package3d name="DO201-15" urn="urn:adsk.eagle:package:43365/2" type="model" library_version="8">
+<description>DIODE
+diameter 5.6 mm, horizontal, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="DO201-15"/>
+</packageinstances>
+</package3d>
+<package3d name="DO07" urn="urn:adsk.eagle:package:43394/2" type="model" library_version="8">
+<description>DIODE
+diameter 2.54 mm, horizontal, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="DO07"/>
+</packageinstances>
+</package3d>
+<package3d name="P1-10" urn="urn:adsk.eagle:package:43375/1" type="box" library_version="8">
+<description>DIODE
+diameter 3 mm, horizontal, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="P1-10"/>
+</packageinstances>
+</package3d>
+<package3d name="P2-15" urn="urn:adsk.eagle:package:43345/2" type="model" library_version="8">
+<description>DIODE
+diameter 5 mm, horizontal, grid 12.7 mm</description>
+<packageinstances>
+<packageinstance name="P2-15"/>
+</packageinstances>
+</package3d>
+<package3d name="DO34-7" urn="urn:adsk.eagle:package:43348/1" type="box" library_version="8">
+<description>DIODE
+diameter 1.8 mm, horizontal, grid 7.62 mm</description>
+<packageinstances>
+<packageinstance name="DO34-7"/>
+</packageinstances>
+</package3d>
+<package3d name="SOT54H" urn="urn:adsk.eagle:package:43359/1" type="box" library_version="8">
+<description>DIODE
+2-lead plastic, vertical</description>
+<packageinstances>
+<packageinstance name="SOT54H"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD523" urn="urn:adsk.eagle:package:43410/4" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="SOD523"/>
+</packageinstances>
+</package3d>
+<package3d name="TO18D" urn="urn:adsk.eagle:package:43443/1" type="box" library_version="8">
+<description>DIODE
+2-lead metall, vertical</description>
+<packageinstances>
+<packageinstance name="TO18D"/>
+</packageinstances>
+</package3d>
+<package3d name="C1702-05" urn="urn:adsk.eagle:package:43430/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 5.08 mm</description>
+<packageinstances>
+<packageinstance name="C1702-05"/>
+</packageinstances>
+</package3d>
+<package3d name="C1702-15" urn="urn:adsk.eagle:package:43351/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, horizontal, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="C1702-15"/>
+</packageinstances>
+</package3d>
+<package3d name="SGA-10" urn="urn:adsk.eagle:package:43388/1" type="box" library_version="8">
+<description>DIODE
+diameter 4 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SGA-10"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD64-10" urn="urn:adsk.eagle:package:43385/1" type="box" library_version="8">
+<description>DIODE
+diameter 4.8 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SOD64-10"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD61A" urn="urn:adsk.eagle:package:43377/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SOD61A"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD61B" urn="urn:adsk.eagle:package:43379/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="SOD61B"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD61C" urn="urn:adsk.eagle:package:43378/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 17.78 mm</description>
+<packageinstances>
+<packageinstance name="SOD61C"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD61D" urn="urn:adsk.eagle:package:43381/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="SOD61D"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD61E" urn="urn:adsk.eagle:package:43380/1" type="box" library_version="8">
+<description>DIODE
+diameter 3.5 mm, vertical, grid 20.32 mm</description>
+<packageinstances>
+<packageinstance name="SOD61E"/>
+</packageinstances>
+</package3d>
+<package3d name="DO27-15" urn="urn:adsk.eagle:package:43337/3" type="model" library_version="8">
+<description>DIODE
+diameter 5 mm, horizontal, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="DO27-15"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD81" urn="urn:adsk.eagle:package:43363/2" type="model" library_version="8">
+<description>DIODE
+diameter 2.3 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SOD81"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD84" urn="urn:adsk.eagle:package:43376/2" type="model" library_version="8">
+<description>DIODE
+diameter 3.3 mm, vertical, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="SOD84"/>
+</packageinstances>
+</package3d>
+<package3d name="F126-10" urn="urn:adsk.eagle:package:43396/2" type="model" library_version="8">
+<description>DIODE
+diameter 3 mm, horizontal, grid 10.16 mm</description>
+<packageinstances>
+<packageinstance name="F126-10"/>
+</packageinstances>
+</package3d>
+<package3d name="DO220S" urn="urn:adsk.eagle:package:43371/4" type="model" library_version="8">
+<description>DIODE
+2-lead molded, vertical</description>
+<packageinstances>
+<packageinstance name="DO220S"/>
+</packageinstances>
+</package3d>
+<package3d name="TO220AC" urn="urn:adsk.eagle:package:43370/1" type="box" library_version="8">
+<description>DIODE
+2-lead molded, horizontal</description>
+<packageinstances>
+<packageinstance name="TO220AC"/>
+</packageinstances>
+</package3d>
+<package3d name="TO220ACS" urn="urn:adsk.eagle:package:43373/3" type="model" library_version="8">
+<description>DIODE
+2-lead molded, vertical</description>
+<packageinstances>
+<packageinstance name="TO220ACS"/>
+</packageinstances>
+</package3d>
+<package3d name="G4-12" urn="urn:adsk.eagle:package:43368/1" type="box" library_version="8">
+<description>DIODE
+diameter 7.62 mm, horizontal, grid 12.7 mm</description>
+<packageinstances>
+<packageinstance name="G4-12"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD83-12" urn="urn:adsk.eagle:package:43382/1" type="box" library_version="8">
+<description>DIODE
+diameter 4.8 mm, vertical, grid 12.7 mm</description>
+<packageinstances>
+<packageinstance name="SOD83-12"/>
+</packageinstances>
+</package3d>
+<package3d name="SMB" urn="urn:adsk.eagle:package:43404/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="SMB"/>
+</packageinstances>
+</package3d>
+<package3d name="P6-15" urn="urn:adsk.eagle:package:43343/1" type="box" library_version="8">
+<description>DIODE
+diameter 9 mm, horizontal, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="P6-15"/>
+</packageinstances>
+</package3d>
+<package3d name="C2673" urn="urn:adsk.eagle:package:43390/1" type="box" library_version="8">
+<description>DIODE
+diameter 5.2 mm, horizontal, grid 15.24 mm</description>
+<packageinstances>
+<packageinstance name="C2673"/>
+</packageinstances>
+</package3d>
+<package3d name="C221B1A" urn="urn:adsk.eagle:package:43391/1" type="box" library_version="8">
+<description>DIODE
+2-lead molded, horizontal</description>
+<packageinstances>
+<packageinstance name="C221B1A"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD80C" urn="urn:adsk.eagle:package:43405/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="SOD80C"/>
+</packageinstances>
+</package3d>
+<package3d name="D-10" urn="urn:adsk.eagle:package:43434/1" type="box" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="D-10"/>
+</packageinstances>
+</package3d>
+<package3d name="D-12.5" urn="urn:adsk.eagle:package:43427/1" type="box" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="D-12.5"/>
+</packageinstances>
+</package3d>
+<package3d name="D-2.5" urn="urn:adsk.eagle:package:43419/1" type="box" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="D-2.5"/>
+</packageinstances>
+</package3d>
+<package3d name="D-5" urn="urn:adsk.eagle:package:43440/1" type="box" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="D-5"/>
+</packageinstances>
+</package3d>
+<package3d name="D-7.5" urn="urn:adsk.eagle:package:43423/1" type="box" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="D-7.5"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD106-R" urn="urn:adsk.eagle:package:43424/2" type="model" library_version="8">
+<description>SOD106 Reflow soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD106-R"/>
+</packageinstances>
+</package3d>
+<package3d name="SMC" urn="urn:adsk.eagle:package:43425/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="SMC"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD106-W" urn="urn:adsk.eagle:package:43431/2" type="model" library_version="8">
+<description>SOD106 Wave soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD106-W"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD106A-R" urn="urn:adsk.eagle:package:43438/2" type="model" library_version="8">
+<description>SOD106A Reflow soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD106A-R"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD110-W" urn="urn:adsk.eagle:package:43428/2" type="model" library_version="8">
+<description>SOD110 Wave soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD110-W"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD110-R" urn="urn:adsk.eagle:package:43426/2" type="model" library_version="8">
+<description>SOD110 Reflow soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD110-R"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD123" urn="urn:adsk.eagle:package:43420/1" type="box" library_version="8">
+<description>Diode</description>
+<packageinstances>
+<packageinstance name="SOD123"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD323-R" urn="urn:adsk.eagle:package:43437/1" type="box" library_version="8">
+<description>SOD323 Reflow soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD323-R"/>
+</packageinstances>
+</package3d>
+<package3d name="SOD323-W" urn="urn:adsk.eagle:package:43418/1" type="box" library_version="8">
+<description>SOD323 Wave soldering Philips SC01_Mounting_1996.pdf</description>
+<packageinstances>
+<packageinstance name="SOD323-W"/>
+</packageinstances>
+</package3d>
+<package3d name="GF1" urn="urn:adsk.eagle:package:43422/1" type="box" library_version="8">
+<description>GF1
+General Semiconductor</description>
+<packageinstances>
+<packageinstance name="GF1"/>
+</packageinstances>
+</package3d>
+<package3d name="MINIMELF" urn="urn:adsk.eagle:package:43429/2" type="model" library_version="8">
+<description>Mini Melf Diode</description>
+<packageinstances>
+<packageinstance name="MINIMELF"/>
+</packageinstances>
+</package3d>
+<package3d name="MELF-MLL41" urn="urn:adsk.eagle:package:43444/1" type="box" library_version="8">
+<description>DIODE
+Package DO-213AB = http://www.diotec.com/pdf/sm4001.pdf</description>
+<packageinstances>
+<packageinstance name="MELF-MLL41"/>
+</packageinstances>
+</package3d>
+<package3d name="MICROMELF-R" urn="urn:adsk.eagle:package:43436/2" type="model" library_version="8">
+<description>Micro Melf Diode Reflow soldering VISHAY mcl4148.pdf</description>
+<packageinstances>
+<packageinstance name="MICROMELF-R"/>
+</packageinstances>
+</package3d>
+<package3d name="MICROMELF-W" urn="urn:adsk.eagle:package:43441/2" type="model" library_version="8">
+<description>Micro Melf Diode Wave soldering VISHAY mcl4148.pdf</description>
+<packageinstances>
+<packageinstance name="MICROMELF-W"/>
+</packageinstances>
+</package3d>
+<package3d name="SC79_INFINEON" urn="urn:adsk.eagle:package:43432/2" type="model" library_version="8">
+<description>Diode Package Reflow soldering
+INFINEON, www.infineon.com/cmc_upload/0/000/010/257/eh_db_5b.pdf</description>
+<packageinstances>
+<packageinstance name="SC79_INFINEON"/>
+</packageinstances>
+</package3d>
+<package3d name="SCD80_INFINEON" urn="urn:adsk.eagle:package:43414/1" type="box" library_version="8">
+<description>Diode Package Reflow soldering
+INFINEON, www.infineon.com/cmc_upload/0/000/010/257/eh_db_5b.pdf</description>
+<packageinstances>
+<packageinstance name="SCD80_INFINEON"/>
+</packageinstances>
+</package3d>
+<package3d name="DO214AA" urn="urn:adsk.eagle:package:43433/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="DO214AA"/>
+</packageinstances>
+</package3d>
+<package3d name="DO214AC" urn="urn:adsk.eagle:package:43417/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="DO214AC"/>
+</packageinstances>
+</package3d>
+<package3d name="DO214BA" urn="urn:adsk.eagle:package:43453/2" type="model" library_version="8">
+<description>DIODE</description>
+<packageinstances>
+<packageinstance name="DO214BA"/>
+</packageinstances>
+</package3d>
+<package3d name="DO-214AC" urn="urn:adsk.eagle:package:43416/2" type="model" library_version="8">
+<description>SURFACE MOUNT GENERAL RECTIFIER JEDEC DO-214AC molded platic body
+Method 2026
+Source: http://www.kingtronics.com/SMD_M7/M7_SMD_4007.pdf</description>
+<packageinstances>
+<packageinstance name="DO-214AC"/>
+</packageinstances>
+</package3d>
+<package3d name="DO41-7.6" urn="urn:adsk.eagle:package:43421/1" type="box" library_version="8">
+<description>DO41 7.6mm x 2mm
+Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
+<packageinstances>
+<packageinstance name="DO41-7.6"/>
+</packageinstances>
+</package3d>
+</packages3d>
 <symbols>
-<symbol name="46765-0001">
-<wire x1="5.08" y1="2.54" x2="55.88" y2="2.54" width="0.254" layer="94"/>
-<wire x1="55.88" y1="-25.4" x2="55.88" y2="2.54" width="0.254" layer="94"/>
-<wire x1="55.88" y1="-25.4" x2="5.08" y2="-25.4" width="0.254" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="5.08" y2="-25.4" width="0.254" layer="94"/>
-<text x="57.15" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="57.15" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="HOT_PLUG_DETECT" x="0" y="0" length="middle"/>
-<pin name="TMDS_DATA2+" x="0" y="-2.54" length="middle"/>
-<pin name="TMDS_DATA2-" x="0" y="-5.08" length="middle"/>
-<pin name="TMDS_DATA1_SHIELD" x="0" y="-7.62" length="middle"/>
-<pin name="TMDS_DATA0+" x="0" y="-10.16" length="middle"/>
-<pin name="TMDS_DATA0-" x="0" y="-12.7" length="middle"/>
-<pin name="TMDS_CLOCK_SHIELD" x="0" y="-15.24" length="middle"/>
-<pin name="CEC" x="0" y="-17.78" length="middle"/>
-<pin name="SCL" x="0" y="-20.32" length="middle"/>
-<pin name="+5V_POWER" x="0" y="-22.86" length="middle"/>
-<pin name="UTILITY" x="60.96" y="0" length="middle" rot="R180"/>
-<pin name="TMDS_DATA2_SHIELD" x="60.96" y="-2.54" length="middle" rot="R180"/>
-<pin name="TMDS_DATA1+" x="60.96" y="-5.08" length="middle" rot="R180"/>
-<pin name="TMDS_DATA1-" x="60.96" y="-7.62" length="middle" rot="R180"/>
-<pin name="TMDS_DATA0_SHIELD" x="60.96" y="-10.16" length="middle" rot="R180"/>
-<pin name="TMDS_CLOCK+" x="60.96" y="-12.7" length="middle" rot="R180"/>
-<pin name="TMDS_CLOCK-" x="60.96" y="-15.24" length="middle" rot="R180"/>
-<pin name="DDC/CEC_GROUND" x="60.96" y="-17.78" length="middle" rot="R180"/>
-<pin name="SDA" x="60.96" y="-20.32" length="middle" rot="R180"/>
+<symbol name="D" urn="urn:adsk.eagle:symbol:43091/2" library_version="8">
+<wire x1="-1.27" y1="-1.27" x2="1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="-1.27" y2="1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="0" x2="-1.27" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="1.27" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="0" x2="-2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="1.27" y2="0" width="0.254" layer="94"/>
+<text x="2.54" y="0.4826" size="1.778" layer="95">&gt;NAME</text>
+<text x="2.54" y="-2.3114" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-2.54" y="0" size="0.4064" layer="99" align="center">SpiceOrder 1</text>
+<text x="2.54" y="0" size="0.4064" layer="99" align="center">SpiceOrder 2</text>
+<pin name="A" x="-2.54" y="0" visible="off" length="point" direction="pas"/>
+<pin name="C" x="2.54" y="0" visible="off" length="point" direction="pas" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="46765-0001" prefix="J">
-<description>&lt;b&gt;0.40mm Micro HDMI Conn R/A Recp SMT 19w Type D 19 Way Female Right Angle HDMI Connector 30 V&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href="http://www.molex.com/webdocs/datasheets/pdf/en-us//0467650001_IO_CONNECTORS.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<deviceset name="DIODE-" urn="urn:adsk.eagle:component:43657/21" prefix="D" uservalue="yes" library_version="8">
+<description>&lt;b&gt;DIODE&lt;/b&gt;</description>
 <gates>
-<gate name="G$1" symbol="46765-0001" x="0" y="0"/>
+<gate name="G$1" symbol="D" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="46765-0001">
+<device name="DO41-10" package="DO41-10">
 <connects>
-<connect gate="G$1" pin="+5V_POWER" pad="19"/>
-<connect gate="G$1" pin="CEC" pad="15"/>
-<connect gate="G$1" pin="DDC/CEC_GROUND" pad="16"/>
-<connect gate="G$1" pin="HOT_PLUG_DETECT" pad="1"/>
-<connect gate="G$1" pin="SCL" pad="17"/>
-<connect gate="G$1" pin="SDA" pad="18"/>
-<connect gate="G$1" pin="TMDS_CLOCK+" pad="12"/>
-<connect gate="G$1" pin="TMDS_CLOCK-" pad="14"/>
-<connect gate="G$1" pin="TMDS_CLOCK_SHIELD" pad="13"/>
-<connect gate="G$1" pin="TMDS_DATA0+" pad="9"/>
-<connect gate="G$1" pin="TMDS_DATA0-" pad="11"/>
-<connect gate="G$1" pin="TMDS_DATA0_SHIELD" pad="10"/>
-<connect gate="G$1" pin="TMDS_DATA1+" pad="6"/>
-<connect gate="G$1" pin="TMDS_DATA1-" pad="8"/>
-<connect gate="G$1" pin="TMDS_DATA1_SHIELD" pad="7"/>
-<connect gate="G$1" pin="TMDS_DATA2+" pad="3"/>
-<connect gate="G$1" pin="TMDS_DATA2-" pad="5"/>
-<connect gate="G$1" pin="TMDS_DATA2_SHIELD" pad="4"/>
-<connect gate="G$1" pin="UTILITY" pad="2"/>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
 </connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43336/1"/>
+</package3dinstances>
 <technologies>
 <technology name="">
-<attribute name="AVAILABILITY" value="Unavailable"/>
-<attribute name="DESCRIPTION" value=" Connector, Hdmi, Receptacle, 19 Position "/>
-<attribute name="MF" value="Molex"/>
-<attribute name="MP" value="46765-0001"/>
-<attribute name="PACKAGE" value="None"/>
-<attribute name="PRICE" value="None"/>
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO35-10" package="DO35-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43344/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO204-10" package="DO204-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43366/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO15-12" package="DO15-12">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43369/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD57-10" package="SOD57-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43367/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO201-15" package="DO201-15">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43365/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO07" package="DO07">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43394/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="P1-10" package="P1-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43375/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="P2-15" package="P2-15">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43345/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO34-7" package="DO34-7">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43348/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOT54H" package="SOT54H">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43359/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD523" package="SOD523">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43410/4"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="TO18D" package="TO18D">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43443/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="C1702-05" package="C1702-05">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43430/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="C1702-15" package="C1702-15">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43351/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SGA-10" package="SGA-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43388/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD64-10" package="SOD64-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43385/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD61A" package="SOD61A">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43377/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD61B" package="SOD61B">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43379/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD61C" package="SOD61C">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43378/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD61D" package="SOD61D">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43381/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD61E" package="SOD61E">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43380/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO27-15" package="DO27-15">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43337/3"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD81" package="SOD81">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43363/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD84" package="SOD84">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43376/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="F126-10" package="F126-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43396/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO220S" package="DO220S">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43371/4"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="TO220H" package="TO220AC">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43370/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="TO220V" package="TO220ACS">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43373/3"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="G4-12" package="G4-12">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43368/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD83-12" package="SOD83-12">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43382/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMB" package="SMB">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43404/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="11" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="P6-15" package="P6-15">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43343/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="C2673" package="C2673">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43390/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="C221B1A" package="C221B1A">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43391/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD80C" package="SOD80C">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43405/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="9" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="D-10" package="D-10">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43434/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="D-12.5" package="D-12.5">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43427/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="D-2.5" package="D-2.5">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43419/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="10" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="D-5" package="D-5">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43440/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="D-7.5" package="D-7.5">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43423/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD106-R" package="SOD106-R">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43424/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMC" package="SMC">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43425/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD106-W" package="SOD106-W">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43431/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD106A-R" package="SOD106A-R">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43438/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD110-W" package="SOD110-W">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43428/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD110-R" package="SOD110-R">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43426/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD123" package="SOD123">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43420/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="22" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD323-R" package="SOD323-R">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43437/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SOD323-W" package="SOD323-W">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43418/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="GF1" package="GF1">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43422/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="MINIMELF" package="MINIMELF">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43429/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="25" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="MELF-MLL41" package="MELF-MLL41">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43444/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="MICROMELF-R" package="MICROMELF-R">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43436/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="MICROMELF-W" package="MICROMELF-W">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43441/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SC79_INFINEON" package="SC79_INFINEON">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43432/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SCD80-INFINEON" package="SCD80_INFINEON">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43414/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO214AA" package="DO214AA">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43433/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO214AC" package="DO214AC">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43417/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="14" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO214BA" package="DO214BA">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43453/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO-214AC" package="DO-214AC">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43416/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="25" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="DO41-7.6" package="DO41-7.6">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:43421/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="7" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -28068,10 +31155,9 @@ Source: &lt;a href="http://www.molex.com/webdocs/datasheets/pdf/en-us//046765000
 <part name="C31" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="0.1uF"/>
 <part name="R22" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="34k"/>
 <part name="R21" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="20k"/>
-<part name="D1" library="SamacSys_Parts" deviceset="B340A-13-F" device="SMA" package3d_urn="urn:adsk.eagle:package:8314666/1" value="500mV 3A"/>
 <part name="GND22" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="GND" device=""/>
 <part name="C36" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C1210" package3d_urn="urn:adsk.eagle:package:23619/2" value="100uF/6.3V/1210"/>
-<part name="BR1" library="SamacSys_Parts" deviceset="CDBHM240L-HF" device="" package3d_urn="urn:adsk.eagle:package:8170595/1" value="50V/2A"/>
+<part name="BR1" library="SamacSys_Parts" deviceset="CDBHM240L-HF" device="" value="50V/2A"/>
 <part name="GND24" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="GND" device=""/>
 <part name="FRAME2" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="FRAME-A4L" device=""/>
 <part name="CT6" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:8231346" deviceset="CONN_02" device="3.5MM" package3d_urn="urn:adsk.eagle:package:8232313/1"/>
@@ -28088,10 +31174,11 @@ Source: &lt;a href="http://www.molex.com/webdocs/datasheets/pdf/en-us//046765000
 <part name="R11" library="Seeed-Resistor-2016" library_urn="urn:adsk.eagle:library:8233575" deviceset="SMD-RES-ARRAY-1K-4R(RA1206-8)" device="" package3d_urn="urn:adsk.eagle:package:8233599/2" value="1K"/>
 <part name="R24" library="Seeed-Resistor-2016" library_urn="urn:adsk.eagle:library:8233575" deviceset="SMD-RES-ARRAY-1K-4R(RA1206-8)" device="" package3d_urn="urn:adsk.eagle:package:8233599/2" value="20K"/>
 <part name="J8" library="adafruit" deviceset="PINHD1X1-SM" device="1X01_SM"/>
-<part name="J3" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1"/>
+<part name="J3" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="3.5MM" package3d_urn="urn:adsk.eagle:package:38050/1"/>
 <part name="J5" library="adafruit" deviceset="PINHD1X1-SM" device="1X01_SM"/>
 <part name="J6" library="adafruit" deviceset="PINHD1X1-SM" device="1X01_SM"/>
-<part name="J7" library="46765-0001" deviceset="46765-0001" device=""/>
+<part name="J9" library="SamacSys_Parts" deviceset="PKS019-4011-0" device=""/>
+<part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="DO214AC" package3d_urn="urn:adsk.eagle:package:43417/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -29939,10 +33026,6 @@ to be corrected</text>
 <attribute name="NAME" x="173.7614" y="115.57" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="178.562" y="115.57" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="D1" gate="G$1" x="223.52" y="137.16" smashed="yes" rot="R270">
-<attribute name="NAME" x="226.06" y="135.89" size="1.778" layer="95" rot="R270" align="center-left"/>
-<attribute name="VALUE" x="220.98" y="135.89" size="1.778" layer="96" rot="R270" align="center-left"/>
-</instance>
 <instance part="GND22" gate="1" x="223.52" y="127" smashed="yes">
 <attribute name="VALUE" x="220.98" y="124.46" size="1.778" layer="96"/>
 </instance>
@@ -29998,9 +33081,13 @@ to be corrected</text>
 <instance part="J6" gate="G$1" x="88.9" y="91.44" smashed="yes">
 <attribute name="NAME" x="82.55" y="94.615" size="1.778" layer="95"/>
 </instance>
-<instance part="J7" gate="G$1" x="21.59" y="38.1" smashed="yes">
-<attribute name="NAME" x="78.74" y="45.72" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="78.74" y="43.18" size="1.778" layer="96" align="center-left"/>
+<instance part="J9" gate="G$1" x="43.18" y="66.04" smashed="yes">
+<attribute name="NAME" x="62.23" y="73.66" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="62.23" y="71.12" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="D1" gate="G$1" x="223.52" y="134.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="223.0374" y="137.16" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="225.8314" y="137.16" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -30033,9 +33120,7 @@ to be corrected</text>
 <junction x="165.1" y="109.22"/>
 <pinref part="GND21" gate="1" pin="GND"/>
 <junction x="157.48" y="109.22"/>
-<pinref part="BR1" gate="G$1" pin="~_2"/>
-<wire x1="144.78" y1="116.84" x2="144.78" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="109.22" x2="157.48" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="109.22" x2="157.48" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="R21" gate="G$1" pin="1"/>
 <wire x1="175.26" y1="114.3" x2="175.26" y2="109.22" width="0.1524" layer="91"/>
 <junction x="175.26" y="109.22"/>
@@ -30059,11 +33144,13 @@ to be corrected</text>
 <pinref part="C35" gate="G$1" pin="2"/>
 <wire x1="215.9" y1="114.3" x2="215.9" y2="109.22" width="0.1524" layer="91"/>
 <junction x="215.9" y="109.22"/>
+<pinref part="BR1" gate="G$1" pin="~"/>
+<wire x1="137.16" y1="124.46" x2="137.16" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="D1" gate="G$1" pin="A"/>
-<wire x1="223.52" y1="129.286" x2="223.52" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="223.52" y1="132.08" x2="223.52" y2="129.54" width="0.1524" layer="91"/>
 <pinref part="GND22" gate="1" pin="GND"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 </segment>
 <segment>
 <wire x1="22.86" y1="121.92" x2="17.78" y2="121.92" width="0.1524" layer="91"/>
@@ -30089,34 +33176,56 @@ to be corrected</text>
 <junction x="135.89" y="67.31"/>
 </segment>
 <segment>
-<wire x1="21.59" y1="30.48" x2="19.05" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA1_SHIELD"/>
-<label x="19.05" y="30.48" size="0.8128" layer="95" rot="R180" xref="yes"/>
-<label x="19.05" y="38.1" size="0.8128" layer="95" rot="R180" xref="yes"/>
-<label x="85.09" y="38.1" size="0.8128" layer="95" xref="yes"/>
+<label x="39.37" y="58.42" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="39.37" y="66.04" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="39.37" y="43.18" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="4"/>
+<wire x1="43.18" y1="58.42" x2="39.37" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="21.59" y1="22.86" x2="19.05" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="TMDS_CLOCK_SHIELD"/>
-<label x="19.05" y="22.86" size="0.8128" layer="95" rot="R180" xref="yes"/>
-<label x="85.09" y="35.56" size="0.8128" layer="95" xref="yes"/>
-<label x="85.09" y="27.94" size="0.8128" layer="95" xref="yes"/>
+<label x="39.37" y="50.8" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="39.37" y="40.64" size="0.8128" layer="95" rot="R180" xref="yes"/>
+<label x="69.85" y="63.5" size="0.8128" layer="95" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="7"/>
+<wire x1="43.18" y1="50.8" x2="39.37" y2="50.8" width="0.1524" layer="91"/>
+<label x="69.85" y="50.8" size="0.8128" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="85.09" y1="35.56" x2="82.55" y2="35.56" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA2_SHIELD"/>
+<wire x1="39.37" y1="40.64" x2="43.18" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="11"/>
 </segment>
 <segment>
-<wire x1="85.09" y1="27.94" x2="82.55" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA0_SHIELD"/>
+<wire x1="69.85" y1="63.5" x2="66.04" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="14"/>
 </segment>
 <segment>
-<wire x1="21.59" y1="38.1" x2="19.05" y2="38.1" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="HOT_PLUG_DETECT"/>
+<pinref part="J9" gate="G$1" pin="1"/>
+<wire x1="43.18" y1="66.04" x2="39.37" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="85.09" y1="38.1" x2="82.55" y2="38.1" width="0.1524" layer="91"/>
-<pinref part="J7" gate="G$1" pin="UTILITY"/>
+<wire x1="39.37" y1="43.18" x2="43.18" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="10"/>
+</segment>
+<segment>
+<wire x1="69.85" y1="50.8" x2="68.58" y2="50.8" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="19"/>
+<pinref part="J9" gate="G$1" pin="20"/>
+<wire x1="68.58" y1="50.8" x2="66.04" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="48.26" x2="68.58" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="48.26" x2="68.58" y2="50.8" width="0.1524" layer="91"/>
+<junction x="68.58" y="50.8"/>
+<pinref part="J9" gate="G$1" pin="21"/>
+<wire x1="66.04" y1="45.72" x2="68.58" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="45.72" x2="68.58" y2="48.26" width="0.1524" layer="91"/>
+<junction x="68.58" y="48.26"/>
+<pinref part="J9" gate="G$1" pin="22"/>
+<wire x1="66.04" y1="43.18" x2="68.58" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="43.18" x2="68.58" y2="45.72" width="0.1524" layer="91"/>
+<junction x="68.58" y="45.72"/>
+<pinref part="J9" gate="G$1" pin="23"/>
+<wire x1="66.04" y1="40.64" x2="68.58" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="40.64" x2="68.58" y2="43.18" width="0.1524" layer="91"/>
+<junction x="68.58" y="43.18"/>
 </segment>
 </net>
 <net name="MOSI" class="0">
@@ -30377,9 +33486,11 @@ to be corrected</text>
 <wire x1="121.92" y1="124.46" x2="127" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="J4" gate="G$1" pin="1"/>
 <label x="127" y="132.08" size="1.27" layer="95" rot="R180" xref="yes"/>
-<wire x1="127" y1="124.46" x2="137.16" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="127" y1="124.46" x2="132.08" y2="124.46" width="0.1524" layer="91"/>
 <junction x="127" y="124.46"/>
 <pinref part="BR1" gate="G$1" pin="-"/>
+<wire x1="132.08" y1="124.46" x2="132.08" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="116.84" x2="144.78" y2="116.84" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R26" gate="G$1" pin="2"/>
@@ -30434,7 +33545,7 @@ to be corrected</text>
 <wire x1="157.48" y1="129.54" x2="157.48" y2="139.7" width="0.1524" layer="91"/>
 <junction x="157.48" y="139.7"/>
 <wire x1="152.4" y1="139.7" x2="157.48" y2="139.7" width="0.1524" layer="91"/>
-<pinref part="BR1" gate="G$1" pin="~_1"/>
+<pinref part="BR1" gate="G$1" pin="~1"/>
 <wire x1="152.4" y1="124.46" x2="152.4" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="165.1" y1="139.7" x2="172.72" y2="139.7" width="0.1524" layer="91"/>
 <junction x="165.1" y="139.7"/>
@@ -30465,10 +33576,10 @@ to be corrected</text>
 <pinref part="L1" gate="G$1" pin="1"/>
 <wire x1="213.36" y1="139.7" x2="223.52" y2="139.7" width="0.1524" layer="91"/>
 <junction x="213.36" y="139.7"/>
-<pinref part="D1" gate="G$1" pin="K"/>
 <wire x1="223.52" y1="139.7" x2="233.68" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="223.52" y1="139.7" x2="223.52" y2="137.16" width="0.1524" layer="91"/>
 <junction x="223.52" y="139.7"/>
+<pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 </net>
 <net name="BOOT" class="0">
@@ -30538,9 +33649,9 @@ to be corrected</text>
 <junction x="97.79" y="74.93"/>
 </segment>
 <segment>
-<pinref part="J3" gate="G$1" pin="2"/>
-<wire x1="182.88" y1="85.09" x2="180.34" y2="85.09" width="0.1524" layer="91"/>
-<label x="180.34" y="85.09" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="J3" gate="G$1" pin="1"/>
+<wire x1="182.88" y1="87.63" x2="180.34" y2="87.63" width="0.1524" layer="91"/>
+<label x="180.34" y="87.63" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="VA2+" class="0">
@@ -30552,9 +33663,9 @@ to be corrected</text>
 <junction x="97.79" y="59.69"/>
 </segment>
 <segment>
-<pinref part="J3" gate="G$1" pin="1"/>
-<wire x1="182.88" y1="87.63" x2="180.34" y2="87.63" width="0.1524" layer="91"/>
-<label x="180.34" y="87.63" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="J3" gate="G$1" pin="2"/>
+<wire x1="182.88" y1="85.09" x2="180.34" y2="85.09" width="0.1524" layer="91"/>
+<label x="180.34" y="85.09" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="VAN" class="0">
@@ -30640,86 +33751,86 @@ to be corrected</text>
 </net>
 <net name="IA-" class="2">
 <segment>
-<wire x1="21.59" y1="33.02" x2="19.05" y2="33.02" width="0.1524" layer="91"/>
-<label x="19.05" y="33.02" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA2-"/>
+<label x="39.37" y="60.96" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="3"/>
+<wire x1="43.18" y1="60.96" x2="39.37" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IB-" class="2">
 <segment>
-<wire x1="21.59" y1="25.4" x2="19.05" y2="25.4" width="0.1524" layer="91"/>
-<label x="19.05" y="25.4" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA0-"/>
+<label x="39.37" y="53.34" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="6"/>
+<wire x1="43.18" y1="53.34" x2="39.37" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IC-" class="2">
 <segment>
-<wire x1="21.59" y1="17.78" x2="19.05" y2="17.78" width="0.1524" layer="91"/>
-<label x="19.05" y="17.78" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="SCL"/>
+<label x="39.37" y="45.72" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="9"/>
+<wire x1="43.18" y1="45.72" x2="39.37" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IA--2" class="2">
 <segment>
-<wire x1="82.55" y1="30.48" x2="85.09" y2="30.48" width="0.1524" layer="91"/>
-<label x="85.09" y="30.48" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA1-"/>
+<label x="69.85" y="66.04" size="1.016" layer="95" xref="yes"/>
+<wire x1="66.04" y1="66.04" x2="69.85" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="13"/>
 </segment>
 </net>
 <net name="IB--2" class="2">
 <segment>
-<wire x1="82.55" y1="22.86" x2="85.09" y2="22.86" width="0.1524" layer="91"/>
-<label x="85.09" y="22.86" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_CLOCK-"/>
+<label x="69.85" y="58.42" size="1.016" layer="95" xref="yes"/>
+<wire x1="66.04" y1="58.42" x2="69.85" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="16"/>
 </segment>
 </net>
 <net name="IC--2" class="2">
 <segment>
-<wire x1="82.55" y1="20.32" x2="85.09" y2="20.32" width="0.1524" layer="91"/>
-<label x="85.09" y="20.32" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="DDC/CEC_GROUND"/>
+<label x="69.85" y="55.88" size="1.016" layer="95" xref="yes"/>
+<wire x1="66.04" y1="55.88" x2="69.85" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="17"/>
 </segment>
 </net>
 <net name="IA+" class="2">
 <segment>
-<wire x1="21.59" y1="35.56" x2="19.05" y2="35.56" width="0.1524" layer="91"/>
-<label x="19.05" y="35.56" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA2+"/>
+<label x="39.37" y="63.5" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="2"/>
+<wire x1="43.18" y1="63.5" x2="39.37" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IB+" class="2">
 <segment>
-<wire x1="21.59" y1="27.94" x2="19.05" y2="27.94" width="0.1524" layer="91"/>
-<label x="19.05" y="27.94" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA0+"/>
+<label x="39.37" y="55.88" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="5"/>
+<wire x1="43.18" y1="55.88" x2="39.37" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IC+" class="2">
 <segment>
-<wire x1="21.59" y1="20.32" x2="19.05" y2="20.32" width="0.1524" layer="91"/>
-<label x="19.05" y="20.32" size="1.016" layer="95" rot="R180" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="CEC"/>
+<label x="39.37" y="48.26" size="1.016" layer="95" rot="R180" xref="yes"/>
+<pinref part="J9" gate="G$1" pin="8"/>
+<wire x1="43.18" y1="48.26" x2="39.37" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="IA+-2" class="2">
 <segment>
-<wire x1="82.55" y1="33.02" x2="85.09" y2="33.02" width="0.1524" layer="91"/>
-<label x="85.09" y="33.02" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_DATA1+"/>
+<label x="39.37" y="38.1" size="1.016" layer="95" rot="R180" xref="yes"/>
+<wire x1="43.18" y1="38.1" x2="39.37" y2="38.1" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="12"/>
 </segment>
 </net>
 <net name="IB+-2" class="2">
 <segment>
-<wire x1="82.55" y1="25.4" x2="85.09" y2="25.4" width="0.1524" layer="91"/>
-<label x="85.09" y="25.4" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="TMDS_CLOCK+"/>
+<label x="69.85" y="60.96" size="1.016" layer="95" xref="yes"/>
+<wire x1="66.04" y1="60.96" x2="69.85" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="15"/>
 </segment>
 </net>
 <net name="IC+-2" class="2">
 <segment>
-<wire x1="82.55" y1="17.78" x2="85.09" y2="17.78" width="0.1524" layer="91"/>
-<label x="85.09" y="17.78" size="1.016" layer="95" xref="yes"/>
-<pinref part="J7" gate="G$1" pin="SDA"/>
+<label x="69.85" y="53.34" size="1.016" layer="95" xref="yes"/>
+<wire x1="66.04" y1="53.34" x2="69.85" y2="53.34" width="0.1524" layer="91"/>
+<pinref part="J9" gate="G$1" pin="18"/>
 </segment>
 </net>
 </nets>
