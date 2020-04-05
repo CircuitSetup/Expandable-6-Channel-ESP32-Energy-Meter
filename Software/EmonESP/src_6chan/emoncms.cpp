@@ -60,7 +60,7 @@ void emoncms_publish(String data)
   url += "&apikey=";
   url += emoncms_apikey;
 
-  DBUGS.println(url); delay(10);
+  DBUGLN(url); delay(10);
   packets_sent++;
 
   // Send data to Emoncms server

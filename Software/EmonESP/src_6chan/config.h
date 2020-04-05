@@ -29,8 +29,10 @@
 #ifndef _EMONESP_CONFIG_H
 #define _EMONESP_CONFIG_H
 
+#include "energy_meter.h"
 #include <Arduino.h>
 #include <EEPROM.h>                   // Save config settings
+#include <ESPAsyncWebServer.h>
 
 // -------------------------------------------------------------------
 // Load and save the EmonESP config.
@@ -63,16 +65,13 @@ extern String mqtt_pass;
 extern String mqtt_feed_prefix;
 
 // Calibration Settings for CircuitSetup 6 channel energy meter
-extern String voltage_cal;
-extern String voltage2_cal;
-extern String ct1_cal;
-extern String ct2_cal;
-extern String ct3_cal;
-extern String ct4_cal;
-extern String ct5_cal;
-extern String ct6_cal;
-extern String freq_cal;
-extern String gain_cal;
+extern unsigned short voltage_cal;
+extern unsigned short voltage2_cal;
+extern unsigned short freq_cal;
+extern unsigned short gain_cal[NUM_BOARDS];
+extern unsigned short ct_cal[NUM_CHANNELS];
+extern float cur_mul[NUM_CHANNELS];
+extern float pow_mul[NUM_CHANNELS];
 
 
 // -------------------------------------------------------------------
@@ -93,8 +92,7 @@ extern void config_save_mqtt(String server, String topic, String prefix, String 
 // -------------------------------------------------------------------
 // Save the Calibration details
 // -------------------------------------------------------------------
-extern void config_save_cal(String voltage, String voltage2, String ct1, String ct2, String ct3, String ct4, String ct5, String ct6, String freq, String gain);
-
+extern void config_save_cal(AsyncWebServerRequest * request);
 // -------------------------------------------------------------------
 // Save the admin/web interface details
 // -------------------------------------------------------------------

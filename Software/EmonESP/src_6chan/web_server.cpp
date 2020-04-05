@@ -312,25 +312,9 @@ void handleSaveCal(AsyncWebServerRequest *request) {
     return;
   }
 
-  config_save_cal(request->arg("voltage"),
-                  request->arg("voltage2"),
-                  request->arg("ct1"),
-                  request->arg("ct2"),
-                  request->arg("ct3"),
-                  request->arg("ct4"),
-                  request->arg("ct5"),
-                  request->arg("ct6"),
-                  request->arg("freq"),
-                  request->arg("gain"));
-
-  char tmpStr[200];
-  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", voltage_cal.c_str(), voltage2_cal.c_str(),
-           ct1_cal.c_str(), ct2_cal.c_str(), ct3_cal.c_str(), ct4_cal.c_str(), ct5_cal.c_str(), ct6_cal.c_str(), 
-           freq_cal.c_str(), gain_cal.c_str());
-  DBUGLN(tmpStr);
+  config_save_cal(request);
 
   response->setCode(200);
-  response->print(tmpStr);
   request->send(response);
 
   // restart the system to load values into energy meter
@@ -407,33 +391,6 @@ void handleStatus(AsyncWebServerRequest *request) {
 
   s += "\"free_heap\":\"" + String(ESP.getFreeHeap()) + "\"";
 
-#ifdef ENABLE_LEGACY_API
-  s += ",\"version\":\"" + currentfirmware + "\"";
-  s += ",\"ssid\":\"" + esid + "\"";
-  //s += ",\"pass\":\""+epass+"\""; security risk: DONT RETURN PASSWORDS
-  s += ",\"emoncms_server\":\"" + emoncms_server + "\"";
-  s += ",\"emoncms_path\":\"" + emoncms_path + "\"";
-  s += ",\"emoncms_node\":\"" + emoncms_node + "\"";
-  //s += ",\"emoncms_apikey\":\""+emoncms_apikey+"\""; security risk: DONT RETURN APIKEY
-  s += ",\"emoncms_fingerprint\":\"" + emoncms_fingerprint + "\"";
-  s += ",\"mqtt_server\":\"" + mqtt_server + "\"";
-  s += ",\"mqtt_topic\":\"" + mqtt_topic + "\"";
-  s += ",\"mqtt_user\":\"" + mqtt_user + "\"";
-  //s += ",\"mqtt_pass\":\""+mqtt_pass+"\""; security risk: DONT RETURN PASSWORDS
-  s += ",\"mqtt_feed_prefix\":\"" + mqtt_feed_prefix + "\"";
-  s += ",\"www_username\":\"" + www_username + "\"";
-  //s += ",\"www_password\":\""+www_password+"\""; security risk: DONT RETURN PASSWORDS
-  s += "\"voltage_cal\":\"" + voltage_cal + "\"";
-  s += "\"voltage2_cal\":\"" + voltage2_cal + "\"";
-  s += "\"ct1_cal\":\"" + ct1_cal + "\"";
-  s += "\"ct2_cal\":\"" + ct2_cal + "\"";
-  s += "\"ct3_cal\":\"" + ct3_cal + "\"";
-  s += "\"ct4_cal\":\"" + ct4_cal + "\"";
-  s += "\"ct5_cal\":\"" + ct5_cal + "\"";
-  s += "\"ct6_cal\":\"" + ct6_cal + "\"";
-  s += "\"freq_cal\":\"" + freq_cal + "\"";
-  s += "\"gain_cal\":\"", + gain_cal + "\"";
-#endif 
   s += "}";
 
 
@@ -488,16 +445,33 @@ void handleConfig(AsyncWebServerRequest *request) {
     s += dummyPassword;
   }
   s += "\",";
-  s += "\"voltage_cal\":\"" + voltage_cal + "\",";
-  s += "\"voltage2_cal\":\"" + voltage2_cal + "\",";
-  s += "\"ct1_cal\":\"" + ct1_cal + "\",";
-  s += "\"ct2_cal\":\"" + ct2_cal + "\",";
-  s += "\"ct3_cal\":\"" + ct3_cal + "\",";
-  s += "\"ct4_cal\":\"" + ct4_cal + "\",";
-  s += "\"ct5_cal\":\"" + ct5_cal + "\",";
-  s += "\"ct6_cal\":\"" + ct6_cal + "\",";
-  s += "\"freq_cal\":\"" + freq_cal + "\",";
-  s += "\"gain_cal\":\"" + gain_cal + "\"";
+  s += "\"voltage_cal\":\"" + String(voltage_cal) + "\",";
+  s += "\"voltage2_cal\":\"" + String(voltage2_cal) + "\",";
+  for (int i = 0; i < NUM_BOARDS; i ++)
+  {
+    byte tb[] = {1, 2, 4, 0};
+    byte gain;
+
+    gain = tb[gain_cal[i] & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+1) + "_cal\":\"" + gain + "\",";
+    gain = tb[(gain_cal[i] >> 2) & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+2) + "_cal\":\"" + gain + "\",";
+    gain = tb[(gain_cal[i] >> 4) & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+3) + "_cal\":\"" + gain + "\",";
+    gain = tb[(gain_cal[i] >> 8) & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+4) + "_cal\":\"" + gain + "\",";
+    gain = tb[(gain_cal[i] >> 10) & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+5) + "_cal\":\"" + gain + "\",";
+    gain = tb[(gain_cal[i] >> 12) & 0x3];
+    s += "\"gain" + String(i*NUM_INPUTS+6) + "_cal\":\"" + gain + "\",";
+  }
+  for (int i = 0; i < NUM_CHANNELS; i ++)
+  {
+    s += "\"ct" + String(i+1) + "_cal\":\"" + ct_cal[i] + "\",";
+    s += "\"cur" + String(i+1) + "_mul\":\"" + cur_mul[i] + "\",";
+    s += "\"pow" + String(i+1) + "_mul\":\"" + pow_mul[i] + "\",";
+  }
+  s += "\"freq_cal\":\"" + String(freq_cal) + "\"";
   s += "}";
 
   response->setCode(200);

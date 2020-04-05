@@ -79,7 +79,7 @@ void setup() {
   energy_meter_setup();
 #endif
 
-  DBUGS.println("Server started");
+  DBUGLN("Server started");
 
 } // end setup
 
@@ -107,7 +107,7 @@ void loop()
 
   if (wifi_client_connected()) {
     if (emoncms_apikey != 0 && gotInput) {
-      DBUGS.println(input);
+//      DBUGS.println(input);
       emoncms_publish(input);
     }
     if (mqtt_server != 0) {
