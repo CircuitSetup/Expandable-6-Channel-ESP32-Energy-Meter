@@ -247,7 +247,7 @@ void energy_meter_loop()
       Serial.println("I" + String(i) + "_" + String(j) + ":" + String(currentCT[j]) + "A");
 
       sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
-      dtostrf(currentCT[j], 2, 3, measurement);
+      dtostrf(currentCT[j], 2, 4, measurement);
       strcat(result, measurement);
 
       sprintf(result + strlen(result), ",PF%d:", i*NUM_INPUTS+j+1);
