@@ -43,7 +43,7 @@
 //#include <DNSServer.h>                // Required for captive portal
 
 #ifndef WIFI_LED
-#define WIFI_LED 2
+//#define WIFI_LED 2
 #endif
 
 #ifdef WIFI_LED
