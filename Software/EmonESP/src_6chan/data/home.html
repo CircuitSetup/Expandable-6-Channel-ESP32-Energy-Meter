@@ -226,7 +226,7 @@
           <span><b>Select sensor to edit. Multiple sensors can edited at once.</span></b><br>
           <div style="width: 100%; overflow: hidden;">
              <div style="width: 50px; float: left;">
-               <select size="24" multiple="true" data-bind="options: config.sensors, selectedOptions: config.selectedSensors">
+               <select size="24" multiple="true" data-bind="options: sensorconfig.sensors, selectedOptions: sensorconfig.selectedSensors">
                </select>
              </div>
              <div style="margin-left: 70px;">
@@ -238,17 +238,17 @@
 			<br>80A/26.6mA SCT-010: 41996
 			<br>100A/50ma SCT-013-000: 27961 (default)
 			<br>120A/40mA: SCT-016: 41880</span><br>
-			<input type="text" data-bind="textInput: config.selectedCt"><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedCt"><br>
 			<b>CT Gain (PGA):</b><br>
 			<span class="small-text">Set the CT gain to 1, 2, or 4. If your CT has a low current output use 2 or 4.</span><br>
-			<input type="text" data-bind="textInput: config.selectedGain"><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedGain"><br>
 			<b>CT Current Multiplier:</b><br>
 			<span class="small-text">Set the CT current multiplier to scale the current output.
 			<br>To reverse readings use a negative sign.</span><br>
-			<input type="text" data-bind="textInput: config.selectedCurMul"><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedCurMul"><br>
 			<b>CT Power Multiplier:</b><br>
 			<span class="small-text">Set the CT power multiplier to scale the power outputs.</span><br>
-			<input type="text" data-bind="textInput: config.selectedPowMul"><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedPowMul"><br>
              </div>
           </div>
 

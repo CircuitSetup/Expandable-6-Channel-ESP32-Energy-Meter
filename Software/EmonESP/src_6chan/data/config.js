@@ -140,25 +140,34 @@ function ConfigViewModel() {
     "ct41_cal":"","cur41_mul":"1.00","pow41_mul":"1.00","ct42_cal":"","cur42_mul":"1.00","pow42_mul":"1.00",
     "freq_cal":""
     }, baseEndpoint + '/config');
-    self.getValue = function(prefix, postfix) {
-      var lastValue = null;
-      var value = "";
-      for (i = 0; i < self.selectedSensors().length; i++) {
-        obs = self[`${prefix}${self.selectedSensors()[i].substr(2)}_${postfix}`];
-        if (obs == null) {
-          return "";
-        }
-        value = obs();
-        if (lastValue != null && lastValue != value) {
-          return "";
-        }
-        lastValue = value;
+}
+ConfigViewModel.prototype = Object.create(BaseViewModel.prototype);
+ConfigViewModel.prototype.constructor = ConfigViewModel;
+
+function SensorConfigViewModel(baseconfig, baselast) {
+  var self = this;
+  self.config = baseconfig;
+  self.last = baselast;
+
+  self.getValue = function(prefix, postfix) {
+    var lastValue = null;
+    var value = "";
+    for (i = 0; i < self.selectedSensors().length; i++) {
+      obs = self.config[`${prefix}${self.selectedSensors()[i].substr(2)}_${postfix}`];
+      if (obs == null) {
+        return "";
       }
-      return value;
-    };
+      value = obs();
+      if (lastValue != null && lastValue != value) {
+        return "";
+      }
+      lastValue = value;
+    }
+    return value;
+  };
     self.setValue = function(prefix, postfix, value) {
       self.selectedSensors().forEach(function(sensor,_,_) {
-        self[`${prefix}${sensor.substr(2)}_${postfix}`] = ko.observable(value);
+        self.config[`${prefix}${sensor.substr(2)}_${postfix}`] = ko.observable(value);
       });
     };
     self.selectedCt = ko.pureComputed({
@@ -177,15 +186,21 @@ function ConfigViewModel() {
       read: function() { return self.getValue("pow", "mul") },
       write: function(value) { return self.setValue("pow", "mul", value) }
     }).extend({ notify: 'always' });
-    var vals = [];
-    for (i = 1; i <= 6*7; i++) {
-      vals.push(`CT${i}`);
-    }
-    self.sensors = ko.observableArray(vals);
+
     self.selectedSensors = ko.observableArray(["CT1"]);
+    self.sensors = ko.observableArray();
+
+    self.update = function(after) {
+      var vals = [];
+      self.last.values().forEach(function(input,_,_) {
+        if (input.key().substring(0, 2) == "CT") {
+          vals.push(input.key());
+        }
+      });
+      self.sensors = ko.observableArray(vals);
+      after();
+   }
 }
-ConfigViewModel.prototype = Object.create(BaseViewModel.prototype);
-ConfigViewModel.prototype.constructor = ConfigViewModel;
 
 function LastValuesViewModel() {
   var self = this;
@@ -229,6 +244,7 @@ function EmonEspViewModel() {
   self.config = new ConfigViewModel();
   self.status = new StatusViewModel();
   self.last = new LastValuesViewModel();
+  self.sensorconfig = new SensorConfigViewModel(self.config, self.last);
 
   self.initialised = ko.observable(false);
   self.updating = ko.observable(false);
@@ -247,10 +263,13 @@ function EmonEspViewModel() {
     self.config.update(function () {
       self.status.update(function () {
         self.last.update(function () {
-          self.initialised(true);
-          updateTimer = setTimeout(self.update, updateTime);
-          self.upgradeUrl(baseEndpoint + '/update');
-          self.updating(false);
+          self.sensorconfig.update(function () {
+            ko.applyBindings(self);
+            self.initialised(true);
+            updateTimer = setTimeout(self.update, updateTime);
+            self.upgradeUrl(baseEndpoint + '/update');
+            self.updating(false);
+          });
         });
       });
     });
@@ -430,7 +449,6 @@ function EmonEspViewModel() {
 $(function () {
   // Activates knockout.js
   var emonesp = new EmonEspViewModel();
-  ko.applyBindings(emonesp);
   emonesp.start();
 });
 
