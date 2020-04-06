@@ -153,58 +153,9 @@
           </p>
         </div>
       </div>
-    </div>
-    <!--//////////////////////////////////////////////////////////////////////////////////-->
-    <div id="right-hand-container" data-bind="visible: initialised" style="display: none">
-      <div id="four">
-        <h2>4. Latest Data</h2>
-        <div class="itembody-wrapper">
-          <table>
-            <tr>
-              <th>Key</th>
-              <th>Value</th>
-            </tr>
-            <tbody data-bind="foreach: last.values">
-              <tr>
-                <td data-bind="text: key"></td>
-                <td data-bind="text: value"></td>
-              </tr>
-            </tbody>
-          </table><br>
-        </div>
-        <div class="small-text">
-          Input key value pairs received via serial UART (e.g "CT1:3935,CT2:325") or HTTP input API e.g.: <br>
-          <a data-bind="attr: {href: 'http://'+status.ipaddress()+'/input?string=CT1:3935,CT2:325,T0:20.5'}">http://<span data-bind="text: status.ipaddress"></span>/input?string=CT1:3935,CT2:325,T0:20.5</a>
-        </div>
-      </div>
-      <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="five">
-        <h2>5. Admin</h2>
-        <div class="itembody-wrapper">
-          <p>
-            <b>Username:</b><br>
-            <input type="text" value="admin" data-bind="textInput: config.www_username">
-          </p>
-          <p>
-            <b>Password:</b><br>
-            <input type="password" data-bind="textInput: config.www_password"><br><br>
-            <span>Web interface HTTP authentication.</span><br><br>
-            <button data-bind="click: saveAdmin, text: (saveAdminFetching() ? 'Saving' : (saveAdminSuccess() ? 'Saved' : 'Save')), disable: saveAdminFetching">Save</button>
-          </p>
-        </div>
-      </div>
-      <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="six">
-        <h2>6. Firmware</h2>
-        <div class="itembody-wrapper">
-			<span>Check the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page</a> for the latest updates to our version of EmonESP. The Upload feature can be used to upload the latest firmware .bin files. If for some reason the update fails, you may need to connect the ESP to your computer and upload via the Arduino or Platform.io IDE.</span><br>
-
-          <button id="upload">Upload</button>
-        </div>
-      </div>
 	        <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="seven">
-        <h2>7. Calibration Settings</h2>
+      <div id="four">
+        <h2>4. Calibration Settings</h2>
         <div class="itembody-wrapper">
 		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> <b>The default values are used unless other values are entered here.</b></span><br><br>
           <p>
@@ -264,7 +215,55 @@
           </p>
         </div>
       </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="five">
+        <h2>5. Admin</h2>
+        <div class="itembody-wrapper">
+          <p>
+            <b>Username:</b><br>
+            <input type="text" value="admin" data-bind="textInput: config.www_username">
+          </p>
+          <p>
+            <b>Password:</b><br>
+            <input type="password" data-bind="textInput: config.www_password"><br><br>
+            <span>Web interface HTTP authentication.</span><br><br>
+            <button data-bind="click: saveAdmin, text: (saveAdminFetching() ? 'Saving' : (saveAdminSuccess() ? 'Saved' : 'Save')), disable: saveAdminFetching">Save</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--//////////////////////////////////////////////////////////////////////////////////-->
+    <div id="right-hand-container" data-bind="visible: initialised" style="display: none">
+      <div id="six">
+        <h2>6. Latest Data</h2>
+        <div class="itembody-wrapper">
+          <table>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+            </tr>
+            <tbody data-bind="foreach: last.values">
+              <tr>
+                <td data-bind="text: key"></td>
+                <td data-bind="text: value"></td>
+              </tr>
+            </tbody>
+          </table><br>
+        </div>
+        <div class="small-text">
+          Input key value pairs received via serial UART (e.g "CT1:3935,CT2:325") or HTTP input API e.g.: <br>
+          <a data-bind="attr: {href: 'http://'+status.ipaddress()+'/input?string=CT1:3935,CT2:325,T0:20.5'}">http://<span data-bind="text: status.ipaddress"></span>/input?string=CT1:3935,CT2:325,T0:20.5</a>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="seven">
+        <h2>7. Firmware</h2>
+        <div class="itembody-wrapper">
+			<span>Check the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page</a> for the latest updates to our version of EmonESP. The Upload feature can be used to upload the latest firmware .bin files. If for some reason the update fails, you may need to connect the ESP to your computer and upload via the Arduino or Platform.io IDE.</span><br>
 
+          <button id="upload">Upload</button>
+        </div>
+      </div>
       <!--//////////////////////////////////////////////////////////////////////////////////-->
       <div id="eight">
         <h2>8. System</h2>
