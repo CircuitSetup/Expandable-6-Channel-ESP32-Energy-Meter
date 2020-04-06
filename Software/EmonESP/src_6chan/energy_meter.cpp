@@ -46,16 +46,6 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, OLED_DC, OLED_RESET, OLED_CS);
 #endif
 
-/***** CALIBRATION SETTINGS *****/
-/* These values are edited in the web interface or energy_meter.h */
-/* Values in the web interface take priority */
-unsigned short VoltageGain1 = VOLTAGE_GAIN;
-unsigned short VoltageGain2 = VOLTAGE_GAIN2;
-unsigned short CurrentGainCT[NUM_CHANNELS] = { CURRENT_GAIN_DEFAULT };
-unsigned short lineFreq = LINE_FREQ;
-unsigned short PGAGain1[NUM_BOARDS] = { PGA_GAIN };
-unsigned short PGAGain2[NUM_BOARDS] = { PGA_GAIN };
-
 unsigned long startMillis;
 unsigned long currentMillis;
 const int period = 1000; //time interval in ms to send data
@@ -80,27 +70,12 @@ ATM90E32 sensor_ic2[NUM_BOARDS]{};
 void energy_meter_setup() {
   int i, j;
 
-  /*Get values from web interface and assign them if populated*/
-  if (voltage_cal > 0) VoltageGain1 = voltage_cal;
-  if (voltage2_cal > 0) VoltageGain2 = voltage2_cal;
-  if (freq_cal > 0) lineFreq = freq_cal;
-
   /*Initialise the ATM90E32 & Pass CS pin and calibrations to its library */
   Serial.println("Start ATM90E32");
   for (i = 0; i < NUM_BOARDS; i ++)
   {
-    if (gain_cal[i] > 0)
-    {
-      PGAGain1[i] = gain_cal[i] & 0xFF;
-      PGAGain2[i] = gain_cal[i] >> 8;
-    }
-
-    for (j = 0; j < NUM_INPUTS; j ++)
-    {
-      if (ct_cal[i*NUM_INPUTS+j] > 0) CurrentGainCT[j] = ct_cal[i*NUM_INPUTS+j];
-    }
-    sensor_ic1[i].begin(CS1[i], lineFreq, PGAGain1[i], VoltageGain1, CurrentGainCT[i*NUM_INPUTS+0], CurrentGainCT[i*NUM_INPUTS+1], CurrentGainCT[i*NUM_INPUTS+2]);
-    sensor_ic2[i].begin(CS2[i], lineFreq, PGAGain2[i], VoltageGain2, CurrentGainCT[i*NUM_INPUTS+3], CurrentGainCT[i*NUM_INPUTS+4], CurrentGainCT[i*NUM_INPUTS+5]);
+    sensor_ic1[i].begin(CS1[i], freq_cal, gain_cal[i] & 0xFF, voltage_cal, ct_cal[i*NUM_INPUTS+0], ct_cal[i*NUM_INPUTS+1], ct_cal[i*NUM_INPUTS+2]);
+    sensor_ic2[i].begin(CS2[i], freq_cal, gain_cal[i] >> 8, voltage2_cal, ct_cal[i*NUM_INPUTS+3], ct_cal[i*NUM_INPUTS+4], ct_cal[i*NUM_INPUTS+5]);
     delay(500);
   }
 

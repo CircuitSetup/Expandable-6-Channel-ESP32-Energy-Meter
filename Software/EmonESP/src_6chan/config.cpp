@@ -318,18 +318,18 @@ void config_load_settings()
   EEPROM_read_string(EEPROM_MQTT_PASS_START, EEPROM_MQTT_PASS_SIZE, mqtt_pass);
 
   // Calibration settings
-  voltage_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE_START, EEPROM_CAL_VOLTAGE_SIZE);
-  voltage2_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE2_START, EEPROM_CAL_VOLTAGE_SIZE);
-  freq_cal = EEPROM_read_ushort(EEPROM_CAL_FREQ_START, EEPROM_CAL_FREQ_SIZE);
+  voltage_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE_START, VOLTAGE_GAIN_DEFAULT);
+  voltage2_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE2_START, VOLTAGE_GAIN_DEFAULT);
+  freq_cal = EEPROM_read_ushort(EEPROM_CAL_FREQ_START, LINE_FREQ_DEFAULT);
   for (int i = 0; i < NUM_CHANNELS; i++)
   {
-    ct_cal[i] = EEPROM_read_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE));
+    ct_cal[i] = EEPROM_read_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE), CURRENT_GAIN_DEFAULT);
     cur_mul[i] = EEPROM_read_float(EEPROM_CUR_MUL_START + (i*EEPROM_CUR_MUL_SIZE), 1.0);
     pow_mul[i] = EEPROM_read_float(EEPROM_POW_MUL_START + (i*EEPROM_POW_MUL_SIZE), 1.0);
   }
   for (int i = 0; i < NUM_BOARDS; i++)
   {
-    gain_cal[i] = EEPROM_read_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE));
+    gain_cal[i] = EEPROM_read_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE), PGA_GAIN_DEFAULT);
   }
 
   // Web server credentials
