@@ -231,28 +231,35 @@ void energy_meter_loop()
 
     for (j = 0; j < NUM_INPUTS; j ++)
     {
-      float curMulSign = 1;
-      if (cur_mul[i*NUM_INPUTS+j] < 0) curMulSign = -1;
-
       /* determine if negative - current registers are not signed, so this is an easy way to tell */
       if (realPowerCT[j] < 0) currentCT[j] *= -1;
+
+      /* flip sign of power factor if current multiplier is negative */
+      if (cur_mul[i*NUM_INPUTS+j] < 0) powerFactorCT[j] *= -1;
+
+      /* scale current and power using multipliers */
+      currentCT[j] *=  cur_mul[i*NUM_INPUTS+j];
+      realPowerCT[j] *= pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j];
+
+      /* apparent power is always positive */
+      vaPowerCT[j] *= fabs(pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j]);
 
       Serial.println("I" + String(i) + "_" + String(j) + ":" + String(currentCT[j]) + "A");
 
       sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
-      dtostrf(currentCT[j]*cur_mul[i*NUM_INPUTS+j], 2, 3, measurement);
+      dtostrf(currentCT[j], 2, 3, measurement);
       strcat(result, measurement);
 
       sprintf(result + strlen(result), ",PF%d:", i*NUM_INPUTS+j+1);
-      dtostrf(powerFactorCT[j]*curMulSign, 2, 3, measurement);
+      dtostrf(powerFactorCT[j], 2, 3, measurement);
       strcat(result, measurement);
 
       sprintf(result + strlen(result), ",W%d:", i*NUM_INPUTS+j+1);
-      dtostrf(realPowerCT[j]*pow_mul[i*NUM_INPUTS+j]*curMulSign, 2, 2, measurement);
+      dtostrf(realPowerCT[j], 2, 2, measurement);
       strcat(result, measurement);
 
       sprintf(result + strlen(result), ",AW%d:", i*NUM_INPUTS+j+1);
-      dtostrf(vaPowerCT[j]*fabs(pow_mul[i*NUM_INPUTS+j]), 2, 2, measurement);
+      dtostrf(vaPowerCT[j], 2, 2, measurement);
       strcat(result, measurement);
     }
     Serial.println("");
