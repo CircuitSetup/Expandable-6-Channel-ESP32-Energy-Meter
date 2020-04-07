@@ -50,7 +50,7 @@ boolean mqtt_connect()
   DBUGS.println(mqttclient.state());
 
 #ifdef ESP32
-  String strID = String((uint32_t)ESP.getEfuseMac());
+  String strID = String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
 #else
   String strID = String(ESP.getChipId());
 #endif
