@@ -1,9 +1,9 @@
-//simple sketch reading from DHT22 and posting up to emoncms.org using the ESP8266 wifi module.
+//simple sketch reading from DHT22 and posting up to emoncms.org using the ESP32wifi module.
 // This file is part of OpenEnergyMonitor project.
 
 
 
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include "DHT.h"
 #define DHTPIN 12    
 

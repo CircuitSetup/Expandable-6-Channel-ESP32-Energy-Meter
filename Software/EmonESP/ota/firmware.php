@@ -5,7 +5,7 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL, $githubApiUrl);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'User-Agent: ESP8266'));
+    'User-Agent: ESP32'));
     $result = curl_exec($ch);
     //echo $json;
     curl_close($ch);

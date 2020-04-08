@@ -1,6 +1,6 @@
 
 /* 
- ESP8266 CheckFlashConfig by Markus Sattler
+  CheckFlashConfig by Markus Sattler
  
  This sketch tests if the EEPROM settings of the IDE match to the Hardware
  
