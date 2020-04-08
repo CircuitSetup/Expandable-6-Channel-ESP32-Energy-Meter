@@ -55,6 +55,8 @@ void emoncms_publish(String data)
   url += packets_success;
   url += ",freeram:";
   url += String(ESP.getFreeHeap());
+  url += ",rssi:";
+  url += String(WiFi.RSSI());
   url += "}&node=";
   url += emoncms_node;
   url += "&apikey=";
