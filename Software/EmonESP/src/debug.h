@@ -29,6 +29,9 @@
 #ifndef __DEBUG_H
 #define __DEBUG_H
 
+
+
+// Enable Debug messages here
 //#define ENABLE_DEBUG
 
 #define TEXTIFY(A) #A

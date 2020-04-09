@@ -130,6 +130,17 @@ void mqtt_publish(String data)
   String rssi_S = String(rssi);
   String rssi_topic = mqtt_topic + "/" + mqtt_feed_prefix + "rssi";
   mqttclient.publish(rssi_topic.c_str(), rssi_S.c_str());
+
+    // send ip
+  String ip_topic = mqtt_topic + "/" + mqtt_feed_prefix + "ip";
+  String ip_add = WiFi.localIP().toString();
+  mqttclient.publish(ip_topic.c_str(), ip_add.c_str());
+
+  // send Uptime
+  String uptime_topic = mqtt_topic + "/" + mqtt_feed_prefix + "uptime";
+  String uptime = String(millis());
+  mqttclient.publish(uptime_topic.c_str(), uptime.c_str());
+
 }
 
 // -------------------------------------------------------------------

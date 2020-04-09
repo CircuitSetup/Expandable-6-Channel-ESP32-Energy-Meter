@@ -36,9 +36,8 @@
 #include <Arduino.h>
 #include <FS.h>
 #include <ArduinoOTA.h>               // local OTA update from Arduino IDE
-#ifdef ESP32
 #include <Update.h>        // remote OTA update from server
-#endif
+
 
 
 void ota_setup();

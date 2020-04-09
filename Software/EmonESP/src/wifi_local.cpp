@@ -34,6 +34,13 @@ DNSServer dnsServer;                  // Create class DNS server, captive portal
 const byte DNS_PORT = 53;
 */
 
+//Define some Vars to stop annoying errors
+
+bool isClient;
+  bool isClientOnly;
+  bool isAp;
+  bool isApOnly;
+
 // Access Point SSID, password & IP address. SSID will be softAP_ssid + chipID to make SSID unique
 const char *softAP_ssid = "emonESP";
 const char *softAP_password = "";
@@ -297,10 +304,10 @@ void wifi_setup() {
 
 void wifi_loop()
 {
-  bool isClient = wifi_mode_is_sta();
-  bool isClientOnly = wifi_mode_is_sta_only();
-  bool isAp = wifi_mode_is_ap();
-  bool isApOnly = wifi_mode_is_ap_only();
+  isClient = wifi_mode_is_sta();
+  isClientOnly = wifi_mode_is_sta_only();
+  isAp = wifi_mode_is_ap();
+  isApOnly = wifi_mode_is_ap_only();
 
   // flash the LED according to what state wifi is in
   // if AP mode & disconnected - blink every 2 seconds

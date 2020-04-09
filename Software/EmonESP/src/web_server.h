@@ -32,7 +32,7 @@
 #include <Arduino.h>
 #ifdef ESP32
 #include <SPIFFS.h>
-#include <WiFi.h>
+#include "wifi_local.h"
 #include <AsyncTCP.h>  //https://github.com/me-no-dev/AsyncTCP
 #include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
 #endif
