@@ -1,6 +1,6 @@
-#ifndef _EMONESP_WIFI_NEW_H
-#define _EMONESP_WIFI_NEW_H
-
+#ifndef _EMONESP_WIFI_H
+#define _EMONESP_WIFI_H
+#include <Arduino.h>
 #ifdef ESP32
   #include <esp_wifi.h>
   #include <WiFi.h>
@@ -10,26 +10,17 @@
 
   #define LED_ON      HIGH
   #define LED_OFF     LOW  
-#else
-  #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
-  //needed for library
-  #include <DNSServer.h>
-  #include <ESP8266WebServer.h>  
-
-  #define ESP_getChipId()   (ESP.getChipId())
-
-  #define LED_ON      LOW
-  #define LED_OFF     HIGH
 #endif
-
-#endif // _EMONESP_WIFI_NEW_H
-
+extern String esid;
+extern String epass;
+extern String ipaddress;
+// mDNS hostname
+extern const char *esp_hostname;
 // SSID and PW for Config Portal
-String ssid = "ESP_" + String(ESP_getChipId(), HEX);
-const char* password = "";
-bool isConnected = false;
-String ipaddress = "";
-String wifiMode = "";
+// String ssid = "ESP_" + String(ESP_getChipId(), HEX);
+extern const char* password;
+extern bool isConnected;
+extern String ssid;
 
 
 // Use false if you don't like to display Available Pages in Information Page of Config Portal
@@ -40,132 +31,95 @@ String wifiMode = "";
 #include <ESP_WiFiManager.h>              //https://github.com/khoih-prog/ESP_WiFiManager
 
 // Indicates whether ESP has WiFi credentials saved from previous session
-bool initialConfig = false;
-const char* esp_hn = "EmonESP";
-
-void wifi_setup() 
-{
-  unsigned long startedAt = millis();
-
-  //Local intialization. Once its business is done, there is no need to keep it around
-  // Use this to default DHCP hostname to ESP8266-XXXXXX or ESP32-XXXXXX
-  //ESP_WiFiManager ESP_wifiManager;
-  // Use this to personalize DHCP hostname (RFC952 conformed)
-  ESP_WiFiManager ESP_wifiManager(esp_hn);
-  
-  ESP_wifiManager.setMinimumSignalQuality(-1);
-  // Set static IP, Gateway, Subnetmask, DNS1 and DNS2. New in v1.0.5
-  ESP_wifiManager.setRemoveDuplicateAPs(true);
-
-  // We can't use WiFi.SSID() in ESP32as it's only valid after connected. 
-  // SSID and Password stored in ESP32 wifi_ap_record_t and wifi_config_t are also cleared in reboot
-  // Have to create a new function to store in EEPROM/SPIFFS for this purpose
-  esid = ESP_wifiManager.WiFi_SSID();
-  epass = ESP_wifiManager.WiFi_Pass();
-  
-  //Remove this line if you do not want to see WiFi password printed
-  DBUGS.println("Stored: SSID = " + esid + ", Pass = " + epass);
-
-  // SSID to uppercase 
-  ssid.toUpperCase();
-  
-  if (esid == "")
-  {
-    DBUGS.println("We haven't got any access point credentials, so get them now");   
-     
-    
-    //it starts an access point 
-    //and goes into a blocking loop awaiting configuration
-    if (!ESP_wifiManager.startConfigPortal(ssid.c_str(), password)) {
-      DBUGS.println("Not connected to WiFi but continuing anyway.");
-      isConnected = false;
-    } 
-    else {
-      DBUGS.println("WiFi connected...yeey :)");
-      isConnected = true;    
-    }
-  }
-
-  
-  #define WIFI_CONNECT_TIMEOUT        30000L
-  #define WHILE_LOOP_DELAY            200L
-  #define WHILE_LOOP_STEPS            (WIFI_CONNECT_TIMEOUT / ( 3 * WHILE_LOOP_DELAY ))
-  
-  startedAt = millis();
-  
-  while ( (WiFi.status() != WL_CONNECTED) && (millis() - startedAt < WIFI_CONNECT_TIMEOUT ) )
-  {   
-    WiFi.mode(WIFI_STA);
-    WiFi.persistent (true);
-    // We start by connecting to a WiFi network
-  
-    DBUGS.println("Connecting to " + esid);
-    
-  
-    WiFi.begin(esid.c_str(), epass.c_str());
-
-    int i = 0;
-    while((!WiFi.status() || WiFi.status() >= WL_DISCONNECTED) && i++ < WHILE_LOOP_STEPS)
-    {
-      delay(WHILE_LOOP_DELAY);
-    }    
-  }
-
-  DBUGS.println("After waiting ");
-  DBUGS.println((millis()- startedAt) / 1000);
-  DBUGS.println(" secs more in setup(), connection result is ");
-
-  if (WiFi.status() == WL_CONNECTED)
-  {
-    DBUGS.println("connected. Local IP: ");
-    DBUGS.println(WiFi.localIP());
-    ipaddress = (WiFi.localIP()).toString();
-    isConnected = true;
-  }
-  else
-    DBUGS.println(ESP_wifiManager.getStatus(WiFi.status()));
-    isConnected = false;
-
-}
-
-void heartBeatPrint(void)
-{
-  static int num = 1;
-
-  if (WiFi.status() == WL_CONNECTED)
-    DBUGS.print("H");        // H means connected to WiFi
-  else
-    DBUGS.print("F");        // F means not connected to WiFi
-  
-  if (num == 80) 
-  {
-    DBUGS.println();
-    num = 1;
-  }
-  else if (num++ % 10 == 0) 
-  {
-    DBUGS.print(" ");
-  }
-} 
-
-void check_status()
-{
-  static ulong checkstatus_timeout = 0;
-
-if(WiFi.getMode() == 1){
-  wifiMode = "STA";
-} else if(WiFi.getMode() == 2){
-  wifiMode = "AP";
-}else if(WiFi.getMode() == 3){
-  wifiMode = "STA+AP";
-}
+extern bool initialConfig;
 
 
-  #define HEARTBEAT_INTERVAL    10000L
-  // Print hearbeat every HEARTBEAT_INTERVAL (10) seconds.
-  if ((millis() > checkstatus_timeout) || (checkstatus_timeout == 0))
-  {
-    heartBeatPrint();
-    checkstatus_timeout = millis() + HEARTBEAT_INTERVAL;
-  }
-}
+
+// Last discovered WiFi access points
+extern String st;
+extern String rssi;
+
+// Network state
+extern String ipaddress;
+
+#ifndef WIFI_LED
+#define WIFI_LED 2
+#endif
+
+#ifdef WIFI_LED
+
+#ifndef WIFI_LED_ON_STATE
+#define WIFI_LED_ON_STATE LOW
+#endif
+
+//the time the LED actually stays on
+#ifndef WIFI_LED_ON_TIME
+#define WIFI_LED_ON_TIME 50
+#endif
+
+//times the LED is off...
+#ifndef WIFI_LED_AP_TIME
+#define WIFI_LED_AP_TIME 2000
+#endif
+
+#ifndef WIFI_LED_AP_CONNECTED_TIME
+#define WIFI_LED_AP_CONNECTED_TIME 1000
+#endif
+
+#ifndef WIFI_LED_STA_CONNECTING_TIME
+#define WIFI_LED_STA_CONNECTING_TIME 500
+#endif
+
+#ifndef WIFI_LED_STA_CONNECTED_TIME
+#define WIFI_LED_STA_CONNECTED_TIME 4000
+#endif
+
+#endif
+
+#ifndef WIFI_BUTTON
+#define WIFI_BUTTON 3
+#endif
+
+#ifndef WIFI_BUTTON_AP_TIMEOUT
+#define WIFI_BUTTON_AP_TIMEOUT              (5 * 1000)
+#endif
+
+#ifndef WIFI_BUTTON_FACTORY_RESET_TIMEOUT
+#define WIFI_BUTTON_FACTORY_RESET_TIMEOUT   (10 * 1000)
+#endif
+
+#ifndef WIFI_CLIENT_DISCONNECT_RETRY
+#define WIFI_CLIENT_DISCONNECT_RETRY         (10 * 1000)
+#endif
+
+#ifndef WIFI_CLIENT_RETRY_TIMEOUT
+#define WIFI_CLIENT_RETRY_TIMEOUT           (5 * 60 * 1000) //5 min
+#endif
+
+extern void wifi_setup();
+extern void wifi_loop();
+extern void wifi_scan();
+
+extern void wifi_restart();
+extern void wifi_disconnect();
+
+extern void wifi_turn_off_ap();
+extern void wifi_turn_on_ap();
+extern bool wifi_client_connected();
+
+#define wifi_is_client_configured()   (WiFi.SSID() != "")
+
+
+// Wifi mode
+bool wifi_mode_is_sta(){if((WiFi.getMode() & WIFI_STA) == WIFI_STA){return true;}return false;}         
+bool wifi_mode_is_sta_only(){if(WiFi.getMode() == WIFI_STA){return true;}return false;}//       (WiFi.getMode() == WIFI_STA)
+bool wifi_mode_is_ap(){if((WiFi.getMode() & WIFI_AP) == WIFI_AP){return true;}return false;}//             ((WiFi.getMode() & WIFI_AP) == WIFI_AP)
+
+// Performing a scan enables STA so we end up in AP+STA mode so treat AP+STA with no
+// ssid set as AP only
+bool wifi_mode_is_ap_only(){if((WiFi.getMode() == WIFI_AP) || (WiFi.getMode() && !wifi_is_client_configured() == WIFI_AP_STA)){return true;}return false;}// ((WiFi.getMode() == WIFI_AP) || (WiFi.getMode() && !wifi_is_client_configured()) == WIFI_AP_STA))
+
+// }        ((WiFi.getMode() == WIFI_AP) || 
+//                                        (WiFi.getMode() && !wifi_is_client_configured() == WIFI_AP_STA))
+
+#endif // _EMONESP_WIFI_NEW_H

@@ -25,6 +25,8 @@
    Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 */
+#ifndef _WEB_SERVER_H
+#define _WEB_SERVER_H
 
 #include "emonesp.h"
 #include "energy_meter.h"
@@ -36,17 +38,20 @@
 #include "ota.h"
 #include "debug.h"
 
+extern bool wifi_mode_is_ap_only();
+extern bool wifi_mode_is_sta();
+extern bool wifi_mode_is_sta_only();
+extern bool wifi_mode_is_ap();
 
+#endif
 AsyncWebServer server(80);          //Create class for Web server
 AsyncWebSocket ws("/ws");
 
-extern bool isConnected;
-extern const char* esp_hn;
-extern String ipaddress;
-extern String wifiMode;
-
-
 bool enableCors = true;
+extern bool wifi_mode_is_ap_only();
+extern bool wifi_mode_is_sta();
+extern bool wifi_mode_is_sta_only();
+extern bool wifi_mode_is_ap();
 
 // Event timeouts
 unsigned long wifiRestartTime = 0;
@@ -113,9 +118,9 @@ bool requestPreProcess(AsyncWebServerRequest *request, AsyncResponseStream *&res
 {
   dumpRequest(request);
 
-  if (isConnected && www_username != "" &&
+  if (wifi_mode_is_sta() && www_username != "" &&
       false == request->authenticate(www_username.c_str(), www_password.c_str())) {
-    request->requestAuthentication(esp_hn);
+    request->requestAuthentication(esp_hostname);
     return false;
   }
 
@@ -137,7 +142,7 @@ void handleHome(AsyncWebServerRequest *request) {
   if (www_username != ""
       && !request->authenticate(www_username.c_str(),
                                 www_password.c_str())
-      && isConnected) {
+      && wifi_mode_is_sta()) {
     return request->requestAuthentication();
   }
 
@@ -391,17 +396,17 @@ void handleStatus(AsyncWebServerRequest *request) {
   if (false == requestPreProcess(request, response)) {
     return;
   }
-  DBUGS.println("WIFI: " + wifiMode);
+
   String s = "{";
-  if (wifiMode == "STA") {
+  if (wifi_mode_is_sta_only()) {
     s += "\"mode\":\"STA\",";
-  } else if (wifiMode == "AP") {
+  } else if (wifi_mode_is_ap_only()) {
     s += "\"mode\":\"AP\",";
-  } else if (wifiMode == "STA+AP") {
+  } else if (wifi_mode_is_ap() && wifi_mode_is_sta()) {
     s += "\"mode\":\"STA+AP\",";
   }
-  s += "\"networks\":[" + esid + "],";
-  s += "\"rssi\":[" + String(WiFi.RSSI()) + "],";
+  s += "\"networks\":[" + st + "],";
+  s += "\"rssi\":[" + rssi + "],";
 
   s += "\"srssi\":\"" + String(WiFi.RSSI()) + "\",";
   s += "\"ipaddress\":\"" + ipaddress + "\",";
@@ -683,7 +688,7 @@ void handleNotFound(AsyncWebServerRequest *request)
   DBUG("NOT_FOUND: ");
   dumpRequest(request);
 
-  if (WiFi.getMode() == 2) {
+  if (wifi_mode_is_ap_only()) {
     // Redirect to the home page in AP mode (for the captive portal)
     AsyncResponseStream *response = request->beginResponseStream(String("text/html"));
 
@@ -757,10 +762,10 @@ void web_server_setup()
 
 void web_server_loop() {
   // Do we need to restart the WiFi?
-  // if (wifiRestartTime > 0 && millis() > wifiRestartTime) {
-  //   wifiRestartTime = 0;
-  //   wifi_restart();
-  // }
+  if (wifiRestartTime > 0 && millis() > wifiRestartTime) {
+    wifiRestartTime = 0;
+    wifi_restart();
+    }
 
   // Do we need to restart MQTT?
   if (mqttRestartTime > 0 && millis() > mqttRestartTime) {
@@ -772,7 +777,7 @@ void web_server_loop() {
   if (systemRestartTime > 0 && millis() > systemRestartTime) {
     systemRestartTime = 0;
     WiFi.disconnect();
-  #ifdef ESP32
+#ifdef ESP32
     esp_restart();
 #else
     ESP.restart();
