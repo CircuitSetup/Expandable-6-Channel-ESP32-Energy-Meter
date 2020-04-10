@@ -263,14 +263,14 @@ void energy_meter_loop()
     unsigned short en0_2 = main2.GetMeterStatus0();
     unsigned short en1_2 = main2.GetMeterStatus1();
 
-    Serial.println("Sys Status 1: S0:0x" + String(sys0, HEX) + " S1:0x" + String(sys1, HEX));
-    Serial.println("Meter Status 1: E0:0x" + String(en0, HEX) + " E1:0x" + String(en1, HEX));
-    Serial.println("Sys Status 2: S0:0x" + String(sys0_2, HEX) + " S1:0x" + String(sys1_2, HEX));
-    Serial.println("Meter Status 2: E0:0x" + String(en0_2, HEX) + " E1:0x" + String(en1_2, HEX));
+    // Serial.println("Sys Status 1: S0:0x" + String(sys0, HEX) + " S1:0x" + String(sys1, HEX));
+    // Serial.println("Meter Status 1: E0:0x" + String(en0, HEX) + " E1:0x" + String(en1, HEX));
+    // Serial.println("Sys Status 2: S0:0x" + String(sys0_2, HEX) + " S1:0x" + String(sys1_2, HEX));
+    // Serial.println("Meter Status 2: E0:0x" + String(en0_2, HEX) + " E1:0x" + String(en1_2, HEX));
     delay(10);
     
     /*if true the MCU is not getting data from the energy meter */
-    if (sys0 == 65535 || sys0 == 0) DBUGS.println("Error: Not receiving data from the energy meter - check your connections");
+    if (sys0 == 65535 || sys0 == 0);// DBUGS.println("Error: Not receiving data from the energy meter - check your connections");
 
     /* only 1 voltage channel is used on each IC */
     voltage1 = main1.GetLineVoltageA();
@@ -318,10 +318,10 @@ void energy_meter_loop()
     totalWatts = (voltage1 * current1) + (voltage2 * current2);
     #endif
 
-    Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V");
-    Serial.println("I1:" + String(currentCT1) + "A   I6:" + String(currentCT6) + "A");
-    Serial.println("I2:" + String(currentCT2) + "A   I5:" + String(currentCT5) + "A");
-    Serial.println("I3:" + String(currentCT3) + "A   I4:" + String(currentCT4) + "A");
+    // Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V");
+    // Serial.println("I1:" + String(currentCT1) + "A   I6:" + String(currentCT6) + "A");
+    // Serial.println("I2:" + String(currentCT2) + "A   I5:" + String(currentCT5) + "A");
+    // Serial.println("I3:" + String(currentCT3) + "A   I4:" + String(currentCT4) + "A");
     #ifdef ADDON_BOARDS
     Serial.println("Total Current:" + String(totalCurrent) + "A");
     Serial.println("Total Power:" + String(totalWatts) + "W");
@@ -329,11 +329,11 @@ void energy_meter_loop()
     
     #ifdef JP9_JP11_SET
     #ifdef EXPORT_METERING_VALS
-    Serial.println("Power Factor:" + String(avgPF));
-    Serial.println("Fundamental Power:" + String(fundPower) + "W");
-    Serial.println("Harmonic Power:" + String(harPower) + "W");
-    Serial.println("Reactive Power:" + String(reactPower) + "var");
-    Serial.println("Apparent Power:" + String(appPower) + "VA");
+    // Serial.println("Power Factor:" + String(avgPF));
+    // Serial.println("Fundamental Power:" + String(fundPower) + "W");
+    // Serial.println("Harmonic Power:" + String(harPower) + "W");
+    // Serial.println("Reactive Power:" + String(reactPower) + "var");
+    // Serial.println("Apparent Power:" + String(appPower) + "VA");
     #endif
     #endif
     Serial.println("");
@@ -517,10 +517,10 @@ void energy_meter_loop()
       Serial.println("");
     #endif
 #endif
-    Serial.println("Total Current:" + String(totalCurrent) + "A");
-    Serial.println("Total Power:" + String(totalWatts)+ "W");
-    Serial.println("Temp:" + String(temp) + "C");
-    Serial.println("Freq:" + String(freq) + "Hz");
+    // Serial.println("Total Current:" + String(totalCurrent) + "A");
+    // Serial.println("Total Power:" + String(totalWatts)+ "W");
+    // Serial.println("Temp:" + String(temp) + "C");
+    // Serial.println("Freq:" + String(freq) + "Hz");
 
 
 #ifdef ENABLE_OLED_DISPLAY

@@ -29,7 +29,8 @@ String ssid = "ESP_" + String(ESP_getChipId(), HEX);
 const char* password = "";
 bool isConnected = false;
 String ipaddress = "";
-String isAPMode = "";
+String wifiMode = "";
+
 
 // Use false if you don't like to display Available Pages in Information Page of Config Portal
 // Comment out or use true to display Available Pages in Information Page of Config Portal
@@ -120,12 +121,10 @@ void wifi_setup()
     DBUGS.println(WiFi.localIP());
     ipaddress = (WiFi.localIP()).toString();
     isConnected = true;
-    isAPMode = WiFi.getMode();
   }
   else
     DBUGS.println(ESP_wifiManager.getStatus(WiFi.status()));
     isConnected = false;
-    isAPMode = WiFi.getMode();
 
 }
 
@@ -134,24 +133,33 @@ void heartBeatPrint(void)
   static int num = 1;
 
   if (WiFi.status() == WL_CONNECTED)
-    Serial.print("H");        // H means connected to WiFi
+    DBUGS.print("H");        // H means connected to WiFi
   else
-    Serial.print("F");        // F means not connected to WiFi
+    DBUGS.print("F");        // F means not connected to WiFi
   
   if (num == 80) 
   {
-    Serial.println();
+    DBUGS.println();
     num = 1;
   }
   else if (num++ % 10 == 0) 
   {
-    Serial.print(" ");
+    DBUGS.print(" ");
   }
 } 
 
 void check_status()
 {
   static ulong checkstatus_timeout = 0;
+
+if(WiFi.getMode() == 1){
+  wifiMode = "STA";
+} else if(WiFi.getMode() == 2){
+  wifiMode = "AP";
+}else if(WiFi.getMode() == 3){
+  wifiMode = "STA+AP";
+}
+
 
   #define HEARTBEAT_INTERVAL    10000L
   // Print hearbeat every HEARTBEAT_INTERVAL (10) seconds.
@@ -161,36 +169,3 @@ void check_status()
     checkstatus_timeout = millis() + HEARTBEAT_INTERVAL;
   }
 }
-
-extern void wifi_loop() 
-{
-    //Local intialization. Once its business is done, there is no need to keep it around
-    ESP_WiFiManager ESP_wifiManager;
-    
-    //Check if there is stored WiFi router/password credentials.
-    //If not found, device will remain in configuration mode until switched off via webserver.
-    DBUGS.println("Opening configuration portal. ");
-    esid = ESP_wifiManager.WiFi_SSID();
-    if (esid != "")
-    {
-      ESP_wifiManager.setConfigPortalTimeout(60); //If no access point name has been previously entered disable timeout.
-      DBUGS.println("Got stored Credentials. Timeout 60s");
-    }
-    else
-      DBUGS.println("No stored Credentials. No timeout");
-    
-    //it starts an access point 
-    //and goes into a blocking loop awaiting configuration
-    if (!ESP_wifiManager.startConfigPortal(ssid.c_str(), password)) 
-    {
-      DBUGS.println("Not connected to WiFi but continuing anyway.");
-    } 
-    else 
-    {
-      //if you get here you have connected to the WiFi
-      DBUGS.println("connected...yeey :)");
-    }
-    isAPMode = WiFi.getMode();
-    DBUGS.println("APMode: " + isAPMode);
-
-  }

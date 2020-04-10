@@ -43,7 +43,7 @@ AsyncWebSocket ws("/ws");
 extern bool isConnected;
 extern const char* esp_hn;
 extern String ipaddress;
-extern String isAPMode;
+extern String wifiMode;
 
 
 bool enableCors = true;
@@ -391,13 +391,13 @@ void handleStatus(AsyncWebServerRequest *request) {
   if (false == requestPreProcess(request, response)) {
     return;
   }
-
+  DBUGS.println("WIFI: " + wifiMode);
   String s = "{";
-  if (isAPMode == "STA") {
+  if (wifiMode == "STA") {
     s += "\"mode\":\"STA\",";
-  } else if (isAPMode == "AP") {
+  } else if (wifiMode == "AP") {
     s += "\"mode\":\"AP\",";
-  } else if (isAPMode == "AP" && isAPMode == "AP") {
+  } else if (wifiMode == "STA+AP") {
     s += "\"mode\":\"STA+AP\",";
   }
   s += "\"networks\":[" + esid + "],";
@@ -683,7 +683,7 @@ void handleNotFound(AsyncWebServerRequest *request)
   DBUG("NOT_FOUND: ");
   dumpRequest(request);
 
-  if (isAPMode == "AP") {
+  if (WiFi.getMode() == 2) {
     // Redirect to the home page in AP mode (for the captive portal)
     AsyncResponseStream *response = request->beginResponseStream(String("text/html"));
 
