@@ -29,7 +29,6 @@
 #include "emonesp.h"
 #include "ota.h"
 #include "web_server.h"
-#include "wifi_local.h"
 #include "http.h"
 
 

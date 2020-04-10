@@ -29,7 +29,7 @@
 #include "emonesp.h"
 #include "mqtt.h"
 #include "config.h"
-#include "wifi_local.h"
+#include <WiFiClientSecure.h>   // Secure https GET request
 
 WiFiClient espClient;                 // Create client for MQTT
 PubSubClient mqttclient(espClient);   // Create client for MQTT

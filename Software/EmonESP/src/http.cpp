@@ -29,7 +29,7 @@
 #include "http.h"
 
 #include <Print.h>
-#include <WiFiClientSecure.h>   // Secure https GET request
+
 
 #ifdef ESP32
 #include <HTTPClient.h>

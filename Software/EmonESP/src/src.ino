@@ -36,16 +36,21 @@
 
 #include "emonesp.h"
 #include "config.h"
-#include "wifi_local.h"
+#include "wifi_new.h"
 #include "web_server.h"
 #include "ota.h"
 #include "input.h"
 #include "emoncms.h"
 #include "mqtt.h"
 
+
 #ifdef ENABLE_ENERGY_METER
 #include "energy_meter.h"
 #endif
+
+// #ifndef WIFI_LED
+// #define WIFI_LED 4
+// #endif
 
 // -------------------------------------------------------------------
 // SETUP
@@ -84,8 +89,6 @@ void setup() {
 void loop()
 {
   web_server_loop();
-  wifi_loop();
-
 
 #ifdef ENABLE_ENERGY_METER
   energy_meter_loop();
@@ -97,7 +100,7 @@ void loop()
     DBUGS.println(".");
   }
 
-  if (wifi_client_connected()) {
+  if (WiFi.status() == WL_CONNECTED) {
     if (emoncms_apikey != 0 && gotInput) {
       DBUGS.println(input);
       emoncms_publish(input);
@@ -109,5 +112,30 @@ void loop()
       }
     }
   }
-
+    //Local intialization. Once its business is done, there is no need to keep it around
+    ESP_WiFiManager ESP_wifiManager;
+    
+    //Check if there is stored WiFi router/password credentials.
+    //If not found, device will remain in configuration mode until switched off via webserver.
+    DBUGS.print("Opening configuration portal. ");
+    esid = ESP_wifiManager.WiFi_SSID();
+    if (esid != "")
+    {
+      ESP_wifiManager.setConfigPortalTimeout(60); //If no access point name has been previously entered disable timeout.
+      DBUGS.println("Got stored Credentials. Timeout 60s");
+    }
+    else
+      DBUGS.println("No stored Credentials. No timeout");
+    
+    //it starts an access point 
+    //and goes into a blocking loop awaiting configuration
+    if (!ESP_wifiManager.startConfigPortal((const char *) ssid.c_str(), password)) 
+    {
+      DBUGS.println("Not connected to WiFi but continuing anyway.");
+    } 
+    else 
+    {
+      //if you get here you have connected to the WiFi
+      DBUGS.println("connected...yeey :)");
+    }
 } // end loop
