@@ -4,9 +4,13 @@
    -------------------------------------------------------------------
    Adaptation of Chris Howells OpenEVSE ESP Wifi
    by Trystan Lea, Glyn Hudson, OpenEnergyMonitor
+
    Modified to use with the CircuitSetup.us Split Phase Energy Meter by jdeglavina
+
    All adaptation GNU General Public License as below.
+
    -------------------------------------------------------------------
+
    This file is part of OpenEnergyMonitor.org project.
    EmonESP is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,7 +36,7 @@ const byte DNS_PORT = 53;
 
 // Access Point SSID, password & IP address. SSID will be softAP_ssid + chipID to make SSID unique
 const char *softAP_ssid = "emonESP";
-const char *softAP_password = "";
+const char* softAP_password = "";
 IPAddress apIP(192, 168, 4, 1);
 IPAddress netMsk(255, 255, 255, 0);
 int apClients = 0;
@@ -46,9 +50,6 @@ bool startAPonWifiDisconnect = true;
 
 // hostname for mDNS. Should work at least on windows. Try http://emonesp.local
 const char *esp_hostname = "emonesp";
-const char* password = "";
-bool isConnected = false;
-bool initialConfig = false;
 
 #ifdef WIFI_LED
 int wifiLedState = !WIFI_LED_ON_STATE;
@@ -299,7 +300,56 @@ void wifi_onStationModeDisconnected(const WiFiEventStationModeDisconnected &even
 
 #endif
 
+void wifi_setup() {
 
+#ifdef WIFI_LED
+  pinMode(WIFI_LED, OUTPUT);
+  digitalWrite(WIFI_LED, wifiLedState);
+#endif
+
+  randomSeed(analogRead(0));
+
+  // If we have an SSID configured at this point we have likely
+  // been running another firmware, clear the results
+  /*
+    if(wifi_is_client_configured()) {
+      WiFi.persistent(true);
+
+      #ifdef ESP32
+      WiFi.disconnect(false,true);
+      #else
+      WiFi.disconnect();
+      ESP.eraseConfig();
+      #endif
+    }
+
+    // Stop the WiFi module
+    WiFi.persistent(false);
+    WiFi.mode(WIFI_OFF);
+  */
+#ifdef ESP32
+  WiFi.onEvent(WiFiEvent);
+
+#else
+  static auto _onStationModeConnected = WiFi.onStationModeConnected([](const WiFiEventStationModeConnected & event) {
+    DBUGF("Connected to %s", event.ssid.c_str());
+  });
+  static auto _onStationModeGotIP = WiFi.onStationModeGotIP(wifi_onStationModeGotIP);
+  static auto _onStationModeDisconnected = WiFi.onStationModeDisconnected(wifi_onStationModeDisconnected);
+  static auto _onSoftAPModeStationConnected = WiFi.onSoftAPModeStationConnected([](const WiFiEventSoftAPModeStationConnected & event) {
+    apClients++;
+  });
+  static auto _onSoftAPModeStationDisconnected = WiFi.onSoftAPModeStationDisconnected([](const WiFiEventSoftAPModeStationDisconnected & event) {
+    apClients--;
+  });
+#endif
+
+  wifi_start();
+
+  if (MDNS.begin(esp_hostname)) {
+    MDNS.addService("http", "tcp", 80);
+  }
+}
 
 void wifi_loop()
 {
@@ -482,121 +532,3 @@ bool wifi_client_connected()
 {
   return WiFi.isConnected() && (WIFI_STA == (WiFi.getMode() & WIFI_STA));
 }
-void wifi_setup() 
-{
-  unsigned long startedAt = millis();
-
-  //Local intialization. Once its business is done, there is no need to keep it around
-  // Use this to default DHCP hostname to ESP8266-XXXXXX or ESP32-XXXXXX
-  //ESP_WiFiManager ESP_wifiManager;
-  // Use this to personalize DHCP hostname (RFC952 conformed)
-  ESP_WiFiManager ESP_wifiManager(esp_hostname);
-  
-  ESP_wifiManager.setMinimumSignalQuality(-1);
-  // Set static IP, Gateway, Subnetmask, DNS1 and DNS2. New in v1.0.5
-  ESP_wifiManager.setRemoveDuplicateAPs(true);
-
-  // We can't use WiFi.SSID() in ESP32as it's only valid after connected. 
-  // SSID and Password stored in ESP32 wifi_ap_record_t and wifi_config_t are also cleared in reboot
-  // Have to create a new function to store in EEPROM/SPIFFS for this purpose
-  esid = ESP_wifiManager.WiFi_SSID();
-  epass = ESP_wifiManager.WiFi_Pass();
-  
-  //Remove this line if you do not want to see WiFi password printed
-  DBUGS.println("Stored: SSID = " + esid + ", Pass = " + epass);
-
-  // SSID to uppercase 
-  ssid.toUpperCase();
-  
-  if (esid == "")
-  {
-    DBUGS.println("We haven't got any access point credentials, so get them now");   
-     
-    
-    //it starts an access point 
-    //and goes into a blocking loop awaiting configuration
-    if (!ESP_wifiManager.startConfigPortal(ssid.c_str(), password)) {
-      DBUGS.println("Not connected to WiFi but continuing anyway.");
-      isConnected = false;
-    } 
-    else {
-      DBUGS.println("WiFi connected...yeey :)");
-      isConnected = true;    
-    }
-  }
-
-  
-  #define WIFI_CONNECT_TIMEOUT        30000L
-  #define WHILE_LOOP_DELAY            200L
-  #define WHILE_LOOP_STEPS            (WIFI_CONNECT_TIMEOUT / ( 3 * WHILE_LOOP_DELAY ))
-  
-  startedAt = millis();
-  
-  while ( (WiFi.status() != WL_CONNECTED) && (millis() - startedAt < WIFI_CONNECT_TIMEOUT ) )
-  {   
-    WiFi.mode(WIFI_STA);
-    WiFi.persistent (true);
-    // We start by connecting to a WiFi network
-  
-    DBUGS.println("Connecting to " + esid);
-    
-  
-    WiFi.begin(esid.c_str(), epass.c_str());
-
-    int i = 0;
-    while((!WiFi.status() || WiFi.status() >= WL_DISCONNECTED) && i++ < WHILE_LOOP_STEPS)
-    {
-      delay(WHILE_LOOP_DELAY);
-    }    
-  }
-
-  DBUGS.println("After waiting ");
-  DBUGS.println((millis()- startedAt) / 1000);
-  DBUGS.println(" secs more in setup(), connection result is ");
-
-  if (WiFi.status() == WL_CONNECTED)
-  {
-    DBUGS.println("connected. Local IP: ");
-    DBUGS.println(WiFi.localIP());
-    ipaddress = (WiFi.localIP()).toString();
-    isConnected = true;
-  }
-  else
-    DBUGS.println(ESP_wifiManager.getStatus(WiFi.status()));
-    isConnected = false;
-
-}
-
-void heartBeatPrint(void)
-{
-  static int num = 1;
-
-  if (WiFi.status() == WL_CONNECTED)
-    DBUGS.print("H");        // H means connected to WiFi
-  else
-    DBUGS.print("F");        // F means not connected to WiFi
-  
-  if (num == 80) 
-  {
-    DBUGS.println();
-    num = 1;
-  }
-  else if (num++ % 10 == 0) 
-  {
-    DBUGS.print(" ");
-  }
-} 
-
-void check_status()
-{
-  static ulong checkstatus_timeout = 0;
-
-  #define HEARTBEAT_INTERVAL    10000L
-  // Print hearbeat every HEARTBEAT_INTERVAL (10) seconds.
-  if ((millis() > checkstatus_timeout) || (checkstatus_timeout == 0))
-  {
-    heartBeatPrint();
-    checkstatus_timeout = millis() + HEARTBEAT_INTERVAL;
-  }
-}
-

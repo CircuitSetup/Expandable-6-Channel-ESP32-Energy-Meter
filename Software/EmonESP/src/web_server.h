@@ -32,22 +32,21 @@
 #include <Arduino.h>
 #ifdef ESP32
 #include <SPIFFS.h>
-#include "wifi_new.h"
+#include <WiFi.h>
 #include <AsyncTCP.h>  //https://github.com/me-no-dev/AsyncTCP
-#include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
+#elif defined(ESP8266)
+#include <Hash.h>
+#include <ESP8266WiFi.h>
+#include <ESPAsyncTCP.h>
 #endif
+#include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
+
 
 extern AsyncWebServer server;
 extern AsyncWebSocket ws;
 extern String currentfirmware;
 
-
 extern void web_server_setup();
 extern void web_server_loop();
-extern void wifi_restart();
-extern String ipaddress;
-extern String st;
-extern const char* esp_hostname;
-extern String rssi;
 
 #endif // _EMONESP_WEB_SERVER_H

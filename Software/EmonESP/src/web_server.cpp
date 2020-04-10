@@ -25,33 +25,22 @@
    Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 */
-#ifndef _WEB_SERVER_H
-#define _WEB_SERVER_H
 
 #include "emonesp.h"
 #include "energy_meter.h"
 #include "web_server.h"
 #include "config.h"
+#include "wifi_new.h"
 #include "mqtt.h"
 #include "input.h"
 #include "emoncms.h"
 #include "ota.h"
 #include "debug.h"
 
-extern bool wifi_mode_is_ap_only();
-extern bool wifi_mode_is_sta();
-extern bool wifi_mode_is_sta_only();
-extern bool wifi_mode_is_ap();
-
-#endif
 AsyncWebServer server(80);          //Create class for Web server
 AsyncWebSocket ws("/ws");
 
 bool enableCors = true;
-extern bool wifi_mode_is_ap_only();
-extern bool wifi_mode_is_sta();
-extern bool wifi_mode_is_sta_only();
-extern bool wifi_mode_is_ap();
 
 // Event timeouts
 unsigned long wifiRestartTime = 0;
@@ -64,7 +53,7 @@ static const char _DUMMY_PASSWORD[] PROGMEM = "_DUMMY_PASSWORD";
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)
-String currentfirmware = "2.5.7"; //ESCAPEQUOTE(BUILD_TAG);
+String currentfirmware = "2.5.4"; //ESCAPEQUOTE(BUILD_TAG);
 
 void dumpRequest(AsyncWebServerRequest *request) {
   if (request->method() == HTTP_GET) {
@@ -335,7 +324,7 @@ void handleSaveCal(AsyncWebServerRequest *request) {
                   request->arg("gain"));
 
   char tmpStr[200];
-  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s %s %s %s %s %s", voltage_cal.c_str(), voltage2_cal.c_str(),
+  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", voltage_cal.c_str(), voltage2_cal.c_str(),
            ct1_cal.c_str(), ct2_cal.c_str(), ct3_cal.c_str(), ct4_cal.c_str(), ct5_cal.c_str(), ct6_cal.c_str(), 
            freq_cal.c_str(), gain_cal.c_str());
   DBUGLN(tmpStr);
@@ -620,6 +609,33 @@ void handleUpdate(AsyncWebServerRequest *request) {
   DBUGLN("UPDATING...");
   delay(500);
 
+  //will not work with ESP32 Update.h
+#ifdef ESP8266
+  t_httpUpdate_return ret = ota_http_update();
+
+  int retCode = 400;
+  String str = "Error";
+  switch (ret) {
+    case HTTP_UPDATE_FAILED:
+      str = "Update failed error (";
+      str += ESPhttpUpdate.getLastError();
+      str += "): ";
+      str += ESPhttpUpdate.getLastErrorString();
+      break;
+    case HTTP_UPDATE_NO_UPDATES:
+      str = "No update, running latest firmware";
+      break;
+    case HTTP_UPDATE_OK:
+      retCode = 200;
+      str = "Update done!";
+      break;
+  }
+  response->setCode(retCode);
+  response->print(str);
+  request->send(response);
+
+  DBUGLN(str);
+#endif
 }
 
 // -------------------------------------------------------------------
@@ -658,6 +674,13 @@ void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t 
     // if filename includes spiffs, update the spiffs partition
     int cmd = (filename.indexOf("spiffs") > 0) ? U_SPIFFS : U_FLASH;
     if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
+#ifdef ENABLE_DEBUG
+      Update.printError(DEBUG_PORT);
+#endif
+    }
+#elif defined(ESP8266)
+    Update.runAsync(true);
+    if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
 #ifdef ENABLE_DEBUG
       Update.printError(DEBUG_PORT);
 #endif
@@ -765,7 +788,7 @@ void web_server_loop() {
   if (wifiRestartTime > 0 && millis() > wifiRestartTime) {
     wifiRestartTime = 0;
     wifi_restart();
-    }
+  }
 
   // Do we need to restart MQTT?
   if (mqttRestartTime > 0 && millis() > mqttRestartTime) {
@@ -776,7 +799,7 @@ void web_server_loop() {
   // Do we need to restart the system?
   if (systemRestartTime > 0 && millis() > systemRestartTime) {
     systemRestartTime = 0;
-    WiFi.disconnect();
+    wifi_disconnect();
 #ifdef ESP32
     esp_restart();
 #else
@@ -787,7 +810,7 @@ void web_server_loop() {
   // Do we need to reboot the system?
   if (systemRebootTime > 0 && millis() > systemRebootTime) {
     systemRebootTime = 0;
-    WiFi.disconnect();
+    wifi_disconnect();
 #ifdef ESP32
     esp_restart();
 #else

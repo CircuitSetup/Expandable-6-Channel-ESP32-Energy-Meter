@@ -1,46 +1,46 @@
+/*
+   -------------------------------------------------------------------
+   EmonESP Serial to Emoncms gateway
+   -------------------------------------------------------------------
+   Adaptation of Chris Howells OpenEVSE ESP Wifi
+   by Trystan Lea, Glyn Hudson, OpenEnergyMonitor
+
+   Modified to use with the CircuitSetup.us Split Phase Energy Meter by jdeglavina
+
+   All adaptation GNU General Public License as below.
+
+   -------------------------------------------------------------------
+
+   This file is part of OpenEnergyMonitor.org project.
+   EmonESP is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3, or (at your option)
+   any later version.
+   EmonESP is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with EmonESP; see the file COPYING.  If not, write to the
+   Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+*/
+
 #ifndef _EMONESP_WIFI_H
 #define _EMONESP_WIFI_H
+
 #include <Arduino.h>
+
 #ifdef ESP32
-  #include <esp_wifi.h>
-  #include <WiFi.h>
-  #include <WiFiClient.h>
-
-  #define ESP_getChipId()   ((uint32_t)ESP.getEfuseMac())
-
-  #define LED_ON      HIGH
-  #define LED_OFF     LOW  
+#include <WiFi.h>
+#include <ESPmDNS.h>              // Resolve URL for update server etc.
+#elif defined(ESP8266)
+#include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>              // Resolve URL for update server etc.
 #endif
-extern String esid;
-extern String epass;
-extern String ipaddress;
-// mDNS hostname
-extern const char *esp_hostname;
-// SSID and PW for Config Portal
-// String ssid = "ESP_" + String(ESP_getChipId(), HEX);
-extern const char* password;
-extern bool isConnected;
-extern String ssid;
 
-
-// Use false if you don't like to display Available Pages in Information Page of Config Portal
-// Comment out or use true to display Available Pages in Information Page of Config Portal
-// Must be placed before #include <ESP_WiFiManager.h> 
-#define USE_AVAILABLE_PAGES     false
-
-#include <ESP_WiFiManager.h>              //https://github.com/khoih-prog/ESP_WiFiManager
-
-// Indicates whether ESP has WiFi credentials saved from previous session
-extern bool initialConfig;
-
-
-
-// Last discovered WiFi access points
-extern String st;
-extern String rssi;
-
-// Network state
-extern String ipaddress;
+//was causing ESP to crash in AP mode
+//#include <DNSServer.h>                // Required for captive portal
 
 #ifndef WIFI_LED
 #define WIFI_LED 2
@@ -96,6 +96,17 @@ extern String ipaddress;
 #define WIFI_CLIENT_RETRY_TIMEOUT           (5 * 60 * 1000) //5 min
 #endif
 
+
+// Last discovered WiFi access points
+extern String st;
+extern String rssi;
+
+// Network state
+extern String ipaddress;
+
+// mDNS hostname
+extern const char *esp_hostname;
+
 extern void wifi_setup();
 extern void wifi_loop();
 extern void wifi_scan();
@@ -109,17 +120,14 @@ extern bool wifi_client_connected();
 
 #define wifi_is_client_configured()   (WiFi.SSID() != "")
 
-
 // Wifi mode
-bool wifi_mode_is_sta(){if((WiFi.getMode() & WIFI_STA) == WIFI_STA){return true;}return false;}         
-bool wifi_mode_is_sta_only(){if(WiFi.getMode() == WIFI_STA){return true;}return false;}//       (WiFi.getMode() == WIFI_STA)
-bool wifi_mode_is_ap(){if((WiFi.getMode() & WIFI_AP) == WIFI_AP){return true;}return false;}//             ((WiFi.getMode() & WIFI_AP) == WIFI_AP)
+#define wifi_mode_is_sta()            (WIFI_STA == (WiFi.getMode() & WIFI_STA))
+#define wifi_mode_is_sta_only()       (WIFI_STA == WiFi.getMode())
+#define wifi_mode_is_ap()             (WIFI_AP == (WiFi.getMode() & WIFI_AP))
 
 // Performing a scan enables STA so we end up in AP+STA mode so treat AP+STA with no
 // ssid set as AP only
-bool wifi_mode_is_ap_only(){if((WiFi.getMode() == WIFI_AP) || (WiFi.getMode() && !wifi_is_client_configured() == WIFI_AP_STA)){return true;}return false;}// ((WiFi.getMode() == WIFI_AP) || (WiFi.getMode() && !wifi_is_client_configured()) == WIFI_AP_STA))
+#define wifi_mode_is_ap_only()        ((WIFI_AP == WiFi.getMode()) || \
+                                       (WIFI_AP_STA == WiFi.getMode() && !wifi_is_client_configured()))
 
-// }        ((WiFi.getMode() == WIFI_AP) || 
-//                                        (WiFi.getMode() && !wifi_is_client_configured() == WIFI_AP_STA))
-
-#endif // _EMONESP_WIFI_NEW_H
+#endif // _EMONESP_WIFI_H
