@@ -184,9 +184,11 @@ void WiFiEvent(WiFiEvent_t event)
       break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
       DBUGS.println("Disconnected from WiFi access point");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_AUTHMODE_CHANGE:
       DBUGS.println("Authentication mode of access point has changed");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_GOT_IP: {
         IPAddress myAddress = WiFi.localIP();
@@ -206,15 +208,18 @@ void WiFiEvent(WiFiEvent_t event)
       break;
     case SYSTEM_EVENT_STA_LOST_IP:
       DBUGS.println("Lost IP address and IP address is reset to 0");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_SUCCESS:
       DBUGS.println("WiFi Protected Setup (WPS): succeeded in enrollee mode");
       break;
     case SYSTEM_EVENT_STA_WPS_ER_FAILED:
       DBUGS.println("WiFi Protected Setup (WPS): failed in enrollee mode");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_TIMEOUT:
       DBUGS.println("WiFi Protected Setup (WPS): timeout in enrollee mode");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_PIN:
       DBUGS.println("WiFi Protected Setup (WPS): pin code in enrollee mode");
@@ -242,60 +247,6 @@ void WiFiEvent(WiFiEvent_t event)
     default:
       break;
   }
-}
-
-#else //ESP8266
-void wifi_onStationModeGotIP(const WiFiEventStationModeGotIP &event)
-{
-  IPAddress myAddress = WiFi.localIP();
-  char tmpStr[40];
-  sprintf(tmpStr, "%d.%d.%d.%d", myAddress[0], myAddress[1], myAddress[2], myAddress[3]);
-  ipaddress = tmpStr;
-  DBUGS.print("Connected, IP: ");
-  DBUGS.println(tmpStr);
-
-  // Copy the connected network and ipaddress to global strings for use in status request
-  connected_network = esid;
-
-  // Clear any error state
-  client_disconnects = 0;
-  client_retry = false;
-}
-
-void wifi_onStationModeDisconnected(const WiFiEventStationModeDisconnected &event)
-{
-  DBUGF("WiFi disconnected: %s",
-        WIFI_DISCONNECT_REASON_UNSPECIFIED == event.reason ? "WIFI_DISCONNECT_REASON_UNSPECIFIED" :
-        WIFI_DISCONNECT_REASON_AUTH_EXPIRE == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_EXPIRE" :
-        WIFI_DISCONNECT_REASON_AUTH_LEAVE == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_LEAVE" :
-        WIFI_DISCONNECT_REASON_ASSOC_EXPIRE == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_EXPIRE" :
-        WIFI_DISCONNECT_REASON_ASSOC_TOOMANY == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_TOOMANY" :
-        WIFI_DISCONNECT_REASON_NOT_AUTHED == event.reason ? "WIFI_DISCONNECT_REASON_NOT_AUTHED" :
-        WIFI_DISCONNECT_REASON_NOT_ASSOCED == event.reason ? "WIFI_DISCONNECT_REASON_NOT_ASSOCED" :
-        WIFI_DISCONNECT_REASON_ASSOC_LEAVE == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_LEAVE" :
-        WIFI_DISCONNECT_REASON_ASSOC_NOT_AUTHED == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_NOT_AUTHED" :
-        WIFI_DISCONNECT_REASON_DISASSOC_PWRCAP_BAD == event.reason ? "WIFI_DISCONNECT_REASON_DISASSOC_PWRCAP_BAD" :
-        WIFI_DISCONNECT_REASON_DISASSOC_SUPCHAN_BAD == event.reason ? "WIFI_DISCONNECT_REASON_DISASSOC_SUPCHAN_BAD" :
-        WIFI_DISCONNECT_REASON_IE_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_IE_INVALID" :
-        WIFI_DISCONNECT_REASON_MIC_FAILURE == event.reason ? "WIFI_DISCONNECT_REASON_MIC_FAILURE" :
-        WIFI_DISCONNECT_REASON_4WAY_HANDSHAKE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_4WAY_HANDSHAKE_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_GROUP_KEY_UPDATE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_GROUP_KEY_UPDATE_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_IE_IN_4WAY_DIFFERS == event.reason ? "WIFI_DISCONNECT_REASON_IE_IN_4WAY_DIFFERS" :
-        WIFI_DISCONNECT_REASON_GROUP_CIPHER_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_GROUP_CIPHER_INVALID" :
-        WIFI_DISCONNECT_REASON_PAIRWISE_CIPHER_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_PAIRWISE_CIPHER_INVALID" :
-        WIFI_DISCONNECT_REASON_AKMP_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_AKMP_INVALID" :
-        WIFI_DISCONNECT_REASON_UNSUPP_RSN_IE_VERSION == event.reason ? "WIFI_DISCONNECT_REASON_UNSUPP_RSN_IE_VERSION" :
-        WIFI_DISCONNECT_REASON_INVALID_RSN_IE_CAP == event.reason ? "WIFI_DISCONNECT_REASON_INVALID_RSN_IE_CAP" :
-        WIFI_DISCONNECT_REASON_802_1X_AUTH_FAILED == event.reason ? "WIFI_DISCONNECT_REASON_802_1X_AUTH_FAILED" :
-        WIFI_DISCONNECT_REASON_CIPHER_SUITE_REJECTED == event.reason ? "WIFI_DISCONNECT_REASON_CIPHER_SUITE_REJECTED" :
-        WIFI_DISCONNECT_REASON_BEACON_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_BEACON_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_NO_AP_FOUND == event.reason ? "WIFI_DISCONNECT_REASON_NO_AP_FOUND" :
-        WIFI_DISCONNECT_REASON_AUTH_FAIL == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_FAIL" :
-        WIFI_DISCONNECT_REASON_ASSOC_FAIL == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_FAIL" :
-        WIFI_DISCONNECT_REASON_HANDSHAKE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_HANDSHAKE_TIMEOUT" :
-        "UNKNOWN");
-
-  client_disconnects++;
 }
 
 #endif
@@ -330,18 +281,7 @@ void wifi_setup() {
 #ifdef ESP32
   WiFi.onEvent(WiFiEvent);
 
-#else
-  static auto _onStationModeConnected = WiFi.onStationModeConnected([](const WiFiEventStationModeConnected & event) {
-    DBUGF("Connected to %s", event.ssid.c_str());
-  });
-  static auto _onStationModeGotIP = WiFi.onStationModeGotIP(wifi_onStationModeGotIP);
-  static auto _onStationModeDisconnected = WiFi.onStationModeDisconnected(wifi_onStationModeDisconnected);
-  static auto _onSoftAPModeStationConnected = WiFi.onSoftAPModeStationConnected([](const WiFiEventSoftAPModeStationConnected & event) {
-    apClients++;
-  });
-  static auto _onSoftAPModeStationDisconnected = WiFi.onSoftAPModeStationDisconnected([](const WiFiEventSoftAPModeStationDisconnected & event) {
-    apClients--;
-  });
+
 #endif
 
   wifi_start();
@@ -357,6 +297,7 @@ void wifi_loop()
   bool isClientOnly = wifi_mode_is_sta_only();
   bool isAp = wifi_mode_is_ap();
   bool isApOnly = wifi_mode_is_ap_only();
+
 
   // flash the LED according to what state wifi is in
   // if AP mode & disconnected - blink every 2 seconds

@@ -324,7 +324,7 @@ void handleSaveCal(AsyncWebServerRequest *request) {
                   request->arg("gain"));
 
   char tmpStr[200];
-  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", voltage_cal.c_str(), voltage2_cal.c_str(),
+  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s %s %s %s %s %s", voltage_cal.c_str(), voltage2_cal.c_str(),
            ct1_cal.c_str(), ct2_cal.c_str(), ct3_cal.c_str(), ct4_cal.c_str(), ct5_cal.c_str(), ct6_cal.c_str(), 
            freq_cal.c_str(), gain_cal.c_str());
   DBUGLN(tmpStr);

@@ -43,17 +43,9 @@
 #include "emoncms.h"
 #include "mqtt.h"
 
-
 #ifdef ENABLE_ENERGY_METER
 #include "energy_meter.h"
 #endif
-
-// #ifndef WIFI_LED
-// #define WIFI_LED 4
-// #endif
-
-extern void wifi_setup();
-extern void check_status();
 
 // -------------------------------------------------------------------
 // SETUP
@@ -78,6 +70,11 @@ void setup() {
   web_server_setup();
   delay(500);
 
+#ifdef ESP8266
+  // Start the OTA update systems
+  ota_setup();
+#endif
+
 #ifdef ENABLE_ENERGY_METER
   energy_meter_setup();
 #endif
@@ -91,8 +88,8 @@ void setup() {
 // -------------------------------------------------------------------
 void loop()
 {
-  
   web_server_loop();
+  wifi_loop();
 
 
 #ifdef ENABLE_ENERGY_METER
@@ -105,7 +102,7 @@ void loop()
     DBUGS.println(".");
   }
 
-  if (WiFi.status() == WL_CONNECTED) {
+  if (wifi_client_connected()) {
     if (emoncms_apikey != 0 && gotInput) {
       DBUGS.println(input);
       emoncms_publish(input);
@@ -117,7 +114,5 @@ void loop()
       }
     }
   }
- 
 
-  }
-
+} // end loop
