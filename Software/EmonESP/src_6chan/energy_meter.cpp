@@ -57,7 +57,6 @@ const int period = 1000; //time interval in ms to send data
 const int CS1[NUM_BOARDS] = { 5, 0, 27, 2, 13, 14, 15 };
 const int CS2[NUM_BOARDS] = { 4, 16, 17, 21, 22, 25, 26 };
 
-char result[2000];
 char measurement[16];
 
 /* Initialize ATM90E32 library for each IC */
@@ -103,6 +102,8 @@ void energy_meter_setup() {
 void energy_meter_loop()
 {
   int i, j;
+
+  char * result = input_string;
 
   /*get the current "time" (actually the number of milliseconds since the program started)*/
   currentMillis = millis();
@@ -262,6 +263,4 @@ void energy_meter_loop()
   */
   display.display();
 #endif
-
-  input_string = result;
 }

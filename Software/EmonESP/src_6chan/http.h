@@ -39,12 +39,12 @@
 // HTTPS SECURE GET Request
 // url: N/A
 // -------------------------------------------------------------------
-extern String get_https(const char* fingerprint, const char* host, String url, int httpsPort);
+extern String get_https(const char* fingerprint, const char* host, const char * url, int httpsPort);
 
 // -------------------------------------------------------------------
 // HTTP GET Request
 // url: N/A
 // -------------------------------------------------------------------
-extern String get_http(const char* host, String url);
+extern String get_http(const char* host, const char * url);
 
 #endif // _EMONESP_HTTP_H

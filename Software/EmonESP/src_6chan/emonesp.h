@@ -35,4 +35,6 @@
 
 #include "debug.h"
 
+#define MAX_DATA_LEN 4096
+
 #endif // _EMONESP_H

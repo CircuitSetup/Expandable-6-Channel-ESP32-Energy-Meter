@@ -43,13 +43,15 @@
 WiFiClientSecure client;        // Create class for HTTPS TCP connections get_https()
 HTTPClient http;                // Create class for HTTP TCP connections get_http()
 
+static char request[MAX_DATA_LEN+100];
+
 // -------------------------------------------------------------------
 // HTTPS SECURE GET Request
 // url: N/A
 // -------------------------------------------------------------------
 
 String
-get_https(const char *fingerprint, const char *host, String url,
+get_https(const char *fingerprint, const char *host, const char *url,
           int httpsPort) {
   // Use WiFiClient class to create TCP connections
   if (!client.connect(host, httpsPort)) {
@@ -60,8 +62,8 @@ get_https(const char *fingerprint, const char *host, String url,
 #warning HTTPS verification not enabled
   if (client.verify(fingerprint, host)) {
 #endif
-    client.print(String("GET ") + url + " HTTP/1.1\r\n" + "Host: " + host +
-                 "\r\n" + "Connection: close\r\n\r\n");
+    sprintf(request, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
+    client.print(request);
     // Handle wait for reply and timeout
     unsigned long timeout = millis();
     while (client.available() == 0) {
@@ -91,8 +93,9 @@ get_https(const char *fingerprint, const char *host, String url,
 // url: N/A
 // -------------------------------------------------------------------
 String
-get_http(const char *host, String url) {
-  http.begin(String("http://") + host + String(url));
+get_http(const char *host, const char *url) {
+  sprintf(request, "http://%s%s", host, url);
+  http.begin(request);
   int httpCode = http.GET();
   if ((httpCode > 0) && (httpCode == HTTP_CODE_OK)) {
     String payload = http.getString();

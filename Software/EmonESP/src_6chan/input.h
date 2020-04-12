@@ -35,8 +35,8 @@
 // Support for reading input
 // -------------------------------------------------------------------
 
-extern String last_datastr;
-extern String input_string;
+extern char last_datastr[MAX_DATA_LEN];
+extern char input_string[MAX_DATA_LEN];
 
 // -------------------------------------------------------------------
 // Read input sent via the web_server or serial.
@@ -44,6 +44,6 @@ extern String input_string;
 // data: if true is returned data will be updated with the new line of
 //       input
 // -------------------------------------------------------------------
-extern boolean input_get(String& data);
+extern boolean input_get(char * data);
 
 #endif // _EMONESP_INPUT_H

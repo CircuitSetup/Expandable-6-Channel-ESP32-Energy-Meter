@@ -65,8 +65,7 @@ void ota_loop()
 String ota_get_latest_version()
 {
   // Get latest firmware version number
-  String url = u_url;
-  return get_http(u_host, url);
+  return get_http(u_host, u_url);
 }
 
 #ifdef ESP8266

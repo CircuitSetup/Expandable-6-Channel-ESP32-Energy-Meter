@@ -47,6 +47,8 @@
 #include "energy_meter.h"
 #endif
 
+static char input[MAX_DATA_LEN];
+
 // -------------------------------------------------------------------
 // SETUP
 // -------------------------------------------------------------------
@@ -99,7 +101,6 @@ void loop()
   energy_meter_loop();
 #endif
 
-  String input = "";
   boolean gotInput = input_get(input);
   if (gotInput) {
     DBUGS.println(".");

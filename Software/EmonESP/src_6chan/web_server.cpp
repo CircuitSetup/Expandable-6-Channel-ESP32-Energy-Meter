@@ -533,7 +533,7 @@ void handleInput(AsyncWebServerRequest *request) {
     return;
   }
 
-  input_string = request->arg("string");
+  strcpy(input_string, request->arg("string").c_str());
 
   response->setCode(200);
   response->print(input_string);
