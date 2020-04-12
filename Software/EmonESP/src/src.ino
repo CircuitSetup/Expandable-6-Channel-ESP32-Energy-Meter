@@ -36,7 +36,7 @@
 
 #include "emonesp.h"
 #include "config.h"
-#include "wifi_local.h"
+#include "wifi_new.h"
 #include "web_server.h"
 #include "ota.h"
 #include "input.h"
@@ -69,6 +69,11 @@ void setup() {
   // Bring up the web server
   web_server_setup();
   delay(500);
+
+#ifdef ESP8266
+  // Start the OTA update systems
+  ota_setup();
+#endif
 
 #ifdef ENABLE_ENERGY_METER
   energy_meter_setup();

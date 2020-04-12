@@ -26,7 +26,7 @@
    Boston, MA 02111-1307, USA.
 */
 #include "emonesp.h"
-#include "wifi_local.h"
+#include "wifi_new.h"
 #include "config.h"
 
 /*
@@ -34,16 +34,9 @@ DNSServer dnsServer;                  // Create class DNS server, captive portal
 const byte DNS_PORT = 53;
 */
 
-//Define some Vars to stop annoying errors
-
-bool isClient;
-  bool isClientOnly;
-  bool isAp;
-  bool isApOnly;
-
 // Access Point SSID, password & IP address. SSID will be softAP_ssid + chipID to make SSID unique
 const char *softAP_ssid = "emonESP";
-const char *softAP_password = "";
+const char* softAP_password = "";
 IPAddress apIP(192, 168, 4, 1);
 IPAddress netMsk(255, 255, 255, 0);
 int apClients = 0;
@@ -167,7 +160,7 @@ static void wifi_start()
   }
 }
 
-
+#ifdef ESP32
 
 void WiFiEvent(WiFiEvent_t event)
 {
@@ -191,9 +184,11 @@ void WiFiEvent(WiFiEvent_t event)
       break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
       DBUGS.println("Disconnected from WiFi access point");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_AUTHMODE_CHANGE:
       DBUGS.println("Authentication mode of access point has changed");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_GOT_IP: {
         IPAddress myAddress = WiFi.localIP();
@@ -213,15 +208,18 @@ void WiFiEvent(WiFiEvent_t event)
       break;
     case SYSTEM_EVENT_STA_LOST_IP:
       DBUGS.println("Lost IP address and IP address is reset to 0");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_SUCCESS:
       DBUGS.println("WiFi Protected Setup (WPS): succeeded in enrollee mode");
       break;
     case SYSTEM_EVENT_STA_WPS_ER_FAILED:
       DBUGS.println("WiFi Protected Setup (WPS): failed in enrollee mode");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_TIMEOUT:
       DBUGS.println("WiFi Protected Setup (WPS): timeout in enrollee mode");
+      wifi_restart();
       break;
     case SYSTEM_EVENT_STA_WPS_ER_PIN:
       DBUGS.println("WiFi Protected Setup (WPS): pin code in enrollee mode");
@@ -250,6 +248,8 @@ void WiFiEvent(WiFiEvent_t event)
       break;
   }
 }
+
+#endif
 
 void wifi_setup() {
 
@@ -281,18 +281,7 @@ void wifi_setup() {
 #ifdef ESP32
   WiFi.onEvent(WiFiEvent);
 
-#else
-  static auto _onStationModeConnected = WiFi.onStationModeConnected([](const WiFiEventStationModeConnected & event) {
-    DBUGF("Connected to %s", event.ssid.c_str());
-  });
-  static auto _onStationModeGotIP = WiFi.onStationModeGotIP(wifi_onStationModeGotIP);
-  static auto _onStationModeDisconnected = WiFi.onStationModeDisconnected(wifi_onStationModeDisconnected);
-  static auto _onSoftAPModeStationConnected = WiFi.onSoftAPModeStationConnected([](const WiFiEventSoftAPModeStationConnected & event) {
-    apClients++;
-  });
-  static auto _onSoftAPModeStationDisconnected = WiFi.onSoftAPModeStationDisconnected([](const WiFiEventSoftAPModeStationDisconnected & event) {
-    apClients--;
-  });
+
 #endif
 
   wifi_start();
@@ -304,10 +293,11 @@ void wifi_setup() {
 
 void wifi_loop()
 {
-  isClient = wifi_mode_is_sta();
-  isClientOnly = wifi_mode_is_sta_only();
-  isAp = wifi_mode_is_ap();
-  isApOnly = wifi_mode_is_ap_only();
+  bool isClient = wifi_mode_is_sta();
+  bool isClientOnly = wifi_mode_is_sta_only();
+  bool isAp = wifi_mode_is_ap();
+  bool isApOnly = wifi_mode_is_ap_only();
+
 
   // flash the LED according to what state wifi is in
   // if AP mode & disconnected - blink every 2 seconds

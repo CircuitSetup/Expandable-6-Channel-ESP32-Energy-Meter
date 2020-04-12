@@ -30,7 +30,7 @@
 #include "energy_meter.h"
 #include "web_server.h"
 #include "config.h"
-#include "wifi_local.h"
+#include "wifi_new.h"
 #include "mqtt.h"
 #include "input.h"
 #include "emoncms.h"
@@ -53,7 +53,7 @@ static const char _DUMMY_PASSWORD[] PROGMEM = "_DUMMY_PASSWORD";
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)
-String currentfirmware = "2.5.7"; //ESCAPEQUOTE(BUILD_TAG);
+String currentfirmware = "2.5.4"; //ESCAPEQUOTE(BUILD_TAG);
 
 void dumpRequest(AsyncWebServerRequest *request) {
   if (request->method() == HTTP_GET) {
@@ -609,6 +609,33 @@ void handleUpdate(AsyncWebServerRequest *request) {
   DBUGLN("UPDATING...");
   delay(500);
 
+  //will not work with ESP32 Update.h
+#ifdef ESP8266
+  t_httpUpdate_return ret = ota_http_update();
+
+  int retCode = 400;
+  String str = "Error";
+  switch (ret) {
+    case HTTP_UPDATE_FAILED:
+      str = "Update failed error (";
+      str += ESPhttpUpdate.getLastError();
+      str += "): ";
+      str += ESPhttpUpdate.getLastErrorString();
+      break;
+    case HTTP_UPDATE_NO_UPDATES:
+      str = "No update, running latest firmware";
+      break;
+    case HTTP_UPDATE_OK:
+      retCode = 200;
+      str = "Update done!";
+      break;
+  }
+  response->setCode(retCode);
+  response->print(str);
+  request->send(response);
+
+  DBUGLN(str);
+#endif
 }
 
 // -------------------------------------------------------------------
@@ -647,6 +674,13 @@ void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t 
     // if filename includes spiffs, update the spiffs partition
     int cmd = (filename.indexOf("spiffs") > 0) ? U_SPIFFS : U_FLASH;
     if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
+#ifdef ENABLE_DEBUG
+      Update.printError(DEBUG_PORT);
+#endif
+    }
+#elif defined(ESP8266)
+    Update.runAsync(true);
+    if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
 #ifdef ENABLE_DEBUG
       Update.printError(DEBUG_PORT);
 #endif

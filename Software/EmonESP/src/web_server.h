@@ -32,10 +32,15 @@
 #include <Arduino.h>
 #ifdef ESP32
 #include <SPIFFS.h>
-#include "wifi_local.h"
+#include <WiFi.h>
 #include <AsyncTCP.h>  //https://github.com/me-no-dev/AsyncTCP
-#include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
+#elif defined(ESP8266)
+#include <Hash.h>
+#include <ESP8266WiFi.h>
+#include <ESPAsyncTCP.h>
 #endif
+#include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
+
 
 extern AsyncWebServer server;
 extern AsyncWebSocket ws;
