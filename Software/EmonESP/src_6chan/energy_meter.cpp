@@ -234,7 +234,7 @@ void energy_meter_loop()
       dtostrf(realPowerCT[j], 2, 2, measurement);
       strcat(result, measurement);
 
-      sprintf(result + strlen(result), ",AW%d:", i*NUM_INPUTS+j+1);
+      sprintf(result + strlen(result), ",VA%d:", i*NUM_INPUTS+j+1);
       dtostrf(vaPowerCT[j], 2, 2, measurement);
       strcat(result, measurement);
     }
