@@ -34,6 +34,9 @@
 // otherwise it seems to read garbage data.
 //#define USE_SERIAL_INPUT
 
+#define WDT_TIMEOUT_SEC 10
+
+#include <esp_task_wdt.h>
 #include "emonesp.h"
 #include "config.h"
 #include "wifi.h"
@@ -53,6 +56,10 @@ static char input[MAX_DATA_LEN];
 // SETUP
 // -------------------------------------------------------------------
 void setup() {
+#ifdef WDT_TIMEOUT_SEC
+  esp_task_wdt_init(WDT_TIMEOUT_SEC, true);
+  enableLoopWDT();
+#endif
 
   Serial.begin(115200);
 #ifdef DEBUG_SERIAL1
@@ -90,6 +97,9 @@ void setup() {
 // -------------------------------------------------------------------
 void loop()
 {
+#ifdef WDT_TIMEOUT_SEC
+  esp_task_wdt_reset();
+#endif
   web_server_loop();
   wifi_loop();
 
