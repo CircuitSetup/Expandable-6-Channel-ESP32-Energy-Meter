@@ -56,7 +56,7 @@ void emoncms_publish(const char * data)
   if (emoncms_fingerprint != 0) {
     // HTTPS on port 443 if HTTPS fingerprint is present
     DBUGS.println("HTTPS Enabled"); delay(10);
-    result = get_https(emoncms_fingerprint.c_str(), emoncms_server.c_str(), url, 443);
+    result = get_http(emoncms_server.c_str(), url, 443, emoncms_fingerprint.c_str());
   } else {
     // Plain HTTP if other emoncms server e.g EmonPi
     DBUGS.println("Plain old HTTP"); delay(10);
