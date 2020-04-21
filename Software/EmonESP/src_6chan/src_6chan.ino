@@ -34,8 +34,6 @@
 // otherwise it seems to read garbage data.
 //#define USE_SERIAL_INPUT
 
-#define WDT_TIMEOUT_SEC 10
-
 #include <esp_task_wdt.h>
 #include "emonesp.h"
 #include "config.h"
@@ -56,8 +54,7 @@ static char input[MAX_DATA_LEN];
 // SETUP
 // -------------------------------------------------------------------
 void setup() {
-#ifdef WDT_TIMEOUT_SEC
-  esp_task_wdt_init(WDT_TIMEOUT_SEC, true);
+#ifdef ENABLE_WDT
   enableLoopWDT();
 #endif
 
@@ -79,6 +76,11 @@ void setup() {
   web_server_setup();
   delay(500);
 
+#ifdef ENABLE_WDT
+  DBUGS.println("Watchdog timer is enabled.");
+  feedLoopWDT();
+#endif
+
 #ifdef ESP8266
   // Start the OTA update systems
   ota_setup();
@@ -97,8 +99,8 @@ void setup() {
 // -------------------------------------------------------------------
 void loop()
 {
-#ifdef WDT_TIMEOUT_SEC
-  esp_task_wdt_reset();
+#ifdef ENABLE_WDT
+  feedLoopWDT();
 #endif
   web_server_loop();
   wifi_loop();

@@ -71,6 +71,9 @@ get_http(const char * host, const char * url, int port, const char * fingerprint
         http->stop();
         return ("Client Timeout");
       }
+#ifdef ENABLE_WDT
+      feedLoopWDT();
+#endif
     }
     // Handle message receive
     while (http->available()) {

@@ -463,6 +463,9 @@ void wifi_loop()
         delay(WIFI_CLIENT_DISCONNECT_RETRY);
         wifi_restart();
       }
+#ifdef ENABLE_WDT
+      feedLoopWDT();
+#endif
     }
   }
 
