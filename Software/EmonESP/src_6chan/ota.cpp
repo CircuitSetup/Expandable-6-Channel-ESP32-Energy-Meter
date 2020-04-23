@@ -59,6 +59,9 @@ void ota_setup()
 
 void ota_loop()
 {
+#ifdef ENABLE_WDT
+  feedLoopWDT();
+#endif
   ArduinoOTA.handle();
 }
 
