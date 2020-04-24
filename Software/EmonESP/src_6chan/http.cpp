@@ -28,6 +28,8 @@
 #include "emonesp.h"
 #include "http.h"
 
+#define HTTP_TIMEOUT 3
+
 #include <Print.h>
 #include <WiFiClient.h>         // http GET request
 #include <WiFiClientSecure.h>   // Secure https GET request
@@ -54,10 +56,11 @@ get_http(const char * host, const char * url, int port, const char * fingerprint
   }
 
   // Use WiFiClient class to create TCP connections
-  if (!http->connect(host, port)) {
+  if (!http->connect(host, port, HTTP_TIMEOUT*1000)) {
     DBUGS.printf("%s:%d\n", host, port);      //debug
     return ("Connection error");
   }
+  http->setTimeout(HTTP_TIMEOUT);
 #ifndef ESP32
 #warning HTTPS verification not enabled
   if (!fingerprint || http->verify(fingerprint, host)) {
@@ -67,7 +70,7 @@ get_http(const char * host, const char * url, int port, const char * fingerprint
     // Handle wait for reply and timeout
     unsigned long timeout = millis();
     while (http->available() == 0) {
-      if (millis() - timeout > 5000) {
+      if (millis() - timeout > (HTTP_TIMEOUT*1000)) {
         http->stop();
         return ("Client Timeout");
       }
