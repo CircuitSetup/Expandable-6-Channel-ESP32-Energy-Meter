@@ -31,6 +31,8 @@
 #include "config.h"
 #include "wifi.h"
 
+#define MQTT_TIMEOUT 3
+
 WiFiClient espClient;                 // Create client for MQTT
 PubSubClient mqttclient(espClient);   // Create client for MQTT
 
@@ -47,9 +49,16 @@ static char mqtt_data[64] = "";
 // -------------------------------------------------------------------
 boolean mqtt_connect()
 {
-  mqttclient.setServer(mqtt_server.c_str(), 1883);
   DBUGS.println("MQTT Connecting...");
   DBUGS.println(mqttclient.state());
+
+  if (espClient.connect(mqtt_server.c_str(), 1883, MQTT_TIMEOUT * 1000) != 1)
+  {
+     DBUGS.println("MQTT connect timeout.");
+     return (0);
+  }
+
+  espClient.setTimeout(MQTT_TIMEOUT);
 
 #ifdef ESP32
   String strID = String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
@@ -112,18 +121,27 @@ void mqtt_publish(const char * data)
     // send data via mqtt
     //delay(100);
     //DBUGS.printf("%s = %s\r\n", mqtt_topic_prefix, mqtt_data);
-    mqttclient.publish(mqtt_topic_prefix, mqtt_data);
+    if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+    {
+      return;
+    }
   } while (*data_ptr++ != 0);
 
   // send esp free ram
   sprintf(mqtt_topic_prefix, "%s/%sfreeram", mqtt_topic, mqtt_feed_prefix);
   sprintf(mqtt_data, "%lu", ESP.getFreeHeap());
-  mqttclient.publish(mqtt_topic_prefix, mqtt_data);
+  if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+  {
+    return;
+  }
 
   // send wifi signal strength
   sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic, mqtt_feed_prefix);
   sprintf(mqtt_data, "%d", WiFi.RSSI());
-  mqttclient.publish(mqtt_topic_prefix, mqtt_data);
+  if(!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+  }
+    return;
+  }
 }
 
 // -------------------------------------------------------------------
