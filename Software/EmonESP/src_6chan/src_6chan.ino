@@ -34,6 +34,7 @@
 // otherwise it seems to read garbage data.
 //#define USE_SERIAL_INPUT
 
+#include <esp_task_wdt.h>
 #include "emonesp.h"
 #include "config.h"
 #include "wifi.h"
@@ -47,10 +48,15 @@
 #include "energy_meter.h"
 #endif
 
+static char input[MAX_DATA_LEN];
+
 // -------------------------------------------------------------------
 // SETUP
 // -------------------------------------------------------------------
 void setup() {
+#ifdef ENABLE_WDT
+  enableLoopWDT();
+#endif
 
   Serial.begin(115200);
 #ifdef DEBUG_SERIAL1
@@ -70,6 +76,11 @@ void setup() {
   web_server_setup();
   delay(500);
 
+#ifdef ENABLE_WDT
+  DBUGS.println("Watchdog timer is enabled.");
+  feedLoopWDT();
+#endif
+
 #ifdef ESP8266
   // Start the OTA update systems
   ota_setup();
@@ -79,7 +90,7 @@ void setup() {
   energy_meter_setup();
 #endif
 
-  DBUGS.println("Server started");
+  DBUGLN("Server started");
 
 } // end setup
 
@@ -88,6 +99,9 @@ void setup() {
 // -------------------------------------------------------------------
 void loop()
 {
+#ifdef ENABLE_WDT
+  feedLoopWDT();
+#endif
   web_server_loop();
   wifi_loop();
 
@@ -99,7 +113,6 @@ void loop()
   energy_meter_loop();
 #endif
 
-  String input = "";
   boolean gotInput = input_get(input);
   if (gotInput) {
     DBUGS.println(".");
@@ -107,7 +120,7 @@ void loop()
 
   if (wifi_client_connected()) {
     if (emoncms_apikey != 0 && gotInput) {
-      DBUGS.println(input);
+//      DBUGS.println(input);
       emoncms_publish(input);
     }
     if (mqtt_server != 0) {

@@ -28,51 +28,59 @@
 #include "emonesp.h"
 #include "http.h"
 
+#define HTTP_TIMEOUT 3
+
 #include <Print.h>
+#include <WiFiClient.h>         // http GET request
 #include <WiFiClientSecure.h>   // Secure https GET request
 
-#ifdef ESP32
-#include <HTTPClient.h>
-#elif defined(ESP8266)
-#include <ESP8266HTTPClient.h>
-#else
-#error Platform not supported
-#endif
 
+WiFiClient client;                  // Create class for HTTP TCP connections get_http()
+WiFiClientSecure client_ssl;        // Create class for HTTPS TCP connections get_https()
 
-WiFiClientSecure client;        // Create class for HTTPS TCP connections get_https()
-HTTPClient http;                // Create class for HTTP TCP connections get_http()
+static char request[MAX_DATA_LEN+100];
 
 // -------------------------------------------------------------------
-// HTTPS SECURE GET Request
+// HTTP or HTTPS GET Request
 // url: N/A
 // -------------------------------------------------------------------
 
 String
-get_https(const char *fingerprint, const char *host, String url,
-          int httpsPort) {
+get_http(const char * host, const char * url, int port, const char * fingerprint) {
+  WiFiClientSecure * http;
+
+  if (fingerprint) {
+    http = &client_ssl;
+  } else {
+    http = (WiFiClientSecure *) &client;
+  }
+
   // Use WiFiClient class to create TCP connections
-  if (!client.connect(host, httpsPort)) {
-    DBUGS.print(host + httpsPort);      //debug
+  if (!http->connect(host, port, HTTP_TIMEOUT*1000)) {
+    DBUGS.printf("%s:%d\n", host, port);      //debug
     return ("Connection error");
   }
+  http->setTimeout(HTTP_TIMEOUT);
 #ifndef ESP32
 #warning HTTPS verification not enabled
-  if (client.verify(fingerprint, host)) {
+  if (!fingerprint || http->verify(fingerprint, host)) {
 #endif
-    client.print(String("GET ") + url + " HTTP/1.1\r\n" + "Host: " + host +
-                 "\r\n" + "Connection: close\r\n\r\n");
+    sprintf(request, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
+    http->print(request);
     // Handle wait for reply and timeout
     unsigned long timeout = millis();
-    while (client.available() == 0) {
-      if (millis() - timeout > 5000) {
-        client.stop();
+    while (http->available() == 0) {
+      if (millis() - timeout > (HTTP_TIMEOUT*1000)) {
+        http->stop();
         return ("Client Timeout");
       }
+#ifdef ENABLE_WDT
+      feedLoopWDT();
+#endif
     }
     // Handle message receive
-    while (client.available()) {
-      String line = client.readStringUntil('\r');
+    while (http->available()) {
+      String line = http->readStringUntil('\r');
       DBUGS.println(line);      //debug
       if (line.startsWith("HTTP/1.1 200 OK")) {
         return ("ok");
@@ -86,21 +94,3 @@ get_https(const char *fingerprint, const char *host, String url,
   return ("error " + String(host));
 }
 
-// -------------------------------------------------------------------
-// HTTP GET Request
-// url: N/A
-// -------------------------------------------------------------------
-String
-get_http(const char *host, String url) {
-  http.begin(String("http://") + host + String(url));
-  int httpCode = http.GET();
-  if ((httpCode > 0) && (httpCode == HTTP_CODE_OK)) {
-    String payload = http.getString();
-    DBUGS.println(payload);
-    http.end();
-    return (payload);
-  } else {
-    http.end();
-    return ("server error: " + String(httpCode));
-  }
-}                               // end http_get

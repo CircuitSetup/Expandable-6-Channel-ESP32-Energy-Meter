@@ -29,17 +29,17 @@
 #include "emonesp.h"
 #include "input.h"
 
-String input_string = "";
-String last_datastr = "";
+char input_string[MAX_DATA_LEN] = "";
+char last_datastr[MAX_DATA_LEN] = "";
 
-boolean input_get(String& data)
+boolean input_get(char * data)
 {
   boolean gotData = false;
 
   // If data from test API e.g `http://<IP-ADDRESS>/input?string=CT1:3935,CT2:325,T1:12.5,T2:16.9,T3:11.2,T4:34.7`
-  if (input_string.length() > 0) {
-    data = input_string;
-    input_string = "";
+  if (strlen(input_string) > 0) {
+    strcpy(data, input_string);
+    strcpy(input_string, "");
     gotData = true;
   }
 #ifdef USE_SERIAL_INPUT
@@ -54,11 +54,11 @@ boolean input_get(String& data)
   if (gotData)
   {
     // Get rid of any whitespace, newlines etc
-    data.trim();
+    //data.trim();
 
-    if (data.length() > 0) {
-      DBUGS.printf("Got '%s'\n", data.c_str());
-      last_datastr = data;
+    if (strlen(data) > 0) {
+//      DBUGS.printf("Got '%s'\n", data.c_str());
+      strcpy(last_datastr, data);
     } else {
       gotData = false;
     }

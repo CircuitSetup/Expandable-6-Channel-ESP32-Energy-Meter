@@ -53,16 +53,13 @@ String mqtt_pass = "";
 String mqtt_feed_prefix = "";
 
 // Calibration Settings
-String voltage_cal = "";
-String voltage2_cal = "";
-String ct1_cal = "";
-String ct2_cal = "";
-String ct3_cal = "";
-String ct4_cal = "";
-String ct5_cal = "";
-String ct6_cal = "";
-String freq_cal = "";
-String gain_cal = "";
+unsigned short voltage_cal = 0;
+unsigned short voltage2_cal = 0;
+unsigned short freq_cal = 0;
+unsigned short gain_cal[NUM_BOARDS] = { 0 };
+unsigned short ct_cal[NUM_CHANNELS] = { 0 };
+float cur_mul[NUM_CHANNELS] = { 0.0 };
+float pow_mul[NUM_CHANNELS] = { 0.0 };
 
 #define EEPROM_ESID_SIZE          32
 #define EEPROM_EPASS_SIZE         64
@@ -74,20 +71,16 @@ String gain_cal = "";
 #define EEPROM_MQTT_TOPIC_SIZE    32
 #define EEPROM_MQTT_USER_SIZE     32
 #define EEPROM_MQTT_PASS_SIZE     64
-#define EEPROM_EMON_FINGERPRINT_SIZE  60
+#define EEPROM_EMON_FINGERPRINT_SIZE  21
 #define EEPROM_MQTT_FEED_PREFIX_SIZE  10
 #define EEPROM_WWW_USER_SIZE      16
 #define EEPROM_WWW_PASS_SIZE      16
-#define EEPROM_CAL_VOLTAGE_SIZE   6
-#define EEPROM_CAL_VOLTAGE2_SIZE   6
-#define EEPROM_CAL_CT1_SIZE       6
-#define EEPROM_CAL_CT2_SIZE       6
-#define EEPROM_CAL_CT3_SIZE       6
-#define EEPROM_CAL_CT4_SIZE       6
-#define EEPROM_CAL_CT5_SIZE       6
-#define EEPROM_CAL_CT6_SIZE       6
-#define EEPROM_CAL_FREQ_SIZE      6
-#define EEPROM_CAL_GAIN_SIZE      6
+#define EEPROM_CAL_VOLTAGE_SIZE   3
+#define EEPROM_CAL_FREQ_SIZE      3
+#define EEPROM_CAL_GAIN_SIZE      3
+#define EEPROM_CAL_CT_SIZE        3
+#define EEPROM_CUR_MUL_SIZE       5
+#define EEPROM_POW_MUL_SIZE       5
 #define EEPROM_SIZE               1024
 
 #define EEPROM_ESID_START         0
@@ -120,25 +113,19 @@ String gain_cal = "";
 #define EEPROM_EMON_PATH_END      (EEPROM_EMON_PATH_START + EEPROM_EMON_PATH_SIZE)
 #define EEPROM_CAL_VOLTAGE_START  EEPROM_EMON_PATH_END
 #define EEPROM_CAL_VOLTAGE_END    (EEPROM_CAL_VOLTAGE_START + EEPROM_CAL_VOLTAGE_SIZE)
-#define EEPROM_CAL_VOLTAGE2_START  EEPROM_CAL_VOLTAGE_END
-#define EEPROM_CAL_VOLTAGE2_END    (EEPROM_CAL_VOLTAGE2_START + EEPROM_CAL_VOLTAGE2_SIZE)
-#define EEPROM_CAL_CT1_START   EEPROM_CAL_VOLTAGE2_END
-#define EEPROM_CAL_CT1_END     (EEPROM_CAL_CT1_START + EEPROM_CAL_CT1_SIZE)
-#define EEPROM_CAL_CT2_START    EEPROM_CAL_CT1_END
-#define EEPROM_CAL_CT2_END      (EEPROM_CAL_CT2_START + EEPROM_CAL_CT2_SIZE)
-#define EEPROM_CAL_CT3_START   EEPROM_CAL_CT2_END
-#define EEPROM_CAL_CT3_END     (EEPROM_CAL_CT3_START + EEPROM_CAL_CT3_SIZE)
-#define EEPROM_CAL_CT4_START    EEPROM_CAL_CT3_END
-#define EEPROM_CAL_CT4_END      (EEPROM_CAL_CT4_START + EEPROM_CAL_CT4_SIZE)
-#define EEPROM_CAL_CT5_START   EEPROM_CAL_CT4_END
-#define EEPROM_CAL_CT5_END     (EEPROM_CAL_CT5_START + EEPROM_CAL_CT5_SIZE)
-#define EEPROM_CAL_CT6_START    EEPROM_CAL_CT5_END
-#define EEPROM_CAL_CT6_END      (EEPROM_CAL_CT6_START + EEPROM_CAL_CT6_SIZE)
-#define EEPROM_CAL_FREQ_START    EEPROM_CAL_CT6_END
-#define EEPROM_CAL_FREQ_END      (EEPROM_CAL_FREQ_START + EEPROM_CAL_FREQ_SIZE)
-#define EEPROM_CAL_GAIN_START    EEPROM_CAL_FREQ_END
-#define EEPROM_CAL_GAIN_END      (EEPROM_CAL_GAIN_START + EEPROM_CAL_GAIN_SIZE)
-#define EEPROM_CONFIG_END         EEPROM_CAL_GAIN_END
+#define EEPROM_CAL_VOLTAGE2_START EEPROM_CAL_VOLTAGE_END
+#define EEPROM_CAL_VOLTAGE2_END   (EEPROM_CAL_VOLTAGE2_START + EEPROM_CAL_VOLTAGE_SIZE)
+#define EEPROM_CAL_FREQ_START     EEPROM_CAL_VOLTAGE2_END
+#define EEPROM_CAL_FREQ_END       (EEPROM_CAL_FREQ_START + EEPROM_CAL_FREQ_SIZE)
+#define EEPROM_CAL_GAIN_START     EEPROM_CAL_FREQ_END
+#define EEPROM_CAL_GAIN_END       (EEPROM_CAL_GAIN_START + EEPROM_CAL_GAIN_SIZE*NUM_BOARDS)
+#define EEPROM_CAL_CT_START       EEPROM_CAL_GAIN_END
+#define EEPROM_CAL_CT_END         (EEPROM_CAL_CT_START + EEPROM_CAL_CT_SIZE*NUM_CHANNELS)
+#define EEPROM_CUR_MUL_START      EEPROM_CAL_CT_END
+#define EEPROM_CUR_MUL_END        (EEPROM_CUR_MUL_START + EEPROM_CUR_MUL_SIZE*NUM_CHANNELS)
+#define EEPROM_POW_MUL_START      EEPROM_CUR_MUL_END
+#define EEPROM_POW_MUL_END        (EEPROM_POW_MUL_START + EEPROM_POW_MUL_SIZE*NUM_CHANNELS)
+#define EEPROM_CONFIG_END         EEPROM_POW_MUL_END
 
 #if EEPROM_CONFIG_END > EEPROM_SIZE
 #error EEPROM_SIZE too small
@@ -181,6 +168,70 @@ void EEPROM_read_string(int start, int count, String & val, String defaultVal = 
   }
 }
 
+void EEPROM_read_fingerprint(int start, int count, String & val, String defaultVal = "") {
+  byte checksum = CHECKSUM_SEED;
+  bool valid = false;
+  char string[62], * ptr = string;
+  for (int i = 0; i < count - 1; ++i) {
+    byte c = EEPROM.read(start + i);
+    checksum ^= c;
+    ptr += sprintf(ptr, "%.2X:", c);
+    if (c != 0) {
+      valid = true;
+    }
+  }
+  string[(count-1)*3-1] = '\0';
+  val = String(string);
+
+  // Check the checksum
+  byte c = EEPROM.read(start + (count - 1));
+  DBUGF("Got '%s' %d == %d @ %d:%d", val.c_str(), c, checksum, start, count);
+  if (!valid || c != checksum) {
+    DBUGF("Using default '%s'", defaultVal.c_str());
+    val = defaultVal;
+  }
+}
+
+unsigned short EEPROM_read_ushort(int start, unsigned short defaultVal = 0) {
+  byte checksum = CHECKSUM_SEED;
+  byte c[3] = { 0 };
+  int i;
+  for (i = 0; i < 2; i ++)
+  {
+    c[i] = EEPROM.read(start + i);
+    checksum ^= c[i];
+  }
+
+  // Check the checksum
+  c[i] = EEPROM.read(start + i);
+  DBUGF("Got '%u' %d == %d @ %d:%d", *((unsigned short *)&c), c[i], checksum, start, i);
+  if (c[i] != checksum) {
+    DBUGF("Using default '%u'", defaultVal);
+    return defaultVal;
+  }
+  return *((unsigned short *)&c);
+}
+
+float EEPROM_read_float(int start, float defaultVal = 0) {
+  byte checksum = CHECKSUM_SEED;
+  byte c[5] = { 0 };
+  int i;
+  for (i = 0; i < 4; i ++)
+  {
+    c[i] = EEPROM.read(start + i);
+    checksum ^= c[i];
+  }
+
+  // Check the checksum
+  c[i] = EEPROM.read(start + i);
+  DBUGF("Got '%f' %d == %d @ %d:%d", *((float *)&c), c[i], checksum, start, i);
+  if (c[i] != checksum) {
+    DBUGF("Using default '%f'", defaultVal);
+    return defaultVal;
+  }
+  return *((float *)&c);
+}
+
 void EEPROM_write_string(int start, int count, String val) {
   byte checksum = CHECKSUM_SEED;
   for (int i = 0; i < count - 1; ++i) {
@@ -193,6 +244,47 @@ void EEPROM_write_string(int start, int count, String val) {
   }
   EEPROM.write(start + (count - 1), checksum);
   DBUGF("Saved '%s' %d @ %d:%d", val.c_str(), checksum, start, count);
+}
+
+void EEPROM_write_fingerprint(int start, int count, String val) {
+  byte checksum = CHECKSUM_SEED;
+  for (int i = 0; i < count - 1; ++i) {
+    if (i*3 < val.length()) {
+      byte b;
+      sscanf(&val.c_str()[i*3], "%x", &b);
+      checksum ^= b;
+      EEPROM.write(start + i, b);
+    } else {
+      EEPROM.write(start + i, 0);
+    }
+  }
+  EEPROM.write(start + (count - 1), checksum);
+  DBUGF("Saved '%s' %d @ %d:%d", val.c_str(), checksum, start, count);
+}
+
+void EEPROM_write_ushort(int start, unsigned short val) {
+  byte checksum = CHECKSUM_SEED;
+  int i;
+  for (i = 0; i < 2; i++)
+  {
+    checksum ^= *(((byte *)&val)+i);
+    EEPROM.write(start+i, *(((byte *)&val)+i));
+  }
+  EEPROM.write(start+i, checksum);
+  DBUGF("Saved '%d' %d @ %d:%d", val, checksum, start, i);
+}
+
+void EEPROM_write_float(int start, float val) {
+  byte checksum = CHECKSUM_SEED;
+  int i;
+  for (i = 0; i < 4; i++)
+  {
+    checksum ^= *(((byte *)&val)+i);
+    EEPROM.write(start+i, *(((byte *)&val)+i));
+  }
+  EEPROM.write(start+i, checksum);
+
+  DBUGF("Saved '%f' %d @ %d:%d", val, checksum, start, i);
 }
 
 // -------------------------------------------------------------------
@@ -215,7 +307,7 @@ void config_load_settings()
                      emoncms_path);
   EEPROM_read_string(EEPROM_EMON_NODE_START, EEPROM_EMON_NODE_SIZE,
                      emoncms_node);
-  EEPROM_read_string(EEPROM_EMON_FINGERPRINT_START,
+  EEPROM_read_fingerprint(EEPROM_EMON_FINGERPRINT_START,
                      EEPROM_EMON_FINGERPRINT_SIZE, emoncms_fingerprint);
 
   // MQTT settings
@@ -226,17 +318,19 @@ void config_load_settings()
   EEPROM_read_string(EEPROM_MQTT_PASS_START, EEPROM_MQTT_PASS_SIZE, mqtt_pass);
 
   // Calibration settings
-  EEPROM_read_string(EEPROM_CAL_VOLTAGE_START, EEPROM_CAL_VOLTAGE_SIZE, voltage_cal);
-  EEPROM_read_string(EEPROM_CAL_VOLTAGE2_START, EEPROM_CAL_VOLTAGE2_SIZE, voltage2_cal);
-  EEPROM_read_string(EEPROM_CAL_CT1_START, EEPROM_CAL_CT1_SIZE, ct1_cal);
-  EEPROM_read_string(EEPROM_CAL_CT2_START, EEPROM_CAL_CT2_SIZE, ct2_cal);
-  EEPROM_read_string(EEPROM_CAL_CT3_START, EEPROM_CAL_CT3_SIZE, ct3_cal);
-  EEPROM_read_string(EEPROM_CAL_CT4_START, EEPROM_CAL_CT4_SIZE, ct4_cal);
-  EEPROM_read_string(EEPROM_CAL_CT5_START, EEPROM_CAL_CT5_SIZE, ct5_cal);
-  EEPROM_read_string(EEPROM_CAL_CT6_START, EEPROM_CAL_CT6_SIZE, ct6_cal);
-  EEPROM_read_string(EEPROM_CAL_FREQ_START, EEPROM_CAL_FREQ_SIZE, freq_cal);
-  EEPROM_read_string(EEPROM_CAL_GAIN_START, EEPROM_CAL_GAIN_SIZE, gain_cal);
-
+  voltage_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE_START, VOLTAGE_GAIN_DEFAULT);
+  voltage2_cal = EEPROM_read_ushort(EEPROM_CAL_VOLTAGE2_START, VOLTAGE_GAIN_DEFAULT);
+  freq_cal = EEPROM_read_ushort(EEPROM_CAL_FREQ_START, LINE_FREQ_DEFAULT);
+  for (int i = 0; i < NUM_CHANNELS; i++)
+  {
+    ct_cal[i] = EEPROM_read_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE), CURRENT_GAIN_DEFAULT);
+    cur_mul[i] = EEPROM_read_float(EEPROM_CUR_MUL_START + (i*EEPROM_CUR_MUL_SIZE), 1.0);
+    pow_mul[i] = EEPROM_read_float(EEPROM_POW_MUL_START + (i*EEPROM_POW_MUL_SIZE), 1.0);
+  }
+  for (int i = 0; i < NUM_BOARDS; i++)
+  {
+    gain_cal[i] = EEPROM_read_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE), PGA_GAIN_DEFAULT);
+  }
 
   // Web server credentials
   EEPROM_read_string(EEPROM_WWW_USER_START, EEPROM_WWW_USER_SIZE, www_username);
@@ -267,8 +361,8 @@ void config_save_emoncms(String server, String path, String node, String apikey,
   // save emoncms node to EEPROM max 32 characters
   EEPROM_write_string(EEPROM_EMON_NODE_START, EEPROM_EMON_NODE_SIZE, emoncms_node);
 
-  // save emoncms HTTPS fingerprint to EEPROM max 60 characters
-  EEPROM_write_string(EEPROM_EMON_FINGERPRINT_START, EEPROM_EMON_FINGERPRINT_SIZE, emoncms_fingerprint);
+  // save emoncms HTTPS fingerprint to EEPROM max 20 bytes
+  EEPROM_write_fingerprint(EEPROM_EMON_FINGERPRINT_START, EEPROM_EMON_FINGERPRINT_SIZE, emoncms_fingerprint);
 
   EEPROM.end();
 }
@@ -302,31 +396,56 @@ void config_save_mqtt(String server, String topic, String prefix, String user, S
 }
 
 //for CircuitSetup 6 channel energy meter
-void config_save_cal(String voltage, String voltage2, String ct1, String ct2, String ct3, String ct4, String ct5, String ct6, String freq, String gain)
+void config_save_cal(AsyncWebServerRequest * request)
 {
+  char req[12];
+
   EEPROM.begin(EEPROM_SIZE);
 
-  voltage_cal = voltage;
-  voltage2_cal = voltage2;
-  ct1_cal = ct1;
-  ct2_cal = ct2;
-  ct3_cal = ct3;
-  ct4_cal = ct4;
-  ct5_cal = ct5;
-  ct6_cal = ct6;
-  freq_cal = freq;
-  gain_cal = gain;
+  voltage_cal = request->arg("voltage_cal").toInt();
+  voltage2_cal = request->arg("voltage2_cal").toInt();
+  freq_cal = request->arg("freq_cal").toInt();
 
-  EEPROM_write_string(EEPROM_CAL_VOLTAGE_START, EEPROM_CAL_VOLTAGE_SIZE, voltage_cal);
-  EEPROM_write_string(EEPROM_CAL_VOLTAGE2_START, EEPROM_CAL_VOLTAGE2_SIZE, voltage2_cal);
-  EEPROM_write_string(EEPROM_CAL_CT1_START, EEPROM_CAL_CT1_SIZE, ct1_cal);
-  EEPROM_write_string(EEPROM_CAL_CT2_START, EEPROM_CAL_CT2_SIZE, ct2_cal);
-  EEPROM_write_string(EEPROM_CAL_CT3_START, EEPROM_CAL_CT3_SIZE, ct3_cal);
-  EEPROM_write_string(EEPROM_CAL_CT4_START, EEPROM_CAL_CT4_SIZE, ct4_cal);
-  EEPROM_write_string(EEPROM_CAL_CT5_START, EEPROM_CAL_CT5_SIZE, ct5_cal);
-  EEPROM_write_string(EEPROM_CAL_CT6_START, EEPROM_CAL_CT6_SIZE, ct6_cal);
-  EEPROM_write_string(EEPROM_CAL_FREQ_START, EEPROM_CAL_FREQ_SIZE, freq_cal);
-  EEPROM_write_string(EEPROM_CAL_GAIN_START, EEPROM_CAL_GAIN_SIZE, gain_cal);
+  EEPROM_write_ushort(EEPROM_CAL_VOLTAGE_START, voltage_cal);
+  EEPROM_write_ushort(EEPROM_CAL_VOLTAGE2_START, voltage2_cal);
+  EEPROM_write_ushort(EEPROM_CAL_FREQ_START, freq_cal);
+
+  for (int i = 0; i < NUM_CHANNELS; i++)
+  {
+    sprintf(req, "ct%d_cal", i+1);
+    ct_cal[i] = request->arg(req).toInt();
+    EEPROM_write_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE), ct_cal[i]);
+    sprintf(req, "cur%d_mul", i+1);
+    cur_mul[i] = request->arg(req).toFloat();
+    EEPROM_write_float(EEPROM_CUR_MUL_START + (i*EEPROM_CUR_MUL_SIZE), cur_mul[i]);
+    sprintf(req, "pow%d_mul", i+1);
+    pow_mul[i] = request->arg(req).toFloat();
+    EEPROM_write_float(EEPROM_POW_MUL_START + (i*EEPROM_POW_MUL_SIZE), pow_mul[i]);
+  }
+
+  for (int i = 0; i < NUM_BOARDS; i++)
+  {
+    byte pgaA, pgaB, pgaC;
+
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+1);
+    pgaA = request->arg(req).toInt() >> 1;
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+2);
+    pgaB = request->arg(req).toInt() >> 1;
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+3);
+    pgaC = request->arg(req).toInt() >> 1;
+
+    gain_cal[i] = pgaA | (pgaB << 2) | (pgaC << 4);
+
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+4);
+    pgaA = request->arg(req).toInt() >> 1;
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+5);
+    pgaB = request->arg(req).toInt() >> 1;
+    sprintf(req, "gain%d_cal", i*NUM_INPUTS+6);
+    pgaC = request->arg(req).toInt() >> 1;
+
+    gain_cal[i] |= (pgaA << 8) | (pgaB << 10) | (pgaC << 12);
+    EEPROM_write_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE), gain_cal[i]);
+  }
 
   EEPROM.end();
 }

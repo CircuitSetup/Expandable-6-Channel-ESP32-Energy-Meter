@@ -26,23 +26,12 @@
 #ifndef _ENERGY_METER
 #define _ENERGY_METER
 
+#define NUM_BOARDS 7
+#define NUM_INPUTS 6
+
+#define NUM_CHANNELS (NUM_BOARDS*NUM_INPUTS)
+
 //#define ENABLE_OLED_DISPLAY
-
-/* If JP9-JP11 are bridged, this means voltage is copied to registers, and power can be read directly from the meter 
-   vs being calculated in software. Other metering values can also be read. 
-   v1.4 removes the jumpers so this should always be set */
-#define JP9_JP11_SET
-
-//#define ADDON_BOARDS
-#ifdef ADDON_BOARDS
-/* Change to total number of Add-On Boards - Can not be more than 6 */
-#define NUM_OF_ADDON_BOARDS 1
-#endif
-
-/*
-    Uncomment to send metering values to EmonCMS, like Fundamental, Harmonic, Reactive, Apparent Power, and Phase Angle
-*/
-#define EXPORT_METERING_VALS
 
 /*
    The following calibration values can be set here or in the EmonESP interface
@@ -53,7 +42,7 @@
    135 for 50 hz 6 channel meter
 */
 
-#define LINE_FREQ 4231
+#define LINE_FREQ_DEFAULT 4231
 
 /*
    Sets the current gain to 1x, 2x, or 4x. If your CT has a low current output use 2x or 4x.
@@ -61,7 +50,7 @@
    21 (2x)
    42 (4x)
 */
-#define PGA_GAIN 0
+#define PGA_GAIN_DEFAULT 0
 
 /*
    For meter <= v1.2:
@@ -70,8 +59,7 @@
    For meter > v1.3:
       7305 - 9v AC Transformer - Jameco 157041
 */
-#define VOLTAGE_GAIN 7305
-#define VOLTAGE_GAIN2 7305
+#define VOLTAGE_GAIN_DEFAULT 7305
 
 /*
  When PGA Gain is set to 0
@@ -79,16 +67,10 @@
   30A/1V SCT-013-030: 8650
   50A/1V SCT-013-050: 15420
   80A/26.6mA SCT-010: 41996
-  100A/50ma SCT-013-000: 27961
+  100A/50mA SCT-013-000: 27961
   120A/40mA: SCT-016: 41880
 */
-#define CURRENT_GAIN_CT1 41880
-#define CURRENT_GAIN_CT2 41880
-#define CURRENT_GAIN_CT3 41880
-#define CURRENT_GAIN_CT4 41880
-#define CURRENT_GAIN_CT5 41880
-#define CURRENT_GAIN_CT6 41880
-
+#define CURRENT_GAIN_DEFAULT 27961
 
 extern void energy_meter_setup();
 extern void energy_meter_loop();

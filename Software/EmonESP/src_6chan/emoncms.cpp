@@ -39,28 +39,16 @@ unsigned long packets_sent = 0;
 unsigned long packets_success = 0;
 unsigned long emoncms_connection_error_count = 0;
 
-void emoncms_publish(String data)
+static char url[MAX_DATA_LEN+100];
+
+void emoncms_publish(const char * data)
 {
   // We now create a URL for server data upload
-  String url = emoncms_path.c_str();
-  url += e_url;
-  url += "{";
-  // Copy across, data length
-  for (int i = 0; i < data.length(); ++i) {
-    url += data[i];
-  }
-  url += ",psent:";
-  url += packets_sent;
-  url += ",psuccess:";
-  url += packets_success;
-  url += ",freeram:";
-  url += String(ESP.getFreeHeap());
-  url += "}&node=";
-  url += emoncms_node;
-  url += "&apikey=";
-  url += emoncms_apikey;
+  sprintf(url, "%s%s{%s,psent:%lu,psuccess:%lu,freeram:%lu,rssi:%d}&node=%s&apikey=%s",
+    emoncms_path.c_str(), e_url, data, packets_sent, packets_success, ESP.getFreeHeap(),
+    WiFi.RSSI(), emoncms_node.c_str(), emoncms_apikey.c_str());
 
-  DBUGS.println(url); delay(10);
+  DBUGLN(url); delay(10);
   packets_sent++;
 
   // Send data to Emoncms server
@@ -68,7 +56,7 @@ void emoncms_publish(String data)
   if (emoncms_fingerprint != 0) {
     // HTTPS on port 443 if HTTPS fingerprint is present
     DBUGS.println("HTTPS Enabled"); delay(10);
-    result = get_https(emoncms_fingerprint.c_str(), emoncms_server.c_str(), url, 443);
+    result = get_http(emoncms_server.c_str(), url, 443, emoncms_fingerprint.c_str());
   } else {
     // Plain HTTP if other emoncms server e.g EmonPi
     DBUGS.println("Plain old HTTP"); delay(10);

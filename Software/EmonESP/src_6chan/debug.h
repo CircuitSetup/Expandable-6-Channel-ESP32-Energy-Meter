@@ -30,6 +30,7 @@
 #define __DEBUG_H
 
 //#define ENABLE_DEBUG
+//#define DEBUG_PORT Serial
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)

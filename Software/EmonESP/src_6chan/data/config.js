@@ -19,6 +19,10 @@ function scaleString(string, scale, precision) {
   return tmpval.toFixed(precision);
 }
 
+function isNumber(val) {
+     return (val != undefined && val != null && val.toString().length > 0 && val.toString().match(/[^0-9\.\-]/g) == null);
+}
+
 function BaseViewModel(defaults, remoteUrl, mappings) {
   if(mappings === undefined){
    mappings = {};
@@ -86,37 +90,117 @@ StatusViewModel.prototype = Object.create(BaseViewModel.prototype);
 StatusViewModel.prototype.constructor = StatusViewModel;
 
 function ConfigViewModel() {
-  BaseViewModel.call(this, {
-    "ssid": "",
-    "pass": "",
-    "emoncms_server": "emoncms.org",
-    "emoncms_path": "/emoncms",
-    "emoncms_apikey": "",
-    "emoncms_node": "",
-    "emoncms_fingerprint": "",
-    "mqtt_server": "",
-    "mqtt_topic": "",
-    "mqtt_feed_prefix": "",
-    "mqtt_user": "",
-    "mqtt_pass": "",
-    "www_username": "",
-    "www_password": "",
-	"voltage_cal": "",
-	"voltage2_cal": "",
-	"ct1_cal": "",
-	"ct2_cal": "",
-	"ct3_cal": "",
-	"ct4_cal": "",
-	"ct5_cal": "",
-	"ct6_cal": "",
-	"freq_cal": "",
-	"gain_cal": "", 
-    "espflash": "",
-    "version": "0.0.0"
-  }, baseEndpoint + '/config');
+  var self = this;
+  BaseViewModel.call(self, {
+    "espflash":"",
+    "version":"",
+    "ssid":"",
+    "pass":"",
+    "emoncms_server":"emoncms.org",
+    "emoncms_path":"/emoncms",
+    "emoncms_node":"",
+    "emoncms_apikey":"",
+    "emoncms_fingerprint":"",
+    "mqtt_server":"",
+    "mqtt_topic":"",
+    "mqtt_feed_prefix":"",
+    "mqtt_user":"",
+    "mqtt_pass":"",
+    "www_username":"",
+    "www_password":"",
+    "voltage_cal":"",
+    "voltage2_cal":"",
+    "gain1_cal":"1","gain2_cal":"1","gain3_cal":"1","gain4_cal":"1","gain5_cal":"1","gain6_cal":"1",
+    "gain7_cal":"1","gain8_cal":"1","gain9_cal":"1","gain10_cal":"1","gain11_cal":"1","gain12_cal":"1",
+    "gain13_cal":"1","gain14_cal":"1","gain15_cal":"1","gain16_cal":"1","gain17_cal":"1","gain18_cal":"1",
+    "gain19_cal":"1","gain20_cal":"1","gain21_cal":"1","gain22_cal":"1","gain23_cal":"1","gain24_cal":"1",
+    "gain25_cal":"1","gain26_cal":"1","gain27_cal":"1","gain28_cal":"1","gain29_cal":"1","gain30_cal":"1",
+    "gain31_cal":"1","gain32_cal":"1","gain33_cal":"1","gain34_cal":"1","gain35_cal":"1","gain36_cal":"1",
+    "gain37_cal":"1","gain38_cal":"1","gain39_cal":"1","gain40_cal":"1","gain41_cal":"1","gain42_cal":"1",
+    "ct1_cal":"","cur1_mul":"1.00","pow1_mul":"1.00","ct2_cal":"","cur2_mul":"1.00","pow2_mul":"1.00",
+    "ct3_cal":"","cur3_mul":"1.00","pow3_mul":"1.00","ct4_cal":"","cur4_mul":"1.00","pow4_mul":"1.00",
+    "ct5_cal":"","cur5_mul":"1.00","pow5_mul":"1.00","ct6_cal":"","cur6_mul":"1.00","pow6_mul":"1.00",
+    "ct7_cal":"","cur7_mul":"1.00","pow7_mul":"1.00","ct8_cal":"","cur8_mul":"1.00","pow8_mul":"1.00",
+    "ct9_cal":"","cur9_mul":"1.00","pow9_mul":"1.00","ct10_cal":"","cur10_mul":"1.00","pow10_mul":"1.00",
+    "ct11_cal":"","cur11_mul":"1.00","pow11_mul":"1.00","ct12_cal":"","cur12_mul":"1.00","pow12_mul":"1.00",
+    "ct13_cal":"","cur13_mul":"1.00","pow13_mul":"1.00","ct14_cal":"","cur14_mul":"1.00","pow14_mul":"1.00",
+    "ct15_cal":"","cur15_mul":"1.00","pow15_mul":"1.00","ct16_cal":"","cur16_mul":"1.00","pow16_mul":"1.00",
+    "ct17_cal":"","cur17_mul":"1.00","pow17_mul":"1.00","ct18_cal":"","cur18_mul":"1.00","pow18_mul":"1.00",
+    "ct19_cal":"","cur19_mul":"1.00","pow19_mul":"1.00","ct20_cal":"","cur20_mul":"1.00","pow20_mul":"1.00",
+    "ct21_cal":"","cur21_mul":"1.00","pow21_mul":"1.00","ct22_cal":"","cur22_mul":"1.00","pow22_mul":"1.00",
+    "ct23_cal":"","cur23_mul":"1.00","pow23_mul":"1.00","ct24_cal":"","cur24_mul":"1.00","pow24_mul":"1.00",
+    "ct25_cal":"","cur25_mul":"1.00","pow25_mul":"1.00","ct26_cal":"","cur26_mul":"1.00","pow26_mul":"1.00",
+    "ct27_cal":"","cur27_mul":"1.00","pow27_mul":"1.00","ct28_cal":"","cur28_mul":"1.00","pow28_mul":"1.00",
+    "ct29_cal":"","cur29_mul":"1.00","pow29_mul":"1.00","ct30_cal":"","cur30_mul":"1.00","pow30_mul":"1.00",
+    "ct31_cal":"","cur31_mul":"1.00","pow31_mul":"1.00","ct32_cal":"","cur32_mul":"1.00","pow32_mul":"1.00",
+    "ct33_cal":"","cur33_mul":"1.00","pow33_mul":"1.00","ct34_cal":"","cur34_mul":"1.00","pow34_mul":"1.00",
+    "ct35_cal":"","cur35_mul":"1.00","pow35_mul":"1.00","ct36_cal":"","cur36_mul":"1.00","pow36_mul":"1.00",
+    "ct37_cal":"","cur37_mul":"1.00","pow37_mul":"1.00","ct38_cal":"","cur38_mul":"1.00","pow38_mul":"1.00",
+    "ct39_cal":"","cur39_mul":"1.00","pow39_mul":"1.00","ct40_cal":"","cur40_mul":"1.00","pow40_mul":"1.00",
+    "ct41_cal":"","cur41_mul":"1.00","pow41_mul":"1.00","ct42_cal":"","cur42_mul":"1.00","pow42_mul":"1.00",
+    "freq_cal":""
+    }, baseEndpoint + '/config');
 }
 ConfigViewModel.prototype = Object.create(BaseViewModel.prototype);
 ConfigViewModel.prototype.constructor = ConfigViewModel;
+
+function SensorConfigViewModel(baseconfig, baselast) {
+  var self = this;
+  self.config = baseconfig;
+  self.last = baselast;
+
+  self.getValue = function(prefix, postfix) {
+    var lastValue = null;
+    var value = "";
+    for (i = 0; i < self.selectedSensors().length; i++) {
+      obs = self.config[`${prefix}${self.selectedSensors()[i].substr(2)}_${postfix}`];
+      if (obs == null) {
+        return "";
+      }
+      value = obs();
+      if (lastValue != null && lastValue != value) {
+        return "";
+      }
+      lastValue = value;
+    }
+    return value;
+  };
+    self.setValue = function(prefix, postfix, value) {
+      self.selectedSensors().forEach(function(sensor,_,_) {
+        self.config[`${prefix}${sensor.substr(2)}_${postfix}`] = ko.observable(value);
+      });
+    };
+    self.selectedCt = ko.pureComputed({
+      read: function() { return self.getValue("ct", "cal") },
+      write: function(value) { self.setValue("ct", "cal", value) }
+    }).extend({ notify: 'always' });
+    self.selectedGain = ko.pureComputed({
+      read: function() { return self.getValue("gain", "cal") },
+      write: function(value) { self.setValue("gain", "cal", value) }
+    }).extend({ notify: 'always' });
+    self.selectedCurMul = ko.pureComputed({
+      read: function() { return self.getValue("cur", "mul") },
+      write: function(value) { self.setValue("cur", "mul", value) }
+    }).extend({ notify: 'always' });
+    self.selectedPowMul = ko.pureComputed({
+      read: function() { return self.getValue("pow", "mul") },
+      write: function(value) { return self.setValue("pow", "mul", value) }
+    }).extend({ notify: 'always' });
+
+    self.selectedSensors = ko.observableArray(["CT1"]);
+    self.sensors = ko.observableArray();
+
+    self.update = function(after) {
+      var vals = [];
+      self.last.values().forEach(function(input,_,_) {
+        if (input.key().substring(0, 2) == "CT") {
+          vals.push(input.key());
+        }
+      });
+      self.sensors = ko.observableArray(vals);
+      after();
+   }
+}
 
 function LastValuesViewModel() {
   var self = this;
@@ -142,6 +226,7 @@ function LastValuesViewModel() {
 		if (namevalue[0].indexOf("totI") === 0) units = "A";
 		if (namevalue[0].indexOf("V") === 0) units = "V";
 		if (namevalue[0].indexOf("W") === 0) units = "W";
+		if (namevalue[0].indexOf("AW") === 0) units = "W";
         if (namevalue[0].indexOf("T") === 0) units = String.fromCharCode(176)+"C";
         vals.push({key: namevalue[0], value: namevalue[1]+units});
       }
@@ -159,6 +244,7 @@ function EmonEspViewModel() {
   self.config = new ConfigViewModel();
   self.status = new StatusViewModel();
   self.last = new LastValuesViewModel();
+  self.sensorconfig = new SensorConfigViewModel(self.config, self.last);
 
   self.initialised = ko.observable(false);
   self.updating = ko.observable(false);
@@ -177,10 +263,13 @@ function EmonEspViewModel() {
     self.config.update(function () {
       self.status.update(function () {
         self.last.update(function () {
-          self.initialised(true);
-          updateTimer = setTimeout(self.update, updateTime);
-          self.upgradeUrl(baseEndpoint + '/update');
-          self.updating(false);
+          self.sensorconfig.update(function () {
+            ko.applyBindings(self);
+            self.initialised(true);
+            updateTimer = setTimeout(self.update, updateTime);
+            self.upgradeUrl(baseEndpoint + '/update');
+            self.updating(false);
+          });
         });
       });
     });
@@ -324,40 +413,42 @@ function EmonEspViewModel() {
   self.saveCalFetching = ko.observable(false);
   self.saveCalSuccess = ko.observable(false);
   self.saveCal = function () {
-	var cal = {
-		voltage: self.config.voltage_cal(), 
-		voltage2: self.config.voltage2_cal(), 
-		ct1: self.config.ct1_cal(), 
-		ct2: self.config.ct2_cal(),
-		ct3: self.config.ct3_cal(), 
-		ct4: self.config.ct4_cal(),
-		ct5: self.config.ct5_cal(), 
-		ct6: self.config.ct6_cal(),
-		freq: self.config.freq_cal(), 
-		gain: self.config.gain_cal()
-    };
-	if (isNaN(cal.voltage) || isNaN(cal.ct1) || isNaN(cal.ct2) || isNaN(cal.freq) || isNaN(cal.gain)) {
-		alert("Please enter a number for calibration values");
-	} else if (cal.voltage > 65535 || cal.ct1 > 65535 || cal.ct2 > 65535) {
-		alert("Please enter calibration settings less than 65535");
-    } else {
-		self.saveCalFetching(true);
-		self.saveCalSuccess(false);
-	  $.post(baseEndpoint + "/savecal", cal, function (data) {
-		  self.saveCalSuccess(true);
-		}).fail(function () {
-		  alert("Failed to save calibration config");
-		}).always(function () {
-		  self.saveCalFetching(false);
-		});
-	}
+    for (i = 1; i <= 6*7; i ++) {
+      if (!isNumber(self.config[`ct${i}_cal`]()) || !isNumber(self.config[`cur${i}_mul`]()) || !isNumber(self.config[`pow${i}_mul`]())) {
+        alert("Please enter a number for calibration values");
+        return;
+      } else if (self.config[`ct${i}_cal`] > 65535) {
+        alert("Please enter calibration settings less than 65535");
+        return;
+      }
+      if (!isNumber(self.config[`gain${i}_cal`]()) || (self.config[`gain${i}_cal`]() != 1 && self.config[`gain${i}_cal`]() != 2 && self.config[`gain${i}_cal`]() != 4)) {
+        alert("Please enter gain settings of 1, 2, or 4");
+        return;
+      }
+    }
+    if (!isNumber(self.config.voltage_cal()) || !isNumber(self.config.voltage2_cal()) || !isNumber(self.config.freq_cal())) {
+      alert("Please enter a number for calibration values");
+      return;
+    }
+    if (self.config.voltage_cal() > 65535 || self.config.voltage2_cal() > 65535 || self.config.freq_cal() > 65535) {
+      alert("Please enter calibration settings less than 65535");
+      return;
+    }
+    self.saveCalFetching(true);
+    self.saveCalSuccess(false);
+    $.post(baseEndpoint + "/savecal", self.config, function (data) {
+      self.saveCalSuccess(true);
+    }).fail(function () {
+      alert("Failed to save calibration config");
+    }).always(function () {
+      self.saveCalFetching(false);
+    });
   };
 }
 
 $(function () {
   // Activates knockout.js
   var emonesp = new EmonEspViewModel();
-  ko.applyBindings(emonesp);
   emonesp.start();
 });
 

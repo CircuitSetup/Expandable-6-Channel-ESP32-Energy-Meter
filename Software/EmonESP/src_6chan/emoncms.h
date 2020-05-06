@@ -44,6 +44,6 @@ extern unsigned long packets_success;
 //
 // data: a comma seperated list of name:value pairs to send
 // -------------------------------------------------------------------
-void emoncms_publish(String data);
+void emoncms_publish(const char * data);
 
 #endif // _EMONESP_EMONCMS_H

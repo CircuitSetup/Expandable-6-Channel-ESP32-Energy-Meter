@@ -31,6 +31,8 @@
 #include "config.h"
 #include "wifi.h"
 
+#define MQTT_TIMEOUT 3
+
 WiFiClient espClient;                 // Create client for MQTT
 PubSubClient mqttclient(espClient);   // Create client for MQTT
 
@@ -38,6 +40,8 @@ long lastMqttReconnectAttempt = 0;
 int clientTimeout = 0;
 int i = 0;
 
+static char mqtt_topic_prefix[128] = "";
+static char mqtt_data[64] = "";
 
 // -------------------------------------------------------------------
 // MQTT Connect
@@ -45,12 +49,19 @@ int i = 0;
 // -------------------------------------------------------------------
 boolean mqtt_connect()
 {
-  mqttclient.setServer(mqtt_server.c_str(), 1883);
   DBUGS.println("MQTT Connecting...");
   DBUGS.println(mqttclient.state());
 
+  if (espClient.connect(mqtt_server.c_str(), 1883, MQTT_TIMEOUT * 1000) != 1)
+  {
+     DBUGS.println("MQTT connect timeout.");
+     return (0);
+  }
+
+  espClient.setTimeout(MQTT_TIMEOUT);
+
 #ifdef ESP32
-  String strID = String((uint32_t)ESP.getEfuseMac());
+  String strID = String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
 #else
   String strID = String(ESP.getChipId());
 #endif
@@ -86,50 +97,51 @@ boolean mqtt_connect()
 // base topic = emon/emonesp
 // MQTT Publish: emon/emonesp/CT1 > 3935 etc..
 // -------------------------------------------------------------------
-void mqtt_publish(String data)
+void mqtt_publish(const char * data)
 {
-  String mqtt_data = "";
-  String topic = mqtt_topic + "/" + mqtt_feed_prefix;
-  int i = 0;
-  while (int (data[i]) != 0)
+  const char * data_ptr = data;
+  char * topic_ptr = mqtt_topic_prefix;
+  topic_ptr += sprintf(mqtt_topic_prefix, "%s/%s", mqtt_topic, mqtt_feed_prefix);
+
+  do
   {
-    // Construct MQTT topic e.g. <base_topic>/CT1 e.g. emonesp/CT1
-    while (data[i] != ':') {
-      topic += data[i];
-      i++;
-      if (int(data[i]) == 0) {
-        break;
-      }
+    int pos = strcspn(data_ptr, ":");
+    strncpy(topic_ptr, data_ptr, pos);
+    topic_ptr[pos] = 0;
+    data_ptr += pos;
+    if (*data_ptr++ == 0) {
+      break;
     }
-    i++;
-    // Construct data string to publish to above topic
-    while (data[i] != ',') {
-      mqtt_data += data[i];
-      i++;
-      if (int(data[i]) == 0) {
-        break;
-      }
-    }
+
+    pos = strcspn(data_ptr, ",");
+    strncpy(mqtt_data, data_ptr, pos);
+    mqtt_data[pos] = 0;
+    data_ptr += pos;
+
     // send data via mqtt
     //delay(100);
-    //DBUGS.printf("%s = %s\r\n", topic.c_str(), mqtt_data.c_str());
-    mqttclient.publish(topic.c_str(), mqtt_data.c_str());
-    topic = mqtt_topic + "/" + mqtt_feed_prefix;
-    mqtt_data = "";
-    i++;
-    if (int(data[i]) == 0) break;
-  }
+    //DBUGS.printf("%s = %s\r\n", mqtt_topic_prefix, mqtt_data);
+    if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+    {
+      return;
+    }
+  } while (*data_ptr++ != 0);
 
   // send esp free ram
-  String ram_topic = mqtt_topic + "/" + mqtt_feed_prefix + "freeram";
-  String free_ram = String(ESP.getFreeHeap());
-  mqttclient.publish(ram_topic.c_str(), free_ram.c_str());
+  sprintf(mqtt_topic_prefix, "%s/%sfreeram", mqtt_topic, mqtt_feed_prefix);
+  sprintf(mqtt_data, "%lu", ESP.getFreeHeap());
+  if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+  {
+    return;
+  }
 
   // send wifi signal strength
-  long rssi = WiFi.RSSI();
-  String rssi_S = String(rssi);
-  String rssi_topic = mqtt_topic + "/" + mqtt_feed_prefix + "rssi";
-  mqttclient.publish(rssi_topic.c_str(), rssi_S.c_str());
+  sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic, mqtt_feed_prefix);
+  sprintf(mqtt_data, "%d", WiFi.RSSI());
+  if(!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
+  {
+    return;
+  }
 }
 
 // -------------------------------------------------------------------

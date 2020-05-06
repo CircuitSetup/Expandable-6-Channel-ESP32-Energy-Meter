@@ -153,11 +153,89 @@
           </p>
         </div>
       </div>
+	        <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="four">
+        <h2>4. Calibration Settings</h2>
+        <div class="itembody-wrapper">
+		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> <b>The default values are used unless other values are entered here.</b></span><br><br>
+          <p>
+            <b>Voltage1:</b><br>
+			<span class="small-text">7305 - 9v AC Transformer - Jameco 157041 (default)</span><br>
+            <input type="text" value="voltage_cal" data-bind="textInput: config.voltage_cal"><br>
+          </p>
+		  <p>
+            <b>Voltage2:</b><br>
+            <input type="text" value="voltage2_cal" data-bind="textInput: config.voltage2_cal"><br>
+          </p>
+		  <p>
+		    <b>Frequency:</b><br>
+			<span class="small-text">60 Hz - North America: 4231 (default)<br>
+			50 Hz - Europe: 135</span><br>
+            <input type="text" data-bind="textInput: config.freq_cal">
+        </p>
+        <p>
+          <span><b>Select sensor to edit. Multiple sensors can edited at once.</span></b><br>
+          <div style="width: 100%; overflow: hidden;">
+             <div style="width: 50px; float: left;">
+               <select size="24" multiple="true" data-bind="options: sensorconfig.sensors, selectedOptions: sensorconfig.selectedSensors">
+               </select>
+             </div>
+             <div style="margin-left: 70px;">
+            <b>CT Sensor Cal:</b><br>
+			<span class="small-text">
+			20A/25mA SCT-006: 11131
+			<br>30A/1V SCT-013-030: 8650
+			<br>50A/1V SCT-013-050: 15420
+			<br>80A/26.6mA SCT-010: 41996
+			<br>100A/50ma SCT-013-000: 27961 (default)
+			<br>120A/40mA: SCT-016: 41880</span><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedCt"><br>
+			<b>CT Gain (PGA):</b><br>
+			<span class="small-text">Set the CT gain to 1, 2, or 4. If your CT has a low current output use 2 or 4.</span><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedGain"><br>
+			<b>CT Current Multiplier:</b><br>
+			<span class="small-text">Set the CT current multiplier to scale the current output.
+			<br>To reverse readings use a negative sign.</span><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedCurMul"><br>
+			<b>CT Power Multiplier:</b><br>
+			<span class="small-text">Set the CT power multiplier to scale the power outputs.</span><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedPowMul"><br>
+             </div>
+          </div>
+
+		</p>
+		  <p>
+            
+            <button data-bind="click: saveCal, text: (saveCalFetching() ? 'Saving' : (saveCalSuccess() ? 'Saved' : 'Save')), disable: saveCalFetching">Save</button><br>
+			<span>After saving, the ESP will be restarted and values sent to the energy meter</span>
+        <div class="small-text">
+          Configuration JSON can be retrieved from HTTP input API e.g.: <br>
+          <a data-bind="attr: {href: 'http://'+status.ipaddress()+'/config'}">http://<span data-bind="text: status.ipaddress"></span>/config</a>
+        </div>
+          </p>
+        </div>
+      </div>
+      <!--//////////////////////////////////////////////////////////////////////////////////-->
+      <div id="five">
+        <h2>5. Admin</h2>
+        <div class="itembody-wrapper">
+          <p>
+            <b>Username:</b><br>
+            <input type="text" value="admin" data-bind="textInput: config.www_username">
+          </p>
+          <p>
+            <b>Password:</b><br>
+            <input type="password" data-bind="textInput: config.www_password"><br><br>
+            <span>Web interface HTTP authentication.</span><br><br>
+            <button data-bind="click: saveAdmin, text: (saveAdminFetching() ? 'Saving' : (saveAdminSuccess() ? 'Saved' : 'Save')), disable: saveAdminFetching">Save</button>
+          </p>
+        </div>
+      </div>
     </div>
     <!--//////////////////////////////////////////////////////////////////////////////////-->
     <div id="right-hand-container" data-bind="visible: initialised" style="display: none">
-      <div id="four">
-        <h2>4. Latest Data</h2>
+      <div id="six">
+        <h2>6. Latest Data</h2>
         <div class="itembody-wrapper">
           <table>
             <tr>
@@ -178,97 +256,14 @@
         </div>
       </div>
       <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="five">
-        <h2>5. Admin</h2>
+      <div id="seven">
+        <h2>7. Firmware</h2>
         <div class="itembody-wrapper">
-          <p>
-            <b>Username:</b><br>
-            <input type="text" value="admin" data-bind="textInput: config.www_username">
-          </p>
-          <p>
-            <b>Password:</b><br>
-            <input type="password" data-bind="textInput: config.www_password"><br><br>
-            <span>Web interface HTTP authentication.</span><br><br>
-            <button data-bind="click: saveAdmin, text: (saveAdminFetching() ? 'Saving' : (saveAdminSuccess() ? 'Saved' : 'Save')), disable: saveAdminFetching">Save</button>
-          </p>
-        </div>
-      </div>
-      <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="six">
-        <h2>6. Firmware</h2>
-        <div class="itembody-wrapper">
-			<span>Check the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> for the latest updates to our version of EmonESP. The Upload feature can be used to upload the latest firmware .bin files. If for some reason the update fails, you may need to connect the ESP to your computer and upload via the Arduino or Platform.io IDE.</span><br>
+			<span>Check the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page</a> for the latest updates to our version of EmonESP. The Upload feature can be used to upload the latest firmware .bin files. If for some reason the update fails, you may need to connect the ESP to your computer and upload via the Arduino or Platform.io IDE.</span><br>
 
           <button id="upload">Upload</button>
         </div>
       </div>
-	        <!--//////////////////////////////////////////////////////////////////////////////////-->
-      <div id="seven">
-        <h2>7. Calibration Settings</h2>
-        <div class="itembody-wrapper">
-		<span>Values for voltage and current calibration. <br>For more information on setting custom values for calibration see the <a href="https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter">Energy Meter Github page.</a> <b>The default values are used unless other values are entered here.</b></span><br><br>
-          <p>
-            <b>Voltage1:</b><br>
-			<span class="small-text">7305 - 9v AC Transformer - Jameco 157041 (default)</span><br>
-            <input type="text" value="voltage_cal" data-bind="textInput: config.voltage_cal"><br>
-          </p>
-		  <p>
-            <b>Voltage2:</b><br>
-            <input type="text" value="voltage_cal" data-bind="textInput: config.voltage_cal"><br>
-          </p>
-          <p>
-            <b>CT1:</b><br>
-			<span class="small-text">If you are using an add-on board, CT1-CT6 will be set with the values below for all boards. If you need a seperate current calibration for an add-on board, this has to be set in software.
-			<br>20A/25mA SCT-006: 11131
-  			<br>30A/1V SCT-013-030: 8650
-  			<br>50A/1V SCT-013-050: 15420
-  			<br>80A/26.6mA SCT-010: 41996
-  			<br>100A/50ma SCT-013-000: 27961 (default)
-  			<br>120A/40mA: SCT-016: 41880</span><br>
-            <input type="text" data-bind="textInput: config.ct1_cal"><br>
-          </p>
-		  <p>
-            <b>CT2:</b><br>
-            <input type="text" data-bind="textInput: config.ct2_cal"><br>
-          </p>
-		  <p>
-            <b>CT3:</b><br>
-            <input type="text" data-bind="textInput: config.ct3_cal"><br>
-          </p>
-		  <p>
-            <b>CT4:</b><br>
-            <input type="text" data-bind="textInput: config.ct4_cal"><br>
-          </p>
-		  <p>
-            <b>CT5:</b><br>
-            <input type="text" data-bind="textInput: config.ct5_cal"><br>
-          </p>
-		  <p>
-            <b>CT6:</b><br>
-            <input type="text" data-bind="textInput: config.ct6_cal"><br>
-          </p>
-		  <br>
-		  <p>
-		    <b>Frequency:</b><br>
-            <input type="text" data-bind="textInput: config.freq_cal"><br>
-			<span class="small-text">60 Hz - North America: 4231 (Default)
-			<br>50 Hz - Europe: 135</span>
-          </p>
-		  <p>
-		    <b>CT Gain (PGA):</b><br>
-			<span class="small-text">Sets the CT current gain to 1x, 2x, or 4x. If your CT has a low current output use 2x or 4x.</span><br>
-            <input type="text" data-bind="textInput: config.gain_cal"><br>
-			<span class="small-text"> 1x: 0 (default)
-			<br>2x: 21
-			<br>4x: 42</span>
-			<br><br>
-            
-            <button data-bind="click: saveCal, text: (saveCalFetching() ? 'Saving' : (saveCalSuccess() ? 'Saved' : 'Save')), disable: saveCalFetching">Save</button><br>
-			<span>After saving, the ESP will be restarted and values sent to the energy meter</span>
-          </p>
-        </div>
-      </div>
-
       <!--//////////////////////////////////////////////////////////////////////////////////-->
       <div id="eight">
         <h2>8. System</h2>

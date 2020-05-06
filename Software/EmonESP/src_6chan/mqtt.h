@@ -47,7 +47,7 @@ extern void mqtt_loop();
 //
 // data: a comma seperated list of name:value pairs to send
 // -------------------------------------------------------------------
-extern void mqtt_publish(String data);
+extern void mqtt_publish(const char * data);
 
 // -------------------------------------------------------------------
 // Restart the MQTT connection

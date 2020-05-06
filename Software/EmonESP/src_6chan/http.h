@@ -36,15 +36,9 @@
 #include <Arduino.h>
 
 // -------------------------------------------------------------------
-// HTTPS SECURE GET Request
+// HTTP or HTTPS GET Request
 // url: N/A
 // -------------------------------------------------------------------
-extern String get_https(const char* fingerprint, const char* host, String url, int httpsPort);
-
-// -------------------------------------------------------------------
-// HTTP GET Request
-// url: N/A
-// -------------------------------------------------------------------
-extern String get_http(const char* host, String url);
+extern String get_http(const char * host, const char * url, int port=80, const char * fingerprint=NULL);
 
 #endif // _EMONESP_HTTP_H
