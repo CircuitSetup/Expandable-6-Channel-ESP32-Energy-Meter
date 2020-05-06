@@ -139,7 +139,7 @@ void mqtt_publish(const char * data)
   sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic, mqtt_feed_prefix);
   sprintf(mqtt_data, "%d", WiFi.RSSI());
   if(!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
-  }
+  {
     return;
   }
 }
