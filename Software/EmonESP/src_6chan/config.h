@@ -69,10 +69,17 @@ extern unsigned short voltage_cal;
 extern unsigned short voltage2_cal;
 extern unsigned short freq_cal;
 extern unsigned short gain_cal[NUM_BOARDS];
+extern String ct_name[NUM_CHANNELS];
 extern unsigned short ct_cal[NUM_CHANNELS];
 extern float cur_mul[NUM_CHANNELS];
 extern float pow_mul[NUM_CHANNELS];
 
+struct config_flags_t
+{
+  bool mqtt_json:1;
+};
+
+extern config_flags_t config_flags;
 
 // -------------------------------------------------------------------
 // Load saved settings
@@ -87,7 +94,7 @@ extern void config_save_emoncms(String server, String path, String node, String 
 // -------------------------------------------------------------------
 // Save the MQTT broker details
 // -------------------------------------------------------------------
-extern void config_save_mqtt(String server, String topic, String prefix, String user, String pass);
+extern void config_save_mqtt(String server, String topic, String prefix, String user, String pass, bool json);
 
 // -------------------------------------------------------------------
 // Save the Calibration details

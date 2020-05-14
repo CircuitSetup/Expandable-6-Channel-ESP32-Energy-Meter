@@ -287,7 +287,8 @@ void handleSaveMqtt(AsyncWebServerRequest *request) {
                    request->arg("topic"),
                    request->arg("prefix"),
                    request->arg("user"),
-                   pass);
+                   pass,
+                   request->arg("json") != "false");
 
   char tmpStr[200];
   snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", mqtt_server.c_str(),
@@ -439,6 +440,13 @@ void handleConfig(AsyncWebServerRequest *request) {
     s += dummyPassword;
   }
   s += "\",";
+  s += "\"mqtt_json\":\"";
+  if (config_flags.mqtt_json) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
   s += "\"www_username\":\"" + www_username + "\",";
   s += "\"www_password\":\"";
   if (www_password != 0) {
@@ -467,6 +475,7 @@ void handleConfig(AsyncWebServerRequest *request) {
   }
   for (int i = 0; i < NUM_CHANNELS; i ++)
   {
+    s += "\"ct" + String(i+1) + "_name\":\"" + ct_name[i] + "\",";
     s += "\"ct" + String(i+1) + "_cal\":\"" + ct_cal[i] + "\",";
     s += "\"cur" + String(i+1) + "_mul\":\"" + cur_mul[i] + "\",";
     s += "\"pow" + String(i+1) + "_mul\":\"" + pow_mul[i] + "\",";
