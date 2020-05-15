@@ -78,10 +78,12 @@ The CS pins can be:
     * For v1.4 and above:
       * 0
       * 27
-      * 35
+      * 35 (do not use - it will not work correctly)
       * 13
       * 14
       * 15
+    * For v1.4 rev1 and above:
+      * 35 is changed to 2 (may prevent the ESP32 from being programmed - disconnect jumper if so)
   * CT4-CT6 (CS2):
     * 16
     * 17
