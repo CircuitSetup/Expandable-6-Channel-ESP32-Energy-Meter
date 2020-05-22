@@ -119,7 +119,7 @@ The CS pins can be:
 * AC Transformers
     * Jameco 9VAC Transformer 157041: 
        * For meter versions: 
-         * >= v1.3: 7305
+         * v1.3 or greater: 7305
          * v1.2: 42620
 
 #### **Measuring Power & Other Metering Values**
