@@ -335,11 +335,11 @@ function EmonEspViewModel() {
       fingerprint: self.config.emoncms_fingerprint()
     };
 
-    if (emoncms.server === "" || emoncms.node === "") {
-      alert("Please enter EmonCMS server and node");
-    } else if (emoncms.apikey.length != 32) {
+    if (emoncms.server != "" && emoncms.node === "") {
+      alert("Please enter EmonCMS node");
+    } else if (emoncms.server != "" && emoncms.apikey.length != 32) {
       alert("Please enter a valid Emoncms apikey");
-    } else if (emoncms.fingerprint !== "" && emoncms.fingerprint.length != 59) {
+    } else if (emoncms.server != "" && emoncms.fingerprint !== "" && emoncms.fingerprint.length != 59) {
       alert("Please enter a valid SSL SHA-1 fingerprint");
     } else {
       self.saveEmonCmsFetching(true);
