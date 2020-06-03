@@ -115,7 +115,7 @@ void mqtt_publish(const char * data)
   {
     const char * data_ptr = data;
     char * topic_ptr = mqtt_topic_prefix;
-    topic_ptr += sprintf(mqtt_topic_prefix, "%s/%s", mqtt_topic, mqtt_feed_prefix);
+    topic_ptr += sprintf(mqtt_topic_prefix, "%s/%s", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
 
     do
     {
