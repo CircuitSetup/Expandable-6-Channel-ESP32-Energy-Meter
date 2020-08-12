@@ -45,6 +45,7 @@ char input_json[MAX_DATA_LEN];
 
 static char mqtt_topic_prefix[128] = "";
 static char mqtt_data[64] = "";
+static int mqtt_connection_error_count = 0;
 
 // -------------------------------------------------------------------
 // MQTT Connect
@@ -173,6 +174,16 @@ void mqtt_loop()
       lastMqttReconnectAttempt = now;
       if (mqtt_connect()) { // Attempt to reconnect
         lastMqttReconnectAttempt = 0;
+        mqtt_connection_error_count = 0;
+      } else {
+        mqtt_connection_error_count ++;
+        if (mqtt_connection_error_count > 10) {
+#ifdef ESP32
+          esp_restart();
+#else
+          ESP.restart();
+#endif
+        }
       }
     }
   } else {
