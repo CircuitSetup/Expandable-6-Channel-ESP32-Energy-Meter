@@ -62,6 +62,9 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 ### **Setting up the Meter**
 
+![Expandable 6 Channel ESP32 Energy Meter Diagram](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/6-channel_diagram.png)
+![Expandable 6 Channel ESP32 Energy Meter Back Diagram](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/6_channel_v1.4_back.png)
+
 #### **Plugging in the ESP32**
 The Expandable 6 Channel ESP32 Energy Meter is made so that an ESP32 dev board can be plugged directly into the meter. See the list above for compatible ESP32 dev boards. 
 **Always insert the ESP32 with the 3V3 pin in the upper left of the meter**. The bottom pins are used to connect the voltage signal (from the power plug) to add-on boards. If the ESP32 is inserted into the bottom pins it will more than likely short the ESP32.
@@ -75,6 +78,13 @@ The **main board** uses the following SPI pins:
 * MOSI - 23
 * CS1 - 5 (CT1-CT3 & Voltage 1)
 * CS2 - 4 (CT4-CT6 & Voltage 2)
+
+The version of [EmonESP available here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) has all of these pins set by default. 
+
+For examples of how to set up your config in ESPHome, [see here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome) and [here.](https://next.esphome.io/components/sensor/atm90e32.html)
+
+#### **Add-on Boards**
+Add-on boards (up to 6) can expand the main energy meter up to 42 current channels & 8 voltage channels. The add-on boards plug directly into the main board as seen here.
 
 The **add-on board** allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
 The CS pins can be:
@@ -103,6 +113,8 @@ The CS pins can be:
     * 25
     * 26
     
+![Expandable 6 Channel ESP32 Energy Meter Add-on Diagram](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/6-channel-add-on_diagram.png)
+
 #### **Calibrating Current Sensors & Voltage (AC Transformer)** 
 [See here for the calibration procedure](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter#calibration),
 [or here for a video](https://youtu.be/BOgy6QbfeZk?t=1261)
