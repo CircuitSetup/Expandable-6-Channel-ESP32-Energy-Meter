@@ -35,6 +35,7 @@
 #include <Arduino.h>
 #include <PubSubClient.h>             // MQTT https://github.com/knolleary/pubsubclient PlatformIO lib: 89
 #include <WiFiClient.h>
+#include "emonesp.h"
 
 // -------------------------------------------------------------------
 // Perform the background MQTT operations. Must be called in the main
@@ -61,5 +62,8 @@ extern void mqtt_restart();
 extern boolean mqtt_connected();
 
 String uint64ToString(uint64_t input);
+
+extern char input_json[MAX_DATA_LEN];
+
 
 #endif // _EMONESP_MQTT_H

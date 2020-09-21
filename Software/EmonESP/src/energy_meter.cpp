@@ -28,6 +28,7 @@
 #include "emoncms.h"
 #include "input.h"
 #include "config.h"
+#include "mqtt.h"
 
 // for ATM90E32 energy meter
 #include <SPI.h>
@@ -75,7 +76,7 @@ void energy_meter_setup() {
   {
     sensor_ic1[i].begin(CS1[i], freq_cal, gain_cal[i] & 0xFF, voltage_cal, ct_cal[i*NUM_INPUTS+0], ct_cal[i*NUM_INPUTS+1], ct_cal[i*NUM_INPUTS+2]);
     sensor_ic2[i].begin(CS2[i], freq_cal, gain_cal[i] >> 8, voltage2_cal, ct_cal[i*NUM_INPUTS+3], ct_cal[i*NUM_INPUTS+4], ct_cal[i*NUM_INPUTS+5]);
-    delay(100);
+    delay(200);
   }
 
 #ifdef ENABLE_OLED_DISPLAY
@@ -93,7 +94,6 @@ void energy_meter_setup() {
 #endif
 
   startMillis = millis();  //initial start time
-
 } // end setup
 
 // -------------------------------------------------------------------
@@ -101,9 +101,10 @@ void energy_meter_setup() {
 // -------------------------------------------------------------------
 void energy_meter_loop()
 {
-  int i, j;
+  int i, j, json_idx = 0;
 
   char * result = input_string;
+  char * result_json = input_json;
 
   /*get the current "time" (actually the number of milliseconds since the program started)*/
   currentMillis = millis();
@@ -119,7 +120,8 @@ void energy_meter_loop()
   startMillis = currentMillis;
 
   /*Repeatedly fetch some values from the ATM90E32 */
-  float  temp, freq, voltage1, voltage2, currentCT[NUM_INPUTS], realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
+  float temp, freq, voltage1, voltage2, voltageCT[NUM_INPUTS], currentCT[NUM_INPUTS],
+        realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
 
   unsigned short sys0 = sensor_ic1[0].GetSysStatus0();  //EMMState0
   unsigned short sys1 = sensor_ic1[0].GetSysStatus1();  //EMMState1
@@ -164,6 +166,8 @@ void energy_meter_loop()
   dtostrf(voltage2, 2, 2, measurement);
   strcat(result, measurement);
 
+  result_json += sprintf(result_json, "{\"temp\":%.1f,\"freq\":%.2f,\"sensors\":[", temp, freq);
+
   for (i = 0; i < NUM_BOARDS; i ++)
   {
     unsigned short sys0_1 = sensor_ic1[i].GetSysStatus0();  //EMMState0
@@ -177,6 +181,13 @@ void energy_meter_loop()
     }
 
     /* get current readings from each IC */
+    voltageCT[0] = sensor_ic1[i].GetLineVoltageA();
+    voltageCT[1] = sensor_ic1[i].GetLineVoltageB();
+    voltageCT[2] = sensor_ic1[i].GetLineVoltageC();
+    voltageCT[3] = sensor_ic2[i].GetLineVoltageA();
+    voltageCT[4] = sensor_ic2[i].GetLineVoltageB();
+    voltageCT[5] = sensor_ic2[i].GetLineVoltageC();
+
     currentCT[0] = sensor_ic1[i].GetLineCurrentA();
     currentCT[1] = sensor_ic1[i].GetLineCurrentB();
     currentCT[2] = sensor_ic1[i].GetLineCurrentC();
@@ -222,6 +233,19 @@ void energy_meter_loop()
 
       Serial.println("I" + String(i) + "_" + String(j) + ":" + String(currentCT[j]) + "A");
 
+      if (i != 0 || j != 0)
+      {
+        result_json += sprintf(result_json, ",");
+      }
+
+      result_json += sprintf(result_json, "{\"ct\":%d", i*NUM_INPUTS+j+1);
+      result_json += sprintf(result_json, ",\"name\":\"%s\"", ct_name[i*NUM_INPUTS+j].c_str());
+      result_json += sprintf(result_json, ",\"w\":%.2f", realPowerCT[j]);
+      result_json += sprintf(result_json, ",\"a\":%.4f", currentCT[j]);
+      result_json += sprintf(result_json, ",\"pf\":%.3f", powerFactorCT[j]);
+      result_json += sprintf(result_json, ",\"va\":%.2f", vaPowerCT[j]);
+      result_json += sprintf(result_json, ",\"v\":%.2f}", voltageCT[j]);
+
       sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
       dtostrf(currentCT[j], 2, 4, measurement);
       strcat(result, measurement);
@@ -240,6 +264,7 @@ void energy_meter_loop()
     }
     Serial.println("");
   }
+  strcpy(result_json, "]}");
 
 #ifdef ENABLE_OLED_DISPLAY
   /* Write meter data to the display */

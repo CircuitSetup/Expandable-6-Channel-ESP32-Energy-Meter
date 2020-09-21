@@ -140,6 +140,11 @@
               Leave blank for no prefix.
             </span>
           </p>
+          <p><b>JSON format:</b>
+            <input data-bind="checked: config.mqtt_json" type="checkbox"><br/>
+            <span class="small-text">
+              Use JSON formatting for sending data over MQTT.  The measurements from each sensor will be grouped into one packet.
+            </span>
           <p><b>Username:</b><br>
             <input data-bind="textInput: config.mqtt_user" type="text"><br/>
             <span class="small-text">Leave blank for no authentication</span>
@@ -181,6 +186,10 @@
                </select>
              </div>
              <div style="margin-left: 70px;">
+            <b>Name:</b><br>
+			<span class="small-text">
+			Friendly name for the sensor.</span><br>
+			<input type="text" data-bind="textInput: sensorconfig.selectedName, enable: sensorconfig.selectedNameEnable"><br>
             <b>CT Sensor Cal:</b><br>
 			<span class="small-text">
 			20A/25mA SCT-006: 11131
@@ -205,7 +214,7 @@
 
 		</p>
 		  <p>
-            
+
             <button data-bind="click: saveCal, text: (saveCalFetching() ? 'Saving' : (saveCalSuccess() ? 'Saved' : 'Save')), disable: saveCalFetching">Save</button><br>
 			<span>After saving, the ESP will be restarted and values sent to the energy meter</span>
         <div class="small-text">

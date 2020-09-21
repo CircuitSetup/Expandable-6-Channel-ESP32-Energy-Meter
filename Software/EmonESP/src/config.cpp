@@ -57,9 +57,13 @@ unsigned short voltage_cal = 0;
 unsigned short voltage2_cal = 0;
 unsigned short freq_cal = 0;
 unsigned short gain_cal[NUM_BOARDS] = { 0 };
+String ct_name[NUM_CHANNELS] = "";
 unsigned short ct_cal[NUM_CHANNELS] = { 0 };
 float cur_mul[NUM_CHANNELS] = { 0.0 };
 float pow_mul[NUM_CHANNELS] = { 0.0 };
+
+//Configuration flags
+struct config_flags_t config_flags = { 0 };
 
 #define EEPROM_ESID_SIZE          32
 #define EEPROM_EPASS_SIZE         64
@@ -81,7 +85,9 @@ float pow_mul[NUM_CHANNELS] = { 0.0 };
 #define EEPROM_CAL_CT_SIZE        3
 #define EEPROM_CUR_MUL_SIZE       5
 #define EEPROM_POW_MUL_SIZE       5
-#define EEPROM_SIZE               1024
+#define EEPROM_CONFIG_FLAGS_SIZE  3
+#define EEPROM_NAME_CT_SIZE       49
+#define EEPROM_SIZE               4096
 
 #define EEPROM_ESID_START         0
 #define EEPROM_ESID_END           (EEPROM_ESID_START + EEPROM_ESID_SIZE)
@@ -125,7 +131,11 @@ float pow_mul[NUM_CHANNELS] = { 0.0 };
 #define EEPROM_CUR_MUL_END        (EEPROM_CUR_MUL_START + EEPROM_CUR_MUL_SIZE*NUM_CHANNELS)
 #define EEPROM_POW_MUL_START      EEPROM_CUR_MUL_END
 #define EEPROM_POW_MUL_END        (EEPROM_POW_MUL_START + EEPROM_POW_MUL_SIZE*NUM_CHANNELS)
-#define EEPROM_CONFIG_END         EEPROM_POW_MUL_END
+#define EEPROM_CONFIG_FLAGS_START EEPROM_POW_MUL_END
+#define EEPROM_CONFIG_FLAGS_END   (EEPROM_CONFIG_FLAGS_START + EEPROM_CONFIG_FLAGS_SIZE)
+#define EEPROM_NAME_CT_START      EEPROM_CONFIG_FLAGS_END
+#define EEPROM_NAME_CT_END        (EEPROM_NAME_CT_START + EEPROM_NAME_CT_SIZE*NUM_CHANNELS)
+#define EEPROM_CONFIG_END         EEPROM_NAME_CT_MUL_END
 
 #if EEPROM_CONFIG_END > EEPROM_SIZE
 #error EEPROM_SIZE too small
@@ -323,6 +333,7 @@ void config_load_settings()
   freq_cal = EEPROM_read_ushort(EEPROM_CAL_FREQ_START, LINE_FREQ_DEFAULT);
   for (int i = 0; i < NUM_CHANNELS; i++)
   {
+    EEPROM_read_string(EEPROM_NAME_CT_START + (i*EEPROM_NAME_CT_SIZE), EEPROM_NAME_CT_SIZE, ct_name[i], "ct" + String(i+1));
     ct_cal[i] = EEPROM_read_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE), CURRENT_GAIN_DEFAULT);
     cur_mul[i] = EEPROM_read_float(EEPROM_CUR_MUL_START + (i*EEPROM_CUR_MUL_SIZE), 1.0);
     pow_mul[i] = EEPROM_read_float(EEPROM_POW_MUL_START + (i*EEPROM_POW_MUL_SIZE), 1.0);
@@ -331,6 +342,9 @@ void config_load_settings()
   {
     gain_cal[i] = EEPROM_read_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE), PGA_GAIN_DEFAULT);
   }
+
+  // Configuration flags
+  *((uint16_t *)&config_flags) = EEPROM_read_ushort(EEPROM_CONFIG_FLAGS_START, 0);
 
   // Web server credentials
   EEPROM_read_string(EEPROM_WWW_USER_START, EEPROM_WWW_USER_SIZE, www_username);
@@ -367,10 +381,11 @@ void config_save_emoncms(String server, String path, String node, String apikey,
   EEPROM.end();
 }
 
-void config_save_mqtt(String server, String topic, String prefix, String user, String pass)
+void config_save_mqtt(String server, String topic, String prefix, String user, String pass, bool json)
 {
   EEPROM.begin(EEPROM_SIZE);
 
+  config_flags.mqtt_json = json;
   mqtt_server = server;
   mqtt_topic = topic;
   mqtt_feed_prefix = prefix;
@@ -392,6 +407,9 @@ void config_save_mqtt(String server, String topic, String prefix, String user, S
   // Save MQTT pass max 64 characters
   EEPROM_write_string(EEPROM_MQTT_PASS_START, EEPROM_MQTT_PASS_SIZE, mqtt_pass);
 
+  // Configuration flags
+  EEPROM_write_ushort(EEPROM_CONFIG_FLAGS_START, *((uint16_t *)&config_flags));
+
   EEPROM.end();
 }
 
@@ -412,6 +430,9 @@ void config_save_cal(AsyncWebServerRequest * request)
 
   for (int i = 0; i < NUM_CHANNELS; i++)
   {
+    sprintf(req, "ct%d_name", i+1);
+    ct_name[i] = request->arg(req);
+    EEPROM_write_string(EEPROM_NAME_CT_START + (i*EEPROM_NAME_CT_SIZE), EEPROM_NAME_CT_SIZE, ct_name[i]);
     sprintf(req, "ct%d_cal", i+1);
     ct_cal[i] = request->arg(req).toInt();
     EEPROM_write_ushort(EEPROM_CAL_CT_START + (i*EEPROM_CAL_CT_SIZE), ct_cal[i]);
