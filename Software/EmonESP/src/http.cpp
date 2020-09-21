@@ -28,7 +28,7 @@
 #include "emonesp.h"
 #include "http.h"
 
-#define HTTP_TIMEOUT 3
+#define HTTP_TIMEOUT 4
 
 #include <Print.h>
 #include <WiFiClient.h>         // http GET request
@@ -45,8 +45,7 @@ static char request[MAX_DATA_LEN+100];
 // url: N/A
 // -------------------------------------------------------------------
 
-String
-get_http(const char * host, const char * url, int port, const char * fingerprint) {
+String get_http(const char * host, const char * url, int port, const char * fingerprint) {
   WiFiClientSecure * http;
 
   if (fingerprint) {
@@ -93,4 +92,3 @@ get_http(const char * host, const char * url, int port, const char * fingerprint
 #endif
   return ("error " + String(host));
 }
-

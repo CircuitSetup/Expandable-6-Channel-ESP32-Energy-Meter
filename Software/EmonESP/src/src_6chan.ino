@@ -62,19 +62,19 @@ void setup() {
 #ifdef DEBUG_SERIAL1
   Serial1.begin(115200);
 #endif
-  delay(1000);
+  delay(500);
 
   // Read saved settings from the config
   config_load_settings();
-  delay(500);
+  delay(200);
 
   // Initialise the WiFi
   wifi_setup();
-  delay(500);
+  delay(200);
 
   // Bring up the web server
   web_server_setup();
-  delay(500);
+  delay(200);
 
 #ifdef ENABLE_WDT
   DBUGS.println("Watchdog timer is enabled.");

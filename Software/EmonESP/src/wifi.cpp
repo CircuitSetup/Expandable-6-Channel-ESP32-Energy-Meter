@@ -104,7 +104,7 @@ void startAP() {
   // Pick a random channel out of 1, 6 or 11
   int channel = (random(3) * 5) + 1;
   WiFi.softAP(softAP_ssid_ID.c_str(), softAP_password, channel);
-  delay(500); // Without delay the IP address is sometimes blank
+  delay(200); // Without delay the IP address is sometimes blank
 
   // Setup the DNS server redirecting all the domains to the apIP
   /*dnsServer.setErrorReplyCode(DNSReplyCode::NoError);

@@ -37,16 +37,15 @@
 
 #ifdef ENABLE_DEBUG
 #ifndef DEBUG_PORT
-#define DEBUG_PORT Serial1
+#define DEBUG_PORT Serial
 #endif
-#define DBUGS               Serial
+#define DBUGS               DEBUG_PORT
 #define DEBUG_BEGIN(speed)  DEBUG_PORT.begin(speed)
-#define DBUGF(format, ...)  DEBUG_PORT.printf_P(PSTR(format "\n"), ##__VA_ARGS__)
 #define DBUGF(format, ...)  DEBUG_PORT.printf(format "\n", ##__VA_ARGS__)
 #define DBUG(...)           DEBUG_PORT.print(__VA_ARGS__)
 #define DBUGLN(...)         DEBUG_PORT.println(__VA_ARGS__)
 #else
-#define DBUGS               Serial
+#define DBUGS               DEBUG_PORT
 #define DEBUG_BEGIN(speed)
 #define DBUGF(...)
 #define DBUG(...)
