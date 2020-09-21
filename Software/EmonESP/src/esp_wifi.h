@@ -26,8 +26,8 @@
    Boston, MA 02111-1307, USA.
 */
 
-#ifndef _EMONESP_WIFI_H
-#define _EMONESP_WIFI_H
+#ifndef _EMONESP_ESP_WIFI_H
+#define _EMONESP_ESP_WIFI_H
 
 #include <Arduino.h>
 
