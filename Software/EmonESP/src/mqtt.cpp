@@ -29,7 +29,7 @@
 #include "emonesp.h"
 #include "mqtt.h"
 #include "config.h"
-#include "wifi.h"
+#include "esp_wifi.h"
 
 #define MQTT_TIMEOUT 3
 
@@ -67,7 +67,7 @@ boolean mqtt_connect()
 #endif
 
   if (mqtt_user.length() == 0) {
-    //allows for anonymous connection 
+    //allows for anonymous connection
     if (mqttclient.connect(strID.c_str())) {  // Attempt to connect
       DBUGS.println("MQTT connected");
       mqttclient.publish(mqtt_topic.c_str(), "connected"); // Once connected, publish an announcement..
@@ -76,7 +76,7 @@ boolean mqtt_connect()
       DBUGS.println(mqttclient.state());
       return (0);
     }
-    
+
   } else {
     if (mqttclient.connect(strID.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {  // Attempt to connect
       DBUGS.println("MQTT connected");

@@ -37,7 +37,7 @@
 #include <esp_task_wdt.h>
 #include "emonesp.h"
 #include "config.h"
-#include "wifi.h"
+#include "esp_wifi.h"
 #include "web_server.h"
 #include "ota.h"
 #include "input.h"

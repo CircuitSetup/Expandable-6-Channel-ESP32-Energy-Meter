@@ -30,7 +30,7 @@
 #include "energy_meter.h"
 #include "web_server.h"
 #include "config.h"
-#include "wifi.h"
+#include "esp_wifi.h"
 #include "mqtt.h"
 #include "input.h"
 #include "emoncms.h"
