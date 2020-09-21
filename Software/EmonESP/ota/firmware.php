@@ -1,5 +1,5 @@
 <?php
-    $githubApiUrl = "https://api.github.com/repos/openenergymonitor/EmonESP/releases/latest";
+    $githubApiUrl = "https://api.github.com/repos/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/releases/latest";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

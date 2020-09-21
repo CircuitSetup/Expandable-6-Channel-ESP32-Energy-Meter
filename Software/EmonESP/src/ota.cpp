@@ -32,7 +32,6 @@
 #include "esp_wifi.h"
 #include "http.h"
 
-
 // -------------------------------------------------------------------
 //OTA UPDATE SETTINGS
 // -------------------------------------------------------------------
@@ -47,14 +46,40 @@ void ota_setup()
 {
   // Start local OTA update server
   ArduinoOTA.setHostname(esp_hostname);
+  ArduinoOTA
+    .onStart([]() {
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+      {
+        type = "filesystem";
+        SPIFFS.end(); // unmount filesystem
+      }
+      DBUGS.println("Start updating " + type);
+    })
+    .onEnd([]() {
+      DBUGS.println("\nOTA Update Complete");
+      if (ArduinoOTA.getCommand() == U_SPIFFS)
+        SPIFFS.begin();
+    })
+    #ifdef WIFI_LED
+    .onProgress([](unsigned int pos, unsigned int size) {
+      static int state = LOW;
+      state = !state;
+      digitalWrite(WIFI_LED, state);
+    })
+    #endif
+    .onError([](ota_error_t error) {
+      DBUGS.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) DBUGS.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) DBUGS.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) DBUGS.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) DBUGS.println("Receive Failed");
+      else if (error == OTA_END_ERROR) DBUGS.println("End Failed");
+    });
+
   ArduinoOTA.begin();
-#ifdef WIFI_LED
-  ArduinoOTA.onProgress([](unsigned int pos, unsigned int size) {
-    static int state = LOW;
-    state = !state;
-    digitalWrite(WIFI_LED, state);
-  });
-#endif
 }
 
 void ota_loop()
@@ -71,12 +96,14 @@ String ota_get_latest_version()
   return get_http(u_host, u_url);
 }
 
-#ifdef ESP8266
 t_httpUpdate_return ota_http_update()
 {
+  WiFiClient client;
+  #ifdef ENABLE_WDT
+    feedLoopWDT();
+  #endif
   SPIFFS.end(); // unmount filesystem
-  t_httpUpdate_return ret = ESPhttpUpdate.update("http://" + String(u_host) + String(u_url) + "?tag=" + currentfirmware);
+  t_httpUpdate_return ret = httpUpdate.update(client,"http://" + String(u_host) + String(u_url) + "?tag=" + currentfirmware);
   SPIFFS.begin(); //mount-file system
   return ret;
 }
-#endif

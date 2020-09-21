@@ -62,7 +62,7 @@ void setup() {
 #ifdef DEBUG_SERIAL1
   Serial1.begin(115200);
 #endif
-  delay(500);
+  delay(200);
 
   // Read saved settings from the config
   config_load_settings();
@@ -81,7 +81,7 @@ void setup() {
   feedLoopWDT();
 #endif
 
-#ifdef ESP8266
+#ifdef ENABLE_WEB_OTA
   // Start the OTA update systems
   ota_setup();
 #endif
@@ -105,7 +105,7 @@ void loop()
   web_server_loop();
   wifi_loop();
 
-#ifdef ESP8266
+#ifdef ENABLE_WEB_OTA
   ota_loop();
 #endif
 

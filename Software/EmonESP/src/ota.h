@@ -35,20 +35,12 @@
 
 #include <Arduino.h>
 #include <FS.h>
+#include <HTTPUpdate.h>
 #include <ArduinoOTA.h>               // local OTA update from Arduino IDE
-#ifdef ESP32
-#include <Update.h>        // remote OTA update from server
-#elif defined(ESP8266)
-#include <ESP8266httpUpdate.h>        // remote OTA update from server
-#endif
 
-
-void ota_setup();
-void ota_loop();
-String ota_get_latest_version();
-
-#ifdef ESP8266
-t_httpUpdate_return ota_http_update();
-#endif
+extern void ota_setup();
+extern void ota_loop();
+extern String ota_get_latest_version();
+extern t_httpUpdate_return ota_http_update();
 
 #endif // _EMONESP_OTA_H

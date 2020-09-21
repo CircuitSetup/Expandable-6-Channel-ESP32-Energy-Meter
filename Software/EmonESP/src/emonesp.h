@@ -35,7 +35,16 @@
 
 #include "debug.h"
 
+#ifndef ENABLE_WDT
 #define ENABLE_WDT
+#endif
+
+#ifndef MAX_DATA_LEN
 #define MAX_DATA_LEN 4096
+#endif
+
+#ifndef ENABLE_WEB_OTA
+//#define ENABLE_WEB_OTA
+#endif
 
 #endif // _EMONESP_H

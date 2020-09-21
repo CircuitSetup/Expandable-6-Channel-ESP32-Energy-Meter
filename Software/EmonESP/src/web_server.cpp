@@ -574,7 +574,7 @@ void handleUpdateCheck(AsyncWebServerRequest *request) {
 // -------------------------------------------------------------------
 void handleUpdate(AsyncWebServerRequest *request) {
   // BUG/HACK/TODO: This will block, should be done in the loop call
-
+#ifdef ENABLE_WEB_OTA
   AsyncResponseStream *response;
   if (false == requestPreProcess(request, response, "text/plain")) {
     return;
@@ -583,8 +583,6 @@ void handleUpdate(AsyncWebServerRequest *request) {
   DBUGLN("UPDATING...");
   delay(500);
 
-  //will not work with ESP32 Update.h
-#ifdef ESP8266
   t_httpUpdate_return ret = ota_http_update();
 
   int retCode = 400;
@@ -592,9 +590,9 @@ void handleUpdate(AsyncWebServerRequest *request) {
   switch (ret) {
     case HTTP_UPDATE_FAILED:
       str = "Update failed error (";
-      str += ESPhttpUpdate.getLastError();
+      str += httpUpdate.getLastError();
       str += "): ";
-      str += ESPhttpUpdate.getLastErrorString();
+      str += httpUpdate.getLastErrorString();
       break;
     case HTTP_UPDATE_NO_UPDATES:
       str = "No update, running latest firmware";
