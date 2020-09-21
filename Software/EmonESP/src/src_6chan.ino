@@ -120,8 +120,10 @@ void loop()
 
   if (wifi_client_connected()) {
     if (emoncms_apikey != 0 && gotInput) {
-//      DBUGS.println(input);
-      emoncms_publish(input);
+      //DBUGS.println(input);
+      if (emoncms_server != 0) {
+        emoncms_publish(input);
+      }
     }
     if (mqtt_server != 0) {
       mqtt_loop();

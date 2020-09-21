@@ -91,55 +91,7 @@ StatusViewModel.prototype.constructor = StatusViewModel;
 
 function ConfigViewModel() {
   var self = this;
-  BaseViewModel.call(self, {
-    "espflash":"",
-    "version":"",
-    "ssid":"",
-    "pass":"",
-    "emoncms_server":"emoncms.org",
-    "emoncms_path":"/emoncms",
-    "emoncms_node":"",
-    "emoncms_apikey":"",
-    "emoncms_fingerprint":"",
-    "mqtt_server":"",
-    "mqtt_topic":"",
-    "mqtt_feed_prefix":"",
-    "mqtt_user":"",
-    "mqtt_pass":"",
-    "www_username":"",
-    "www_password":"",
-    "voltage_cal":"",
-    "voltage2_cal":"",
-    "gain1_cal":"1","gain2_cal":"1","gain3_cal":"1","gain4_cal":"1","gain5_cal":"1","gain6_cal":"1",
-    "gain7_cal":"1","gain8_cal":"1","gain9_cal":"1","gain10_cal":"1","gain11_cal":"1","gain12_cal":"1",
-    "gain13_cal":"1","gain14_cal":"1","gain15_cal":"1","gain16_cal":"1","gain17_cal":"1","gain18_cal":"1",
-    "gain19_cal":"1","gain20_cal":"1","gain21_cal":"1","gain22_cal":"1","gain23_cal":"1","gain24_cal":"1",
-    "gain25_cal":"1","gain26_cal":"1","gain27_cal":"1","gain28_cal":"1","gain29_cal":"1","gain30_cal":"1",
-    "gain31_cal":"1","gain32_cal":"1","gain33_cal":"1","gain34_cal":"1","gain35_cal":"1","gain36_cal":"1",
-    "gain37_cal":"1","gain38_cal":"1","gain39_cal":"1","gain40_cal":"1","gain41_cal":"1","gain42_cal":"1",
-    "ct1_cal":"","cur1_mul":"1.00","pow1_mul":"1.00","ct2_cal":"","cur2_mul":"1.00","pow2_mul":"1.00",
-    "ct3_cal":"","cur3_mul":"1.00","pow3_mul":"1.00","ct4_cal":"","cur4_mul":"1.00","pow4_mul":"1.00",
-    "ct5_cal":"","cur5_mul":"1.00","pow5_mul":"1.00","ct6_cal":"","cur6_mul":"1.00","pow6_mul":"1.00",
-    "ct7_cal":"","cur7_mul":"1.00","pow7_mul":"1.00","ct8_cal":"","cur8_mul":"1.00","pow8_mul":"1.00",
-    "ct9_cal":"","cur9_mul":"1.00","pow9_mul":"1.00","ct10_cal":"","cur10_mul":"1.00","pow10_mul":"1.00",
-    "ct11_cal":"","cur11_mul":"1.00","pow11_mul":"1.00","ct12_cal":"","cur12_mul":"1.00","pow12_mul":"1.00",
-    "ct13_cal":"","cur13_mul":"1.00","pow13_mul":"1.00","ct14_cal":"","cur14_mul":"1.00","pow14_mul":"1.00",
-    "ct15_cal":"","cur15_mul":"1.00","pow15_mul":"1.00","ct16_cal":"","cur16_mul":"1.00","pow16_mul":"1.00",
-    "ct17_cal":"","cur17_mul":"1.00","pow17_mul":"1.00","ct18_cal":"","cur18_mul":"1.00","pow18_mul":"1.00",
-    "ct19_cal":"","cur19_mul":"1.00","pow19_mul":"1.00","ct20_cal":"","cur20_mul":"1.00","pow20_mul":"1.00",
-    "ct21_cal":"","cur21_mul":"1.00","pow21_mul":"1.00","ct22_cal":"","cur22_mul":"1.00","pow22_mul":"1.00",
-    "ct23_cal":"","cur23_mul":"1.00","pow23_mul":"1.00","ct24_cal":"","cur24_mul":"1.00","pow24_mul":"1.00",
-    "ct25_cal":"","cur25_mul":"1.00","pow25_mul":"1.00","ct26_cal":"","cur26_mul":"1.00","pow26_mul":"1.00",
-    "ct27_cal":"","cur27_mul":"1.00","pow27_mul":"1.00","ct28_cal":"","cur28_mul":"1.00","pow28_mul":"1.00",
-    "ct29_cal":"","cur29_mul":"1.00","pow29_mul":"1.00","ct30_cal":"","cur30_mul":"1.00","pow30_mul":"1.00",
-    "ct31_cal":"","cur31_mul":"1.00","pow31_mul":"1.00","ct32_cal":"","cur32_mul":"1.00","pow32_mul":"1.00",
-    "ct33_cal":"","cur33_mul":"1.00","pow33_mul":"1.00","ct34_cal":"","cur34_mul":"1.00","pow34_mul":"1.00",
-    "ct35_cal":"","cur35_mul":"1.00","pow35_mul":"1.00","ct36_cal":"","cur36_mul":"1.00","pow36_mul":"1.00",
-    "ct37_cal":"","cur37_mul":"1.00","pow37_mul":"1.00","ct38_cal":"","cur38_mul":"1.00","pow38_mul":"1.00",
-    "ct39_cal":"","cur39_mul":"1.00","pow39_mul":"1.00","ct40_cal":"","cur40_mul":"1.00","pow40_mul":"1.00",
-    "ct41_cal":"","cur41_mul":"1.00","pow41_mul":"1.00","ct42_cal":"","cur42_mul":"1.00","pow42_mul":"1.00",
-    "freq_cal":""
-    }, baseEndpoint + '/config');
+  BaseViewModel.call(self, null, baseEndpoint + '/config');
 }
 ConfigViewModel.prototype = Object.create(BaseViewModel.prototype);
 ConfigViewModel.prototype.constructor = ConfigViewModel;
@@ -170,6 +122,24 @@ function SensorConfigViewModel(baseconfig, baselast) {
         self.config[`${prefix}${sensor.substr(2)}_${postfix}`] = ko.observable(value);
       });
     };
+  self.getOnlyOneValue = function(prefix, postfix) {
+    if (self.selectedSensors().length == 1) {
+      self.selectedNameEnable(true);
+      return self.getValue(prefix, postfix);
+    }
+    else
+    {
+      self.selectedNameEnable(false);
+      return `Can only name one sensor at a time`;
+    }
+  };
+
+    self.selectedName = ko.pureComputed({
+      read: function() { return self.getOnlyOneValue("ct", "name") },
+      write: function(value) { self.setValue("ct", "name", value) }
+    }).extend({ notify: 'always' });
+    self.selectedNameEnable = ko.observable(true);
+
     self.selectedCt = ko.pureComputed({
       read: function() { return self.getValue("ct", "cal") },
       write: function(value) { self.setValue("ct", "cal", value) }
@@ -198,6 +168,7 @@ function SensorConfigViewModel(baseconfig, baselast) {
         }
       });
       self.sensors = ko.observableArray(vals);
+      self.config.mqtt_json = ko.observable(self.config.mqtt_json() != "false");
       after();
    }
 }
@@ -334,7 +305,7 @@ function EmonEspViewModel() {
 		user: self.config.www_username(),
 		pass: self.config.www_password()
 	};
-	
+
 	if (adminsave.user.length > 16 || adminsave.pass.length > 16) {
 		alert("Please enter a username and password that is 16 characters or less");
 	} else {
@@ -356,7 +327,7 @@ function EmonEspViewModel() {
   self.saveEmonCmsFetching = ko.observable(false);
   self.saveEmonCmsSuccess = ko.observable(false);
   self.saveEmonCms = function () {
-    var emoncms = {
+    var emoncms = { 
       server: self.config.emoncms_server(),
       path: self.config.emoncms_path(),
       apikey: self.config.emoncms_apikey(),
@@ -364,11 +335,11 @@ function EmonEspViewModel() {
       fingerprint: self.config.emoncms_fingerprint()
     };
 
-    if (emoncms.server === "" || emoncms.node === "") {
-      alert("Please enter EmonCMS server and node");
-    } else if (emoncms.apikey.length != 32) {
+    if (emoncms.server != "" && emoncms.node === "") {
+      alert("Please enter EmonCMS node");
+    } else if (emoncms.server != "" && emoncms.apikey.length != 32) {
       alert("Please enter a valid Emoncms apikey");
-    } else if (emoncms.fingerprint !== "" && emoncms.fingerprint.length != 59) {
+    } else if (emoncms.server != "" && emoncms.fingerprint !== "" && emoncms.fingerprint.length != 59) {
       alert("Please enter a valid SSL SHA-1 fingerprint");
     } else {
       self.saveEmonCmsFetching(true);
@@ -394,7 +365,8 @@ function EmonEspViewModel() {
       topic: self.config.mqtt_topic(),
       prefix: self.config.mqtt_feed_prefix(),
       user: self.config.mqtt_user(),
-      pass: self.config.mqtt_pass()
+      pass: self.config.mqtt_pass(),
+      json: self.config.mqtt_json()
     };
 
 	  self.saveMqttFetching(true);
@@ -419,6 +391,10 @@ function EmonEspViewModel() {
         return;
       } else if (self.config[`ct${i}_cal`] > 65535) {
         alert("Please enter calibration settings less than 65535");
+        return;
+      }
+      if (self.config[`ct${i}_name`]().length > 48) {
+        alert("Please keep sensor names <= 48 characters");
         return;
       }
       if (!isNumber(self.config[`gain${i}_cal`]()) || (self.config[`gain${i}_cal`]() != 1 && self.config[`gain${i}_cal`]() != 2 && self.config[`gain${i}_cal`]() != 4)) {
