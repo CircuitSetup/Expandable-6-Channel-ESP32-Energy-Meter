@@ -214,7 +214,7 @@ unsigned short EEPROM_read_ushort(int start, unsigned short defaultVal = 0) {
 
   // Check the checksum
   c[i] = EEPROM.read(start + i);
-  DBUGF("Got '%u' %d == %d @ %d:%d", *((unsigned short *)&c), c[i], checksum, start, i);
+  //DBUGF("Got '%u' %d == %d @ %d:%d", *((unsigned short *)&c), c[i], checksum, start, i);
   if (c[i] != checksum) {
     DBUGF("Using default '%u'", defaultVal);
     return defaultVal;
@@ -234,7 +234,7 @@ float EEPROM_read_float(int start, float defaultVal = 0) {
 
   // Check the checksum
   c[i] = EEPROM.read(start + i);
-  DBUGF("Got '%f' %d == %d @ %d:%d", *((float *)&c), c[i], checksum, start, i);
+  //DBUGF("Got '%f' %d == %d @ %d:%d", *((float *)&c), c[i], checksum, start, i);
   if (c[i] != checksum) {
     DBUGF("Using default '%f'", defaultVal);
     return defaultVal;
@@ -261,7 +261,7 @@ void EEPROM_write_fingerprint(int start, int count, String val) {
   for (int i = 0; i < count - 1; ++i) {
     if (i*3 < val.length()) {
       byte b;
-      sscanf(&val.c_str()[i*3], "%x", &b);
+      sscanf(&val.c_str()[i*3], "%x", (unsigned int*)&b);
       checksum ^= b;
       EEPROM.write(start + i, b);
     } else {

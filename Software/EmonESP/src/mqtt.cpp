@@ -105,7 +105,7 @@ void mqtt_publish(const char * data)
   {
     // add some data onto the end
     sprintf(input_json+strlen(input_json)-1,
-      ",\"freeram\":%lu,\"rssi\":%d}", ESP.getFreeHeap(), WiFi.RSSI());
+      ",\"freeram\":%lu,\"rssi\":%d}", (unsigned long)ESP.getFreeHeap(), WiFi.RSSI());
 
     if (!mqttclient.publish(mqtt_topic.c_str(), input_json, false))
     {
@@ -143,15 +143,15 @@ void mqtt_publish(const char * data)
     } while (*data_ptr++ != 0);
 
     // send esp free ram
-    sprintf(mqtt_topic_prefix, "%s/%sfreeram", mqtt_topic, mqtt_feed_prefix);
-    sprintf(mqtt_data, "%lu", ESP.getFreeHeap());
+    sprintf(mqtt_topic_prefix, "%s/%sfreeram", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
+    sprintf(mqtt_data, "%lu", (unsigned long)ESP.getFreeHeap());
     if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
     {
       return;
     }
 
     // send wifi signal strength
-    sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic, mqtt_feed_prefix);
+    sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
     sprintf(mqtt_data, "%d", WiFi.RSSI());
     if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
     {

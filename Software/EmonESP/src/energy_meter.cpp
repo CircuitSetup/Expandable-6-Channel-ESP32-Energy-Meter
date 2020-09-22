@@ -68,7 +68,7 @@ ATM90E32 sensor_ic2[NUM_BOARDS]{};
 // SETUP
 // -------------------------------------------------------------------
 void energy_meter_setup() {
-  int i, j;
+  int i;
 
   /*Initialise the ATM90E32 & Pass CS pin and calibrations to its library */
   Serial.println("Start ATM90E32");
@@ -101,7 +101,7 @@ void energy_meter_setup() {
 // -------------------------------------------------------------------
 void energy_meter_loop()
 {
-  int i, j, json_idx = 0;
+  int i, j = 0;
 
   char * result = input_string;
   char * result_json = input_json;
