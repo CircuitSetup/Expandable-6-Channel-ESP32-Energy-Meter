@@ -353,9 +353,7 @@ void wifi_setup() {
 
 void wifi_loop()
 {
-  bool isClient = wifi_mode_is_sta();
   bool isClientOnly = wifi_mode_is_sta_only();
-  bool isAp = wifi_mode_is_ap();
   bool isApOnly = wifi_mode_is_ap_only();
 
   // flash the LED according to what state wifi is in
