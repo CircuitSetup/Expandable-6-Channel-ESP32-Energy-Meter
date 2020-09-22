@@ -29,16 +29,16 @@
 #ifndef __DEBUG_H
 #define __DEBUG_H
 
-//#define ENABLE_DEBUG
-//#define DEBUG_PORT Serial
+#ifndef ENABLE_DEBUG
+#define ENABLE_DEBUG
+#endif
+
+#define DEBUG_PORT Serial
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)
 
 #ifdef ENABLE_DEBUG
-#ifndef DEBUG_PORT
-#define DEBUG_PORT Serial
-#endif
 #define DBUGS               DEBUG_PORT
 #define DEBUG_BEGIN(speed)  DEBUG_PORT.begin(speed)
 #define DBUGF(format, ...)  DEBUG_PORT.printf(format "\n", ##__VA_ARGS__)
