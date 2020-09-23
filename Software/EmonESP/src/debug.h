@@ -33,7 +33,9 @@
 #define ENABLE_DEBUG
 #endif
 
+#ifndef DEBUG_PORT
 #define DEBUG_PORT Serial
+#endif
 
 #define TEXTIFY(A) #A
 #define ESCAPEQUOTE(A) TEXTIFY(A)

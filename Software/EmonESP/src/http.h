@@ -34,6 +34,9 @@
 // -------------------------------------------------------------------
 
 #include <Arduino.h>
+#include <Print.h>
+#include <WiFiClient.h>         // http GET request
+#include <WiFiClientSecure.h>   // Secure https GET request
 
 // -------------------------------------------------------------------
 // HTTP or HTTPS GET Request

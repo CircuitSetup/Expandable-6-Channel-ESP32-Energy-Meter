@@ -43,6 +43,10 @@
 #define MAX_DATA_LEN 4096
 #endif
 
+#ifndef HTTP_TIMEOUT
+#define HTTP_TIMEOUT 4
+#endif
+
 #ifndef ENABLE_WEB_OTA
 //#define ENABLE_WEB_OTA
 #endif

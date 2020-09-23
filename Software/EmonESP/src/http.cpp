@@ -28,13 +28,6 @@
 #include "emonesp.h"
 #include "http.h"
 
-#define HTTP_TIMEOUT 4
-
-#include <Print.h>
-#include <WiFiClient.h>         // http GET request
-#include <WiFiClientSecure.h>   // Secure https GET request
-
-
 WiFiClient client;                  // Create class for HTTP TCP connections get_http()
 WiFiClientSecure client_ssl;        // Create class for HTTPS TCP connections get_https()
 

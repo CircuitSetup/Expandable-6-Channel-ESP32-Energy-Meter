@@ -32,8 +32,6 @@
 #include "esp_wifi.h"
 #include "energy_meter.h"
 
-#define MQTT_TIMEOUT 3
-
 WiFiClient espClient;                 // Create client for MQTT
 PubSubClient mqttclient(espClient);   // Create client for MQTT
 

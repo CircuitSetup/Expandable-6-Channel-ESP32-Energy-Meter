@@ -37,6 +37,10 @@
 #include <WiFiClient.h>
 #include "emonesp.h"
 
+#ifndef MQTT_TIMEOUT
+#define MQTT_TIMEOUT 3
+#endif
+
 // -------------------------------------------------------------------
 // Perform the background MQTT operations. Must be called in the main
 // loop function
