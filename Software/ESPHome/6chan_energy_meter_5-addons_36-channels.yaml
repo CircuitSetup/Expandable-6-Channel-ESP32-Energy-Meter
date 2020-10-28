@@ -214,7 +214,8 @@ sensor:
     update_interval: ${update_time}
 #IC1 AddOn 3
   - platform: atm90e32
-    cs_pin: 35
+#do not use GPIO2 if ESP32 has an on-board LED assigned to it
+    cs_pin: 2
     phase_a:
       power:
         name: ${disp_name} CT19 Watts
