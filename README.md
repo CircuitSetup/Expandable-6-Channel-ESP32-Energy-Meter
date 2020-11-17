@@ -7,7 +7,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 * North American split single phase 120V/240V 60Hz - mains and/or individual circuits
 * European single phase 240V 50Hz (must provide [AC-AC transformer](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters) 9V or 12V with at least 500mA output)
-* 3 phase - the meter can be used to measure 3-phase, but power (wattage) will not be calculated correctly. Power can be calculated in software, but the [power factor](https://en.wikipedia.org/wiki/Power_factor) will have to be estimated ((voltage*current)*power_factor))
+* 3 phase - the meter can be used to measure 3-phase, but power (wattage) will not be calculated correctly. Power can be calculated in software, but the [power factor](https://en.wikipedia.org/wiki/Power_factor) will have to be estimated ((voltage*current)*power_factor)).
 
 
 #### **Features:**
@@ -25,12 +25,12 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 *   Uses standard current transformer clamps to sample current
 *   22ohm burden resistors per current channel
 *   Includes built-in buck converter to power ESP32 & electronics
-*   2 IRQ interrupts, and 1 Warning output
+*   2 IRQ interrupts, and 1 Warning output connected to ESP32
 *   Zero crossing outputs
 *   Energy Pulse outputs per IC (4 per IC x2)
 *   SPI Interface
-*   Measurement Error: 0.1%
-*   Dynamic Range: 6000:1
+*   IC Measurement Error: 0.1%
+*   IC Dynamic Range: 6000:1
 *   Current Gain Selection: Up to 4x
 *   Voltage Reference Drift Typical (ppm/°C): 6
 *   ADC Resolution (bits): 16
@@ -148,8 +148,22 @@ The holes labelled VA2 next to the power plug on the meter main board, and in th
 * Sever (with a knife) JP12 and JP13 on the back of the board for v1.3+, or JP7 for prior versions
 * Use a second AC transformer, ideally one identical to the primary
 * Plug in the second AC transformer to an outlet on the opposite phase to the primary
-* Solder on a pin header, 2.54mm screw connector, or pigtail on to VA2+ & VA2-
+* Solder on a pin header, 3.5mm (2.54mm for v1.3 and earlier) screw connector, or DC style jack pigtail on to VA2+ & VA2- (next to the main power/voltage jack)
 
-When voltage jumpers are severed, the voltage reference for CT4-CT6 will be from VA2. This means that current transformers for CT4-CT6 should be hooked up to circuits that are on the same phase as VA2, and CT1-CT3 should be hooked up to circuits that are in phase with the primary voltage. If a CT is not in phase with the voltage its current and power readings will be negative. If, for example, you have 4 circuits in phase with the primary, and 2 in phase with VA2, you can reverse the current transformer on the wire to put it in phase with the voltage. 
+When voltage jumpers are severed, the voltage reference for CT4-CT6 will be from VA2. This means that current transformers for CT4-CT6 should be hooked up to circuits that are on the same phase as VA2, and CT1-CT3 should be hooked up to circuits that are in phase with the primary voltage. If a CT is not in phase with the voltage its current and power readings will be negative. If, for example, you have 4 circuits in phase with the primary, and 2 in phase with VA2, you can reverse the current transformer on the wire to put it in phase with the voltage (assuming split single phase or dual phase)
 
 For add-on boards, the primary voltage will come from the main board. The optional secondary voltage measurement (also VA2 pins), will be in phase with CT4-CT6.
+
+#### **Setting Up Software**
+##### **EmonESP/EmonCMS**
+EmonESP is used to send energy meter data to a [local install of EmonCMS](https://github.com/emoncms/emoncms), or [emoncms.org](https://emoncms.org/). Data can also be sent to a MQTT broker through this. EmonCMS has Android and IOS apps.
+[The ESP32 sofware for EmonESP is located here](/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
+
+##### **ESPHome**
+[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/).
+* [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
+* Example cofigurations are [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+* [Digiblur video of the calibration and setup process](https://www.youtube.com/watch?v=BOgy6QbfeZk)
+* [TH3D video with add-on board](https://www.youtube.com/watch?v=zfB4znO6_Z0)
+
+
