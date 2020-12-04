@@ -1,4 +1,5 @@
 # Example config for when jp8-jp11 are all bridged - this connects all the voltage channels and allows for power to be calculated by the meter directly.
+# Boards >= v1.4 jp8-jp11 are removed and have all voltage channels connected
 
 substitutions:
 # Change the disp_name to something you want  
