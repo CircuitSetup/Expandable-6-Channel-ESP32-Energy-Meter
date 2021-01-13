@@ -165,17 +165,20 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
 - Click on **Open Web UI**
 ![ESPHome add-on](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_add-on_install.png)
+
 - Click the green + circle in the bottom right to add a new node
 - Fill in the name (for exmaple 'energy_meter', and device type as **NodeMCU-32S** or **Generic ESP32**
 - Add your wifi details and click **Submit** to create the node
 - ESPHome will compile - when it is complete click **Download Binary**
 ![ESPHome Download Binary](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/download_binary.png)
+
 - [Download the ESPHome flasher tool for your OS here](https://github.com/esphome/esphome-flasher/releases)
 - Connect the ESP32 that you intend to use with your meter to your computer via USB (it does not need to be plugged into the meter at this point, but if it is, do not plug in the AC transformer yet for the meter at the same time the ESP32 is plugged into USB)
 - In the ESPHome flasher, select the COM port that the ESP32 is connected to
 - Select the .bin file you just downloaded and click **Flash ESP** (If it doesn't connect, click view logs to see what is going on - you will probably have to hold down the right Boot button on the ESP32 after clicking on Flash ESP)
 - ESPHome will be loaded on the ESP32 with a basic config
 ![ESPHome Flasher](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_flasher.PNG)
+
 - Assuming the ESP32 is close enough to the AP you want to connect to for WiFi, it should now be available in ESPHome within Home Assistant
 - In Home Assistant go to **Configuration > Integrations**, and **Configure** for ESPHome. It should be highlighted as **Discovered**
 
@@ -184,9 +187,11 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - In the Home Assistant/ESPHome Web UI, click **Edit** for the Energy Meter Node
 - Copy/Paste the example config, change any applicable settings, like the current calibrations to the current transformers that you use, and click **Save**
 ![yaml config edit](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_yaml_edit.PNG)
+
 - At this point it's a good idea to **close** the edit dialog, and click **Validate** on the main screen to make sure your .yaml file is valid. Fix any errors that may come up.
 - Click **Upload** to save your configuration to the ESP32. Note that if you have 4 or more add-on boards, you may get an error and run out of memory on your ESP32 if you have a lot of sensors. [See details here.](https://github.com/esphome/issues/issues/855#issuecomment-662470779)
 ![ESPHome node](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_main.png)
+
 - For greater accuracy, you can calibrate the current sensors. [See here](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter#calibration),
 [or here for a video](https://youtu.be/BOgy6QbfeZk?t=1261)
 - When updating values for current transformers in the ESPHome config, click **Edit**, then **Upload**
