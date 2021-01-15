@@ -251,7 +251,7 @@
               },
               {
                 "params": [
-                  " / 3600"
+                  " / 3600/1000"
                 ],
                 "type": "math"
               }
@@ -1473,7 +1473,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
