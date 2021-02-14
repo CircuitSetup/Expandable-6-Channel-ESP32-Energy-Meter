@@ -52,7 +52,6 @@ static int mqtt_connection_error_count = 0;
 boolean mqtt_connect()
 {
   DBUGS.println("MQTT Connecting...");
-  DBUGS.println(mqttclient.state());
 
   if (espClient.connect(mqtt_server.c_str(), 1883, MQTT_TIMEOUT * 1000) != 1)
   {
@@ -61,6 +60,8 @@ boolean mqtt_connect()
   }
 
   espClient.setTimeout(MQTT_TIMEOUT);
+  mqttclient.setSocketTimeout(MQTT_TIMEOUT);
+  mqttclient.setBufferSize(MAX_DATA_LEN + 200);
 
 #ifdef ESP32
   String strID = String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
