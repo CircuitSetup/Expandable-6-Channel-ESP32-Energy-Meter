@@ -133,7 +133,7 @@ The CS pins can be:
        * For meter versions: 
          * v1.3 or greater: 7305
          * v1.2: 42620
-
+         
 #### **Measuring Power & Other Metering Values**
 The Expandable 6 Channel ESP32 Energy Meter uses 2 ATM90E32AS ICs. Each IC has 3 voltage channels and 3 current channels. In order for power metering data to be calculated internally, each current channel must have a reference voltage. If the voltage is out of phase with the current, then the current and power will read as negative, affecting the power factor and power calculations. If you have a split single phase or dual phase setup, the solution is to turn around the current transformer on the wire.
 
@@ -142,6 +142,12 @@ v1.1 of the meter used 1 of the voltage channels for each IC. This means that po
 v1.2 & v1.3 have JP8-JP11 on the back of the board, that would allow all voltage channels to be connected together, which would allow power and other metering values to be calculated. Most of v1.3 came soldered together.
 
 v1.4 removed JP8-JP11, and has voltage channels connected internally on the pcb. 
+
+#### **Measuring Dual Pole (240V) Circuits**
+There are 3 different options for measuring circuits that are dual pole, or 240V:
+- Monitor 1 phase with 1 CT, and double the current output in software (least accurate)
+- Use 2 CTs to monitor each hot wire on the circuit (if you are monitoring 1 voltage, they should be in opposite directions from eachother)
+- If you have enough wire, and the CT is large enough, run both hot wires through 1 CT in opposite directions
 
 #### **Measuring A Second Voltage**
 The holes labelled VA2 next to the power plug on the meter main board, and in the bottom right of the add-on board are for measuring a second voltage. To do this you must:
