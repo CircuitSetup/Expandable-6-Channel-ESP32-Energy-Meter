@@ -7,7 +7,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 * North American split single phase 120V/240V 60Hz - mains and/or individual circuits
 * European single phase 240V 50Hz (must provide [AC-AC transformer](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters) 9V or 12V with at least 500mA output)
-* 3 phase - the meter can be used to measure 3-phase, but power (wattage) will not be calculated correctly. Power can be calculated in software, but the [power factor](https://en.wikipedia.org/wiki/Power_factor) will have to be estimated ((voltage*current)*power_factor)).
+* 3 phase - It is recommended to measure all 3 voltages with 3 voltage transformers. This can be done by using a main board with 1 add-on board (more information below). A single meter can be used to measure 3-phase, but power (wattage) will not be calculated correctly. Power can be calculated in software, but the [power factor](https://en.wikipedia.org/wiki/Power_factor) will have to be estimated ((voltage*current)*power_factor)). 
 
 
 #### **Features:**
@@ -153,6 +153,16 @@ The holes labelled VA2 next to the power plug on the meter main board, and in th
 When voltage jumpers are severed, the voltage reference for CT4-CT6 will be from VA2. This means that current transformers for CT4-CT6 should be hooked up to circuits that are on the same phase as VA2, and CT1-CT3 should be hooked up to circuits that are in phase with the primary voltage. If a CT is not in phase with the voltage its current and power readings will be negative. If, for example, you have 4 circuits in phase with the primary, and 2 in phase with VA2, you can reverse the current transformer on the wire to put it in phase with the voltage (assuming split single phase or dual phase)
 
 For add-on boards, the primary voltage will come from the main board. The optional secondary voltage measurement (also VA2 pins), will be in phase with CT4-CT6.
+
+#### **Measuring 3-Phase Electricity**
+What you'll need to measure all 3 phases properly: 
+* 6 Channel Main Board (v1.4 and above)
+* 6 Channel Add-on Board
+* 3 voltage transformers - one for each phase. These can either be wall, plug-in type (if you have an outlet wired to each phase), or stand-alone transformers wired directly to breakers. They must bring down the voltage to between 9-14VAC. The first one that plugs into the main board also powers the ESP32 and electronics, so it must output at least 500mA.
+* Headers soldered to the VA2 terminals on the main board and add-on board
+* JP12 and JP13 severed on both boards
+
+Similar to the above for measuring a second voltage, once JP12 and JP13 are severed, CT1-CT3 on the main board, and CT1-CT3 on the add-on board will be in phase with the 1st phase, CT3-CT4 on the main board with the 2nd phase, and CT3-CT4 on the add-on board with the 3rd phase. The transformers should be calibrated individually for greater accuracy.
 
 ### **Setting Up Software**
 #### **EmonESP/EmonCMS**
