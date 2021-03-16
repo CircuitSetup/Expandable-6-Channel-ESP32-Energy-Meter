@@ -171,6 +171,10 @@ What you'll need to measure all 3 phases properly:
 
 Similar to the above for measuring a second voltage, once JP12 and JP13 are severed, CT1-CT3 on the main board, and CT1-CT3 on the add-on board will be in phase with the 1st phase, CT3-CT4 on the main board with the 2nd phase, and CT3-CT4 on the add-on board with the 3rd phase. The transformers should be calibrated individually for greater accuracy.
 
+Alternately, you can use two add-on boards and assign one phase to each board. To do this, instead of severing JP12 and JP13, you cut both front-most pins (i.e. those which the ESP32 does *not* plug into) of the extension boards' connectors. Then connect each phase to one of the connectors.
+
+On 3-phase systems, a current meter that's connected to the wrong phase will always result in near-zero active power.
+
 ### **Setting Up Software**
 #### **EmonESP/EmonCMS**
 EmonESP is used to send energy meter data to a [local install of EmonCMS](https://github.com/emoncms/emoncms), or [emoncms.org](https://emoncms.org/). Data can also be sent to a MQTT broker through this. EmonCMS has Android and IOS apps.
