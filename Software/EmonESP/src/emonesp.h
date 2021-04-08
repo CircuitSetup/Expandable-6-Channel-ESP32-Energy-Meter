@@ -36,7 +36,7 @@
 #include "debug.h"
 
 #ifndef ENABLE_WDT
-#define ENABLE_WDT
+//#define ENABLE_WDT //will cause issues for Soft AP
 #endif
 
 #ifndef MAX_DATA_LEN
