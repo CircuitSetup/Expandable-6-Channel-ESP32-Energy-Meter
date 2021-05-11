@@ -1,0 +1,263 @@
+{
+	"name": "6 Channel Meter",
+	"category": "CircuitSetup",
+	"group": "Energy Meters",
+	"description": "CircuitSetup 6 Channel",
+	"inputs": [
+		{
+			"name": "V1",
+			"description": "Voltage 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Voltage 1" }
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"description": "Voltage 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Voltage 2" }
+				}
+			]
+		},
+		{
+			"name": "CT1",
+			"description": "Current 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 1" }
+				}
+			]
+		},
+		{
+			"name": "CT2",
+			"description": "Current 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 2" }
+				}
+			]
+		},
+		{
+			"name": "CT3",
+			"description": "Current 3",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 3" }
+				}
+			]
+		},
+		{
+			"name": "CT4",
+			"description": "Current 4",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 4" }
+				}
+			]
+		},
+		{
+			"name": "CT5",
+			"description": "Current 5",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 5" }
+				}
+			]
+		},
+		{
+			"name": "CT6",
+			"description": "Current 6",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Current 6" }
+				}
+			]
+		},
+		{
+			"name": "PF1",
+			"description": "Power Factor 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "PF 1" }
+				}
+			]
+		},
+		{
+			"name": "PF2",
+			"description": "Power Factor 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "PF 2" }
+				}
+			]
+		},
+		{
+			"name": "temp",
+			"description": "Temp",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Temp" }
+				}
+			]
+		},
+		{
+			"name": "freq",
+			"description": "Frequency",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Frequency" }
+				}
+			]
+		},
+		{
+			"name": "W1",
+			"description": "Total Power",
+			"processList": [
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W2" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W3" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W4" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W5" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W6" }
+				},
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "total_power" }
+				},
+				{
+					"process": "power_to_kwh",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "total_power_kwh" }
+				}
+			]
+		}
+	],
+
+	"feeds": [
+		{
+			"name": "Voltage 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "V"
+		},
+		{
+			"name": "Voltage 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "V"
+		},
+		{
+			"name": "Current 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Current 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Current 3",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Current 4",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Current 5",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Current 6",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "total_power",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "W"
+		},
+		{
+			"name": "total_power_kwh",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "kWh"
+		},
+		{
+			"name": "PF 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": ""
+		},
+		{
+			"name": "PF 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": ""
+		},
+		{
+			"name": "Temp",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "°C"
+		},
+		{
+			"name": "Frequency",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "Hz"
+		}
+	]
+}

@@ -1,0 +1,345 @@
+{
+	"name": "6 Channel Meter with Solar",
+	"category": "CircuitSetup",
+	"group": "Energy Meters",
+	"description": "CircuitSetup 6 Channel with Solar",
+	"inputs": [
+		{
+			"name": "V1",
+			"description": "Voltage 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Voltage 1" }
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"description": "Voltage 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Voltage 2" }
+				}
+			]
+		},
+		{
+			"name": "CT1",
+			"description": "House Current 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "House Current 1" }
+				}
+			]
+		},
+		{
+			"name": "CT2",
+			"description": "House Current 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "House Current 2" }
+				}
+			]
+		},
+		{
+			"name": "CT3",
+			"description": "Charging Current 3",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Charging Current 3" }
+				}
+			]
+		},
+		{
+			"name": "CT4",
+			"description": "Charging Current 4",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Charging Current 4" }
+				}
+			]
+		},
+		{
+			"name": "CT5",
+			"description": "Solar Current 5",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Solar Current 5" }
+				}
+			]
+		},
+		{
+			"name": "CT6",
+			"description": "Solar Current 6",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Solar Current 6" }
+				}
+			]
+		},
+		{
+			"name": "PF1",
+			"description": "House Power Factor 1",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "House PF 1" }
+				}
+			]
+		},
+		{
+			"name": "PF2",
+			"description": "House Power Factor 2",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "House PF 2" }
+				}
+			]
+		},
+		{
+			"name": "temp",
+			"description": "Temp",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Temp" }
+				}
+			]
+		},
+		{
+			"name": "freq",
+			"description": "Frequency",
+			"processList": [
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "Frequency" }
+				}
+			]
+		},
+		{
+			"name": "W1",
+			"description": "Total House Power",
+			"processList": [
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W2" }
+				},
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "house_import" }
+				},
+				{
+					"process": "power_to_kwh",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "house_import_kwh" }
+				}
+			]
+		},
+		{
+			"name": "W3",
+			"description": "Total Charging",
+			"processList": [
+				{
+					"process": "allowpositive",
+					"arguments": {"type": "ProcessArg::NONE"}
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W4" }
+				},
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "charging_import" }
+				},
+				{
+					"process": "power_to_kwh",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "charging_import_kwh" }
+				}
+			]
+		},
+		{
+			"name": "W5",
+			"description": "Total Solar Power",
+			"processList": [
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W6" }
+				},
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "solar" }
+				},
+				{
+					"process": "power_to_kwh",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "solar_kwh" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W1" }
+				},
+				{
+					"process": "add_input",
+					"arguments": {"type": "ProcessArg::INPUTID", "value": "W2" }
+				},
+				{
+					"process": "log_to_feed",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "use" }
+				},
+				{
+					"process": "power_to_kwh",
+					"arguments": {"type": "ProcessArg::FEEDID", "value": "use_kwh" }
+				}
+			]
+		}
+	],
+
+	"feeds": [
+		{
+			"name": "Voltage 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "V"
+		},
+		{
+			"name": "Voltage 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "V"
+		},
+		{
+			"name": "House Current 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "House Current 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Charging Current 3",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Charging Current 4",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Solar Current 5",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "Solar Current 6",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "A"
+		},
+		{
+			"name": "charging_import",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "W"
+		},
+		{
+			"name": "charging_import_kwh",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "kWh"
+		},
+		{
+			"name": "use",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "W"
+		},
+		{
+			"name": "use_kwh",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "kWh"
+		},
+		{
+			"name": "solar",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "W"
+		},
+		{
+			"name": "solar_kwh",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "kWh"
+		},
+		{
+			"name": "house_import",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "W"
+		},
+		{
+			"name": "house_import_kwh",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "kWh"
+		},
+		{
+			"name": "House PF 1",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": ""
+		},
+		{
+			"name": "House PF 2",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": ""
+		},
+		{
+			"name": "Temp",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": "°C"
+		},
+		{
+			"name": "Frequency",
+			"type": "DataType::REALTIME",
+			"engine": "Engine::PHPFINA",
+			"interval": "10",
+			"unit": ""
+		}
+	]
+}
