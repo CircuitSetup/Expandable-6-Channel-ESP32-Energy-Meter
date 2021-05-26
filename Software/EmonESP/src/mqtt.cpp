@@ -131,16 +131,14 @@ static void mqtt_msg_callback(char *topic, byte *payload, unsigned int length) {
 // -------------------------------------------------------------------
 boolean mqtt_connect()
 {
-  mqttclient.setServer(mqtt_server.c_str(), mqtt_port);
-  mqttclient.setCallback(mqtt_msg_callback); //function to be called when mqtt msg is received on subscribed topic
+  DBUGS.println("MQTT Connecting...");
 
   DEBUG.print(F("MQTT Connecting to..."));
   DEBUG.println(mqtt_server.c_str());
 
-  String strID = String(node_name.c_str());
-  if (mqttclient.connect(strID.c_str(), mqtt_user.c_str(), mqtt_pass.c_str())) {  // Attempt to connect
-    DEBUG.println(F("MQTT connected"));
-    mqtt_publish("describe", node_type);
+  espClient.setTimeout(MQTT_TIMEOUT);
+  mqttclient.setSocketTimeout(MQTT_TIMEOUT);
+  mqttclient.setBufferSize(MAX_DATA_LEN + 200);
 
     String subscribe_topic = mqtt_topic + "/" + node_name + "/in/#";
     mqttclient.subscribe(subscribe_topic.c_str());

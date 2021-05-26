@@ -31,11 +31,9 @@
 #include "debug.h"
 #include "profile.h"
 
-String getTime();
-
-void setTimeOffset();
-
-//#define ENABLE_WDT
+#ifndef ENABLE_WDT
+//#define ENABLE_WDT //will cause issues for Soft AP
+#endif
 
 #ifndef MAX_DATA_LEN
 #define MAX_DATA_LEN 4096
