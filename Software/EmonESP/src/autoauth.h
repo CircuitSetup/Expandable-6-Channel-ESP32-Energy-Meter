@@ -23,28 +23,13 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef _EMONESP_AUTOAUTH_H
+#define _EMONESP_AUTOAUTH_H
 
-#ifndef _EMONESP_EMONCMS_H
-#define _EMONESP_EMONCMS_H
+void auth_request();
+void auth_setup();
+void auth_loop();
 
-#include <Arduino.h>
-#include <ArduinoJson.h>
+#endif
 
-// -------------------------------------------------------------------
-// Commutication with EmonCMS
-// -------------------------------------------------------------------
-
-extern boolean emoncms_connected;
-extern boolean emoncms_updated;
-
-extern unsigned long packets_sent;
-extern unsigned long packets_success;
-
-// -------------------------------------------------------------------
-// Publish values to EmonCMS
-//
-// data: a comma seperated list of name:value pairs to send
-// -------------------------------------------------------------------
-void emoncms_publish(JsonDocument &data);
-
-#endif // _EMONESP_EMONCMS_H
