@@ -207,7 +207,7 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - In Home Assistant go to **Configuration > Integrations**, and **Configure** for ESPHome. It should be highlighted as **Discovered**
 
 ##### **Loading the Energy Meter Config**
-- Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+- Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
 - In the Home Assistant/ESPHome Web UI, click **Edit** for the Energy Meter Node
 - Copy/Paste the example config, change any applicable settings, like the current calibrations to the current transformers that you use, and click **Save**
 
