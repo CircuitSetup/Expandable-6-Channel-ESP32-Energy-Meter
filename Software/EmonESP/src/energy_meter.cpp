@@ -27,7 +27,7 @@
 #include "emonesp.h"
 #include "emoncms.h"
 #include "input.h"
-#include "config.h"
+#include "app_config.h"
 #include "mqtt.h"
 
 // for ATM90E32 energy meter
@@ -46,6 +46,15 @@
 #define OLED_RESET  2 //17
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, OLED_DC, OLED_RESET, OLED_CS);
 #endif
+
+/***** CALIBRATION SETTINGS *****/
+/* These values are edited in the web interface or energy_meter.h */
+/* Values in the web interface take priority */
+unsigned short VoltageGain = VOLTAGE_GAIN;
+unsigned short CurrentGainCT1 = CURRENT_GAIN_CT1;
+unsigned short CurrentGainCT2 = CURRENT_GAIN_CT2;
+unsigned short LineFreq = LINE_FREQ;
+unsigned short PGAGain = PGA_GAIN;
 
 unsigned long startMillis;
 unsigned long currentMillis;
@@ -69,6 +78,8 @@ ATM90E32 sensor_ic2[NUM_BOARDS]{};
 // -------------------------------------------------------------------
 void energy_meter_setup() {
   int i;
+
+  //TODO: in the updated version, VoltageGain = voltage_cal, but this has multiple calibration values
 
   /*Initialise the ATM90E32 & Pass CS pin and calibrations to its library */
   Serial.println("Start ATM90E32");
@@ -104,7 +115,7 @@ void energy_meter_loop()
   int i, j = 0;
 
   char * result = input_string;
-  char * result_json = input_json;
+  //char * result_json = input_json;
 
   /*get the current "time" (actually the number of milliseconds since the program started)*/
   currentMillis = millis();
@@ -139,6 +150,126 @@ void energy_meter_loop()
   Serial.println("Meter Status 2: E0:0x" + String(en0_2, HEX) + " E1:0x" + String(en1_2, HEX));
   delay(10);
 
+  //************************* NEW STUFF ****************
+
+  if (sys0 == 65535 || sys0 == 0) DEBUG.println("Error: Not receiving data from energy meter 1 - Check your connections");
+
+  if (sys0_2 == 65535 || sys0_2 == 0) DEBUG.println("Error: Not receiving data from energy meter 2 - Check your connections");
+
+  //VOLTAGE
+
+  //yknow i'm pretty sure this isn't used
+  voltage1 = sensor_ic1[0].GetLineVoltageA();
+  voltage2 = sensor_ic2[0].GetLineVoltageA();
+
+  if(LineFreq == LINE_FREQ_50HZ){
+    //if 50hz then voltage is 240v and needs to be scaled
+    voltage1 *= 2;
+    voltage2 *= 2;
+  }
+
+  freq = sensor_ic1[0].GetFrequency();
+  temp = sensor_ic1[0].GetTemperature();
+
+  strcpy(result, "");
+
+  strcpy(result, "temp:");
+  dtostrf(temp, 2, 1, measurement);
+  strcat(result, measurement);
+
+  strcpy(result, ",freq:");
+  dtostrf(freq, 2, 2, measurement);
+  strcat(result, measurement);
+
+  for(i = 0; i < NUM_BOARDS; i++){
+      unsigned short sys0_1 = sensor_ic1[i].GetSysStatus0();  //EMMState0
+    unsigned short sys0_2 = sensor_ic2[i].GetSysStatus0();
+    if (sys0_1 == 65535 || sys0_1 == 0 || sys0_2 == 65535 || sys0_2 == 0)
+    {
+      /* Print error message if we can't talk to the master board */
+      if (i == 0) DEBUG.println("Error: Not receiving data from the energy meter - check your connections");
+      /* If no response, go to next board */
+      continue;
+    }
+
+    /* get current readings from each IC */
+    voltageCT[0] = sensor_ic1[i].GetLineVoltageA();
+    voltageCT[1] = sensor_ic1[i].GetLineVoltageB();
+    voltageCT[2] = sensor_ic1[i].GetLineVoltageC();
+    voltageCT[3] = sensor_ic2[i].GetLineVoltageA();
+    voltageCT[4] = sensor_ic2[i].GetLineVoltageB();
+    voltageCT[5] = sensor_ic2[i].GetLineVoltageC();
+
+    currentCT[0] = sensor_ic1[i].GetLineCurrentA();
+    currentCT[1] = sensor_ic1[i].GetLineCurrentB();
+    currentCT[2] = sensor_ic1[i].GetLineCurrentC();
+    currentCT[3] = sensor_ic2[i].GetLineCurrentA();
+    currentCT[4] = sensor_ic2[i].GetLineCurrentB();
+    currentCT[5] = sensor_ic2[i].GetLineCurrentC();
+
+    realPowerCT[0] = sensor_ic1[i].GetActivePowerA();
+    realPowerCT[1] = sensor_ic1[i].GetActivePowerB();
+    realPowerCT[2] = sensor_ic1[i].GetActivePowerC();
+    realPowerCT[3] = sensor_ic2[i].GetActivePowerA();
+    realPowerCT[4] = sensor_ic2[i].GetActivePowerB();
+    realPowerCT[5] = sensor_ic2[i].GetActivePowerC();
+
+    vaPowerCT[0] = sensor_ic1[i].GetApparentPowerA();
+    vaPowerCT[1] = sensor_ic1[i].GetApparentPowerB();
+    vaPowerCT[2] = sensor_ic1[i].GetApparentPowerC();
+    vaPowerCT[3] = sensor_ic2[i].GetApparentPowerA();
+    vaPowerCT[4] = sensor_ic2[i].GetApparentPowerB();
+    vaPowerCT[5] = sensor_ic2[i].GetApparentPowerC();
+
+    powerFactorCT[0] = sensor_ic1[i].GetPowerFactorA();
+    powerFactorCT[1] = sensor_ic1[i].GetPowerFactorB();
+    powerFactorCT[2] = sensor_ic1[i].GetPowerFactorC();
+    powerFactorCT[3] = sensor_ic2[i].GetPowerFactorA();
+    powerFactorCT[4] = sensor_ic2[i].GetPowerFactorB();
+
+    for (j = 0; j < NUM_INPUTS; j ++)
+    {
+      /* determine if negative - current registers are not signed, so this is an easy way to tell */
+      if (realPowerCT[j] < 0) currentCT[j] *= -1;
+
+      /* flip sign of power factor if current multiplier is negative */
+      if (cur_mul[i*NUM_INPUTS+j] < 0) powerFactorCT[j] *= -1;
+
+      /* scale current and power using multipliers */
+      currentCT[j] *=  cur_mul[i*NUM_INPUTS+j];
+      realPowerCT[j] *= pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j];
+
+      /* apparent power is always positive */
+      vaPowerCT[j] *= fabs(pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j]);
+
+      Serial.println("I" + String(i) + "_" + String(j) + ":" + String(currentCT[j]) + "A");
+
+      sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
+      dtostrf(currentCT[j], 2, 4, measurement);
+      strcat(result, measurement);
+
+      sprintf(result + strlen(result), ",PF%d:", i*NUM_INPUTS+j+1);
+      dtostrf(powerFactorCT[j], 2, 3, measurement);
+      strcat(result, measurement);
+
+      sprintf(result + strlen(result), ",W%d:", i*NUM_INPUTS+j+1);
+      dtostrf(realPowerCT[j], 2, 2, measurement);
+      strcat(result, measurement);
+
+      sprintf(result + strlen(result), ",VA%d:", i*NUM_INPUTS+j+1);
+      dtostrf(vaPowerCT[j], 2, 2, measurement);
+      strcat(result, measurement);
+
+      sprintf(result + strlen(result), ",V%d:", i*NUM_INPUTS+j+1);
+      dtostrf(voltageCT[j], 2, 2, measurement);
+      strcat(result, measurement);
+
+    }
+    Serial.println("");
+  }
+
+  //****************************************************
+#ifdef REVERT
   /* only 1 voltage channel is used on each IC */
   voltage1 = sensor_ic1[0].GetLineVoltageA();
   voltage2 = sensor_ic2[0].GetLineVoltageA();
@@ -175,7 +306,7 @@ void energy_meter_loop()
     if (sys0_1 == 65535 || sys0_1 == 0 || sys0_2 == 65535 || sys0_2 == 0)
     {
       /* Print error message if we can't talk to the master board */
-      if (i == 0) DBUGS.println("Error: Not receiving data from the energy meter - check your connections");
+      if (i == 0) DEBUG.println("Error: Not receiving data from the energy meter - check your connections");
       /* If no response, go to next board */
       continue;
     }
@@ -265,6 +396,7 @@ void energy_meter_loop()
     Serial.println("");
   }
   strcpy(result_json, "]}");
+#endif
 
 #ifdef ENABLE_OLED_DISPLAY
   /* Write meter data to the display */
