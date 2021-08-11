@@ -183,7 +183,7 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 #### **ESPHome/Home Assistant**
 [ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
 
-A [new features in Home Assistant allows you to monitor enectricity usage directly in Home Assistant](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/). You can also track usage of individual devices using the 6 channel meter. 
+A [new features in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
 
 ##### **Flashing ESPHome**
 - If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
