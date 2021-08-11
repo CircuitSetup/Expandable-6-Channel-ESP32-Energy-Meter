@@ -269,8 +269,13 @@ To do this you must have power calulated by the meter, or a lambda template that
         id: ct1Watts
 ```
 
-##### **Setup in ESPHome**
+##### **Setup in Home Assistant**
 - Go to **Configuration > Energy**
+- For total energy, click **Add Consumption** under Electricity grid
+- The name of the total_daily_energy platform, like 6C Total kWh, should be available to choose
+- You can also set a static cost per kWh or choose an entity that tracks the cost of your electricity
+- For **Individual devices** chose the name of the individual circuits, like 6C CT1 Watts Daily
+- If monitoring your Solar Panels with a 6 channel meter, you can also set this here, but it will not register unless energy is being consumed by your house or flowing out to the grid.
 
 ##### More resources:
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
