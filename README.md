@@ -181,7 +181,10 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 [The ESP32 sofware for EmonESP is located here]((https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
 
 #### **ESPHome/Home Assistant**
-[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant.
+[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
+
+A [new features in Home Assistant allows you to monitor enectricity usage directly in Home Assistant](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/). You can also track usage of individual devices using the 6 channel meter. 
+
 ##### **Flashing ESPHome**
 - If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
 - Click on **Open Web UI**
@@ -229,6 +232,45 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - Edit your .yaml config and add the InfluxDB parameters listed under **Supervisor > InfluxDB > Documentation (top menu) > Integrating into Home Assistant**
 - Restart Home Assistant
 - Data should now be available in Home Assistant and available under http://homeassistant.local:8086 or the IP of Home Assistant
+
+#### **Getting Data in the Home Assistant Energy Dashboard**
+![Home Assistant Energy Config](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/ha_energy_config.png)
+To display data in the Home Assistant Energy Dashboard you must be using v1.20.4 or higher, and have at least one total_daily_energy platform configured in the ESPHome config.
+##### **For Total Energy Consumption**
+```yaml
+#kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Total kWh
+    power_id: totalWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+```
+Where ```totalWatts``` is the sum of all watt calculations on the meter. [See an example of this here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_main_board.yaml) In the example, this was done with a [lambda template](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/ae0c42b86ec5faa7bc923f488fb5cc09cf5517eb/Software/ESPHome/6chan_energy_meter_main_board.yaml#L157).
+
+##### **For Solar Panels**
+The same can be done as above to track solar panel use and export. The current channels on the meter that are tracking solar usage must have their own lambda template calculation.
+
+##### **For Individual Device/Circuit Tracking**
+To do this you must have power calulated by the meter, or a lambda template that calculates watts per circuit. Then can use a kWh platform for each of the current channels on the 6 channel energy meter. For example:
+```yaml
+#kWh
+  - platform: total_daily_energy
+    name: ${disp_name} CT1 Watts Daily
+    power_id: ct1Watts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+```
+```ct1Watts``` references the id of the watt calculation. In the [example config](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/ae0c42b86ec5faa7bc923f488fb5cc09cf5517eb/Software/ESPHome/6chan_energy_meter_main_board.yaml#L79), this is:
+```yaml
+      power:
+        name: ${disp_name} CT1 Watts
+        id: ct1Watts
+```
+
+##### **Setup in ESPHome**
+- Go to **Configuration > Energy**
 
 ##### More resources:
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
