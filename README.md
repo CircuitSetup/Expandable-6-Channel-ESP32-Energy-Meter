@@ -235,7 +235,9 @@ A [new features in Home Assistant allows you to monitor enectricity usage direct
 
 #### **Getting Data in the Home Assistant Energy Dashboard**
 ![Home Assistant Energy Config](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/ha_energy_config.png)
-To display data in the Home Assistant Energy Dashboard you must be using v1.20.4 or higher, and have at least one total_daily_energy platform configured in the ESPHome config.
+
+To display data in the Home Assistant Energy Dashboard you must be using ESPHome v1.20.4 or higher, and have at least one ```total_daily_energy``` platform configured in your ESPHome config.
+
 ##### **For Total Energy Consumption**
 ```yaml
 #kWh
