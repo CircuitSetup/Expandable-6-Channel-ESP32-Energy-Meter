@@ -236,17 +236,20 @@ A [new features in Home Assistant allows you to monitor enectricity usage direct
 #### **Getting Data in the Home Assistant Energy Dashboard**
 ![Home Assistant Energy Config](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/ha_energy_config.png)
 
-To display data in the Home Assistant Energy Dashboard you must be using ESPHome v1.20.4 or higher, and have at least one ```total_daily_energy``` platform configured in your ESPHome config.
+To display data in the Home Assistant Energy Dashboard you must be using ESPHome v1.20.4 or higher, and have at least one ```total_daily_energy``` platform configured in your ESPHome config. ```time``` is also needed.
 
 ##### **For Total Energy Consumption**
 ```yaml
-#kWh
+#Total kWh
   - platform: total_daily_energy
     name: ${disp_name} Total kWh
     power_id: totalWatts
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+time:
+  - platform: sntp
+    id: sntp_time 
 ```
 Where ```totalWatts``` is the sum of all watt calculations on the meter. [See an example of this here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_main_board.yaml) In the example, this was done with a [lambda template](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/ae0c42b86ec5faa7bc923f488fb5cc09cf5517eb/Software/ESPHome/6chan_energy_meter_main_board.yaml#L157).
 
@@ -256,7 +259,7 @@ The same can be done as above to track solar panel use and export. The current c
 ##### **For Individual Device/Circuit Tracking**
 To do this you must have power calulated by the meter, or a lambda template that calculates watts per circuit. Then can use a kWh platform for each of the current channels on the 6 channel energy meter. For example:
 ```yaml
-#kWh
+#CT1 kWh
   - platform: total_daily_energy
     name: ${disp_name} CT1 Watts Daily
     power_id: ct1Watts
