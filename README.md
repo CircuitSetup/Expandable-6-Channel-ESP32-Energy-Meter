@@ -256,6 +256,8 @@ Where ```totalWatts``` is the sum of all watt calculations on the meter. [See an
 ##### **For Solar Panels**
 The same can be done as above to track solar panel use and export. The current channels on the meter that are tracking solar usage must have their own lambda template calculation.
 
+[See this example for how you could set this up with the 6 Channel Meter.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_house_solar_ha_kwh.yaml)
+
 ##### **For Individual Device/Circuit Tracking**
 To do this you must have power calulated by the meter, or a lambda template that calculates watts per circuit. Then can use a kWh platform for each of the current channels on the 6 channel energy meter. For example:
 ```yaml
