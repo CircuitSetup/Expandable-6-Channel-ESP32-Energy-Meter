@@ -2,7 +2,7 @@
 
 substitutions:
 # Change the disp_name to something you want  
-  disp_name: EMON
+  disp_name: emon
 # Interval of how often the power is updated
   update_time: 10s
 # Current Transformers:
@@ -15,14 +15,14 @@ substitutions:
 #  200A/100mA SCT-024: 27518
   house_current_cal: '27518'
   solar_current_cal: '27518'
-  current_cal: 27518
+  current_cal: '27518'
 # Jameco 9VAC Transformer: 
 #  For meter versions: 
 #  >= v1.3: 7305
   voltage_cal: '7305'
 
 esphome:
-  name: Energy_Meter
+  name: energy-meter
   platform: ESP32
   board: nodemcu-32s
 
@@ -60,7 +60,7 @@ sensor:
   - platform: wifi_signal
     name: ${disp_name} WiFi
     update_interval: 60s
-#IC1
+#IC1    
   - platform: atm90e32
     cs_pin: 5
     #CT1
@@ -82,7 +82,7 @@ sensor:
       current:
         name: ${disp_name} Solar L1 Amps
         id: SolarL1Amps
-       power:
+      power:
         name: ${disp_name} Solar L1 Watts
         id: SolarL1Watts
       gain_voltage: ${voltage_cal}
