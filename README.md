@@ -178,7 +178,7 @@ On 3-phase systems, a current meter that's connected to the wrong phase will alw
 ### **Setting Up Software**
 #### **EmonESP/EmonCMS**
 EmonESP is used to send energy meter data to a [local install of EmonCMS](https://github.com/emoncms/emoncms), or [emoncms.org](https://emoncms.org/). Data can also be sent to a MQTT broker through this. EmonCMS has Android and IOS apps.
-[The ESP32 sofware for EmonESP is located here]((https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
+[The ESP32 sofware for EmonESP is located here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
 
 #### **ESPHome/Home Assistant**
 [ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
@@ -284,9 +284,41 @@ To do this you must have power calulated by the meter, or a lambda template that
 - For **Individual devices** chose the name of the individual circuits, like 6C CT1 Watts Daily
 - If monitoring your Solar Panels with a 6 channel meter, you can also set this here, but it will not register unless energy is being consumed by your house or flowing out to the grid.
 
-##### More resources:
+##### **FAQ**
+##
+**Q:** I am getting a low reading, or nothing at all for one CT - what is wrong?
+
+**A:** Sometimes the jack for the CT is a bit stiff, and you may need to push in the CT connector into the board jack until it clicks. If it is definitely all the way in, it's possible the connector or somewhere else has a loose connection, and we will replace the meter for free.
+
+##
+**Q:** Does the 6 channel energy meter work in my country?
+
+**A:** Yes! There is a setting to set the meter to 50Hz or 60Hz power. You will need to purchase an **AC** transformer that brings down the voltage to between 9-12V **AC**. Transformers for the US are for sale in the circuitsetup.us store.
+
+##
+**Q:** I'm getting a negative value on one current channel. What is going on? 
+
+**A:** This usually means that the CT is on the wire backwords - just turn it around! 
+
+##
+**Q:** The CT wires are not long enough. Can I extend them? 
+
+**A:** Yes, you absolutely can! Something like a headphone extension or even an ethernet wire can be used (if you don't mind doing some wiring). It is recommended to calibrate the CTs after adding any particularly long entension.
+
+##
+**Q:** Can I use this CT with the 6 channel meter?
+
+**A:** More than likely, yes! As long as the output is rated at less than 1V or 720mA.
+
+##
+**Q:** How do I know if my CT has a burden resistor?
+
+**A:** There is a built in burden resistor if the output is rated in volts. In this case the corresponding jumper on the rear of the meter should be severed.
+
+##### **More resources:**
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
 * [Digiblur video of energy meter calibration and setup process of ESPHome](https://www.youtube.com/watch?v=BOgy6QbfeZk)
+* [DIY Home Power & Solar Energy Dashboard - Home Assistant w/ ESPHome](https://www.youtube.com/watch?v=n2XZzciz0s4)
 * [TH3D video with add-on board](https://www.youtube.com/watch?v=zfB4znO6_Z0)
 
 
