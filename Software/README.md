@@ -7,3 +7,4 @@ The following are various implamentations that can be used with the 6 Channel En
 
 ### Others
 - [ESPSense](https://github.com/cbpowell/ESPSense) - Can be used to send 6 Channel Energy Meter data via ESPHome to your Sense Home Energy Monitor software
+- [Raspberry Pi to MQTT](https://github.com/tsaitsai/circuitsetup_energy_to_mqtt) - Hook up a 6 channel meter to a Raspberry Pi and send data over MQTT
