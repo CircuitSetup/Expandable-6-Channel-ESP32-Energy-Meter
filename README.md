@@ -284,7 +284,7 @@ To do this you must have power calulated by the meter, or a lambda template that
 - For **Individual devices** chose the name of the individual circuits, like 6C CT1 Watts Daily
 - If monitoring your Solar Panels with a 6 channel meter, you can also set this here, but it will not register unless energy is being consumed by your house or flowing out to the grid.
 
-##### **FAQ**
+### **FAQ**
 ##
 **Q:** I am getting a low reading, or nothing at all for one CT - what is wrong?
 
