@@ -303,22 +303,22 @@ To do this you must have power calulated by the meter, or a lambda template that
 ##
 **Q:** I'm getting a small negative value when there is no load at all, but a positive value otherwise. What is going on?
 
-**A:** This is caused by variances in resistors and current transformers. You can either calibrate the current transformers to the meter, or add this lambda section to the total watts calculation:
-''''yaml
+**A:** This is caused by variances in resistors and current transformers. You can either calibrate the current transformers to the meter, or add this lambda section to only allow positive values for a current channel:
+```yaml
   - platform: template
     name: ${disp_name} CT1 Watts Positive
     id: ct1WattsPositive
-**    lambda: |-
+    lambda: |-
       if (id(ct1Watts).state < 0) {
         return 0;
       } else {
         return id(ct1Watts).state ;
-      }**
+      }
     accuracy_decimals: 2
     unit_of_measurement: W
     icon: "mdi:flash-circle"
     update_interval: ${update_time}
-''''
+```
 Then for your total watts calculation, use ct1WattsPositive
 
 ##
