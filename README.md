@@ -301,6 +301,27 @@ To do this you must have power calulated by the meter, or a lambda template that
 **A:** This usually means that the CT is on the wire backwords - just turn it around! 
 
 ##
+**Q:** I'm getting a small negative value when there is no load at all, but a positive value otherwise. What is going on?
+
+**A:** This is caused by variances in resistors and current transformers. You can either calibrate the current transformers to the meter, or add this lambda section to the total watts calculation:
+''''yaml
+  - platform: template
+    name: ${disp_name} CT1 Watts Positive
+    id: ct1WattsPositive
+**    lambda: |-
+      if (id(ct1Watts).state < 0) {
+        return 0;
+      } else {
+        return id(ct1Watts).state ;
+      }**
+    accuracy_decimals: 2
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+''''
+Then for your total watts calculation, use ct1WattsPositive
+
+##
 **Q:** The CT wires are not long enough. Can I extend them? 
 
 **A:** Yes, you absolutely can! Something like a headphone extension or even an ethernet wire can be used (if you don't mind doing some wiring). It is recommended to calibrate the CTs after adding any particularly long entension.
