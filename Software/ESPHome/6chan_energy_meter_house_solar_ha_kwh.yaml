@@ -22,7 +22,7 @@ substitutions:
   voltage_cal: '7305'
 
 esphome:
-  name: energy-meter
+  name: ${disp_name}
   platform: ESP32
   board: nodemcu-32s
 
@@ -67,7 +67,7 @@ sensor:
     phase_a:
       voltage:
         name: ${disp_name} Volts
-        id: ic1Volts
+        id: HouseL1Volts
         accuracy_decimals: 1
       current:
         name: ${disp_name} House L1 Amps
@@ -146,7 +146,7 @@ sensor:
     lambda: return id(HouseL1Amps).state + id(HouseL2Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}         
 #Total House Watts
   - platform: template
@@ -155,7 +155,7 @@ sensor:
     lambda: return id(HouseL1Watts).state + id(HouseL2Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Solar Amps   
   - platform: template
@@ -164,7 +164,7 @@ sensor:
     lambda: return id(SolarL1Amps).state + id(SolarL2Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}         
 #Total Solar Watts
   - platform: template
@@ -173,7 +173,7 @@ sensor:
     lambda: return id(SolarL1Watts).state + id(SolarL2Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #House kWh
   - platform: total_daily_energy
@@ -182,6 +182,7 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+    device_class: energy
 #Solar kWh
   - platform: total_daily_energy
     name: ${disp_name} Solar kWh
@@ -189,6 +190,7 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+    device_class: energy
 #Individual Hot Water kWh
   - platform: total_daily_energy
     name: ${disp_name} Hot Water kWh
@@ -196,6 +198,7 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+    device_class: energy
 #Individual Dryer kWh
   - platform: total_daily_energy
     name: ${disp_name} Dryer kWh
@@ -203,6 +206,7 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+    device_class: energy
     
 switch:
   - platform: restart
