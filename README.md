@@ -1,7 +1,7 @@
 ![Expandable 6 Channel ESP32 Energy Meter v1.3 Main Board](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/6-channel_v1.3.jpg)
 
 # CircuitSetup Expandable 6 Channel ESP32 Energy Meter
-The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 voltage channels at a time. Much like our [Split Single Phase Energy Meter](https://circuitsetup.us/index.php/product/split-single-phase-real-time-whole-house-energy-meter-v1-4/), the 6 channel uses current transformers and an AC transformer to measure voltage and power the board(s)/ESP32\. The main board includes a buck converter to power the electronics and ESP32 dev board, which plugs directly into the board. Up to 6 add-on boards can stack on top of the main board to allow you to monitor **up to 42 current channels** in 16-bit resolution, in real time, all at once! This product is currently in the prototype stage, so components may change.
+The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 voltage channels at a time. Much like our [Split Single Phase Energy Meter](https://circuitsetup.us/index.php/product/split-single-phase-real-time-whole-house-energy-meter-v1-4/), the 6 channel uses current transformers and an AC transformer to measure voltage and power the board(s)/ESP32\. The main board includes a buck converter to power the electronics and ESP32 dev board, which plugs directly into the board. Up to 6 add-on boards can stack on top of the main board to allow you to monitor **up to 42 current channels** in 16-bit resolution, in real time, all at once! 
 
 #### **Usage:**
 
@@ -178,10 +178,13 @@ On 3-phase systems, a current meter that's connected to the wrong phase will alw
 ### **Setting Up Software**
 #### **EmonESP/EmonCMS**
 EmonESP is used to send energy meter data to a [local install of EmonCMS](https://github.com/emoncms/emoncms), or [emoncms.org](https://emoncms.org/). Data can also be sent to a MQTT broker through this. EmonCMS has Android and IOS apps.
-[The ESP32 sofware for EmonESP is located here](/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
+[The ESP32 sofware for EmonESP is located here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
 
 #### **ESPHome/Home Assistant**
-[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant.
+[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
+
+A [new features in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
+
 ##### **Flashing ESPHome**
 - If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
 - Click on **Open Web UI**
@@ -207,7 +210,7 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - In Home Assistant go to **Configuration > Integrations**, and **Configure** for ESPHome. It should be highlighted as **Discovered**
 
 ##### **Loading the Energy Meter Config**
-- Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+- Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
 - In the Home Assistant/ESPHome Web UI, click **Edit** for the Energy Meter Node
 - Copy/Paste the example config, change any applicable settings, like the current calibrations to the current transformers that you use, and click **Save**
 
@@ -230,9 +233,113 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 - Restart Home Assistant
 - Data should now be available in Home Assistant and available under http://homeassistant.local:8086 or the IP of Home Assistant
 
-##### More resources:
+#### **Getting Data in the Home Assistant Energy Dashboard**
+![Home Assistant Energy Config](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/ha_energy_config.png)
+
+To display data in the Home Assistant Energy Dashboard you must be using ESPHome v1.20.4 or higher, and have at least one ```total_daily_energy``` platform configured in your ESPHome config. ```time``` is also needed.
+
+##### **For Total Energy Consumption**
+```yaml
+#Total kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Total kWh
+    power_id: totalWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+time:
+  - platform: sntp
+    id: sntp_time 
+```
+Where ```totalWatts``` is the sum of all watt calculations on the meter. [See an example of this here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_main_board.yaml) In the example, this was done with a [lambda template](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/ae0c42b86ec5faa7bc923f488fb5cc09cf5517eb/Software/ESPHome/6chan_energy_meter_main_board.yaml#L157).
+
+##### **For Solar Panels**
+The same can be done as above to track solar panel use and export. The current channels on the meter that are tracking solar usage must have their own lambda template calculation.
+
+[See this example for how you could set this up with the 6 Channel Meter.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_house_solar_ha_kwh.yaml)
+
+##### **For Individual Device/Circuit Tracking**
+To do this you must have power calulated by the meter, or a lambda template that calculates watts per circuit. Then can use a kWh platform for each of the current channels on the 6 channel energy meter. For example:
+```yaml
+#CT1 kWh
+  - platform: total_daily_energy
+    name: ${disp_name} CT1 Watts Daily
+    power_id: ct1Watts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+```
+```ct1Watts``` references the id of the watt calculation. In the [example config](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/ae0c42b86ec5faa7bc923f488fb5cc09cf5517eb/Software/ESPHome/6chan_energy_meter_main_board.yaml#L79), this is:
+```yaml
+      power:
+        name: ${disp_name} CT1 Watts
+        id: ct1Watts
+```
+
+##### **Setup in Home Assistant**
+- Go to **Configuration > Energy**
+- For total energy, click **Add Consumption** under Electricity grid
+- The name of the total_daily_energy platform, like 6C Total kWh, should be available to choose
+- You can also set a static cost per kWh or choose an entity that tracks the cost of your electricity
+- For **Individual devices** chose the name of the individual circuits, like 6C CT1 Watts Daily
+- If monitoring your Solar Panels with a 6 channel meter, you can also set this here, but it will not register unless energy is being consumed by your house or flowing out to the grid.
+
+### **FAQ**
+##
+**Q:** I am getting a low reading, or nothing at all for one CT - what is wrong?
+
+**A:** Sometimes the jack for the CT is a bit stiff, and you may need to push in the CT connector into the board jack until it clicks. If it is definitely all the way in, it's possible the connector or somewhere else has a loose connection, and we will replace the meter for free.
+
+##
+**Q:** Does the 6 channel energy meter work in my country?
+
+**A:** Yes! There is a setting to set the meter to 50Hz or 60Hz power. You will need to purchase an **AC** transformer that brings down the voltage to between 9-12V **AC**. Transformers for the US are for sale in the circuitsetup.us store.
+
+##
+**Q:** I'm getting a negative value on one current channel. What is going on? 
+
+**A:** This usually means that the CT is on the wire backwords - just turn it around! 
+
+##
+**Q:** I'm getting a small negative value when there is no load at all, but a positive value otherwise. What is going on?
+
+**A:** This is caused by variances in resistors and current transformers. You can either calibrate the current transformers to the meter, or add this lambda section to only allow positive values for a current channel:
+```yaml
+  - platform: template
+    name: ${disp_name} CT1 Watts Positive
+    id: ct1WattsPositive
+    lambda: |-
+      if (id(ct1Watts).state < 0) {
+        return 0;
+      } else {
+        return id(ct1Watts).state ;
+      }
+    accuracy_decimals: 2
+    unit_of_measurement: W
+    icon: "mdi:flash-circle"
+    update_interval: ${update_time}
+```
+Then for your total watts calculation, use ct1WattsPositive
+
+##
+**Q:** The CT wires are not long enough. Can I extend them? 
+
+**A:** Yes, you absolutely can! Something like a headphone extension or even an ethernet wire can be used (if you don't mind doing some wiring). It is recommended to calibrate the CTs after adding any particularly long entension.
+
+##
+**Q:** Can I use this CT with the 6 channel meter?
+
+**A:** More than likely, yes! As long as the output is rated at less than 1V or 720mA.
+
+##
+**Q:** How do I know if my CT has a burden resistor?
+
+**A:** There is a built in burden resistor if the output is rated in volts. In this case the corresponding jumper on the rear of the meter should be severed.
+
+### **More resources:**
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
 * [Digiblur video of energy meter calibration and setup process of ESPHome](https://www.youtube.com/watch?v=BOgy6QbfeZk)
+* [DIY Home Power & Solar Energy Dashboard - Home Assistant w/ ESPHome](https://www.youtube.com/watch?v=n2XZzciz0s4)
 * [TH3D video with add-on board](https://www.youtube.com/watch?v=zfB4znO6_Z0)
 
 

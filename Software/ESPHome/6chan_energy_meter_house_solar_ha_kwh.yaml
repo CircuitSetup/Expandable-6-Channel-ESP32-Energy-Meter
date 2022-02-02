@@ -1,0 +1,216 @@
+# 6 Channel Example Config for Split Single Phase whole house, solar, and 2 other circuits
+
+substitutions:
+# Change the disp_name to something you want  
+  disp_name: emon
+# Interval of how often the power is updated
+  update_time: 10s
+# Current Transformers:
+#  20A/25mA SCT-006: 11143
+#  30A/1V SCT-013-030: 8650
+#  50A/1V SCT-013-050: 15420
+#  80A/26.6mA SCT-010: 41660
+#  100A/50ma SCT-013-000: 27518
+#  120A/40mA: SCT-016: 41787
+#  200A/100mA SCT-024: 27518
+  house_current_cal: '27518'
+  solar_current_cal: '27518'
+  current_cal: '27518'
+# Jameco 9VAC Transformer: 
+#  For meter versions: 
+#  >= v1.3: 7305
+  voltage_cal: '7305'
+
+esphome:
+  name: ${disp_name}
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_eh_nrgnode
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+
+# mqtt:
+#  broker: !secret mqtt_broker
+#  username: !secret mqtt_user
+#  password: !secret mqtt_pass
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+web_server:
+  port: 80
+
+spi:
+  clk_pin: 18
+  miso_pin: 19
+  mosi_pin: 23
+
+sensor:
+  - platform: wifi_signal
+    name: ${disp_name} WiFi
+    update_interval: 60s
+#IC1    
+  - platform: atm90e32
+    cs_pin: 5
+    #CT1
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts
+        id: HouseL1Volts
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} House L1 Amps
+        id: HouseL1Amps
+      power:
+        name: ${disp_name} House L1 Watts
+        id: HouseL1Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${house_current_cal}
+    #CT2
+    phase_b:
+      current:
+        name: ${disp_name} Solar L1 Amps
+        id: SolarL1Amps
+      power:
+        name: ${disp_name} Solar L1 Watts
+        id: SolarL1Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${solar_current_cal}
+    #CT3
+    phase_c:
+      current:
+        name: ${disp_name} Hot Water Amps
+        id: HotWaterAmps
+      power:
+        name: ${disp_name} Hot Water Watts
+        id: HotWaterWatts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+#IC2
+  - platform: atm90e32
+    cs_pin: 4
+    #CT4
+    phase_a:
+      current:
+        name: ${disp_name} Dryer Amps
+        id: DryerAmps
+      power:
+        name: ${disp_name} Dryer Watts
+        id: DryerWatts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    #CT5
+    phase_b:
+      current:
+        name: ${disp_name} Solar L2 Amps
+        id: SolarL2Amps
+      power:
+        name: ${disp_name} CT5 Watts
+        id: SolarL2Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${solar_current_cal}
+    #CT6
+    phase_c:
+      current:
+        name: ${disp_name} House L2 Amps
+        id: HouseL2Amps
+      power:
+        name: ${disp_name} House L2 Watts
+        id: HouseL2Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${house_current_cal}
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+        
+#Total House Amps   
+  - platform: template
+    name: ${disp_name} Total House Amps
+    id: totalHouseAmps
+    lambda: return id(HouseL1Amps).state + id(HouseL2Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    device_class: current
+    update_interval: ${update_time}         
+#Total House Watts
+  - platform: template
+    name: ${disp_name} Total House Watts
+    id: totalHouseWatts
+    lambda: return id(HouseL1Watts).state + id(HouseL2Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
+#Total Solar Amps   
+  - platform: template
+    name: ${disp_name} Total Solar Amps
+    id: totalSolarAmps
+    lambda: return id(SolarL1Amps).state + id(SolarL2Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    device_class: current
+    update_interval: ${update_time}         
+#Total Solar Watts
+  - platform: template
+    name: ${disp_name} Total Solar Watts
+    id: totalSolarWatts
+    lambda: return id(SolarL1Watts).state + id(SolarL2Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
+#House kWh
+  - platform: total_daily_energy
+    name: ${disp_name} House kWh
+    power_id: totalHouseWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+#Solar kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Solar kWh
+    power_id: totalSolarWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+#Individual Hot Water kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Hot Water kWh
+    power_id: HotWaterWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+#Individual Dryer kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Dryer kWh
+    power_id: DryerWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    
+switch:
+  - platform: restart
+    name: ${disp_name} Restart  
+time:
+  - platform: sntp
+    id: sntp_time   
