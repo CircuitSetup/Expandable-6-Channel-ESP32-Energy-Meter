@@ -365,7 +365,7 @@ sensor:
     lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn1
   - platform: template
@@ -374,7 +374,7 @@ sensor:
     lambda: return id(ct7Watts).state + id(ct8Watts).state + id(ct9Watts).state + id(ct10Watts).state + id(ct11Watts).state + id(ct12Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn2
   - platform: template
@@ -383,7 +383,7 @@ sensor:
     lambda: return id(ct13Watts).state + id(ct14Watts).state + id(ct15Watts).state + id(ct16Watts).state + id(ct17Watts).state + id(ct18Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn3
   - platform: template
@@ -392,7 +392,7 @@ sensor:
     lambda: return id(ct19Watts).state + id(ct20Watts).state + id(ct21Watts).state + id(ct22Watts).state + id(ct23Watts).state + id(ct24Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn4
   - platform: template
@@ -401,7 +401,7 @@ sensor:
     lambda: return id(ct25Watts).state + id(ct26Watts).state + id(ct27Watts).state + id(ct28Watts).state + id(ct29Watts).state + id(ct30Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn5
   - platform: template
@@ -410,7 +410,7 @@ sensor:
     lambda: return id(ct31Watts).state + id(ct32Watts).state + id(ct33Watts).state + id(ct34Watts).state + id(ct35Watts).state + id(ct36Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts
   - platform: template
@@ -419,7 +419,7 @@ sensor:
     lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state + id(totalWattsAddOn2).state + id(totalWattsAddOn3).state + id(totalWattsAddOn4).state + id(totalWattsAddOn5).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #kWh
   - platform: total_daily_energy
@@ -428,6 +428,8 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
 time:
   - platform: sntp
     id: sntp_time
