@@ -152,7 +152,7 @@ sensor:
     lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}         
 #Total Watts
   - platform: template
@@ -161,7 +161,7 @@ sensor:
     lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: energy
     update_interval: ${update_time}
 #kWh
   - platform: total_daily_energy
@@ -170,7 +170,8 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
-    
+    device_class: energy
+    state_class: total_increasing
 switch:
   - platform: restart
     name: ${disp_name} Restart  
