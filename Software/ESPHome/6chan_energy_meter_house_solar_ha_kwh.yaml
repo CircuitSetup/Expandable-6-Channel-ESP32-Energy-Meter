@@ -183,6 +183,7 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
     device_class: energy
+    state_class: total_increasing
 #Solar kWh
   - platform: total_daily_energy
     name: ${disp_name} Solar kWh
@@ -191,6 +192,7 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
     device_class: energy
+    state_class: total_increasing
 #Individual Hot Water kWh
   - platform: total_daily_energy
     name: ${disp_name} Hot Water kWh
@@ -199,6 +201,7 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
     device_class: energy
+    state_class: total_increasing
 #Individual Dryer kWh
   - platform: total_daily_energy
     name: ${disp_name} Dryer kWh
@@ -207,7 +210,7 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
     device_class: energy
-    
+    state_class: total_increasing
 switch:
   - platform: restart
     name: ${disp_name} Restart  
