@@ -126,7 +126,7 @@ sensor:
     lambda: return id(ct1Amps).state * id(ic1Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
   - platform: template
     name: ${disp_name} CT2 Watts
@@ -134,7 +134,7 @@ sensor:
     lambda: return id(ct2Amps).state * id(ic1Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
   - platform: template
     name: ${disp_name} CT3 Watts
@@ -142,7 +142,7 @@ sensor:
     lambda: return id(ct3Amps).state * id(ic1Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
   - platform: template
     name: ${disp_name} CT4 Watts
@@ -150,7 +150,7 @@ sensor:
     lambda: return id(ct4Amps).state * id(ic2Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
   - platform: template
     name: ${disp_name} CT5 Watts
@@ -158,7 +158,7 @@ sensor:
     lambda: return id(ct5Amps).state * id(ic2Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
   - platform: template
     name: ${disp_name} CT6 Watts
@@ -166,7 +166,7 @@ sensor:
     lambda: return id(ct6Amps).state * id(ic2Volts).state;
     accuracy_decimals: 0
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}         
 #Total Amps   
   - platform: template
@@ -175,7 +175,7 @@ sensor:
     lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}         
 #Total Watts
   - platform: template
@@ -184,7 +184,7 @@ sensor:
     lambda: return id(totalAmps).state * id(ic1Volts).state;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #kWh
   - platform: total_daily_energy
@@ -193,7 +193,8 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
-    
+    device_class: energy
+    state_class: total_increasing
 switch:
   - platform: restart
     name: ${disp_name} Restart  
