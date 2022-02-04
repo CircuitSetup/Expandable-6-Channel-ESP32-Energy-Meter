@@ -221,7 +221,7 @@ sensor:
     lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}
 #Total Amps AddOn
   - platform: template
@@ -230,7 +230,7 @@ sensor:
     lambda: return id(ct7Amps).state + id(ct8Amps).state + id(ct9Amps).state + id(ct10Amps).state + id(ct11Amps).state + id(ct12Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}      
 #Total Amps
   - platform: template
@@ -239,7 +239,7 @@ sensor:
     lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
-    icon: "mdi:flash"
+    device_class: current
     update_interval: ${update_time}
     
 #Total Watts Main
@@ -249,7 +249,7 @@ sensor:
     lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts AddOn
   - platform: template
@@ -258,7 +258,7 @@ sensor:
     lambda: return id(ct7Watts).state + id(ct8Watts).state + id(ct9Watts).state + id(ct10Watts).state + id(ct11Watts).state + id(ct12Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
 #Total Watts
   - platform: template
@@ -267,7 +267,7 @@ sensor:
     lambda: return id(totalWattsMain).state + id(totalWattsAddOn).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    icon: "mdi:flash-circle"
+    device_class: power
     update_interval: ${update_time}
     
 #kWh
@@ -277,7 +277,8 @@ sensor:
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
-    
+    device_class: energy
+    state_class: total_increasing
 switch:
   - platform: restart
     name: ${disp_name} Restart  
