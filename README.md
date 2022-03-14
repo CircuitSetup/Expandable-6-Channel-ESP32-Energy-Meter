@@ -336,6 +336,12 @@ Then for your total watts calculation, use ct1WattsPositive
 
 **A:** There is a built in burden resistor if the output is rated in volts. In this case the corresponding jumper on the rear of the meter should be severed.
 
+##
+**Q:** When using more than 3 add-on boards, ESPHome does not work.
+
+**A:**
+ESPHome will run out of stack memory after using more than 15 sensors, or so. You will have to increase the stack memory size before compiling. [See details here.](https://github.com/esphome/issues/issues/855#issuecomment-903296681)
+
 ### **More resources:**
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
 * [Digiblur video of energy meter calibration and setup process of ESPHome](https://www.youtube.com/watch?v=BOgy6QbfeZk)
