@@ -38,14 +38,14 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 
 #### **What you'll need:**
 
-*   **Current Transformers** (any combination of the following, or any current transformer that does not exceed 1V or 720mA output)
+*   **Current Transformers** (any combination of the following, or any current transformer that does not exceed 720mV RMS, or 33mA output)
     *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/index.php/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
     *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/index.php/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
     *   [SCT-013-000 100A/50mA](https://circuitsetup.us/index.php/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
     *   [SCT-016 120A/40mA](https://circuitsetup.us/index.php/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
     *   [Magnelab SCT-0750-100](https://amzn.to/2IF8xnY) (screw connectors - must sever burden resistor connection on the back of the board since they have a built in burden resistor).
     *   [SCT-024 200A/100mA](https://www.poweruc.pl/products/split-core-current-transformer-sct024ts-rated-input-400a) (24mm opening - terminal output)
-    *   Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mA.
+    *   Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mV RMS, or 33mA at peak output.
 *   **AC Transformer (NOT DC):** 
     *   North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/index.php/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
     *   Europe: 240V to 9V or 12V AC-AC at least 500mA - [See a list of some recommended transformers here](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters)
@@ -56,7 +56,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
 *   **Software** (choose one):
     *   Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
-    *   The current dev release of [ESPHome.](https://github.com/esphome/esphome/tree/dev) Details on [integration with Home Assistant are located here.](https://github.com/digiblur/digiNRG_ESPHome) and [here on ESPHome.io](https://next.esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+    *   The current release of [ESPHome.](https://github.com/esphome/esphome/tree/dev) Details on [integration with Home Assistant are located here.](https://github.com/digiblur/digiNRG_ESPHome) and [here on ESPHome.io](https://next.esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
     *   Libraries for [CircuitPython](https://github.com/BitKnitting/CircuitSetup_CircuitPython) & [MicroPython](https://github.com/BitKnitting/CircuitSetup_micropython)
     
 
@@ -329,7 +329,12 @@ Then for your total watts calculation, use ct1WattsPositive
 ##
 **Q:** Can I use this CT with the 6 channel meter?
 
-**A:** More than likely, yes! As long as the output is rated at less than 1V or 720mA.
+**A:** More than likely, yes! As long as the output is rated at less than 720mV RMS, or 33mA.
+
+##
+**Q:** Can I use SCT-024 200A CTs with the 6 channel meter?
+
+**A:** If you need to measure up to 200A, then this is not recommended. At 200A, the SCT-024 will output 100mA. That means, **the max you should measure with the SCT-024 plugged into the 6 channel meter is 66A**. In a residential setting with 200A service, it is highly unlickly that you will use more than 66A per phase sustained. In fact, unless you have your own dedicated transformer, and a very large house, it is impossible.
 
 ##
 **Q:** How do I know if my CT has a burden resistor?
@@ -341,6 +346,24 @@ Then for your total watts calculation, use ct1WattsPositive
 
 **A:**
 ESPHome will run out of stack memory after using more than 15 sensors, or so. You will have to increase the stack memory size before compiling. [See details here.](https://github.com/esphome/issues/issues/855#issuecomment-903296681)
+
+UPDATE: You can replace the esphome: definition in your ESPHome config to solve this issue with the following:
+```yaml
+esphome:
+  name: 6chan_energy_meter
+  platformio_options:
+    build_flags: 
+      - -DCONFIG_ARDUINO_LOOP_STACK_SIZE=32768
+
+esp32:
+  board: nodemcu-32s
+  variant: esp32
+  framework:
+    type: arduino
+    version: 2.0.2
+    source: https://github.com/espressif/arduino-esp32.git#2.0.2
+    platform_version: https://github.com/platformio/platform-espressif32.git#feature/arduino-upstream
+```
 
 ### **More resources:**
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
