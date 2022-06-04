@@ -147,7 +147,8 @@ sensor:
     accuracy_decimals: 2
     unit_of_measurement: A
     device_class: current
-    update_interval: ${update_time}         
+    update_interval: ${update_time}
+
 #Total House Watts
   - platform: template
     name: ${disp_name} Total House Watts
@@ -157,6 +158,57 @@ sensor:
     unit_of_measurement: W
     device_class: power
     update_interval: ${update_time}
+    
+#Total House Watts Negative
+  - platform: template
+    name: ${disp_name} Total House Return To Grid Watts
+    id: returnToGridWatts
+    lambda: |-
+      if (id(totalHouseWatts).state > 0) {
+        return 0;
+      } else {
+        return abs(id(totalHouseWatts).state) ;
+      }
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
+    
+#House Negative kWh (HA Return to Grid)
+  - platform: total_daily_energy
+    name: ${disp_name} House Return To Grid kWh
+    power_id: returnToGridWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+    
+ #Total House Watts Positive
+  - platform: template
+    name: ${disp_name} Total House Positive Watts
+    id: totalHousePositiveWatts
+    lambda: |-
+      if (id(totalHouseWatts).state < 0) {
+        return 0;
+      } else {
+        return id(totalHouseWatts).state ;
+      }
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
+    
+#House positive kWh
+  - platform: total_daily_energy
+    name: ${disp_name} House kWh
+    power_id: totalHousePositiveWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+    
 #Total Solar Amps   
   - platform: template
     name: ${disp_name} Total Solar Amps
@@ -165,7 +217,8 @@ sensor:
     accuracy_decimals: 2
     unit_of_measurement: A
     device_class: current
-    update_interval: ${update_time}         
+    update_interval: ${update_time}
+    
 #Total Solar Watts
   - platform: template
     name: ${disp_name} Total Solar Watts
@@ -175,15 +228,7 @@ sensor:
     unit_of_measurement: W
     device_class: power
     update_interval: ${update_time}
-#House kWh
-  - platform: total_daily_energy
-    name: ${disp_name} House kWh
-    power_id: totalHouseWatts
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: kWh
-    device_class: energy
-    state_class: total_increasing
+    
 #Solar kWh
   - platform: total_daily_energy
     name: ${disp_name} Solar kWh
@@ -193,6 +238,7 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
+    
 #Individual Hot Water kWh
   - platform: total_daily_energy
     name: ${disp_name} Hot Water kWh
@@ -202,6 +248,7 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
+    
 #Individual Dryer kWh
   - platform: total_daily_energy
     name: ${disp_name} Dryer kWh
@@ -211,6 +258,7 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
+    
 switch:
   - platform: restart
     name: ${disp_name} Restart  
