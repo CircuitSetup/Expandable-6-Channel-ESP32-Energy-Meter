@@ -1,5 +1,5 @@
 ### Software
-The following are various implamentations that can be used with the 6 Channel Energy Meter. Instructions for [setting up software for the meter is located here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#setting-up-software).
+The following are various implementations that can be used with the 6 Channel Energy Meter. Instructions for [setting up software for the meter is located here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#setting-up-software).
 - ESPHome - Example configuration files
 - EmonCMS - Device config files (these are now included with the device module for EmonCMS)
 - EmonESP - ESP software that runs on the meter's ESP32, and sends data to EmonCMS or via MQTT
