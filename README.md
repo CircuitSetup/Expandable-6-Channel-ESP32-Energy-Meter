@@ -167,13 +167,21 @@ What you'll need to measure all 3 phases properly:
 * 6 Channel Add-on Board
 * 3 voltage transformers - one for each phase. These can either be wall, plug-in type (if you have an outlet wired to each phase), or stand-alone transformers wired directly to breakers. They must bring down the voltage to between 9-14VAC. The first one that plugs into the main board also powers the ESP32 and electronics, so it must output at least 500mA.
 * Headers soldered to the VA2 terminals on the main board and add-on board
-* JP12 and JP13 severed on both boards
+* JP12 and JP13 severed on the main board & add-on boards
+Similar to the above for measuring a second voltage, once JP12 and JP13 are severed:
+* CT1-CT3 on the main board, and CT1-CT3 on the add-on board will be in phase with the 1st phase
+* CT3-CT4 on the main board with the 2nd phase
+* CT3-CT4 on the add-on board with the 3rd phase. 
 
-Similar to the above for measuring a second voltage, once JP12 and JP13 are severed, CT1-CT3 on the main board, and CT1-CT3 on the add-on board will be in phase with the 1st phase, CT3-CT4 on the main board with the 2nd phase, and CT3-CT4 on the add-on board with the 3rd phase. The transformers should be calibrated individually for greater accuracy.
+The transformers should be calibrated individually for greater accuracy.
 
-Alternately, you can use two add-on boards and assign one phase to each board. To do this, instead of severing JP12 and JP13, you cut both front-most pins (i.e. those which the ESP32 does *not* plug into) of the extension boards' connectors. Then connect each phase to one of the connectors.
+Alternately, you can use *2 add-on boards* and connect 1 transformer to to each board:
+* Locate the bottom most pins (i.e. those which the ESP32 does *not* plug into), marked "VA-" and "VA+" for each add-on board. These normally provide the voltage reference to the add-on board from the main board
+* Cut these pins off
+* Solder a connector, or the wires from a transformer, in the bottom right holes marked "VA2" on the add-on boards. Polarity does not matter (if you are getting negative current readings, reverse the CT on the wire)
+* *Do not sever JP12 and JP13* 
 
-On 3-phase systems, a current meter that's connected to the wrong phase will always result in near-zero active power.
+On 3-phase systems, a current transformer that's connected to a phase not in phase with the voltage reference will always result in near-zero active power and power factor.
 
 ### **Setting Up Software**
 #### **EmonESP/EmonCMS**
