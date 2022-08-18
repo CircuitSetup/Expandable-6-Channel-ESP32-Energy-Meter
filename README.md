@@ -56,7 +56,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
 *   **Software** (choose one):
     *   Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
-    *   The current release of [ESPHome.](https://github.com/esphome/esphome/tree/dev) Details on [integration with Home Assistant are located here.](https://github.com/digiblur/digiNRG_ESPHome) and [here on ESPHome.io](https://next.esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+    *   The current release of [ESPHome.](https://esphome.io/components/sensor/atm90e32.html) Details on [integrating with Home Assistant are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#esphomehome-assistant) and [here on ESPHome.io](https://esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
     *   Libraries for [CircuitPython](https://github.com/BitKnitting/CircuitSetup_CircuitPython) & [MicroPython](https://github.com/BitKnitting/CircuitSetup_micropython)
     
 
@@ -81,7 +81,7 @@ The **main board** uses the following SPI pins:
 
 The version of [EmonESP available here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) has all of these pins set by default. 
 
-For examples of how to set up your config in ESPHome, [see here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome) and [here.](https://next.esphome.io/components/sensor/atm90e32.html)
+For examples of how to set up your config in ESPHome, [see here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome) and [here.](https://esphome.io/components/sensor/atm90e32.html)
 
 #### **Add-on Boards**
 Add-on boards (up to 6) can expand the main energy meter up to 42 current channels & 8 voltage channels. The add-on boards plug directly into the main board as seen here.
@@ -189,9 +189,9 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 [The ESP32 sofware for EmonESP is located here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP), and can be flash to an ESP32 using the [Arduino IDE](https://www.arduino.cc/en/software) or [PlatformIO](https://platformio.org/). See [details on setup here.](https://github.com/CircuitSetup/Split-Single-Phase-Energy-Meter/tree/master/Software/EmonESP)
 
 #### **ESPHome/Home Assistant**
-[ESPHome](https://esphome.io) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
+[ESPHome](https://esphome.io/components/sensor/atm90e32.html) can be loaded on an ESP32 to seamlessly integrate energy data into [Home Assistant](https://www.home-assistant.io/). Energy data can then be saved in InfluxDB and displayed with Grafana. At the same time, the energy data can also be used for automations in Home Assistant. 
 
-A [new features in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
+A [new feature in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
 
 ##### **Flashing ESPHome**
 - If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
