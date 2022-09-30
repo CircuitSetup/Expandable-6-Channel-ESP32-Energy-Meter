@@ -5,6 +5,13 @@ The following are various implementations that can be used with the 6 Channel En
 - EmonESP - ESP software that runs on the meter's ESP32, and sends data to EmonCMS or via MQTT
 - Grafana - Dashboard examples
 
-### Others
+### Libraries
+These are used to communicate directly with the ATM90E32 IC's used with the 6 channel meter. If you want to build your own software, you will need one of these.
+- [Arduino/ESP32](https://github.com/CircuitSetup/ATM90E32)
+- [CircuitPython](https://github.com/BitKnitting/CircuitSetup_CircuitPython)
+- [MicroPython](https://github.com/BitKnitting/CircuitSetup_micropython)
+
+### User Created Projects
+- [CS/ESPHome](https://github.com/sillygoose/cs_esphome) - Python data collection utility. Sensor data is sourced using the ESPHome API and stored in an InfluxDB database. Grafana dashboard included.
 - [ESPSense](https://github.com/cbpowell/ESPSense) - Can be used to send 6 Channel Energy Meter data via ESPHome to your Sense Home Energy Monitor software
-- [Raspberry Pi to MQTT](https://github.com/tsaitsai/circuitsetup_energy_to_mqtt) - Hook up a 6 channel meter to a Raspberry Pi and send data over MQTT
+- [Raspberry Pi to MQTT](https://github.com/tsaitsai/circuitsetup_energy_to_mqtt) - Hook up a 6 channel meter to a Raspberry Pi (in place of an ESP32) and send data over MQTT
