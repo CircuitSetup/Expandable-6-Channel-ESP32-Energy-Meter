@@ -15,6 +15,7 @@ substitutions:
 #  100A/50ma SCT-013-000: 27518
 #  120A/40mA: SCT-016: 41787
 #  200A/100mA SCT-024: 27518
+#  200A/50mA SCT-024: 55036
   current_cal: '27518'
 # Jameco 9VAC Transformer: 
 #  For meter versions: 
