@@ -39,18 +39,18 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 #### **What you'll need:**
 
 *   **Current Transformers** (any combination of the following, or any current transformer that does not exceed 720mV RMS, or 33mA output)
-    *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/index.php/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
-    *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/index.php/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
-    *   [SCT-013-000 100A/50mA](https://circuitsetup.us/index.php/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
-    *   [SCT-016 120A/40mA](https://circuitsetup.us/index.php/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
+    *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
+    *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
+    *   [SCT-013-000 100A/50mA](https://circuitsetup.us/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
+    *   [SCT-016 120A/40mA](https://circuitsetup.us/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
     *   [Magnelab SCT-0750-100](https://amzn.to/2IF8xnY) (screw connectors - must sever burden resistor connection on the back of the board since they have a built in burden resistor).
     *   [SCT-024 200A/50mA](https://circuitsetup.us/product/200a-50ma-current-transformer-yhdc-sct-024-24mm/) (24mm opening - 3.5mm connectors)
     *   Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mV RMS, or 33mA at peak output.
 *   **AC Transformer (NOT DC):** 
-    *   North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/index.php/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
+    *   North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
     *   Europe: 240V to 9V or 12V AC-AC at least 500mA - [See a list of some recommended transformers here](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters)
 *   **ESP32** (choose one):
-    *   [NodeMCU 32s](https://circuitsetup.us/index.php/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
+    *   [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
     *   [Espressif DevKitC](https://amzn.to/2PHvVsg)
     *   [DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32U?qs=%252BEew9%252B0nqrCEVvpkdH%2FG5Q%3D%3D) if you need better wifi reception (don't forget [the antenna](https://www.mouser.com/ProductDetail/Molex/204281-1150?qs=W0yvOO0ixfHu2%252BtTAKRqwg%3D%3D))
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
