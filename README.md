@@ -195,7 +195,7 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 A [new feature in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
 
 ##### **Flashing ESPHome**
-- If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
+- If you have Home Assistant installed, go to **Settings** in the left menu, click **Add-ons**, then **Add-on Store** (bottom right blue button), Search for **ESPHome** - Click on **Install**
 - Click on **Open Web UI**
 
 ![ESPHome add-on](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_add-on_install.png)
@@ -216,7 +216,7 @@ A [new feature in Home Assistant allows you to monitor electricity usage](https:
 ![ESPHome Flasher](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_flasher.PNG)
 
 - Assuming the ESP32 is close enough to the AP you want to connect to for WiFi, it should now be available in ESPHome within Home Assistant
-- In Home Assistant go to **Configuration > Integrations**, and **Configure** for ESPHome. It should be highlighted as **Discovered**
+- In Home Assistant go to **Settings > Devices & Services**, and click on the blue **Configure** for ESPHome. It should be highlighted as **Discovered**
 
 ##### **Loading the Energy Meter Config**
 - Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
@@ -235,10 +235,10 @@ A [new feature in Home Assistant allows you to monitor electricity usage](https:
 - When updating values for current transformers in the ESPHome config, click **Edit**, then **Upload**
 
 #### **Getting Data in InfluxDB**
-- If you don't already, install the InfluxDB add-on in Home Assistant via **Supervisor > Add-on Store**
+- If you don't already, install the InfluxDB add-on in Home Assistant via **Settings > Add-ons > Add-on Store** (bottom right blue button)
 - Open the Web UI, and click on the **InfluxDB Admin** tab, add a database **homeassistant**
 - Click on the **Users** tab (under Databases on the same screen), and create a new user **homeassistant** with All permissions
-- Edit your .yaml config and add the InfluxDB parameters listed under **Supervisor > InfluxDB > Documentation (top menu) > Integrating into Home Assistant**
+- Go to **Settings > Add-ons > InfluxDB > Documentation (top menu) > Integrating into Home Assistant**, and follow the instructions for editing your Home Assistant configuration.yaml
 - Restart Home Assistant
 - Data should now be available in Home Assistant and available under http://homeassistant.local:8086 or the IP of Home Assistant
 
