@@ -26,17 +26,14 @@
 #ifndef _ENERGY_METER
 #define _ENERGY_METER
 
-#define NUM_BOARDS 7
-#define NUM_INPUTS 6
-
-#define NUM_CHANNELS (NUM_BOARDS*NUM_INPUTS)
-
 //#define ENABLE_OLED_DISPLAY
 
 /*
    The following calibration values can be set here or in the EmonESP interface
    EmonESP values take priority if they are set
 */
+
+//OLD
 /*
    4231 for 60 hz 6 channel meter 
    135 for 50 hz 6 channel meter
@@ -44,6 +41,18 @@
 
 #define LINE_FREQ_DEFAULT 4231
 
+//NEW
+/*
+   4485 for 60 Hz (North America)
+   389 for 50 hz (rest of the world)
+*/
+#define LINE_FREQ 4485
+
+#define LINE_FREQ_50HZ 389
+
+#define LINE_FREQ_60HZ 4485
+
+//OLD
 /*
    Sets the current gain to 1x, 2x, or 4x. If your CT has a low current output use 2x or 4x.
    0 (1x)
@@ -52,6 +61,15 @@
 */
 #define PGA_GAIN_DEFAULT 0
 
+//NEW
+/*
+   0 for 1x
+   21 for 2x
+   42 for 4x
+*/
+#define PGA_GAIN 21
+
+//OLD
 /*
    For meter <= v1.2:
       42080 - 9v AC Transformer - Jameco 112336
@@ -61,6 +79,21 @@
 */
 #define VOLTAGE_GAIN_DEFAULT 7305
 
+//NEW
+/*
+   For meter <= v1.3:
+      42080 - 9v AC Transformer - Jameco 112336
+      32428 - 12v AC Transformer - Jameco 167151
+   For meter = v1.4:
+      37106 - 9v AC Transformer - Jameco 157041
+      38302 - 9v AC Transformer - Jameco 112336
+      29462 - 12v AC Transformer - Jameco 167151
+   For Meters >= v1.4 rev.3
+      3920 - 9v AC Transformer - Jameco 157041 - default
+*/
+#define VOLTAGE_GAIN 3920
+
+//OLD
 /*
  When PGA Gain is set to 0
   20A/25mA SCT-006: 11131
@@ -71,6 +104,18 @@
   120A/40mA: SCT-016: 41880
 */
 #define CURRENT_GAIN_DEFAULT 27961
+
+//NEW
+/*
+   10170 - SCT-006 20A/25mA
+   39571 - SCT-010 80A/26.6mA
+   25498 - SCT-013-000 100A/50mA
+   39473 - SCT-016 120A/40mA - default
+   46539 - Magnalab 100A
+   26315 - SCT-024 200A/100mA 
+*/
+#define CURRENT_GAIN_CT1 39473
+#define CURRENT_GAIN_CT2 39473
 
 extern void energy_meter_setup();
 extern void energy_meter_loop();
