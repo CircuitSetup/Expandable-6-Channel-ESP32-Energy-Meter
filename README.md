@@ -39,18 +39,18 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 #### **What you'll need:**
 
 *   **Current Transformers** (any combination of the following, or any current transformer that does not exceed 720mV RMS, or 33mA output)
-    *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/index.php/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
-    *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/index.php/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
-    *   [SCT-013-000 100A/50mA](https://circuitsetup.us/index.php/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
-    *   [SCT-016 120A/40mA](https://circuitsetup.us/index.php/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
+    *   [SCT-006 20A/25mA Micro](https://circuitsetup.us/product/20a-25ma-micro-current-transformer-yhdc-sct-006-6mm/) (6mm opening - 3.5mm connectors)
+    *   [SCT-010 80A/26.6mA Mini](https://circuitsetup.us/product/80a-26-6ma-mini-current-transformer-yhdc-sct-010-10mm/) (10mm opening - 3.5mm connectors)
+    *   [SCT-013-000 100A/50mA](https://circuitsetup.us/product/100a-50ma-current-transformer-yhdc-sct-013/) (13mm opening - 3.5mm connectors)
+    *   [SCT-016 120A/40mA](https://circuitsetup.us/product/120a-40ma-current-transformer-yhdc-sct-016-with-3-5mm-jack-16mm-opening/) (16mm opening - 3.5mm connectors)
     *   [Magnelab SCT-0750-100](https://amzn.to/2IF8xnY) (screw connectors - must sever burden resistor connection on the back of the board since they have a built in burden resistor).
-    *   [SCT-024 200A/100mA](https://www.poweruc.pl/products/split-core-current-transformer-sct024ts-rated-input-400a) (24mm opening - terminal output)
+    *   [SCT-024 200A/50mA](https://circuitsetup.us/product/200a-50ma-current-transformer-yhdc-sct-024-24mm/) (24mm opening - 3.5mm connectors)
     *   Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mV RMS, or 33mA at peak output.
 *   **AC Transformer (NOT DC):** 
-    *   North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/index.php/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
+    *   North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
     *   Europe: 240V to 9V or 12V AC-AC at least 500mA - [See a list of some recommended transformers here](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters)
 *   **ESP32** (choose one):
-    *   [NodeMCU 32s](https://circuitsetup.us/index.php/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
+    *   [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
     *   [Espressif DevKitC](https://amzn.to/2PHvVsg)
     *   [DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32U?qs=%252BEew9%252B0nqrCEVvpkdH%2FG5Q%3D%3D) if you need better wifi reception (don't forget [the antenna](https://www.mouser.com/ProductDetail/Molex/204281-1150?qs=W0yvOO0ixfHu2%252BtTAKRqwg%3D%3D))
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
@@ -128,6 +128,7 @@ The CS pins can be:
     * 100A/50ma SCT-013-000: 27518
     * 120A/40mA: SCT-016: 41787
     * 200A/100mA SCT-024: 27518
+    * 200A/50mA SCT-024: 55036
 * AC Transformers
     * Jameco 9VAC Transformer 157041: 
        * For meter versions: 
@@ -194,7 +195,7 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 A [new feature in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
 
 ##### **Flashing ESPHome**
-- If you have Home Assistant installed, go to **Supervisor** in the left menu, click **Add-on Store** at the top, Search for **ESPHome** - Click on **Install**
+- If you have Home Assistant installed, go to **Settings** in the left menu, click **Add-ons**, then **Add-on Store** (bottom right blue button), Search for **ESPHome** - Click on **Install**
 - Click on **Open Web UI**
 
 ![ESPHome add-on](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_add-on_install.png)
@@ -215,7 +216,7 @@ A [new feature in Home Assistant allows you to monitor electricity usage](https:
 ![ESPHome Flasher](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_flasher.PNG)
 
 - Assuming the ESP32 is close enough to the AP you want to connect to for WiFi, it should now be available in ESPHome within Home Assistant
-- In Home Assistant go to **Configuration > Integrations**, and **Configure** for ESPHome. It should be highlighted as **Discovered**
+- In Home Assistant go to **Settings > Devices & Services**, and click on the blue **Configure** for ESPHome. It should be highlighted as **Discovered**
 
 ##### **Loading the Energy Meter Config**
 - Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
@@ -234,10 +235,10 @@ A [new feature in Home Assistant allows you to monitor electricity usage](https:
 - When updating values for current transformers in the ESPHome config, click **Edit**, then **Upload**
 
 #### **Getting Data in InfluxDB**
-- If you don't already, install the InfluxDB add-on in Home Assistant via **Supervisor > Add-on Store**
+- If you don't already, install the InfluxDB add-on in Home Assistant via **Settings > Add-ons > Add-on Store** (bottom right blue button)
 - Open the Web UI, and click on the **InfluxDB Admin** tab, add a database **homeassistant**
 - Click on the **Users** tab (under Databases on the same screen), and create a new user **homeassistant** with All permissions
-- Edit your .yaml config and add the InfluxDB parameters listed under **Supervisor > InfluxDB > Documentation (top menu) > Integrating into Home Assistant**
+- Go to **Settings > Add-ons > InfluxDB > Documentation (top menu) > Integrating into Home Assistant**, and follow the instructions for editing your Home Assistant configuration.yaml
 - Restart Home Assistant
 - Data should now be available in Home Assistant and available under http://homeassistant.local:8086 or the IP of Home Assistant
 
