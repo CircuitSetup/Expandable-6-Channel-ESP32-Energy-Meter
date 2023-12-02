@@ -171,8 +171,8 @@ What you'll need to measure all 3 phases properly:
 * JP12 and JP13 severed on the main board & add-on boards
 Similar to the above for measuring a second voltage, once JP12 and JP13 are severed:
 * CT1-CT3 on the main board, and CT1-CT3 on the add-on board will be in phase with the 1st phase
-* CT3-CT4 on the main board with the 2nd phase
-* CT3-CT4 on the add-on board with the 3rd phase. 
+* CT4-CT6 on the main board with the 2nd phase
+* CT1-CT6 on the add-on board with the 3rd phase. 
 
 The transformers should be calibrated individually for greater accuracy.
 
