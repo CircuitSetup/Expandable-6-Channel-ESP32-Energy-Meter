@@ -343,7 +343,7 @@ Then for your total watts calculation, use ct1WattsPositive
 ##
 **Q:** Can I use SCT-024 200A CTs with the 6 channel meter?
 
-**A:** If you need to measure up to 200A, then this is not recommended. At 200A, the SCT-024 will output 100mA. That means, **the max you should measure with the SCT-024 plugged into the 6 channel meter is 66A**. In a residential setting with 200A service, it is highly unlickly that you will use more than 66A per phase sustained. In fact, unless you have your own dedicated transformer, and a very large house, it is impossible.
+**A:** If you need to measure up to 200A, then this is not recommended. At 200A, our newest SCT-024's will output 50mA. That means, **the max you should measure with the SCT-024 plugged into the 6 channel meter is 132A**. In a residential setting with 200A service, it is highly unlickly that you will use more than 132A per phase sustained. In fact, unless you have your own dedicated transformer, and a very large house, it is impossible.
 
 ##
 **Q:** How do I know if my CT has a burden resistor?
