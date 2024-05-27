@@ -163,7 +163,7 @@ sensor:
     lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
-    device_class: energy
+    device_class: power
     update_interval: ${update_time}
 #kWh
   - platform: total_daily_energy
