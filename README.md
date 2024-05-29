@@ -52,7 +52,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 *   **ESP32** (choose one):
     *   [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
     *   [Espressif DevKitC](https://amzn.to/2PHvVsg)
-    *   [DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32U?qs=%252BEew9%252B0nqrCEVvpkdH%2FG5Q%3D%3D) if you need better wifi reception (don't forget [the antenna](https://www.mouser.com/ProductDetail/Molex/204281-1150?qs=W0yvOO0ixfHu2%252BtTAKRqwg%3D%3D))
+    *   [[DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32UE?qs=GedFDFLaBXFguOYDKoZ3jA%3D%3D)) if you need better wifi reception (don't forget [the antenna](https://www.mouser.com/ProductDetail/Molex/204281-1150?qs=W0yvOO0ixfHu2%252BtTAKRqwg%3D%3D))
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
 *   **Software** (choose one):
     *   Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
