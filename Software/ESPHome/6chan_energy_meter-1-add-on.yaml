@@ -34,8 +34,9 @@ esp32:
   board: nodemcu-32s
 
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_pass
+  # Set up a wifi access point
+  ap:
+    password: "12345678"
 
 # Enable logging
 logger:
