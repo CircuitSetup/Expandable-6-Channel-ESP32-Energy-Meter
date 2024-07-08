@@ -28,7 +28,7 @@ esphome:
 
 project:
   name: circuitsetup.6c-energy-meter-main
-   version: "1.4.1"
+  version: "1.4.1"
 
 esp32:
   board: nodemcu-32s
