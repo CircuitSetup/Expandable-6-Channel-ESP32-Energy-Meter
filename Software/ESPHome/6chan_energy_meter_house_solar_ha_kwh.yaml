@@ -37,12 +37,13 @@ esp32:
 
 wifi:
   # Set up a wifi access point
-  ap:
-    password: "12345678"
+  ap: {}
 
 captive_portal:
 
 esp32_improv:
+# Sets up Bluetooth LE to allow the user
+# to provision wifi credentials to the device.
   authorizer: none
 
 # Enable logging
