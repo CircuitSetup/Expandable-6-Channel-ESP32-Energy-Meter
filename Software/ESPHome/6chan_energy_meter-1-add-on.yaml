@@ -1,4 +1,4 @@
-# 6 Channel Main Board + 1 add-on board
+#  CircuitSetup 6 Channel Energy Meter Main Board + 1 add-on board example config
 
 substitutions:
 # Change the disp_name to something you want  
