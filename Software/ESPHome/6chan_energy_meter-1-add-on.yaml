@@ -1,10 +1,9 @@
-# Example config for when jp8-jp11 are all bridged - this connects all the voltage channels and allows for power to be calculated by the meter directly.
-# Boards >= v1.4 jp8-jp11 are removed and have all voltage channels connected
-# 1 add-on board
+# 6 Channel Main Board + 1 add-on board
 
 substitutions:
 # Change the disp_name to something you want  
-  disp_name: 6C
+  disp_name: Energy Meter
+  friendly_name: CircuitSetup Energy Meter
 # Interval of how often the power is updated
   update_time: 10s
 # Current Transformers:
@@ -25,23 +24,18 @@ substitutions:
   voltage_cal: '7305'
 
 esphome:
-  name: 6chan_energy_meter
-  platform: ESP32
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+project:
+    name: circuitsetup.6c-energy-meter-1-add-on
+    version: "1.4.1"
+
+esp32:
   board: nodemcu-32s
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_pass
-  manual_ip:
-    static_ip: !secret ip_eh_nrgnode
-    gateway: !secret ip_gateway
-    subnet: !secret ip_subnet
-    dns1: !secret ip_dns1
-    
-# mqtt:
-#  broker: !secret mqtt_broker
-#  username: !secret mqtt_user
-#  password: !secret mqtt_pass
 
 # Enable logging
 logger:
@@ -50,6 +44,11 @@ logger:
 api:
 
 ota:
+  - platform: esphome
+
+dashboard_import:
+  package_import_url: github://circuitsetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter-1-add-on.yaml@master
+  import_full_config: true
 
 web_server:
   port: 80
@@ -112,10 +111,6 @@ sensor:
   - platform: atm90e32
     cs_pin: 4
     phase_a:
-      voltage:
-        name: ${disp_name} Volts B
-        id: ic2Volts
-        accuracy_decimals: 1
       current:
         name: ${disp_name} CT4 Amps
         id: ct4Amps
@@ -149,10 +144,6 @@ sensor:
   - platform: atm90e32
     cs_pin: 0
     phase_a:
-      voltage:
-        name: ${disp_name} Volts A AO
-        id: ic1VoltsAO
-        accuracy_decimals: 1
       current:
         name: ${disp_name} CT7 Amps 
         id: ct7Amps
