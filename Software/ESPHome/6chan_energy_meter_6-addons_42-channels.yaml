@@ -1,10 +1,11 @@
-# 5 add-on boards - 36 current channels
-# ESPHome has a limit on the amount of sensors that it can handle before running out of memory. 
-# Because of this, only the power sensor for each current channel is output
-
+# CircuitSetup 6 Channel Energy Meter Main Board with 6 add-on boards - 42 current channels
+# To reduce the number of sensors, only the power sensor for each current channel is output.
+# current_cal: is set to a 20A CT for all inputs. This can easily be changed per input depending 
+# on what CTs are being used on the corresponding CT inputs.
 substitutions:
 # Change the disp_name to something you want  
-  disp_name: Energy_Meter
+  disp_name: Energy Meter
+  friendly_name: CircuitSetup Energy Meter
 # Interval of how often the power is updated
   update_time: 10s
 # Current Transformers:
@@ -25,13 +26,22 @@ substitutions:
   voltage_cal: '7305'
   
 esphome:
-  name: energy_meter
-  platform: ESP32
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+
+project:
+  name: circuitsetup.6c-energy-meter-main
+  version: "1.4.1"
+
+esp32:
   board: nodemcu-32s
 
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_pass
+  # Set up a wifi access point
+  ap:
+    password: "12345678"
+
+captive_portal:
 
 # Enable logging
 logger:
@@ -40,6 +50,11 @@ logger:
 api:
 
 ota:
+  - platform: esphome
+
+dashboard_import:
+  package_import_url: github://circuitsetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_board.yaml@master
+  import_full_config: true
 
 spi:
   clk_pin: 18
@@ -54,27 +69,18 @@ sensor:
         name: ${disp_name} Volts A Main
         id: ic1Volts
         accuracy_decimals: 1
-      current:
-        name: ${disp_name} CT1 Amps
-        id: ct1Amps
       power:
         name: ${disp_name} CT1 Watts 
         id: ct1Watts
       gain_voltage: ${voltage_cal}
       gain_ct: ${current_cal}
     phase_b:
-      current:
-        name: ${disp_name} CT2 Amps 
-        id: ct2Amps
       power:
         name: ${disp_name} CT2 Watts 
         id: ct2Watts
       gain_voltage: ${voltage_cal}
       gain_ct: ${current_cal}
     phase_c:
-      current:
-        name: ${disp_name} CT3 Amps
-        id: ct3Amps
       power:
         name: ${disp_name} CT3 Watts
         id: ct3Watts
@@ -89,27 +95,18 @@ sensor:
   - platform: atm90e32
     cs_pin: 4
     phase_a:
-      current:
-        name: ${disp_name} CT4 Amps 
-        id: ct4Amps
       power:
         name: ${disp_name} CT4 Watts 
         id: ct4Watts
       gain_voltage: ${voltage_cal}
       gain_ct: ${current_cal}
     phase_b:
-      current:
-        name: ${disp_name} CT5 Amps 
-        id: ct5Amps
       power:
         name: ${disp_name} CT5 Watts 
         id: ct5Watts
       gain_voltage: ${voltage_cal}
       gain_ct: ${current_cal}
     phase_c:
-      current:
-        name: ${disp_name} CT6 Amps 
-        id: ct6Amps
       power:
         name: ${disp_name} CT6 Watts 
         id: ct6Watts
@@ -359,6 +356,54 @@ sensor:
     line_frequency: 60Hz
     gain_pga: 1X
     update_interval: ${update_time}
+#IC1 AddOn 6
+  - platform: atm90e32
+    cs_pin: 15
+    phase_a:
+      power:
+        name: ${disp_name} CT37 Watts
+        id: ct37Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      power:
+        name: ${disp_name} CT38 Watts
+        id: ct38Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      power:
+        name: ${disp_name} CT39 Watts
+        id: ct39Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+#IC2 AddOn 6
+  - platform: atm90e32
+    cs_pin: 26
+    phase_a:
+      power:
+        name: ${disp_name} CT40 Watts
+        id: ct40Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      power:
+        name: ${disp_name} CT41 Watts
+        id: ct41Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      power:
+        name: ${disp_name} CT42 Watts
+        id: ct42Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
 
 #Total Watts Main
   - platform: template
@@ -414,11 +459,20 @@ sensor:
     unit_of_measurement: W
     device_class: power
     update_interval: ${update_time}
+#Total Watts AddOn6
+  - platform: template
+    name: ${disp_name} Total Watts Add-on6
+    id: totalWattsAddOn6
+    lambda: return id(ct37Watts).state + id(ct38Watts).state + id(ct39Watts).state + id(ct40Watts).state + id(ct41Watts).state + id(ct42Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
 #Total Watts
   - platform: template
     name: ${disp_name} Total Watts
     id: totalWatts
-    lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state + id(totalWattsAddOn2).state + id(totalWattsAddOn3).state + id(totalWattsAddOn4).state + id(totalWattsAddOn5).state ;
+    lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state + id(totalWattsAddOn2).state + id(totalWattsAddOn3).state + id(totalWattsAddOn4).state + id(totalWattsAddOn5).state + id(totalWattsAddOn6).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
     device_class: power
@@ -432,6 +486,11 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
+
+switch:
+  - platform: restart
+    name: ${disp_name} Restart
+    
 time:
   - platform: sntp
     id: sntp_time
