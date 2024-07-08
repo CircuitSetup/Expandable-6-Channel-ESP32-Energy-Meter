@@ -26,6 +26,7 @@ substitutions:
 esphome:
   name: energy-meter
   friendly_name: "${friendly_name}"
+  
 project:
   name: circuitsetup.6c-energy-meter-1-add-on
   version: "1.4.1"
@@ -35,12 +36,13 @@ esp32:
 
 wifi:
   # Set up a wifi access point
-  ap:
-    password: "12345678"
+  ap: {}
 
 captive_portal:
 
 esp32_improv:
+# Sets up Bluetooth LE to allow the user
+# to provision wifi credentials to the device.
   authorizer: none
 
 # Enable logging
