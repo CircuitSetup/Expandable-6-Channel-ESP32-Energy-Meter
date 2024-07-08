@@ -43,6 +43,9 @@ wifi:
 
 captive_portal:
 
+esp32_improv:
+  authorizer: none
+
 # Enable logging
 logger:
 
