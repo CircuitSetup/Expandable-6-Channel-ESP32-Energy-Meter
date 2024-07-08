@@ -37,6 +37,8 @@ wifi:
   ap:
     password: "12345678"
 
+captive_portal:
+
 # Enable logging
 logger:
 
