@@ -176,7 +176,7 @@ sensor:
     update_interval: ${update_time}
 #IC1 AddOn 2
   - platform: atm90e32
-    cs_pin: 7
+    cs_pin: 18
     phase_a:
       power:
         name: ${disp_name} CT13 Watts
