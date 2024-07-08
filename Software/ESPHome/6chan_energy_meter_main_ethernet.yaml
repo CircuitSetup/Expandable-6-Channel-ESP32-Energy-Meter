@@ -1,3 +1,5 @@
+# Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
+
 substitutions:
 # Change the disp_name to something you want  
   disp_name: Energy Meter
