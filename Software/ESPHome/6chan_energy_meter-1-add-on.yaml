@@ -26,10 +26,9 @@ substitutions:
 esphome:
   name: energy-meter
   friendly_name: "${friendly_name}"
-  
-project:
-  name: circuitsetup.6c-energy-meter-1-add-on
-  version: "1.4.1"
+  project:
+    name: circuitsetup.6c-energy-meter-1-add-on
+    version: "1.4.1"
 
 esp32:
   board: nodemcu-32s
