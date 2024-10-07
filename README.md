@@ -51,8 +51,8 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
     *   Europe: 240V to 9V or 12V AC-AC at least 500mA - [See a list of some recommended transformers here](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters)
 *   **ESP32** (choose one):
     *   [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
-    *   [Espressif DevKitC](https://amzn.to/2PHvVsg)
-    *   [[DevKitC-32U](https://www.mouser.com/ProductDetail/Espressif-Systems/ESP32-DevKitC-32UE?qs=GedFDFLaBXFguOYDKoZ3jA%3D%3D)) if you need better wifi reception (don't forget [the antenna](https://www.mouser.com/ProductDetail/Molex/204281-1150?qs=W0yvOO0ixfHu2%252BtTAKRqwg%3D%3D))
+    *   [Espressif ESP32-DevKitC-32E](https://amzn.to/3zRmY7x)
+    *   [Espressif ESP32-DevKitC-VIE](https://amzn.to/3Ngp2c9) if you need better wifi reception.
     *   Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
 *   **Software** (choose one):
     *   Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
