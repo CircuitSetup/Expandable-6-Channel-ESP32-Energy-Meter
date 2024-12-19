@@ -147,7 +147,7 @@ v1.4 removed JP8-JP11, and has voltage channels connected internally on the pcb.
 #### **Measuring Dual Pole (240V) Circuits**
 For split single phase applications, dual pole circuits have 2 hot wires that total 240V (usually red and black in newer buildings). In most cases both poles are used equally, but in others there may be electronics in the applicance that use only 1 pole. 
 There are 3 different options for measuring these circuits:
-- Monitor 1 phase with 1 CT, and double the current output in software (least accurate) See details on how to do this in [ESPHome here](https://esphome.io/components/sensor/index.html#offset).
+- Monitor 1 phase with 1 CT, and double the current & power output in software (least accurate) An example of how to do this in ESPHome is the same as the [multiply filter in this example config](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/blob/master/Software/ESPHome/6chan_energy_meter_main_board.yaml#L84).
 - Use 2 CTs to monitor each hot wire on the circuit (if you are monitoring 1 voltage, the CTs should be in opposite directions from eachother)
 - If the circuit has enough wire coming out of the breaker, and the CT is large enough, run both hot wires through 1 CT in opposite directions
 
