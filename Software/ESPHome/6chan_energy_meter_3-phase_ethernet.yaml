@@ -6,7 +6,7 @@
 #
 # Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter.
 # Setup asumes JP12 and JP13 have been severed on the main and add-on board, and each phase has its 
-# own voltage transformer hooks up to the main, and VA2 on each meter.
+# own voltage transformer hooked up to the main board jack, and VA2 on each meter.
 #
 # Current Trasnformers must be in phase with their respective voltage:
 # Phase 1: CT1-CT6 (main board, add-on board left side)
