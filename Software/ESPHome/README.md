@@ -5,4 +5,4 @@
 - [6chan_energy_meter_house_solar_ha_kwh.yaml](/Software/ESPHome/6chan_energy_meter_house_solar_ha_kwh.yaml) - Main board example for Split Single Phase whole house, solar, and 2 other circuits - accomodates for solar return to grid
 - [6chan_energy_meter_v1.2.yaml](/Software/ESPHome/6chan_energy_meter_v1.2.yaml) - Older main board example with power calculations
 - [6chan_energy_meter_main_ethernet.yaml](/Software/ESPHome/6chan_energy_meter_main_ethernet.yaml) - Main board, 6 current channels using the Lilygo T-ETH Lite ESP32S3, and ethernet adapter
-- [6chan_energy_meter_6-addons_ethernet.yaml](/Software/ESPHome/6chan_energy_meter_6-addons_ethernet.yaml) - Main board + 6 added boards, 42 current channels using the Lilygo T-ETH Lite ESP32S3, and ethernet adapter
+- [6chan_energy_meter_6-addons_ethernet.yaml](/Software/ESPHome/6chan_energy_meter_6-addons_ethernet.yaml) - Main board + 6 add-on boards, 42 current channels using the Lilygo T-ETH Lite ESP32S3, and ethernet adapter
