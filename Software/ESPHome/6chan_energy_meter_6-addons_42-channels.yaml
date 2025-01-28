@@ -1,13 +1,17 @@
 # CircuitSetup 6 Channel Energy Meter Main Board with 6 add-on boards - 42 current channels
 # To reduce the number of sensors, only the power sensor for each current channel is output.
-# current_cal: is set to a 20A CT for all inputs. This can easily be changed per input depending 
-# on what CTs are being used on the corresponding CT inputs.
+# See all options at https://esphome.io/components/sensor/atm90e32.html
+
 substitutions:
 # Change the disp_name to something you want  
   disp_name: Energy Meter
   friendly_name: CircuitSetup Energy Meter
-# Interval of how often the power is updated
+# Interval of how often the power data is updated
   update_time: 10s
+
+# Change current_cal to the corresponding CT's that you're using
+# If different CTs per current channel, remove or change "${current_cal}" from 
+# "gain_ct" below and replace with the CT calibration number respectively
 # Current Transformers:
 #  20A/25mA SCT-006: 11143
 #  30A/1V SCT-013-030: 8650
@@ -18,51 +22,15 @@ substitutions:
 #  120A/40mA: SCT-016: 41787
 #  200A/100mA SCT-024: 27518
 #  200A/50mA SCT-024: 55036
-  current_cal: '11143'
+  current_cal: '11143' # 20A/25mA
+
+# This only needs to be changed if you're using something other than the  
 # Jameco 9VAC Transformer: 
-#  For meter versions: 
-#  >= v1.3: 7305
-#  <= v1.2: 42620
   voltage_cal: '7305'
-  
-esphome:
-  name: energy-meter
-  friendly_name: "${friendly_name}"
-  project:
-    name: circuitsetup.6c-energy-meter-main
-    version: "1.4.1"
 
-esp32:
-  board: nodemcu-32s
+packages:
+  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml
 
-wifi:
-  # Set up a wifi access point
-  ap: {}
-
-captive_portal:
-
-esp32_improv:
-# Sets up Bluetooth LE to allow the user
-# to provision wifi credentials to the device.
-  authorizer: none
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-
-ota:
-  - platform: esphome
-
-dashboard_import:
-  package_import_url: github://circuitsetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_board.yaml@master
-  import_full_config: true
-
-spi:
-  clk_pin: 18
-  miso_pin: 19
-  mosi_pin: 23
 sensor:
 #IC1 Main
   - platform: atm90e32
@@ -489,11 +457,3 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
-
-switch:
-  - platform: restart
-    name: ${disp_name} Restart
-    
-time:
-  - platform: sntp
-    id: sntp_time
