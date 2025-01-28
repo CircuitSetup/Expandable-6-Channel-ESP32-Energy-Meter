@@ -1,0 +1,54 @@
+# CircuitSetup 6 Channel Energy Meter ESPHome common variables
+
+esphome:
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+  project:
+    name: circuitsetup.6c-energy-meter
+    version: "1.4.2"
+
+esp32:
+  board: nodemcu-32s
+
+# Set up a wifi access point
+wifi:
+  ap: {}
+
+captive_portal:
+
+# Sets up Bluetooth LE to allow the user
+# to provision wifi credentials to the device.
+esp32_improv:
+  authorizer: none
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Enable OTA updating
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
+
+spi:
+  clk_pin: 18
+  miso_pin: 19
+  mosi_pin: 23
+
+#Wifi signal
+sensor:
+  - platform: wifi_signal
+    name: ${disp_name} WiFi
+    update_interval: 60s
+
+switch:
+  - platform: restart
+    name: ${disp_name} Restart
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time 
