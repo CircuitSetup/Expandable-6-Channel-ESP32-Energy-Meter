@@ -1,0 +1,50 @@
+# CircuitSetup 6 Channel Energy Meter ESPHome common variables
+# using the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
+
+esphome:
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+  platformio_options:
+    board_build.flash_mode: dio
+  project:
+    name: circuitsetup.6c-energy-meter-ethernet
+    version: "1.4.1"
+
+esp32:
+  board: esp32s3box
+  variant: esp32s3
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+ethernet:
+  type: W5500
+  clk_pin: 10
+  mosi_pin: 12
+  miso_pin: 11
+  cs_pin: 9
+  interrupt_pin: 13
+  reset_pin: 14
+  clock_speed: 30Mhz
+
+spi:
+  interface: software
+  clk_pin: 7
+  miso_pin: 5
+  mosi_pin: 6
+
+switch:
+  - platform: restart
+    name: ${disp_name} Restart
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
