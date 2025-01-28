@@ -8,7 +8,7 @@ esphome:
     board_build.flash_mode: dio
   project:
     name: circuitsetup.6c-energy-meter-ethernet
-    version: "1.4.1"
+    version: "1.4.2"
 
 esp32:
   board: esp32s3box
