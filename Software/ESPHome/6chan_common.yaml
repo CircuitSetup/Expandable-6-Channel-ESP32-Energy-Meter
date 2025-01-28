@@ -51,4 +51,4 @@ switch:
 
 time:
   - platform: homeassistant
-    id: homeassistant_time 
+    id: homeassistant_time
