@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2025-02-05T14:41:36Z",
+        "GenerationSoftware": {
+            "Application": "Fusion Electronics",
+            "Vendor": "Autodesk",
+            "Version": "9.7.0"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "6 channel meter ethernet T-ETH-Lite ESP32-S3 v26"
+        },
+        "Owner": "John Deglavina <jdeg@sugarmanstudios.com>",
+        "Size": {
+            "X": 30.48,
+            "Y": 50.8
+        }
+    }
+}
