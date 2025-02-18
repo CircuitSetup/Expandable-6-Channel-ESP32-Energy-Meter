@@ -4,6 +4,26 @@
 #
 # Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter
 # See all options at https://esphome.io/components/sensor/atm90e32.html
+#
+# CS pins for the ESP32-S3 are different, and must be changed if previously using a WiFi ESP32:
+#Main board: 
+# 5 -> 8
+# 4 -> 4 (stays the same)
+#Add-on boards:
+#CS (CT1-3):
+# 0 -> 0
+# 27 -> 18
+# 2 -> 2
+# 13 -> 3
+# 14 -> 41
+# 15 -> 15
+#CS2 (CT3-6):
+# 16 -> 16
+# 17 -> 17
+# 21 -> 21
+# 22 -> 20
+# 25 -> 39
+# 26 -> 38
 
 substitutions:
 # Change the disp_name to something you want  
