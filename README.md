@@ -194,12 +194,25 @@ EmonESP is used to send energy meter data to a [local install of EmonCMS](https:
 
 A [new feature in Home Assistant allows you to monitor electricity usage](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/) [directly in Home Assistant](https://demo.home-assistant.io/#/energy). You can also track usage of individual devices and/or solar using the 6 channel meter!
 
-##### **Flashing ESPHome**
-- If you have Home Assistant installed, go to **Settings** in the left menu, click **Add-ons**, then **Add-on Store** (bottom right blue button), Search for **ESPHome** - Click on **Install**
-- Click on **Open Web UI**
+##### **ESPHome**
+#### **Installing on Home Assistant**
+- If you have Home Assistant installed, click the button below OR go to **Settings** in the left menu, click **Add-ons**, then **Add-on Store** (bottom right blue button), Search for **ESPHome** - Click on **Install**
+[![Install ESPHome Add-on](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=esphome)
 
+#### **Flashing ESPHome to your ESP32**
+### **Method 1**
+- The easiest way to load ESPHome is to use [ESPHome Web](http://web.esphome.io/]
+- Connect your ESP32 to your computer via USB port
+- Click on **Connect** in ESPHome Web
+- Choose the COM port for your ESP32 (if the ESP32 does not connect, check that you're using the correct COM port)
+- Click on **Prepare For First Use**, then **Install** - the base ESPHome firmware will upload to the ESP32
+- If you get an error about WiFi Serial failing, that is okay - go to the next step. If not, enter your WiFi credentials
+- Connect to the ESP32 via WiFi using your phone or laptop - the network will look something like **esphome-web-xxxxxx**
+- Enter your WiFi Credentials. 
+  
 ![ESPHome add-on](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/esphome_add-on_install.png)
 
+### **Method 2**
 - Click the green + circle in the bottom right to add a new node
 - Fill in the name (for exmaple 'energy_meter', and device type as **NodeMCU-32S** or **Generic ESP32**
 - Add your wifi details and click **Submit** to create the node
@@ -218,8 +231,10 @@ A [new feature in Home Assistant allows you to monitor electricity usage](https:
 - Assuming the ESP32 is close enough to the AP you want to connect to for WiFi, it should now be available in ESPHome within Home Assistant
 - In Home Assistant go to **Settings > Devices & Services**, and click on the blue **Configure** for ESPHome. It should be highlighted as **Discovered**
 
-##### **Loading the Energy Meter Config**
-- Choose an exmaple config that best suits your energy meter setup [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html), and [here for some more advanced configurations](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
+#### **Loading the Energy Meter Config**
+- Go to Home Assistant, and click on **ESPHome Builder** in the left menu
+- At the top, there should be a header saying a new device was discovered, click on that and **Take Control**
+- Choose an exmaple config that best suits your energy meter setup [from here](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome). Descriptions for options and more sensors available [here on the ESPHome site](https://esphome.io/components/sensor/atm90e32.html) 
 - In the Home Assistant/ESPHome Web UI, click **Edit** for the Energy Meter Node
 - Copy/Paste the example config, change any applicable settings, like the current calibrations to the current transformers that you use, and click **Save**
 
