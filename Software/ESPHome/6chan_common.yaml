@@ -3,6 +3,7 @@
 esphome:
   name: energy-meter
   friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
   project:
     name: circuitsetup.6c-energy-meter
     version: "1.4.2"
