@@ -38,7 +38,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.4.2"
+    version: "1.5"
 
 esp32:
   board: nodemcu-32s
