@@ -1,0 +1,400 @@
+# CircuitSetup 6 Channel Energy Meter Main Board example config
+# See all options at https://esphome.io/components/sensor/atm90e32.html
+
+substitutions:
+# Change the disp_name to something you want  
+  disp_name: Energy Meter
+  friendly_name: CircuitSetup Energy Meter Wifi
+# Interval of how often the power data is updated
+  update_time: 60s
+
+# Change current_cal to the corresponding CT's that you're using
+# If different CTs per current channel, remove or change "${current_cal}" from 
+# "gain_ct" below and replace with the CT calibration number respectively
+# Current Transformers:
+#  20A/25mA SCT-006: 11143
+#  30A/1V SCT-013-030: 8650
+#  50A/1V SCT-013-050: 15420
+#  50A/16.6mA SCT-010: 41334
+#  80A/26.6mA SCT-010: 41660
+#  100A/50ma SCT-013-000: 27518
+#  120A/40mA: SCT-016: 41787
+#  200A/100mA SCT-024: 27518
+#  200A/50mA SCT-024: 55036
+  current_cal: '27518'
+
+# This only needs to be changed if you're using something other than the  
+# Jameco 9VAC Transformer: 
+  voltage_cal: '7305'
+
+  main_meter_id1: meter_main1
+  main_meter_id2: meter_main2
+
+#packages:
+#  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml
+esphome:
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  project:
+    name: circuitsetup.6c-energy-meter
+    version: "1.4.2"
+
+esp32:
+  board: nodemcu-32s
+
+captive_portal:
+
+improv_serial:
+
+logger:
+  level: VERBOSE
+  logs:
+    api: VERBOSE
+    api.service: DEBUG
+    esp32_ble: DEBUG
+    esp32_ble_server: DEBUG
+    scheduler: DEBUG
+    esp32.preferences: DEBUG
+
+# Enable OTA updating
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
+
+spi:
+  clk_pin: 18
+  miso_pin: 19
+  mosi_pin: 23
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+external_components:
+  - source: github://CircuitSetup/esphome@atm90e32-calibration
+    components: [ atm90e32 ]
+    refresh: 1min
+
+api:
+  encryption:
+    key: O9yDPCHOKzPKBulmdOIZNdATA9FcUabwIp1LYl1kUrA=
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+sensor:
+#IC1
+  - platform: atm90e32
+    cs_pin: 5
+    id: ${main_meter_id1}
+    phase_a:
+      voltage:
+        name: ${disp_name} Volts A
+        id: ic1Volts
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT1 Amps
+        id: ct1Amps
+# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A, 
+# divide the gain_ct by 2 (120A CT) or 4 (200A CT) and multiply the current and power values by 2 or 4 by uncommenting the filter below
+#        filters:
+#          - multiply: 2
+      power:
+        name: ${disp_name} CT1 Watts
+        id: ct1Watts
+#        filters:
+#          - multiply: 2
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT2 Amps
+        id: ct2Amps
+      power:
+        name: ${disp_name} CT2 Watts
+        id: ct2Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT3 Amps
+        id: ct3Amps
+      power:
+        name: ${disp_name} CT3 Watts
+        id: ct3Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq A
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    enable_offset_calibration: true
+    enable_gain_calibration: true
+#IC2
+  - platform: atm90e32
+    cs_pin: 4
+    id: ${main_meter_id2}
+    phase_a:
+#this voltage is only needed if monitoring 2 voltages
+      voltage:
+        name: ${disp_name} Volts B
+        id: ic2Volts
+        accuracy_decimals: 1
+      current:
+        name: ${disp_name} CT4 Amps
+        id: ct4Amps
+      power:
+        name: ${disp_name} CT4 Watts
+        id: ct4Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_b:
+      current:
+        name: ${disp_name} CT5 Amps
+        id: ct5Amps
+      power:
+        name: ${disp_name} CT5 Watts
+        id: ct5Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    phase_c:
+      current:
+        name: ${disp_name} CT6 Amps
+        id: ct6Amps
+      power:
+        name: ${disp_name} CT6 Watts
+        id: ct6Watts
+      gain_voltage: ${voltage_cal}
+      gain_ct: ${current_cal}
+    frequency:
+      name: ${disp_name} Freq B
+    line_frequency: 60Hz
+    gain_pga: 1X
+    update_interval: ${update_time}
+    enable_offset_calibration: true
+    enable_gain_calibration: true
+        
+#Total Amps   
+  - platform: template
+    name: ${disp_name} Total Amps
+    id: totalAmps
+    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    device_class: current
+    update_interval: ${update_time}         
+#Total Watts
+  - platform: template
+    name: ${disp_name} Total Watts
+    id: totalWatts
+    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
+#kWh
+  - platform: total_daily_energy
+    name: ${disp_name} Total kWh
+    power_id: totalWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+
+  - platform: wifi_signal
+    name: ${disp_name} WiFi
+    id: wifi_signal_db
+    entity_category: diagnostic
+
+  - platform: copy
+    source_id: wifi_signal_db
+    id: wifi_signal_pct
+    name: ${disp_name} WiFi %
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: diagnostic
+
+globals:
+  - id: enable_gain_calibration
+    type: bool
+    restore_value: yes
+    initial_value: "false"
+
+switch:
+  - platform: template
+    name: "Enable Gain Calibration"
+    id: switch_enable_gain_calibration
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    turn_on_action:
+      - lambda: |-
+          id(enable_gain_calibration) = true;
+    turn_off_action:
+      - lambda: |-
+          id(enable_gain_calibration) = false;
+
+  - platform: restart
+    name: ${disp_name} Restart
+
+button:
+  - platform: template
+    name: "Run Gain Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).run_gain_calibrations("meter_main1");
+          id(meter_main2).run_gain_calibrations("meter_main2");
+
+  - platform: template
+    name: "Run Offset Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).run_offset_calibrations();
+          id(meter_main2).run_offset_calibrations();
+
+  - platform: template
+    name: "Run Power Offset Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).run_power_offset_calibrations();
+          id(meter_main2).run_power_offset_calibrations();
+
+  - platform: template
+    name: "Clear Gain Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).clear_gain_calibrations();
+          id(meter_main2).clear_gain_calibrations();
+
+  - platform: template
+    name: "Clear Offset Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).clear_offset_calibrations();
+          id(meter_main2).clear_offset_calibrations();
+  
+  - platform: template
+    name: "Clear Power Offset Calibration"
+    on_press:
+      - lambda: |-
+          id(meter_main1).clear_power_offset_calibrations();
+          id(meter_main2).clear_power_offset_calibrations();
+
+number:
+  - platform: template
+    name: "Ref Voltage - 1"
+    id: ref_voltage_${main_meter_id1}
+    unit_of_measurement: "V"
+    min_value: 100.0
+    max_value: 260.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main1).set_reference_voltage("meter_main1", id(ref_voltage_meter_main1));
+
+  - platform: template
+    name: "Ref CT1"
+    id: ref_current_a_${main_meter_id1}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main1).set_reference_current("meter_main1", 0, id(ref_current_a_meter_main1));
+
+  - platform: template
+    name: "Ref CT2"
+    id: ref_current_b_${main_meter_id1}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main1).set_reference_current("meter_main1", 1, id(ref_current_b_meter_main1));
+
+  - platform: template
+    name: "Ref CT3"
+    id: ref_current_c_${main_meter_id1}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main1).set_reference_current("meter_main1", 2, id(ref_current_c_meter_main1));
+
+  - platform: template
+    name: "Ref Voltage - 2"
+    id: ref_voltage_${main_meter_id2}
+    unit_of_measurement: "V"
+    min_value: 100.0
+    max_value: 260.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main2).set_reference_voltage("meter_main2", id(ref_voltage_meter_main2));
+
+  - platform: template
+    name: "Ref CT4"
+    id: ref_current_a_${main_meter_id2}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main2).set_reference_current("meter_main2", 0, id(ref_current_a_meter_main2));
+
+  - platform: template
+    name: "Ref CT5"
+    id: ref_current_b_${main_meter_id2}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main2).set_reference_current("meter_main2", 1, id(ref_current_b_meter_main2));
+
+  - platform: template
+    name: "Ref CT6"
+    id: ref_current_c_${main_meter_id2}
+    unit_of_measurement: "A"
+    min_value: 0.1
+    max_value: 200.0
+    step: 0.1
+    mode: box
+    entity_category: config
+    optimistic: true
+    on_value:
+      lambda: |-
+        id(meter_main2).set_reference_current("meter_main2", 2, id(ref_current_c_meter_main2));
