@@ -79,8 +79,6 @@ external_components:
     refresh: 1min
 
 api:
-  encryption:
-    key: O9yDPCHOKzPKBulmdOIZNdATA9FcUabwIp1LYl1kUrA=
 
 wifi:
   ssid: !secret wifi_ssid
