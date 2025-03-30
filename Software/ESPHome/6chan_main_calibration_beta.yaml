@@ -94,7 +94,7 @@ sensor:
 #IC1
   - platform: atm90e32
     cs_pin: 5
-    id: meter_main1 #${main_meter_id1}
+    id: ${main_meter_id1}
     phase_a:
       voltage:
         name: ${disp_name} Volts A
@@ -161,7 +161,7 @@ sensor:
 #IC2
   - platform: atm90e32
     cs_pin: 4
-    id: meter_main2 #${main_meter_id2}
+    id: ${main_meter_id2}
     phase_a:
 #this voltage is only needed if monitoring 2 voltages
       voltage:
