@@ -54,6 +54,7 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 	* [Espressif ESP32-DevKitC-32E](https://amzn.to/3zRmY7x)
 	* [Espressif ESP32-DevKitC-VIE](https://amzn.to/3Ngp2c9) if you need better wifi reception.
 	* Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
+  	* Ethernet: [CircuitSetup ESP32S3 Ethernet Adapter](https://circuitsetup.us/product/6-channel-energy-meter-to-lilygo-t-eth-lite-esp32s3-ethernet-adapter/) & the [Lilygo T-ETH-Lite ESP32S3](https://www.lilygo.cc/products/t-eth-lite?variant=43120880779445) (for ESPHome only, at the moment)
 * **Software** (choose one):
 	* Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
 	* The current release of [ESPHome.](https://esphome.io/components/sensor/atm90e32.html) Details on [integrating with Home Assistant are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#esphomehome-assistant) and [here on ESPHome.io](https://esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
