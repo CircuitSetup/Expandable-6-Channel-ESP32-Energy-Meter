@@ -89,30 +89,20 @@ Add-on boards (up to 6) can expand the main energy meter up to 42 current channe
 
 The **add-on board** allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
 The CS pins can be:
-  * CT1-CT3 (CS):
-    * For v1.3 and under:
-      * 0
-      * 2 (*make sure that an on board LED is not used for IO2 on the ESP32) 
-      * 12 (*will cause ESP32 to not boot if used)
-      * 13
-      * 14
-      * 15
-    * For v1.4 and above:
-      * 0
-      * 27
-      * 35 (do not use - it will not work correctly)
-      * 13
-      * 14
-      * 15
-    * For v1.4 rev1 and above:
-      * 35 is changed to 2 (may prevent the ESP32 from being programmed - disconnect jumper if so)
-  * CT4-CT6 (CS2):
-    * 16
-    * 17
-    * 21
-    * 22
-    * 25
-    * 26
+* CT1-CT3 (CS):
+  	* 0
+	* 27
+	* 2 (may prevent the ESP32 from being programmed - disconnect jumper if so)
+	* 13
+	* 14
+	* 15
+* CT4-CT6 (CS2):
+	* 16
+	* 17
+	* 21
+	* 22
+	* 25
+	* 26
     
 ![Expandable 6 Channel ESP32 Energy Meter Add-on Diagram](https://raw.githubusercontent.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/master/Images/6-channel-add-on_diagram.png)
 
@@ -121,20 +111,17 @@ The CS pins can be:
 [or here for a video](https://youtu.be/BOgy6QbfeZk?t=1261)
 
 ##### **Common Calibration Values**
- * Current Transformers:
-    * 20A/25mA SCT-006: 11143
-    * 30A/1V SCT-013-030: 8650
-    * 50A/1V SCT-013-050: 15420
-    * 80A/26.6mA SCT-010: 41660
-    * 100A/50ma SCT-013-000: 27518
-    * 120A/40mA: SCT-016: 41787
-    * 200A/100mA SCT-024: 27518
-    * 200A/50mA SCT-024: 55036
+* Current Transformers:
+	* 20A/25mA SCT-006: 11143
+	* 30A/1V SCT-013-030: 8650
+	* 50A/1V SCT-013-050: 15420
+	* 80A/26.6mA SCT-010: 41660
+	* 100A/50ma SCT-013-000: 27518
+	* 120A/40mA: SCT-016: 41787
+	* 200A/100mA SCT-024: 27518
+	* 200A/50mA SCT-024: 55036
 * AC Transformers
-    * Jameco 9VAC Transformer 157041: 
-       * For meter versions: 
-         * v1.3 or greater: 7305
-         * v1.2: 42620
+	* Jameco 9VAC Transformer 157041: 7305
          
 #### **Measuring Power & Other Metering Values**
 The Expandable 6 Channel ESP32 Energy Meter uses 2 ATM90E32AS ICs. Each IC has 3 voltage channels and 3 current channels. In order for power metering data to be calculated internally, each current channel must have a reference voltage. If the voltage is out of phase with the current, then the current and power will read as negative, affecting the power factor and power calculations. If you have a split single phase or dual phase setup, the solution is to turn around the current transformer on the wire.
