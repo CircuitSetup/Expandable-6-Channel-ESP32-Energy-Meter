@@ -310,7 +310,7 @@ To do this you must have power calculated by the meter, or a lambda template tha
 ##
 **Q:** I'm getting a negative value on one current channel. What is going on? 
 
-**A:** This usually means that the CT is on the wire backwards - just turn it around! 
+**A:** This usually means that the CT is on the wire backwards - just turn it around! If all CT readings are negative, you can flip the AC transformer around in the plug.
 
 ##
 **Q:** I'm getting a small negative value when there is no load at all, but a positive value otherwise. What is going on?
@@ -333,6 +333,8 @@ To do this you must have power calculated by the meter, or a lambda template tha
 ```
 Then for your total watts calculation, use ct1WattsPositive
 
+Calibrating voltage offset and current offset will correct this issue as well.
+
 ##
 **Q:** The CT wires are not long enough. Can I extend them? 
 
@@ -354,28 +356,37 @@ Then for your total watts calculation, use ct1WattsPositive
 **A:** There is a built in burden resistor if the output is rated in volts. In this case the corresponding jumper on the rear of the meter should be severed.
 
 ##
-**Q:** When using more than 3 add-on boards, ESPHome does not work.
+**Q:** Can I connect the meter to ethernet?
 
-**A:**
-ESPHome will run out of stack memory after using more than 15 sensors, or so. You will have to increase the stack memory size before compiling. [See details here.](https://github.com/esphome/issues/issues/855#issuecomment-903296681)
+**A:** Yes! We have an [adapter availble](https://circuitsetup.us/product/6-channel-energy-meter-to-lilygo-t-eth-lite-esp32s3-ethernet-adapter/) to use the Lilygo T-ETH-Lite ESP32S3 with the 6 channel energy meter. An example configuration is [available here](/blob/master/Software/ESPHome/6chan_energy_meter_main_ethernet.yaml).
 
-UPDATE: You can replace the esphome: definition in your ESPHome config to solve this issue with the following:
-```yaml
-esphome:
-  name: 6chan_energy_meter
-  platformio_options:
-    build_flags: 
-      - -DCONFIG_ARDUINO_LOOP_STACK_SIZE=32768
+##
+**Q:** How do I set up a solar configuration and power that is returned to the grid?
 
-esp32:
-  board: nodemcu-32s
-  variant: esp32
-  framework:
-    type: arduino
-    version: 2.0.2
-    source: https://github.com/espressif/arduino-esp32.git#2.0.2
-    platform_version: https://github.com/platformio/platform-espressif32.git#feature/arduino-upstream
+**A:** This is assuming you are measuring mains and the circuit that connects your soloar grid to your panel, and the CTs are reading negative when exporting power to the grid. [See this ESPHome example config](/blob/master/Software/ESPHome/6chan_energy_meter_house_solar_ha_kwh.yaml).
+
+##
+**Q:** How can I do calculations across 2 power sensors from 2 different meters (2 or more ESP32's)?
+
+**A:** The easiest way to do the math between 2 meters would be to [create a helper in Home Assistant](https://my.home-assistant.io/redirect/config_flow_start?domain=template). _Create Helper > Template > Template a sensor_
+
+Then for State template enter:
 ```
+{% set meter1 = states(‘sensor.energy_meter1_total_watts’) | float(0) %}
+{% set meter2 = states(‘sensor.energy_meter2_total_watts’) | float(0) %}
+{{ meter1 – meter2 }}
+```
+Where ```energy_meterX_total_watts``` is the name of the total_watts for that meter as defined in the ESPhome config. If you start typing after ‘sensor.’ it should pop up.
+
+Unit of measurement: W
+Device class: Power
+State class: Measurement
+Device: The primary meter
+
+The same can be repeated for Amps, if you want.
+
+The output will then be available in the energy dashboard as ```sensor.helper_name```.
+
 
 ### **More resources:**
 * [How to flash ESPHome to your ESP32](https://esphome.io/guides/getting_started_hassio.html)
