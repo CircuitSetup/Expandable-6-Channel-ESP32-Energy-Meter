@@ -346,7 +346,7 @@ text_sensor:
         name: "${ct2_name} Status"
       phase_c:
         name: "${ct3_name} Status"
-    freq_status:
+    frequency_status:
       name: "Frequency Status 1"
 
   - platform: atm90e32
