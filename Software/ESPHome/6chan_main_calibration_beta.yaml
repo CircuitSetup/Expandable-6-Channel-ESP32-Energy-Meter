@@ -32,6 +32,8 @@ substitutions:
   voltage_cal1: '7305'
   voltage_cal2: '7305'
 
+  main_meter_name1: Meter 1-3
+  main_meter_name2: Meter 4-6
   main_meter_id1: meter_main1
   main_meter_id2: meter_main2
   ct1_name: CT1
