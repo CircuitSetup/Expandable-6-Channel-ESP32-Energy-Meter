@@ -90,7 +90,7 @@ Add-on boards (up to 6) can expand the main energy meter up to 42 current channe
 The **add-on board** allows the CS pin to be selected based on the jumper settings at the bottom of the board. This is so multiple add-on boards can be used - up to 6 maximum. Do NOT select more than one CS pin per bank. 
 The CS pins can be:
 * CT1-CT3 (CS):
-  	* 0
+	* 0
 	* 27
 	* 2 (may prevent the ESP32 from being programmed - disconnect jumper if so)
 	* 13
