@@ -4,28 +4,22 @@ esphome:
   name: energy-meter
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
+  min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.4.2"
+    version: "1.5"
 
 esp32:
   board: nodemcu-32s
-
-# Set up a wifi access point
-wifi:
-  ap: {}
-
-captive_portal:
-
-# Sets up Bluetooth LE to allow the user
-# to provision wifi credentials to the device.
-esp32_improv:
-  authorizer: none
-
-improv_serial:
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
 
 # Enable logging
 logger:
+
+debug:
+  update_interval: 5s
 
 # Enable Home Assistant API
 api:
@@ -34,10 +28,31 @@ api:
 ota:
   - platform: esphome
 
+dashboard_import:
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml
+  import_full_config: false
+
+# Set up a wifi access point
+wifi:
+  ap:
+
+# In combination with the `ap` this allows 
+# provisioning wifi credentials to the device.
+captive_portal:
+
+# Sets up Bluetooth LE to provision wifi credentials 
+# to the device.
+esp32_improv:
+  authorizer: none
+
+# Sets up the improv via serial client for wifi provisioning
+improv_serial:
+
 web_server:
   port: 80
 
 spi:
+  interface: software
   clk_pin: 18
   miso_pin: 19
   mosi_pin: 23
@@ -47,6 +62,32 @@ sensor:
   - platform: wifi_signal
     name: ${disp_name} WiFi
     update_interval: 60s
+    
+  - platform: copy
+    source_id: wifi_signal_db
+    id: wifi_signal_pct
+    name: ${friendly_name} WiFi %
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: diagnostic
+
+  - platform: debug
+    free:
+      name: "Heap Free"
+    block:
+      name: "Heap Max Block"
+    loop_time:
+      name: "Loop Time"
+    cpu_frequency:
+      name: "CPU Frequency"
+
+text_sensor:
+  - platform: debug
+    device:
+      name: "Device Info"
+    reset_reason:
+      name: "Reset Reason"
 
 switch:
   - platform: restart
