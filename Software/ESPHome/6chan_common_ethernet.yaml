@@ -18,10 +18,6 @@ esp32:
   framework:
     type: esp-idf
 
-captive_portal:
-
-improv_serial:
-
 # Enable logging
 logger:
   level: DEBUG
