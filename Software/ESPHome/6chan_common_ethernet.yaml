@@ -2,22 +2,32 @@
 # using the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
 
 esphome:
-  name: energy-meter
+  name: "${disp_name}"
   friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: '2025.5.0'
   platformio_options:
     board_build.flash_mode: dio
   project:
     name: circuitsetup.6c-energy-meter-ethernet
-    version: "1.4.2"
+    version: "1.5"
 
 esp32:
-  board: esp32s3box
-  variant: esp32s3
+  board: esp32-s3-devkitc-1
+  cpu_frequency: 240MHz
   framework:
     type: esp-idf
 
+captive_portal:
+
+improv_serial:
+
 # Enable logging
 logger:
+  level: DEBUG
+
+debug:
+  update_interval: 5s
 
 # Enable Home Assistant API
 api:
