@@ -296,8 +296,8 @@ button:
     clear_gain_calibration:
       name: "z3. Clear ${main_meter_name2} Gain Calibration"
 
-# V & I Reference Fields
-########################
+# V & I Calibration Reference Fields
+####################################
 number:
   - platform: atm90e32
     id: ${main_meter_id1}
