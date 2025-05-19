@@ -21,7 +21,6 @@ substitutions:
 #  120A/40mA: SCT-016: 41787
 #  200A/100mA SCT-024: 27518
 #  200A/50mA SCT-024: 55036
-  current_cal: '27518'
   current_cal_ct1: '27518'
   current_cal_ct2: '27518'
   current_cal_ct3: '27518'
@@ -30,7 +29,6 @@ substitutions:
   current_cal_ct6: '27518'
 # This only needs to be changed if you're using something other than the  
 # Jameco 9VAC Transformer: 
-  voltage_cal: '7305'
   voltage_cal1: '7305'
   voltage_cal2: '7305'
 
@@ -298,6 +296,7 @@ button:
 
 # V & I Calibration Reference Fields
 ####################################
+# Use these to input a known value being measured by a CT or voltage transformer
 number:
   - platform: atm90e32
     id: ${main_meter_id1}
