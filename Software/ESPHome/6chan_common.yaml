@@ -61,6 +61,8 @@ spi:
 sensor:
   - platform: wifi_signal
     name: ${disp_name} WiFi
+    id: wifi_signal_db
+    entity_category: diagnostic
     update_interval: 60s
     
   - platform: copy
