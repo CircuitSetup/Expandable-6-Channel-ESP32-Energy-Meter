@@ -52,7 +52,6 @@ web_server:
   port: 80
 
 spi:
-  interface: software
   clk_pin: 18
   miso_pin: 19
   mosi_pin: 23
