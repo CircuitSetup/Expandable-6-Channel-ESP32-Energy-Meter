@@ -7,7 +7,7 @@ esphome:
   min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.5"
+    version: "1.5.1"
 
 esp32:
   board: nodemcu-32s
