@@ -13,7 +13,8 @@ esp32:
   board: nodemcu-32s
   cpu_frequency: 240MHz
   framework:
-    type: esp-idf
+    #cannot use esp-idf with more than 2 add-on boards
+    type: arduino
 
 # Enable logging
 logger:
