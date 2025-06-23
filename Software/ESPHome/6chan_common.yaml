@@ -7,14 +7,14 @@ esphome:
   min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.5.1"
+    version: "1.5.2"
 
 esp32:
   board: nodemcu-32s
   cpu_frequency: 240MHz
   framework:
-    #cannot use esp-idf with more than 2 add-on boards
-    type: arduino
+    # upcoming ESPHome update to allow more than 6 SPI devices on ESP-IDF
+    type: esp-idf
 
 # Enable logging
 logger:
