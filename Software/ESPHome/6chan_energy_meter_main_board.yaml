@@ -1,4 +1,4 @@
-# CircuitSetup 6 Channel Energy Meter Main Board example config
+# CircuitSetup 6 Channel Energy Meter Main Board config
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
@@ -8,9 +8,22 @@ substitutions:
 # Interval of how often the power data is updated
   update_time: 10s
 
-# Change current_cal to the corresponding CT's that you're using
-# If different CTs per current channel, remove or change "${current_cal}" from 
-# "gain_ct" below and replace with the CT calibration number respectively
+## Semi-Automatic Calibration ##
+# See https://esphome.io/components/sensor/atm90e32.html#calibration
+# WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
+# To save calculated calibration values, copy them from the logs to your config
+# then use the clear buttons to clear the calibration values from memory
+# Values are stored in the variables per phase below under: 
+# offset_voltage: 0
+# offset_current: 0
+# offset_active_power: 0
+# offset_reactive_power: 0
+  offset_calibration: "true"
+  gain_calibration: "true"
+
+## Calibration Values ##
+# Change current_cal_ctX value to the corresponding CT's that you're using
+# For more precise calibration, see documentation for Semi-Auto calibration
 # Current Transformers:
 #  20A/25mA SCT-006: 11143
 #  30A/1V SCT-013-030: 8650
@@ -31,13 +44,7 @@ substitutions:
 # Jameco 9VAC Transformer: 
   voltage_cal1: '7305'
   voltage_cal2: '7305'
-
-# WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
-# to save calculated calibration values, copy them from the logs to your config
-# then use the clear buttons to clear the calibration values from memory
-  offset_calibration: "true"
-  gain_calibration: "true"
-
+  
   main_meter_name1: Meter 1-3
   main_meter_name2: Meter 4-6
   main_meter_id1: meter_main1
