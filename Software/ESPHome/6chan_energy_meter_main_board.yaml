@@ -49,6 +49,15 @@ substitutions:
   ct5_name: CT5
   ct6_name: CT6
 
+esphome:
+  name: energy-meter
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: '2025.5.0'
+  project:
+    name: circuitsetup.6c-energy-meter
+    version: "1.5.2"
+
 packages:
   common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml
 
