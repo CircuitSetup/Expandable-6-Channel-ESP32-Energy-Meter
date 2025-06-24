@@ -1,0 +1,97 @@
+# CircuitSetup 6 Channel Energy Meter 1st Add-on board config
+# Assumes jumpers are both in the 1st position
+
+#IC1 AddOn 1
+############
+  - platform: atm90e32
+    cs_pin: 0
+    id: ${addon1_id1}
+    phase_a:
+      current:
+        name: ${ct7_name} Amps
+        id: ct7Amps
+      power:
+        name: ${ct7_name} Watts
+        id: ct7Watts
+      gain_voltage: ${voltage_cal1}
+      gain_ct: ${current_cal_ct7}
+    phase_b:
+      current:
+        name: ${ct8_name} Amps
+        id: ct8Amps
+      power:
+        name: ${ct8_name} Watts
+        id: ct8Watts
+      gain_voltage: ${voltage_cal1}
+      gain_ct: ${current_cal_ct8}
+    phase_c:
+      current:
+        name: ${ct9_name} Amps
+        id: ct9Amps
+      power:
+        name: ${ct9_name} CT9 Watts
+        id: ct9Watts
+      gain_voltage: ${voltage_cal1}
+      gain_ct: ${current_cal_ct9}
+    line_frequency: ${electric_freq}
+    gain_pga: 1X
+    update_interval: ${update_time}
+    enable_offset_calibration: ${offset_calibration}
+    enable_gain_calibration: ${gain_calibration}
+#IC2 AddOn 1
+############
+  - platform: atm90e32
+    cs_pin: 16
+    id: ${addon1_id2}
+    phase_a:
+      current:
+        name: ${ct10_name} Amps
+        id: ct10Amps
+      power:
+        name: ${ct10_name} Watts
+        id: ct10Watts
+      gain_voltage: ${voltage_cal2}
+      gain_ct: ${current_cal_ct10}
+    phase_b:
+      current:
+        name: ${ct11_name} Amps
+        id: ct11Amps
+      power:
+        name: ${ct11_name} Watts
+        id: ct11Watts
+      gain_voltage: ${voltage_cal2}
+      gain_ct: ${current_cal_ct11}
+    phase_c:
+      current:
+        name: ${ct12_name} Amps
+        id: ct12Amps
+      power:
+        name: ${ct12_name} Watts
+        id: ct12Watts
+      gain_voltage: ${voltage_cal2}
+      gain_ct: ${current_cal_ct12}
+    line_frequency: ${electric_freq}
+    gain_pga: 1X
+    update_interval: ${update_time}
+    enable_offset_calibration: ${offset_calibration}
+    enable_gain_calibration: ${gain_calibration}
+
+#Total Amps AddOn1
+  - platform: template
+    name: ${friendly_name} Total Amps Add-on1
+    id: totalAmpsAddOn1
+    lambda: return id(ct7Amps).state + id(ct8Amps).state + id(ct9Amps).state + id(ct10Amps).state + id(ct11Amps).state + id(ct12Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    device_class: current
+    update_interval: ${update_time}
+
+#Total Watts AddOn1
+  - platform: template
+    name: ${friendly_name} Total Watts Add-on1
+    id: totalWattsAddOn1
+    lambda: return id(ct7Watts).state + id(ct8Watts).state + id(ct9Watts).state + id(ct10Watts).state + id(ct11Watts).state + id(ct12Watts).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
