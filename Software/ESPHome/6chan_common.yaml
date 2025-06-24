@@ -7,6 +7,12 @@ esp32:
     # upcoming ESPHome update to allow more than 6 SPI devices on ESP-IDF
     type: esp-idf
 
+# Enable logging
+logger:
+
+debug:
+  update_interval: 5s
+  
 spi:
   clk_pin: 18
   miso_pin: 19
