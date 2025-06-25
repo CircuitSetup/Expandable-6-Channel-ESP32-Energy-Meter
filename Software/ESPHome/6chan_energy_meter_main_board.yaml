@@ -7,6 +7,19 @@ substitutions:
   friendly_name: "CircuitSetup Energy Meter"
 # Interval of how often the power data is updated
   update_time: 10s
+# Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
+  electric_freq: '60Hz'
+
+  main_meter_name1: Meter 1-3
+  main_meter_name2: Meter 4-6
+  main_meter_id1: meter_main1
+  main_meter_id2: meter_main2
+  ct1_name: CT1
+  ct2_name: CT2
+  ct3_name: CT3
+  ct4_name: CT4
+  ct5_name: CT5
+  ct6_name: CT6
 
 ## Semi-Automatic Calibration ##
 # See https://esphome.io/components/sensor/atm90e32.html#calibration
@@ -18,8 +31,8 @@ substitutions:
 # offset_current: 0
 # offset_active_power: 0
 # offset_reactive_power: 0
-  offset_calibration: "true"
-  gain_calibration: "true"
+  offset_calibration: 'true'
+  gain_calibration: 'true'
 
 ## Calibration Values ##
 # Change current_cal_ctX value to the corresponding CT's that you're using
@@ -44,17 +57,6 @@ substitutions:
 # Jameco 9VAC Transformer: 
   voltage_cal1: '7305'
   voltage_cal2: '7305'
-  
-  main_meter_name1: Meter 1-3
-  main_meter_name2: Meter 4-6
-  main_meter_id1: meter_main1
-  main_meter_id2: meter_main2
-  ct1_name: CT1
-  ct2_name: CT2
-  ct3_name: CT3
-  ct4_name: CT4
-  ct5_name: CT5
-  ct6_name: CT6
 
 esphome:
   name: energy-meter
