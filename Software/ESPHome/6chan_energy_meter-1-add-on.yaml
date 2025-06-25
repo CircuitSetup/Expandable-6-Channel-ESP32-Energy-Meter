@@ -12,15 +12,25 @@ substitutions:
 
   main_meter_name1: Meter 1-3
   main_meter_name2: Meter 4-6
+  addon1_name1: Addon1 7-9
+  addon1_name2: Addon1 10-12
   main_meter_id1: meter_main1
   main_meter_id2: meter_main2
+  addon1_id1: addon1_1
+  addon1_id2: addon1_2
   ct1_name: CT1
   ct2_name: CT2
   ct3_name: CT3
   ct4_name: CT4
   ct5_name: CT5
   ct6_name: CT6
-
+  ct7_name: CT7
+  ct8_name: CT8
+  ct9_name: CT9
+  ct10_name: CT10
+  ct11_name: CT11
+  ct12_name: CT12
+  
 ## Semi-Automatic Calibration ##
 # See https://esphome.io/components/sensor/atm90e32.html#calibration
 # WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
@@ -53,6 +63,12 @@ substitutions:
   current_cal_ct4: '27518'
   current_cal_ct5: '27518'
   current_cal_ct6: '27518'
+  current_cal_ct7: '27518'
+  current_cal_ct8: '27518'
+  current_cal_ct9: '27518'
+  current_cal_ct10: '27518'
+  current_cal_ct11: '27518'
+  current_cal_ct12: '27518'
 # This only needs to be changed if you're using something other than the  
 # Jameco 9VAC Transformer: 
   voltage_cal1: '7305'
@@ -284,7 +300,7 @@ sensor:
   - platform: template
     name: ${disp_name} Total Amps
     id: totalAmps
-    lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn).state ;
+    lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
     device_class: current
@@ -295,7 +311,7 @@ sensor:
   - platform: template
     name: ${disp_name} Total Watts
     id: totalWatts
-    lambda: return id(totalWattsMain).state + id(totalWattsAddOn).state ;
+    lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state ;
     accuracy_decimals: 1
     unit_of_measurement: W
     device_class: power
