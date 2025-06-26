@@ -124,8 +124,8 @@ web_server:
   port: 80
 
 sensor:
-#IC1
-####
+# Main IC1
+#########
   - platform: atm90e32
     cs_pin: 5
     id: ${main_meter_id1}
@@ -146,10 +146,6 @@ sensor:
         id: ct1Watts
 #        filters:
 #          - multiply: 2
-      power_factor:
-        name: ${ct1_name} PF
-      peak_current:
-        name: ${ct1_name} Peak Current
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct1}
       offset_voltage: 0
@@ -163,10 +159,6 @@ sensor:
       power:
         name: ${ct2_name} Watts
         id: ct2Watts
-      power_factor:
-        name: ${ct2_name} PF
-      peak_current:
-        name: ${ct2_name} Peak Current
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct2}
       offset_voltage: 0
@@ -180,10 +172,6 @@ sensor:
       power:
         name: ${ct3_name} Watts
         id: ct3Watts
-      power_factor:
-        name: ${ct3_name} PF
-      peak_current:
-        name: ${ct3_name} Peak Current
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct3}
       offset_voltage: 0
@@ -194,13 +182,13 @@ sensor:
       name: Frequency 1
     chip_temperature:
       name: ${main_meter_name1} Chip Temp
-    line_frequency: 60Hz
+    line_frequency: ${electric_freq}
     gain_pga: 1X
     update_interval: ${update_time}
     enable_offset_calibration: ${offset_calibration}
     enable_gain_calibration: ${gain_calibration}
-#IC2
-####
+# Main IC2
+##########
   - platform: atm90e32
     cs_pin: 4
     id: ${main_meter_id2}
@@ -216,12 +204,6 @@ sensor:
       power:
         name: ${ct4_name} Watts
         id: ct4Watts
-      power_factor:
-        name: ${ct4_name} PF
-      phase_angle:
-        name: ${ct4_name} Phase Angle
-      peak_current:
-        name: ${ct4_name} Peak Current
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct4}
       offset_voltage: 0
@@ -235,10 +217,6 @@ sensor:
       power:
         name: ${ct5_name} Watts
         id: ct5Watts
-      power_factor:
-        name: ${ct5_name} PF
-      peak_current:
-        name: ${ct5_name} Peak Current
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct5}
       offset_voltage: 0
@@ -252,10 +230,6 @@ sensor:
       power:
         name: ${ct6_name} Watts
         id: ct6Watts
-      power_factor:
-        name: ${ct6_name} PF
-      peak_current:
-        name: ${ct6_name} Peak Current
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct6}
       offset_voltage: 0
@@ -267,7 +241,7 @@ sensor:
 #     name: Frequency 2
     chip_temperature:
       name: ${main_meter_name2} Chip Temp
-    line_frequency: 60Hz
+    line_frequency: ${electric_freq}
     gain_pga: 1X
     update_interval: ${update_time}
     enable_offset_calibration: ${offset_calibration}
