@@ -27,10 +27,10 @@ substitutions:
 # To save calculated calibration values, copy them from the logs to your config
 # then use the clear buttons to clear the calibration values from memory
 # Values are stored in the variables per phase below under: 
-# offset_voltage: 0
-# offset_current: 0
-# offset_active_power: 0
-# offset_reactive_power: 0
+# offset_voltage:
+# offset_current:
+# offset_active_power:
+# offset_reactive_power:
   offset_calibration: 'true'
   gain_calibration: 'true'
 
