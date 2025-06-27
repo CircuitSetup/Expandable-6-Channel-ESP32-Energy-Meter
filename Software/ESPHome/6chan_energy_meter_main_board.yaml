@@ -195,8 +195,6 @@ sensor:
         id: ct4Watts
       power_factor:
         name: ${ct4_name} PF
-      phase_angle:
-        name: ${ct4_name} Phase Angle
       peak_current:
         name: ${ct4_name} Peak Current
       gain_voltage: ${voltage_cal2}
