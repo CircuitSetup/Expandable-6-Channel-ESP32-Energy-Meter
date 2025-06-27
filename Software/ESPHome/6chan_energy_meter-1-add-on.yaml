@@ -271,7 +271,7 @@ sensor:
 #Total Amps
 ###########
   - platform: template
-    name: ${disp_name} Total Amps
+    name: ${friendly_name} Total Amps
     id: totalAmps
     lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state ;
     accuracy_decimals: 2
@@ -282,7 +282,7 @@ sensor:
 #Total Watts
 ############
   - platform: template
-    name: ${disp_name} Total Watts
+    name: ${friendly_name} Total Watts
     id: totalWatts
     lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state ;
     accuracy_decimals: 1
