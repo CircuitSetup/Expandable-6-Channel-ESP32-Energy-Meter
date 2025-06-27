@@ -84,12 +84,12 @@ esphome:
     version: "1.5.2"
 
 packages:
+  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml@master
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome
     ref: master
     refresh: 1m
     files:
-      - 6chan_common.yaml
       - 6chan_addon1.yaml
 
 dashboard_import:
