@@ -1,6 +1,7 @@
 # CircuitSetup 6 Channel Energy Meter 1st Add-on board config
 # Assumes jumpers are both in the 1st position
 
+sensor:
 #IC1 AddOn 1
 ############
   - platform: atm90e32
