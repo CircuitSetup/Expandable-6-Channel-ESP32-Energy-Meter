@@ -91,6 +91,7 @@ esp32:
     type: esp-idf
 
 packages:
+
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome
     ref: master
