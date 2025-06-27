@@ -82,14 +82,21 @@ esphome:
   project:
     name: circuitsetup.6c-energy-meter
     version: "1.5.2"
+    
+esp32:
+  board: nodemcu-32s
+  cpu_frequency: 240MHz
+  framework:
+    # upcoming ESPHome update to allow more than 6 SPI devices on ESP-IDF
+    type: esp-idf
 
 packages:
-  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml@master
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome
     ref: master
     refresh: 1m
     files:
+      - 6chan_common.yaml
       - 6chan_addon1.yaml
 
 dashboard_import:
