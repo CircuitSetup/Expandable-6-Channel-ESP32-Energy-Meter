@@ -8,7 +8,7 @@ substitutions:
 # Interval of how often the power data is updated
   update_time: 10s
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
-  electric_freq: '60Hz'
+  electric_freq: "60Hz"
 
   main_meter_name1: Meter 1-3
   main_meter_name2: Meter 4-6
@@ -41,8 +41,8 @@ substitutions:
 # offset_current:
 # offset_active_power:
 # offset_reactive_power:
-  offset_calibration: 'true'
-  gain_calibration: 'true'
+  offset_calibration: "true"
+  gain_calibration: "true"
 
 ## Calibration Values ##
 # Change current_cal_ctX value to the corresponding CT's that you're using
