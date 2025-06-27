@@ -84,9 +84,8 @@ esphome:
     version: "1.5.2"
 
 packages:
-
   remote_package:
-    url: https://github.com/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome
+    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome
     ref: master
     refresh: 1d
     files:
