@@ -66,13 +66,13 @@ sensor:
       gain_ct: ${current_cal_ct35}
     phase_c:
       current:
-        name: ${ct31_name} Amps
-        id: ct31Amps
+        name: ${ct36_name} Amps
+        id: ct36Amps
       power:
-        name: ${ct31_name} Watts
-        id: ct31Watts
+        name: ${ct36_name} Watts
+        id: ct36Watts
       gain_voltage: ${voltage_cal2}
-      gain_ct: ${current_cal_ct31}
+      gain_ct: ${current_cal_ct36}
     line_frequency: ${electric_freq}
     gain_pga: 1X
     update_interval: ${update_time}
@@ -83,7 +83,7 @@ sensor:
   - platform: template
     name: ${friendly_name} Total Amps Add-on5
     id: totalAmpsAddOn5
-    lambda: return id(ct31Amps).state + id(ct32Amps).state + id(ct33Amps).state + id(ct34Amps).state + id(ct35Amps).state + id(ct31Amps).state ;
+    lambda: return id(ct31Amps).state + id(ct32Amps).state + id(ct33Amps).state + id(ct34Amps).state + id(ct35Amps).state + id(ct36Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
     device_class: current
@@ -93,7 +93,7 @@ sensor:
   - platform: template
     name: ${friendly_name} Total Watts Add-on5
     id: totalWattsAddOn5
-    lambda: return id(ct31Watts).state + id(ct32Watts).state + id(ct33Watts).state + id(ct34Watts).state + id(ct35Watts).state + id(ct31Watts).state ;
+    lambda: return id(ct31Watts).state + id(ct32Watts).state + id(ct33Watts).state + id(ct34Watts).state + id(ct35Watts).state + id(ct36Watts).state ;
     accuracy_decimals: 2
     unit_of_measurement: W
     device_class: power
