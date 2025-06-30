@@ -5,6 +5,7 @@ sensor:
 #IC1 AddOn 3
 ############
   - platform: atm90e32
+    release_device: true
     #if ESP32 has an LED for GPIO2, remove jumper or ESP32 from meter stack before programming via serial
     cs_pin: 2
     id: ${addon3_id1}
@@ -43,6 +44,7 @@ sensor:
 #IC2 AddOn 3
 ############
   - platform: atm90e32
+    release_device: true
     cs_pin: 21
     id: ${addon3_id2}
     phase_a:
