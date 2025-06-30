@@ -1,6 +1,6 @@
 # This file contains power quality values that are available for each phase
 # Enabling these on every current channel is possible, but will produce a lot of data
-# and sensor that are likely not needed.
+# and sensors that are likely not needed.
 # More details on each sensor here: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
 
 sensor:
