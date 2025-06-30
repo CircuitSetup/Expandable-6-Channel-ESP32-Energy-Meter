@@ -43,11 +43,11 @@ number:
         name: "${addon1_name1} Ref Voltage 1"
     reference_current:
       phase_a:
-        name: "${ct1_name} Ref Current"
+        name: "${ct7_name} Ref Current"
       phase_b:
-        name: "${ct2_name} Ref Current"
+        name: "${ct8_name} Ref Current"
       phase_c:
-        name: "${ct3_name} Ref Current"
+        name: "${ct9_name} Ref Current"
 
   - platform: atm90e32
     id: ${addon1_id2}
@@ -57,8 +57,8 @@ number:
         name: "${addon1_name2} Ref Voltage 2" 
     reference_current:
       phase_a:
-        name: "${ct4_name} Ref Current"
+        name: "${ct10_name} Ref Current"
       phase_b:
-        name: "${ct5_name} Ref Current"
+        name: "${ct11_name} Ref Current"
       phase_c:
-        name: "${ct6_name} Ref Current"
+        name: "${ct12_name} Ref Current"
