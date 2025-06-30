@@ -7,7 +7,7 @@ sensor:
   - platform: atm90e32
     release_device: true
     cs_pin: 15
-    id: ${addon5_id1}
+    id: ${addon6_id1}
     phase_a:
       current:
         name: ${ct37_name} Amps
@@ -45,7 +45,7 @@ sensor:
   - platform: atm90e32
     release_device: true
     cs_pin: 26
-    id: ${addon5_id2}
+    id: ${addon6_id2}
     phase_a:
       current:
         name: ${ct40_name} Amps
