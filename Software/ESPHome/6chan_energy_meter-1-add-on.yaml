@@ -95,6 +95,26 @@ packages:
       - Software/ESPHome/6chan_common.yaml
       - Software/ESPHome/addons/6chan_addon1.yaml
 
+      # Additional power quality sensors per CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      - Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      - Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
+      
+      # Enables text status fields for each CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      - Software/ESPHome/status_fields/6chan_main_status.yaml
+      - Software/ESPHome/status_fields/6chan_addon1_status.yaml
+      
+      # Adds semi-automatic buttons and reference fields 
+      # If enabled, make sure offset & gain calibration are set to "true" above
+      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      - Software/ESPHome/calibration/6chan_main_calibration.yaml
+      - Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      
+      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
+      - Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
+
 dashboard_import:
   package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter-1-add-on.yaml@master
   import_full_config: true
@@ -150,10 +170,6 @@ sensor:
 #          - multiply: 2
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct1}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
     phase_b:
       current:
         name: ${ct2_name} Amps
@@ -163,10 +179,6 @@ sensor:
         id: ct2Watts
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct2}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
     phase_c:
       current:
         name: ${ct3_name} Amps
@@ -176,10 +188,6 @@ sensor:
         id: ct3Watts
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct3}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
     frequency:
       name: Frequency 1
     chip_temperature:
@@ -208,10 +216,6 @@ sensor:
         id: ct4Watts
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct4}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
     phase_b:
       current:
         name: ${ct5_name} Amps
@@ -221,10 +225,6 @@ sensor:
         id: ct5Watts
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct5}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
     phase_c:
       current:
         name: ${ct6_name} Amps
@@ -234,10 +234,6 @@ sensor:
         id: ct6Watts
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct6}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
 #this is only needed if monitoring 2 voltages
 #   frequency:
 #     name: Frequency 2
@@ -303,96 +299,3 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
-
-# Status Fields
-###############
-text_sensor:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    phase_status:
-      phase_a:
-        name: "${ct1_name} Status"
-      phase_b:
-        name: "${ct2_name} Status"
-      phase_c:
-        name: "${ct3_name} Status"
-    frequency_status:
-      name: "Frequency Status 1"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    phase_status:
-      phase_a:
-        name: "${ct4_name} Status"
-      phase_b:
-        name: "${ct5_name} Status"
-      phase_c:
-        name: "${ct6_name} Status"
-#this is only needed if monitoring 2 voltages
-#   freq_status:
-#     name: "Frequency Status 2"
-
-# Semi-automatic Calibration Buttons
-####################################
-button:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    run_offset_calibration:
-      name: "1. Run ${main_meter_name1} Offset Calibration"
-    clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name1} Offset Calibration"
-    run_power_offset_calibration:
-      name: "2. Run ${main_meter_name1} Power Offset Calibration"
-    clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name1} Power Offset Calibration"
-    run_gain_calibration:
-      name: "3. Run ${main_meter_name1} Gain Calibration"
-    clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name1} Gain Calibration"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    run_offset_calibration:
-      name: "1. Run ${main_meter_name2} Offset Calibration"
-    clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name2} Offset Calibration"
-    run_power_offset_calibration:
-      name: "2. Run ${main_meter_name2} Power Offset Calibration"
-    clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name2} Power Offset Calibration"
-    run_gain_calibration:
-      name: "3. Run ${main_meter_name2} Gain Calibration"
-    clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name2} Gain Calibration"
-
-# V & I Calibration Reference Fields
-####################################
-# Use these to input a known value being measured by a CT or voltage transformer
-number:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    reference_voltage:
-      # will copy to phase_b/c for calibration reference
-      phase_a:
-        name: "Ref Voltage 1"
-    reference_current:
-      phase_a:
-        name: "${ct1_name} Ref Current"
-      phase_b:
-        name: "${ct2_name} Ref Current"
-      phase_c:
-        name: "${ct3_name} Ref Current"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    reference_voltage:
-      # needed to calibrate voltage registers even if not output
-      phase_a:
-        name: "Ref Voltage 2" 
-    reference_current:
-      phase_a:
-        name: "${ct4_name} Ref Current"
-      phase_b:
-        name: "${ct5_name} Ref Current"
-      phase_c:
-        name: "${ct6_name} Ref Current"
