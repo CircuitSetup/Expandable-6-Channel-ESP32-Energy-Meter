@@ -63,7 +63,6 @@ sensor:
       name: ${ct3_name} Peak A
       id: ct3Peak
 
-sensor:
   id: !extend ${main_meter_id2}
   phase_a:
     reactive_power:
