@@ -18,12 +18,14 @@ substitutions:
   main_meter_id2: meter_main2
   addon1_id1: addon1_1
   addon1_id2: addon1_2
+# Main board
   ct1_name: CT1
   ct2_name: CT2
   ct3_name: CT3
   ct4_name: CT4
   ct5_name: CT5
   ct6_name: CT6
+# Addon1
   ct7_name: CT7
   ct8_name: CT8
   ct9_name: CT9
@@ -63,6 +65,7 @@ substitutions:
   current_cal_ct4: '27518'
   current_cal_ct5: '27518'
   current_cal_ct6: '27518'
+# Addon1
   current_cal_ct7: '27518'
   current_cal_ct8: '27518'
   current_cal_ct9: '27518'
@@ -90,7 +93,7 @@ packages:
     refresh: 1min
     files:
       - Software/ESPHome/6chan_common.yaml
-      - Software/ESPHome/6chan_addon1.yaml
+      - Software/ESPHome/addons/6chan_addon1.yaml
 
 dashboard_import:
   package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter-1-add-on.yaml@master
