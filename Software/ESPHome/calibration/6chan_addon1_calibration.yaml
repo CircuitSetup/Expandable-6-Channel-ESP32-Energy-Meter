@@ -1,0 +1,64 @@
+# Semi-automatic Calibration Buttons
+####################################
+button:
+  - platform: atm90e32
+    id: ${addon1_id1}
+    run_offset_calibration:
+      name: "1. Run ${addon1_name1} Offset Calibration"
+    clear_offset_calibration:
+      name: "z1. Clear ${addon1_name1} Offset Calibration"
+    run_power_offset_calibration:
+      name: "2. Run ${addon1_name1} Power Offset Calibration"
+    clear_power_offset_calibration:
+      name: "z2. Clear ${addon1_name1} Power Offset Calibration"
+    run_gain_calibration:
+      name: "3. Run ${addon1_name1} Gain Calibration"
+    clear_gain_calibration:
+      name: "z3. Clear ${addon1_name1} Gain Calibration"
+
+  - platform: atm90e32
+    id: ${addon1_id2}
+    run_offset_calibration:
+      name: "1. Run ${addon1_name2} Offset Calibration"
+    clear_offset_calibration:
+      name: "z1. Clear ${addon1_name2} Offset Calibration"
+    run_power_offset_calibration:
+      name: "2. Run ${addon1_name2} Power Offset Calibration"
+    clear_power_offset_calibration:
+      name: "z2. Clear ${addon1_name2} Power Offset Calibration"
+    run_gain_calibration:
+      name: "3. Run ${addon1_name2} Gain Calibration"
+    clear_gain_calibration:
+      name: "z3. Clear ${addon1_name2} Gain Calibration"
+
+# V & I Calibration Reference Fields
+####################################
+# Use these to input a known value being measured by a CT or voltage transformer
+number:
+  - platform: atm90e32
+    id: ${addon1_id1}
+    reference_voltage:
+      # will copy to phase_b/c for calibration reference
+      phase_a:
+        name: "${addon1_name1} Ref Voltage 1"
+    reference_current:
+      phase_a:
+        name: "${ct1_name} Ref Current"
+      phase_b:
+        name: "${ct2_name} Ref Current"
+      phase_c:
+        name: "${ct3_name} Ref Current"
+
+  - platform: atm90e32
+    id: ${addon1_id2}
+    reference_voltage:
+      # needed to calibrate voltage registers even if not output
+      phase_a:
+        name: "${addon1_name2} Ref Voltage 2" 
+    reference_current:
+      phase_a:
+        name: "${ct4_name} Ref Current"
+      phase_b:
+        name: "${ct5_name} Ref Current"
+      phase_c:
+        name: "${ct6_name} Ref Current"
