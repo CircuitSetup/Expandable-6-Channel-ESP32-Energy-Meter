@@ -63,7 +63,6 @@ sensor:
       name: ${ct9_name} Peak A
       id: ct9Peak
 
-sensor:
   id: !extend ${addon1_id2}
   phase_a:
     reactive_power:
