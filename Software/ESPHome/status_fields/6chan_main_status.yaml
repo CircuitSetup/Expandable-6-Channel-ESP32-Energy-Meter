@@ -1,0 +1,30 @@
+# These fields display the status of each CT, or phase, with a short text description
+# See more details here: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+
+# Main Board Status Fields
+##########################
+text_sensor:
+  - platform: atm90e32
+    id: ${main_meter_id1}
+    phase_status:
+      phase_a:
+        name: "${ct1_name} Status"
+      phase_b:
+        name: "${ct2_name} Status"
+      phase_c:
+        name: "${ct3_name} Status"
+    frequency_status:
+      name: "Frequency Status 1"
+
+  - platform: atm90e32
+    id: ${main_meter_id2}
+    phase_status:
+      phase_a:
+        name: "${ct4_name} Status"
+      phase_b:
+        name: "${ct5_name} Status"
+      phase_c:
+        name: "${ct6_name} Status"
+#this is only needed if monitoring 2 voltages
+#   freq_status:
+#     name: "Frequency Status 2"
