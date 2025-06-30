@@ -21,7 +21,7 @@ sensor:
     offset_active_power: 0
     offset_reactive_power: 0
 
-  id: !extend ${addon1_id1}
+  id: !extend ${addon1_id2}
   phase_a:
     offset_voltage: 0
     offset_current: 0
