@@ -64,7 +64,7 @@ esphome:
     name: circuitsetup.6c-energy-meter
     version: "1.6"
 
-package:
+packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
     ref: master
