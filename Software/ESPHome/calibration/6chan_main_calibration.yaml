@@ -1,35 +1,36 @@
+# Details: https://esphome.io/components/sensor/atm90e32.html#calibration
 # Main Board Semi-automatic Calibration Buttons
 ###############################################
 button:
   - platform: atm90e32
     id: ${main_meter_id1}
     run_offset_calibration:
-      name: "1. Run ${main_meter_name1} Offset Calibration"
+      name: "1. Run ${main_meter_name1} Offset Cal"
     clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name1} Offset Calibration"
+      name: "z1. Clear ${main_meter_name1} Offset Cal"
     run_power_offset_calibration:
-      name: "2. Run ${main_meter_name1} Power Offset Calibration"
+      name: "2. Run ${main_meter_name1} Power Offset Cal"
     clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name1} Power Offset Calibration"
+      name: "z2. Clear ${main_meter_name1} Power Offset Cal"
     run_gain_calibration:
-      name: "3. Run ${main_meter_name1} Gain Calibration"
+      name: "3. Run ${main_meter_name1} Gain Cal"
     clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name1} Gain Calibration"
+      name: "z3. Clear ${main_meter_name1} Gain Cal"
 
   - platform: atm90e32
     id: ${main_meter_id2}
     run_offset_calibration:
-      name: "1. Run ${main_meter_name2} Offset Calibration"
+      name: "1. Run ${main_meter_name2} Offset Cal"
     clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name2} Offset Calibration"
+      name: "z1. Clear ${main_meter_name2} Offset Cal"
     run_power_offset_calibration:
-      name: "2. Run ${main_meter_name2} Power Offset Calibration"
+      name: "2. Run ${main_meter_name2} Power Offset Cal"
     clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name2} Power Offset Calibration"
+      name: "z2. Clear ${main_meter_name2} Power Offset Cal"
     run_gain_calibration:
-      name: "3. Run ${main_meter_name2} Gain Calibration"
+      name: "3. Run ${main_meter_name2} Gain Cal"
     clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name2} Gain Calibration"
+      name: "z3. Clear ${main_meter_name2} Gain Cal"
 
 # Main Board V & I Calibration Reference Fields
 ###############################################
@@ -40,7 +41,7 @@ number:
     reference_voltage:
       # will copy to phase_b/c for calibration reference
       phase_a:
-        name: "Ref Voltage 1"
+        name: "${main_meter_name1} Ref V 1"
     reference_current:
       phase_a:
         name: "${ct1_name} Ref Current"
@@ -54,7 +55,7 @@ number:
     reference_voltage:
       # needed to calibrate voltage registers even if not output
       phase_a:
-        name: "Ref Voltage 2" 
+        name: "${main_meter_name2} Ref V 2" 
     reference_current:
       phase_a:
         name: "${ct4_name} Ref Current"
