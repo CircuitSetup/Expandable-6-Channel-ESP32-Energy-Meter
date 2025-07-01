@@ -146,6 +146,7 @@ improv_serial:
 web_server:
   port: 80
 
+sensor:
 #Total Amps Main
 ################
   - platform: template
