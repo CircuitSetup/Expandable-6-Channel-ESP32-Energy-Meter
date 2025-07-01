@@ -74,7 +74,7 @@ packages:
     refresh: 1min
     files:
       - Software/ESPHome/6chan_common_ethernet.yaml
-      - Software/ESPHome/addons/6chan_main_sensor.yaml
+      - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
 
       # Additional power quality sensors per CT/Phase
       # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables

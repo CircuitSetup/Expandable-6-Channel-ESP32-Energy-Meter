@@ -62,16 +62,16 @@ esphome:
   min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.5.2"
+    version: "1.6"
 
-packages:
+package:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
     ref: master
     refresh: 1min
     files:
       - Software/ESPHome/6chan_common.yaml
-      - Software/ESPHome/addons/6chan_main_sensor.yaml
+      - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
 
       # Additional power quality sensors per CT/Phase
       # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
@@ -124,13 +124,34 @@ web_server:
   port: 80
 
 sensor:
+# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
+# divide the current_cal_ctx (above) by 2 (120A CT) or 4 (200A CT) and multiply the current and power values 
+# by 2 or 4 by uncommenting the below and changing the id and phase_x accordingly
+- id: !extend ${main_meter_id1} # CTs 1-3 
+  phase_a: # CT1
+    current:
+      filters:
+        - multiply: 2
+    power:
+      filters:
+        - multiply: 2
+# uncomment if monitoring 2 voltages
+- id: !extend ${main_meter_id2}
+  phase_a:
+    voltage:
+       name: Voltage 2
+       id: ic2Volts
+       accuracy_decimals: 1
+  frequency:
+    name: Frequency 2
+
 #kWh
 ####
-  - platform: total_daily_energy
-    name: ${friendly_name} Total kWh
-    power_id: totalWattsMain
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: kWh
-    device_class: energy
-    state_class: total_increasing
+- platform: total_daily_energy
+  name: ${friendly_name} Total kWh
+  power_id: totalWattsMain
+  filters:
+    - multiply: 0.001
+  unit_of_measurement: kWh
+  device_class: energy
+  state_class: total_increasing

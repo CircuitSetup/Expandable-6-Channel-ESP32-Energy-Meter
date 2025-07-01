@@ -10,22 +10,22 @@ substitutions:
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
   electric_freq: "60Hz"
 
+## Main board
   main_meter_name1: Meter 1-3
   main_meter_name2: Meter 4-6
-  addon1_name1: Addon1 7-9
-  addon1_name2: Addon1 10-12
   main_meter_id1: meter_main1
   main_meter_id2: meter_main2
-  addon1_id1: addon1_1
-  addon1_id2: addon1_2
-# Main board
   ct1_name: CT1
   ct2_name: CT2
   ct3_name: CT3
   ct4_name: CT4
   ct5_name: CT5
   ct6_name: CT6
-# Addon1
+## Addon1
+  addon1_name1: Addon1 7-9
+  addon1_name2: Addon1 10-12
+  addon1_id1: addon1_1
+  addon1_id2: addon1_2
   ct7_name: CT7
   ct8_name: CT8
   ct9_name: CT9
@@ -83,7 +83,7 @@ esphome:
   min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter-1-addon
-    version: "1.5.2"
+    version: "1.6"
 
 packages:
   remote_package:
@@ -92,8 +92,8 @@ packages:
     refresh: 1min
     files:
       - Software/ESPHome/6chan_common.yaml
-      - Software/ESPHome/addons/6chan_main_sensor.yaml
-      - Software/ESPHome/addons/6chan_addon1.yaml
+      - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon1.yaml
 
       # Additional power quality sensors per CT/Phase
       # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
