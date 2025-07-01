@@ -38,15 +38,12 @@ substitutions:
 # WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
 # To save calculated calibration values, copy them from the logs to your config
 # then use the clear buttons to clear the calibration values from memory
-# Values are stored in the variables per phase below under: 
-# offset_voltage:
-# offset_current:
-# offset_active_power:
-# offset_reactive_power:
+# Values are stored in the variables for gain below and offsets in their corresponding files
+# under /calibration/6chan_xxxx_offset_calibrations.yaml
   offset_calibration: "true"
   gain_calibration: "true"
 
-## Calibration Values ##
+## Gain Calibration Values ##
 # Change current_cal_ctX value to the corresponding CT's that you're using
 # For more precise calibration, see documentation for Semi-Auto calibration
 # Current Transformers:
@@ -59,13 +56,15 @@ substitutions:
 #  120A/40mA: SCT-016: 41787
 #  200A/100mA SCT-024: 27518
 #  200A/50mA SCT-024: 55036
+
+## Main Board
   current_cal_ct1: '27518'
   current_cal_ct2: '27518'
   current_cal_ct3: '27518'
   current_cal_ct4: '27518'
   current_cal_ct5: '27518'
   current_cal_ct6: '27518'
-# Addon1
+## Addon1
   current_cal_ct7: '27518'
   current_cal_ct8: '27518'
   current_cal_ct9: '27518'
@@ -78,12 +77,12 @@ substitutions:
   voltage_cal2: '7305'
 
 esphome:
-  name: energy-meter
+  name: ${disp_name}
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
   min_version: '2025.5.0'
   project:
-    name: circuitsetup.6c-energy-meter
+    name: circuitsetup.6c-energy-meter-1-addon
     version: "1.5.2"
 
 packages:
@@ -121,7 +120,11 @@ dashboard_import:
   import_full_config: true
 
 # Enable Home Assistant API
+# An encryption key is recommended and can be generated here:
+# https://esphome.io/components/api.html#configuration-variables
 api:
+#  encryption:
+#    key: "YOUR_ENCRYPTION_KEY_HERE"
 
 # Enable OTA updating
 ota:
@@ -147,28 +150,6 @@ web_server:
   port: 80
 
 sensor:
-#Total Amps Main
-################
-  - platform: template
-    name: ${friendly_name} Total Amps Main
-    id: totalAmpsMain
-    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    device_class: current
-    update_interval: ${update_time}
-    
-#Total Watts Main
-#################
-  - platform: template
-    name: ${friendly_name} Total Watts Main
-    id: totalWattsMain
-    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
-    accuracy_decimals: 1
-    unit_of_measurement: W
-    device_class: power
-    update_interval: ${update_time}
-
 #Total Amps
 ###########
   - platform: template
