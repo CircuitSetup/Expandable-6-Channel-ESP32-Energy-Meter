@@ -97,3 +97,25 @@ sensor:
     update_interval: ${update_time}
     enable_offset_calibration: ${offset_calibration}
     enable_gain_calibration: ${gain_calibration}
+
+#Total Amps Main
+################
+  - platform: template
+    name: ${friendly_name} Total Amps Main
+    id: totalAmpsMain
+    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
+    accuracy_decimals: 2
+    unit_of_measurement: A
+    device_class: current
+    update_interval: ${update_time}
+    
+#Total Watts Main
+#################
+  - platform: template
+    name: ${friendly_name} Total Watts Main
+    id: totalWattsMain
+    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
+    accuracy_decimals: 1
+    unit_of_measurement: W
+    device_class: power
+    update_interval: ${update_time}
