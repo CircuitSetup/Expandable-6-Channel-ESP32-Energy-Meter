@@ -128,7 +128,7 @@ sensor:
 ####
   - platform: total_daily_energy
     name: ${friendly_name} Total kWh
-    power_id: totalWatts
+    power_id: totalWattsMain
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
