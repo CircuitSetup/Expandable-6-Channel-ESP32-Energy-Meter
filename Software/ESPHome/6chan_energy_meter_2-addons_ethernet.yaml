@@ -35,10 +35,10 @@ substitutions:
   ct11_name: CT11
   ct12_name: CT12
 ## Addon2
-  addon1_name1: Addon2 13-15
-  addon1_name2: Addon2 16-18
-  addon1_id1: addon2_1
-  addon1_id2: addon2_2
+  addon2_name1: Addon2 13-15
+  addon2_name2: Addon2 16-18
+  addon2_id1: addon2_1
+  addon2_id2: addon2_2
   ct13_name: CT13
   ct14_name: CT14
   ct15_name: CT15
