@@ -1,0 +1,25 @@
+# These fields display the status of each CT, or phase, with a short text description
+# See more details here: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+
+# Status Fields
+###############
+text_sensor:
+  - platform: atm90e32
+    id: ${addon4_id1}
+    phase_status:
+      phase_a:
+        name: "${ct25_name} Status"
+      phase_b:
+        name: "${ct26_name} Status"
+      phase_c:
+        name: "${ct27_name} Status"
+
+  - platform: atm90e32
+    id: ${addon4_id2}
+    phase_status:
+      phase_a:
+        name: "${ct28_name} Status"
+      phase_b:
+        name: "${ct29_name} Status"
+      phase_c:
+        name: "${ct30_name} Status"

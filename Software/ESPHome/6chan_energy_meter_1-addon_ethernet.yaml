@@ -1,15 +1,17 @@
 # CircuitSetup 6 Channel Energy Meter Main Board + 1 Add-on Board config
+# Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
 # Change the disp_name to something you want
   disp_name: energy-meter
-  friendly_name: "CircuitSetup Energy Meter"
+  friendly_name: "CircuitSetup Energy Meter 12x"
 # Interval of how often the power data is updated
   update_time: 10s
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
   electric_freq: "60Hz"
 
+## The below names and IDs can be changed to whatever you want. IDs should not have spaces
 ## Main board
   main_meter_name1: Meter 1-3
   main_meter_name2: Meter 4-6
@@ -81,43 +83,47 @@ esphome:
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
   min_version: '2025.5.0'
+  platformio_options:
+    board_build.flash_mode: dio
   project:
-    name: circuitsetup.6c-energy-meter-1-addon
+    name: circuitsetup.6c-energy-meter-1-addon-ethernet
     version: "1.6"
 
 packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
     ref: master
-    refresh: 1min
+    refresh: 1d
     files:
-      - Software/ESPHome/6chan_common.yaml
+      - Software/ESPHome/6chan_common_ethernet.yaml
       - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
       - Software/ESPHome/meter_sensors/6chan_addon1.yaml
 
-      # Additional power quality sensors per CT/Phase
-      # Uncomment to enable
-      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      ## Additional power quality sensors per CT/Phase
+      ## Uncomment to enable
+      ## details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
       #- Software/ESPHome/power_quality/6chan_main_power_quality.yaml
       #- Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
       
-      # Enables text status fields for each CT/Phase
-      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      ## Enables text status fields for each CT/Phase
+      ## details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
       - Software/ESPHome/status_fields/6chan_main_status.yaml
-      - Software/ESPHome/status_fields/6chan_addon1_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon1_status.yaml
       
-      # Adds semi-automatic calibration buttons and reference fields 
-      # If enabled, make sure offset & gain calibration are set to "true" above
-      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      ## Adds semi-automatic calibration buttons and reference fields 
+      ## If enabled, make sure offset & gain calibration are set to "true" above
+      ## details: https://esphome.io/components/sensor/atm90e32.html#calibration
       - Software/ESPHome/calibration/6chan_main_calibration.yaml
-      - Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon1_calibration.yaml
       
-      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
-      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
-      - Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
+      ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
+      ## should not be registering anything.
+      #- Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
 
 dashboard_import:
-  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter-1-add-on.yaml@master
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_1-addon_ethernet.yaml@master
   import_full_config: true
 
 # Enable Home Assistant API
@@ -131,55 +137,81 @@ api:
 ota:
   - platform: esphome
 
-# Set up a wifi access point
-wifi:
-  ap:
-
-# In combination with the `ap` this allows 
-# provisioning wifi credentials to the device.
-captive_portal:
-
-# Sets up Bluetooth LE to provision wifi credentials 
-# to the device.
-esp32_improv:
-  authorizer: none
-
-# Sets up the improv via serial client for wifi provisioning
-improv_serial:
-
 web_server:
   port: 80
 
 sensor:
+# CS Pin mappings for Lilygo T-ETH-Lite ESP32S3
+- id: !extend ${main_meter_id1}
+  cs_pin: 8
+#- id: !extend ${main_meter_id2}
+#  cs_pin: 4
+#- id: !extend ${addon1_id1}
+#  cs_pin: 0
+#- id: !extend ${addon1_id2}
+#  cs_pin: 16
+
+## The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
+## divide the current_cal_ctx (above) by 2 (120A CT) or 4 (200A CT) and multiply the current and power values 
+## by 2 or 4, uncommenting the below and changing the id and phase_x accordingly
+#- id: !extend ${main_meter_id1} # CTs 1-3 
+#  phase_a: # CT1
+#    current:
+#      filters:
+#        - multiply: 2
+#    power:
+#      filters:
+#        - multiply: 2
+#
+## uncomment if monitoring 2 voltages
+#- id: !extend ${main_meter_id2}
+#  phase_a:
+#    voltage:
+#       name: Voltage 2
+#       id: ic2Volts
+#       accuracy_decimals: 1
+#  frequency:
+#    name: Frequency 2
+
+## Comment out to show amps and watts per meter board in Home Assistant
+- id: !extend totalAmpsMain
+  internal: true
+- id: !extend totalWattsMain
+  internal: true
+- id: !extend totalAmpsAddOn1
+  internal: true
+- id: !extend totalWattsAddOn1
+  internal: true
+
 #Total Amps
 ###########
-  - platform: template
-    name: ${friendly_name} Total Amps
-    id: totalAmps
-    lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    device_class: current
-    update_interval: ${update_time}
+- platform: template
+  name: ${friendly_name} Total Amps
+  id: totalAmps
+  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state ;
+  accuracy_decimals: 2
+  unit_of_measurement: A
+  device_class: current
+  update_interval: ${update_time}
    
 #Total Watts
 ############
-  - platform: template
-    name: ${friendly_name} Total Watts
-    id: totalWatts
-    lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state ;
-    accuracy_decimals: 1
-    unit_of_measurement: W
-    device_class: power
-    update_interval: ${update_time}
+- platform: template
+  name: ${friendly_name} Total Watts
+  id: totalWatts
+  lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state ;
+  accuracy_decimals: 1
+  unit_of_measurement: W
+  device_class: power
+  update_interval: ${update_time}
     
 #kWh
 ####
-  - platform: total_daily_energy
-    name: ${friendly_name} Total kWh
-    power_id: totalWatts
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: kWh
-    device_class: energy
-    state_class: total_increasing
+- platform: total_daily_energy
+  name: ${friendly_name} Total kWh
+  power_id: totalWatts
+  filters:
+    - multiply: 0.001
+  unit_of_measurement: kWh
+  device_class: energy
+  state_class: total_increasing

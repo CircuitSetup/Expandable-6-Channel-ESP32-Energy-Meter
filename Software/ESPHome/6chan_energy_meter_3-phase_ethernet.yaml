@@ -37,10 +37,33 @@ substitutions:
 # Jameco 9VAC Transformer: 
   voltage_cal: '7305'
 
+esphome:
+  name: "${disp_name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  platformio_options:
+    board_build.flash_mode: dio
+  project:
+    name: circuitsetup.6c-energy-meter-ethernet
+    version: "1.6"
+
 packages:
   common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common_ethernet.yaml
 
-  
+# Enable Home Assistant API
+# An encryption key is recommended and can be generated here:
+# https://esphome.io/components/api.html#configuration-variables
+api:
+#  encryption:
+#    key: "YOUR_ENCRYPTION_KEY_HERE"
+
+# Enable OTA updating
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
+
 sensor:
 #IC1 Main
   - platform: atm90e32

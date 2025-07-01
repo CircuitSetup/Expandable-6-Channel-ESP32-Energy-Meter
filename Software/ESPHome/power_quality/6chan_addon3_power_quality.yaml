@@ -1,0 +1,123 @@
+# This file contains power quality values that are available for each phase
+# Enabling these on every current channel is possible, but will produce a lot of data
+# and sensors that are likely not needed.
+# More details on each sensor here: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+
+sensor:
+- id: !extend ${addon3_id1}
+  phase_a:
+    reactive_power:
+      name: ${ct19_name} VAR
+      id: ct19VAR
+    apparent_power:
+      name: ${ct19_name} VA
+      id: ct19VA
+    harmonic_power:
+      name: ${ct19_name} Harmonic
+      id: ct19Har
+    power_factor:
+      name: ${ct19_name} Power Factor
+      id: ct19PF
+    phase_angle:
+      name: ${ct19_name} Phase Angle
+      id: ct19Angle
+    peak_current:
+      name: ${ct19_name} Peak A
+      id: ct19Peak
+  phase_b:
+    reactive_power:
+      name: ${ct20_name} VAR
+      id: ct20VAR
+    apparent_power:
+      name: ${ct20_name} VA
+      id: ct20VA
+    harmonic_power:
+      name: ${ct20_name} Harmonic
+      id: ct20Har
+    power_factor:
+      name: ${ct20_name} Power Factor
+      id: ct20PF
+    phase_angle:
+      name: ${ct20_name} Phase Angle
+      id: ct20Angle
+    peak_current:
+      name: ${ct20_name} Peak A
+      id: ct20Peak
+  phase_c:
+    reactive_power:
+      name: ${ct21_name} VAR
+      id: ct21VAR
+    apparent_power:
+      name: ${ct21_name} VA
+      id: ct21VA
+    harmonic_power:
+      name: ${ct21_name} Harmonic
+      id: ct21Har
+    power_factor:
+      name: ${ct21_name} Power Factor
+      id: ct21PF
+    phase_angle:
+      name: ${ct21_name} Phase Angle
+      id: ct21Angle
+    peak_current:
+      name: ${ct21_name} Peak A
+      id: ct21Peak
+
+- id: !extend ${addon3_id2}
+  phase_a:
+    reactive_power:
+      name: ${ct22_name} VAR
+      id: ct22VAR
+    apparent_power:
+      name: ${ct22_name} VA
+      id: ct22VA
+    harmonic_power:
+      name: ${ct22_name} Harmonic
+      id: ct22Har
+    power_factor:
+      name: ${ct22_name} Power Factor
+      id: ct22PF
+    phase_angle:
+      name: ${ct22_name} Phase Angle
+      id: ct22Angle
+    peak_current:
+      name: ${ct22_name} Peak A
+      id: ct22Peak
+  phase_b:
+    reactive_power:
+      name: ${ct23_name} VAR
+      id: ct23VAR
+    apparent_power:
+      name: ${ct23_name} VA
+      id: ct23VA
+    harmonic_power:
+      name: ${ct23_name} Harmonic
+      id: ct23Har
+    power_factor:
+      name: ${ct23_name} Power Factor
+      id: ct23PF
+    phase_angle:
+      name: ${ct23_name} Phase Angle
+      id: ct23Angle
+    peak_current:
+      name: ${ct23_name} Peak A
+      id: ct23Peak
+  phase_c:
+    reactive_power:
+      name: ${ct24_name} VAR
+      id: ct24VAR
+    apparent_power:
+      name: ${ct24_name} VA
+      id: ct24VA
+    harmonic_power:
+      name: ${ct24_name} Harmonic
+      id: ct24Har
+    power_factor:
+      name: ${ct24_name} Power Factor
+      id: ct24PF
+    phase_angle:
+      name: ${ct24_name} Phase Angle
+      id: ct24Angle
+    peak_current:
+      name: ${ct24_name} Peak A
+      id: ct24Peak
