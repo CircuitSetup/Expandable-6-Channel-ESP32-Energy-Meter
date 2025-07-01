@@ -1,17 +1,40 @@
-# CircuitSetup 6 Channel Energy Meter Main Board example config
+# CircuitSetup 6 Channel Energy Meter Main Board config
 # Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
-# Change the disp_name to something you want  
-  disp_name: energy_meter
-  friendly_name: CircuitSetup Energy Meter
+# Change the disp_name to something you want
+  disp_name: energy-meter
+  friendly_name: "CircuitSetup Energy Meter"
 # Interval of how often the power data is updated
   update_time: 10s
+# Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
+  electric_freq: '60Hz'
 
-# Change current_cal to the corresponding CT's that you're using
-# If different CTs per current channel, remove or change "${current_cal}" from 
-# "gain_ct" below and replace with the CT calibration number respectively
+  main_meter_name1: Meter 1-3
+  main_meter_name2: Meter 4-6
+  main_meter_id1: meter_main1
+  main_meter_id2: meter_main2
+  ct1_name: CT1
+  ct2_name: CT2
+  ct3_name: CT3
+  ct4_name: CT4
+  ct5_name: CT5
+  ct6_name: CT6
+
+## Semi-Automatic Calibration ##
+# See https://esphome.io/components/sensor/atm90e32.html#calibration
+# WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
+# To save calculated calibration values, copy them from the logs to your config
+# then use the clear buttons to clear the calibration values from memory
+# Values are stored in the variables for gain below and offsets in their corresponding files
+# under /calibration/6chan_xxxx_offset_calibrations.yaml
+  offset_calibration: "true"
+  gain_calibration: "true"
+
+## Gain Calibration Values ##
+# Change current_cal_ctX value to the corresponding CT's that you're using
+# For more precise calibration, see documentation for Semi-Auto calibration
 # Current Transformers:
 #  20A/25mA SCT-006: 11143
 #  30A/1V SCT-013-030: 8650
@@ -22,109 +45,72 @@ substitutions:
 #  120A/40mA: SCT-016: 41787
 #  200A/100mA SCT-024: 27518
 #  200A/50mA SCT-024: 55036
-  current_cal: '27518'
-
+  current_cal_ct1: '27518'
+  current_cal_ct2: '27518'
+  current_cal_ct3: '27518'
+  current_cal_ct4: '27518'
+  current_cal_ct5: '27518'
+  current_cal_ct6: '27518'
 # This only needs to be changed if you're using something other than the  
 # Jameco 9VAC Transformer: 
-  voltage_cal: '7305'
+  voltage_cal1: '7305'
+  voltage_cal2: '7305'
+
+esphome:
+  name: "${disp_name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: '2025.5.0'
+  platformio_options:
+    board_build.flash_mode: dio
+  project:
+    name: circuitsetup.6c-energy-meter-ethernet
+    version: "1.6"
 
 packages:
-  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common_ethernet.yaml
+  remote_package:
+    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
+    ref: master
+    refresh: 1min
+    files:
+      - Software/ESPHome/6chan_common_ethernet.yaml
+      - Software/ESPHome/addons/6chan_main_sensor.yaml
+
+      # Additional power quality sensors per CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      #- Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      
+      # Enables text status fields for each CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      - Software/ESPHome/status_fields/6chan_main_status.yaml
+      
+      # Adds semi-automatic calibration buttons and reference fields 
+      # If enabled, make sure offset & gain calibration are set to "true" above
+      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      - Software/ESPHome/calibration/6chan_main_calibration.yaml
+      
+      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
+
+dashboard_import:
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_ethernet.yaml@master
+  import_full_config: true
+
+# Enable Home Assistant API
+# An encryption key is recommended and can be generated here:
+# https://esphome.io/components/api.html#configuration-variables
+api:
+#  encryption:
+#    key: "YOUR_ENCRYPTION_KEY_HERE"
+
+# Enable OTA updating
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
 
 sensor:
-#IC1
-  - platform: atm90e32
-    cs_pin: 8
-    phase_a:
-      voltage:
-        name: ${disp_name} Volts A
-        id: ic1Volts
-        accuracy_decimals: 1
-      current:
-        name: ${disp_name} CT1 Amps
-        id: ct1Amps
-      power:
-        name: ${disp_name} CT1 Watts
-        id: ct1Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    phase_b:
-      current:
-        name: ${disp_name} CT2 Amps
-        id: ct2Amps
-      power:
-        name: ${disp_name} CT2 Watts
-        id: ct2Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    phase_c:
-      current:
-        name: ${disp_name} CT3 Amps
-        id: ct3Amps
-      power:
-        name: ${disp_name} CT3 Watts
-        id: ct3Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    frequency:
-      name: ${disp_name} Freq A
-    line_frequency: 60Hz
-    gain_pga: 1X
-    update_interval: ${update_time}
-#IC2
-  - platform: atm90e32
-    cs_pin: 4
-    phase_a:
-      current:
-        name: ${disp_name} CT4 Amps
-        id: ct4Amps
-      power:
-        name: ${disp_name} CT4 Watts
-        id: ct4Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    phase_b:
-      current:
-        name: ${disp_name} CT5 Amps
-        id: ct5Amps
-      power:
-        name: ${disp_name} CT5 Watts
-        id: ct5Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    phase_c:
-      current:
-        name: ${disp_name} CT6 Amps
-        id: ct6Amps
-      power:
-        name: ${disp_name} CT6 Watts
-        id: ct6Watts
-      gain_voltage: ${voltage_cal}
-      gain_ct: ${current_cal}
-    frequency:
-      name: ${disp_name} Freq B
-    line_frequency: 60Hz
-    gain_pga: 1X
-    update_interval: ${update_time}
-        
-#Total Amps   
-  - platform: template
-    name: ${disp_name} Total Amps
-    id: totalAmps
-    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    device_class: current
-    update_interval: ${update_time}         
-#Total Watts
-  - platform: template
-    name: ${disp_name} Total Watts
-    id: totalWatts
-    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
-    accuracy_decimals: 1
-    unit_of_measurement: W
-    device_class: power
-    update_interval: ${update_time}
 #kWh
   - platform: total_daily_energy
     name: ${disp_name} Total kWh
