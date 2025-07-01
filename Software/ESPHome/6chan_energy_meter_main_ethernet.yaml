@@ -118,11 +118,11 @@ sensor:
   cs_pin: 4
   
 #kWh
-  - platform: total_daily_energy
-    name: ${friendly_name} Total kWh
-    power_id: totalWattsMain
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: kWh
-    device_class: energy
-    state_class: total_increasing
+- platform: total_daily_energy
+  name: ${friendly_name} Total kWh
+  power_id: totalWattsMain
+  filters:
+    - multiply: 0.001
+  unit_of_measurement: kWh
+  device_class: energy
+  state_class: total_increasing
