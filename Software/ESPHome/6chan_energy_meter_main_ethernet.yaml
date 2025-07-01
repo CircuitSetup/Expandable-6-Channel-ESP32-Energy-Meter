@@ -96,13 +96,6 @@ dashboard_import:
   package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_ethernet.yaml@master
   import_full_config: true
 
-# CS Pin mappings for Lilygo T-ETH-Lite ESP32S3
-sensor:
-- id: !extend ${main_meter_id1}
-  cs_pin: 8
-- id: !extend ${main_meter_id2}
-  cs_pin: 4
-
 # Enable Home Assistant API
 # An encryption key is recommended and can be generated here:
 # https://esphome.io/components/api.html#configuration-variables
@@ -118,6 +111,12 @@ web_server:
   port: 80
 
 sensor:
+# CS Pin mappings for Lilygo T-ETH-Lite ESP32S3
+- id: !extend ${main_meter_id1}
+  cs_pin: 8
+- id: !extend ${main_meter_id2}
+  cs_pin: 4
+  
 #kWh
   - platform: total_daily_energy
     name: ${friendly_name} Total kWh
