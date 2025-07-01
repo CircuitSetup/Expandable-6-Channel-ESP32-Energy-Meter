@@ -26,15 +26,12 @@ substitutions:
 # WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
 # To save calculated calibration values, copy them from the logs to your config
 # then use the clear buttons to clear the calibration values from memory
-# Values are stored in the variables per phase below under: 
-# offset_voltage:
-# offset_current:
-# offset_active_power:
-# offset_reactive_power:
-  offset_calibration: 'true'
-  gain_calibration: 'true'
+# Values are stored in the variables for gain below and offsets in their corresponding files
+# under /calibration/6chan_xxxx_offset_calibrations.yaml
+  offset_calibration: "true"
+  gain_calibration: "true"
 
-## Calibration Values ##
+## Gain Calibration Values ##
 # Change current_cal_ctX value to the corresponding CT's that you're using
 # For more precise calibration, see documentation for Semi-Auto calibration
 # Current Transformers:
@@ -59,7 +56,7 @@ substitutions:
   voltage_cal2: '7305'
 
 esphome:
-  name: energy-meter
+  name: ${disp_name}
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
   min_version: '2025.5.0'
@@ -68,14 +65,40 @@ esphome:
     version: "1.5.2"
 
 packages:
-  common: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_common.yaml@master
+  remote_package:
+    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
+    ref: master
+    refresh: 1min
+    files:
+      - Software/ESPHome/6chan_common.yaml
+      - Software/ESPHome/addons/6chan_main_sensor.yaml
+
+      # Additional power quality sensors per CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      - Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      
+      # Enables text status fields for each CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      - Software/ESPHome/status_fields/6chan_main_status.yaml
+      
+      # Adds semi-automatic calibration buttons and reference fields 
+      # If enabled, make sure offset & gain calibration are set to "true" above
+      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      - Software/ESPHome/calibration/6chan_main_calibration.yaml
+      
+      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
 
 dashboard_import:
   package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_board.yaml@master
   import_full_config: true
 
 # Enable Home Assistant API
+# An encryption key is recommended and can be generated here:
+# https://esphome.io/components/api.html#configuration-variables
 api:
+#  encryption:
+#    key: "YOUR_ENCRYPTION_KEY_HERE"
 
 # Enable OTA updating
 ota:
@@ -101,173 +124,6 @@ web_server:
   port: 80
 
 sensor:
-#IC1
-####
-  - platform: atm90e32
-    cs_pin: 5
-    id: ${main_meter_id1}
-    phase_a:
-      voltage:
-        name: Voltage 1
-        id: ic1Volts
-        accuracy_decimals: 1
-      current:
-        name: ${ct1_name} Amps
-        id: ct1Amps
-# The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
-# divide the gain_ct by 2 (120A CT) or 4 (200A CT) and multiply the current and power values by 2 or 4 by uncommenting the filter below
-#        filters:
-#          - multiply: 2
-      power:
-        name: ${ct1_name} Watts
-        id: ct1Watts
-#        filters:
-#          - multiply: 2
-      power_factor:
-        name: ${ct1_name} PF
-      peak_current:
-        name: ${ct1_name} Peak Current
-      gain_voltage: ${voltage_cal1}
-      gain_ct: ${current_cal_ct1}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-    phase_b:
-      current:
-        name: ${ct2_name} Amps
-        id: ct2Amps
-      power:
-        name: ${ct2_name} Watts
-        id: ct2Watts
-      power_factor:
-        name: ${ct2_name} PF
-      peak_current:
-        name: ${ct2_name} Peak Current
-      gain_voltage: ${voltage_cal1}
-      gain_ct: ${current_cal_ct2}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-    phase_c:
-      current:
-        name: ${ct3_name} Amps
-        id: ct3Amps
-      power:
-        name: ${ct3_name} Watts
-        id: ct3Watts
-      power_factor:
-        name: ${ct3_name} PF
-      peak_current:
-        name: ${ct3_name} Peak Current
-      gain_voltage: ${voltage_cal1}
-      gain_ct: ${current_cal_ct3}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-    frequency:
-      name: Frequency 1
-    chip_temperature:
-      name: ${main_meter_name1} Chip Temp
-    line_frequency: ${electric_freq}
-    gain_pga: 1X
-    update_interval: ${update_time}
-    enable_offset_calibration: ${offset_calibration}
-    enable_gain_calibration: ${gain_calibration}
-#IC2
-####
-  - platform: atm90e32
-    cs_pin: 4
-    id: ${main_meter_id2}
-    phase_a:
-#this voltage is only needed if monitoring 2 voltages
-#     voltage:
-#       name: Voltage 2
-#       id: ic2Volts
-#       accuracy_decimals: 1
-      current:
-        name: ${ct4_name} Amps
-        id: ct4Amps
-      power:
-        name: ${ct4_name} Watts
-        id: ct4Watts
-      power_factor:
-        name: ${ct4_name} PF
-      peak_current:
-        name: ${ct4_name} Peak Current
-      gain_voltage: ${voltage_cal2}
-      gain_ct: ${current_cal_ct4}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-    phase_b:
-      current:
-        name: ${ct5_name} Amps
-        id: ct5Amps
-      power:
-        name: ${ct5_name} Watts
-        id: ct5Watts
-      power_factor:
-        name: ${ct5_name} PF
-      peak_current:
-        name: ${ct5_name} Peak Current
-      gain_voltage: ${voltage_cal2}
-      gain_ct: ${current_cal_ct5}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-    phase_c:
-      current:
-        name: ${ct6_name} Amps
-        id: ct6Amps
-      power:
-        name: ${ct6_name} Watts
-        id: ct6Watts
-      power_factor:
-        name: ${ct6_name} PF
-      peak_current:
-        name: ${ct6_name} Peak Current
-      gain_voltage: ${voltage_cal2}
-      gain_ct: ${current_cal_ct6}
-      offset_voltage: 0
-      offset_current: 0
-      offset_active_power: 0
-      offset_reactive_power: 0
-#this is only needed if monitoring 2 voltages
-#   frequency:
-#     name: Frequency 2
-    chip_temperature:
-      name: ${main_meter_name2} Chip Temp
-    line_frequency: ${electric_freq}
-    gain_pga: 1X
-    update_interval: ${update_time}
-    enable_offset_calibration: ${offset_calibration}
-    enable_gain_calibration: ${gain_calibration}
-
-#Total Amps
-###########
-  - platform: template
-    name: ${friendly_name} Total Amps
-    id: totalAmps
-    lambda: return id(ct1Amps).state + id(ct2Amps).state + id(ct3Amps).state + id(ct4Amps).state + id(ct5Amps).state + id(ct6Amps).state ;
-    accuracy_decimals: 2
-    unit_of_measurement: A
-    device_class: current
-    update_interval: ${update_time}
-#Total Watts
-############
-  - platform: template
-    name: ${friendly_name} Total Watts
-    id: totalWatts
-    lambda: return id(ct1Watts).state + id(ct2Watts).state + id(ct3Watts).state + id(ct4Watts).state + id(ct5Watts).state + id(ct6Watts).state ;
-    accuracy_decimals: 1
-    unit_of_measurement: W
-    device_class: power
-    update_interval: ${update_time}
 #kWh
 ####
   - platform: total_daily_energy
@@ -278,96 +134,3 @@ sensor:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
-
-# Status Fields
-###############
-text_sensor:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    phase_status:
-      phase_a:
-        name: "${ct1_name} Status"
-      phase_b:
-        name: "${ct2_name} Status"
-      phase_c:
-        name: "${ct3_name} Status"
-    frequency_status:
-      name: "Frequency Status 1"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    phase_status:
-      phase_a:
-        name: "${ct4_name} Status"
-      phase_b:
-        name: "${ct5_name} Status"
-      phase_c:
-        name: "${ct6_name} Status"
-#this is only needed if monitoring 2 voltages
-#   freq_status:
-#     name: "Frequency Status 2"
-
-# Semi-automatic Calibration Buttons
-####################################
-button:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    run_offset_calibration:
-      name: "1. Run ${main_meter_name1} Offset Calibration"
-    clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name1} Offset Calibration"
-    run_power_offset_calibration:
-      name: "2. Run ${main_meter_name1} Power Offset Calibration"
-    clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name1} Power Offset Calibration"
-    run_gain_calibration:
-      name: "3. Run ${main_meter_name1} Gain Calibration"
-    clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name1} Gain Calibration"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    run_offset_calibration:
-      name: "1. Run ${main_meter_name2} Offset Calibration"
-    clear_offset_calibration:
-      name: "z1. Clear ${main_meter_name2} Offset Calibration"
-    run_power_offset_calibration:
-      name: "2. Run ${main_meter_name2} Power Offset Calibration"
-    clear_power_offset_calibration:
-      name: "z2. Clear ${main_meter_name2} Power Offset Calibration"
-    run_gain_calibration:
-      name: "3. Run ${main_meter_name2} Gain Calibration"
-    clear_gain_calibration:
-      name: "z3. Clear ${main_meter_name2} Gain Calibration"
-
-# V & I Calibration Reference Fields
-####################################
-# Use these to input a known value being measured by a CT or voltage transformer
-number:
-  - platform: atm90e32
-    id: ${main_meter_id1}
-    reference_voltage:
-      # will copy to phase_b/c for calibration reference
-      phase_a:
-        name: "Ref Voltage 1"
-    reference_current:
-      phase_a:
-        name: "${ct1_name} Ref Current"
-      phase_b:
-        name: "${ct2_name} Ref Current"
-      phase_c:
-        name: "${ct3_name} Ref Current"
-
-  - platform: atm90e32
-    id: ${main_meter_id2}
-    reference_voltage:
-      # needed to calibrate voltage registers even if not output
-      phase_a:
-        name: "Ref Voltage 2" 
-    reference_current:
-      phase_a:
-        name: "${ct4_name} Ref Current"
-      phase_b:
-        name: "${ct5_name} Ref Current"
-      phase_c:
-        name: "${ct6_name} Ref Current"
