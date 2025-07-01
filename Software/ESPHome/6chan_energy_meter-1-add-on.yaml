@@ -86,6 +86,36 @@ esphome:
     name: circuitsetup.6c-energy-meter
     version: "1.5.2"
 
+packages:
+  remote_package:
+    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
+    ref: master
+    refresh: 1min
+    files:
+      - Software/ESPHome/6chan_common.yaml
+      - Software/ESPHome/addons/6chan_main_sensor.yaml
+      - Software/ESPHome/addons/6chan_addon1.yaml
+
+      # Additional power quality sensors per CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      - Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      - Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
+      
+      # Enables text status fields for each CT/Phase
+      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      - Software/ESPHome/status_fields/6chan_main_status.yaml
+      - Software/ESPHome/status_fields/6chan_addon1_status.yaml
+      
+      # Adds semi-automatic calibration buttons and reference fields 
+      # If enabled, make sure offset & gain calibration are set to "true" above
+      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      - Software/ESPHome/calibration/6chan_main_calibration.yaml
+      - Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      
+      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
+      - Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
+
 dashboard_import:
   package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter-1-add-on.yaml@master
   import_full_config: true
@@ -170,32 +200,3 @@ web_server:
     unit_of_measurement: kWh
     device_class: energy
     state_class: total_increasing
-
-packages:
-  remote_package:
-    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
-    ref: master
-    refresh: 1min
-    files:
-      - Software/ESPHome/6chan_common.yaml
-      - Software/ESPHome/addons/6chan_addon1.yaml
-
-      # Additional power quality sensors per CT/Phase
-      # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
-      - Software/ESPHome/power_quality/6chan_main_power_quality.yaml
-      - Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
-      
-      # Enables text status fields for each CT/Phase
-      # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
-      - Software/ESPHome/status_fields/6chan_main_status.yaml
-      - Software/ESPHome/status_fields/6chan_addon1_status.yaml
-      
-      # Adds semi-automatic calibration buttons and reference fields 
-      # If enabled, make sure offset & gain calibration are set to "true" above
-      # details: https://esphome.io/components/sensor/atm90e32.html#calibration
-      - Software/ESPHome/calibration/6chan_main_calibration.yaml
-      - Software/ESPHome/calibration/6chan_addon1_calibration.yaml
-      
-      # Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
-      - Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
-      - Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
