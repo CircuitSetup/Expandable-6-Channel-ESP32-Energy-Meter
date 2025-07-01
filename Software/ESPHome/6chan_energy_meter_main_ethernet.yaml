@@ -113,8 +113,8 @@ web_server:
 sensor:
 #kWh
   - platform: total_daily_energy
-    name: ${disp_name} Total kWh
-    power_id: totalWatts
+    name: ${friendly_name} Total kWh
+    power_id: totalWattsMain
     filters:
       - multiply: 0.001
     unit_of_measurement: kWh
