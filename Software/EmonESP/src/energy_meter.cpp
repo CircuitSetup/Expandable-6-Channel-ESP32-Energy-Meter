@@ -120,8 +120,14 @@ void energy_meter_loop()
   startMillis = currentMillis;
 
   /*Repeatedly fetch some values from the ATM90E32 */
+  #ifdef THREE_PHASE
+  float temp, freq, voltage1, voltage2, voltage3, voltageCT[NUM_INPUTS], currentCT[NUM_INPUTS],
+        realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
+  #else
   float temp, freq, voltage1, voltage2, voltageCT[NUM_INPUTS], currentCT[NUM_INPUTS],
         realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
+  #endif
+
 
   unsigned short sys0 = sensor_ic1[0].GetSysStatus0();  //EMMState0
   unsigned short sys1 = sensor_ic1[0].GetSysStatus1();  //EMMState1
@@ -140,15 +146,28 @@ void energy_meter_loop()
   delay(10);
 
   /* only 1 voltage channel is used on each IC */
+  /* modified for 3 phase voltage output */
+  #ifdef THREE_PHASE
+  voltage1 = sensor_ic1[0].GetLineVoltageA();
+  voltage2 = sensor_ic1[3].GetLineVoltageA();
+  voltage3 = sensor_ic1[5].GetLineVoltageA();
+  #else
   voltage1 = sensor_ic1[0].GetLineVoltageA();
   voltage2 = sensor_ic2[0].GetLineVoltageA();
+  #endif
 
   freq = sensor_ic1[0].GetFrequency();
   temp = sensor_ic1[0].GetTemperature();
 
   Serial.println("Temp:" + String(temp) + "C");
   Serial.println("Freq:" + String(freq) + "Hz");
+  
+  #ifdef THREE_PHASE
+   /* modified for 3 phase voltage output */
+  Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V   V3:" + String(voltage3) + "V");
+  #else
   Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V");
+  #endif
 
   strcpy(result, "temp:");
   dtostrf(temp, 2, 1, measurement);
@@ -165,6 +184,12 @@ void energy_meter_loop()
   strcat(result, ",V2:");
   dtostrf(voltage2, 2, 2, measurement);
   strcat(result, measurement);
+
+  #ifdef THREE_PHASE
+  strcat(result, ",V3:");
+  dtostrf(voltage3, 2, 2, measurement);
+  strcat(result, measurement);
+  #endif
 
   result_json += sprintf(result_json, "{\"temp\":%.1f,\"freq\":%.2f,\"sensors\":[", temp, freq);
 
@@ -231,7 +256,7 @@ void energy_meter_loop()
       /* apparent power is always positive */
       vaPowerCT[j] *= fabs(pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j]);
 
-      Serial.println("I" + String(i) + "_" + String(j) + ":" + String(currentCT[j]) + "A");
+      Serial.println("I" + String(i) + "_CT" + String(j+1) + ": " + String(currentCT[j]) + "A");
 
       if (i != 0 || j != 0)
       {

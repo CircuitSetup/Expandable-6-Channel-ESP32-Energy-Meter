@@ -542,7 +542,8 @@ void handleInput(AsyncWebServerRequest *request) {
     return;
   }
 
-  strcpy(input_string, request->arg("string").c_str());
+  strncpy(input_string, request->arg("string").c_str(), sizeof(input_string) - 1);
+  input_string[sizeof(input_string) - 1] = '\0'; // null-terminate for safety
 
   response->setCode(200);
   response->print(input_string);

@@ -38,8 +38,9 @@ boolean input_get(char * data)
 
   // If data from test API e.g `http://<IP-ADDRESS>/input?string=CT1:3935,CT2:325,T1:12.5,T2:16.9,T3:11.2,T4:34.7`
   if (strlen(input_string) > 0) {
-    strcpy(data, input_string);
-    strcpy(input_string, "");
+    strncpy(data, input_string, MAX_DATA_LEN - 1);
+    data[MAX_DATA_LEN - 1] = '\0'; // Ensure null-termination
+    input_string[0] = '\0';        // Clear buffer safely
     gotData = true;
   }
 #ifdef USE_SERIAL_INPUT
@@ -58,7 +59,8 @@ boolean input_get(char * data)
 
     if (strlen(data) > 0) {
 //      DBUGS.printf("Got '%s'\n", data.c_str());
-      strcpy(last_datastr, data);
+      strncpy(last_datastr, data, MAX_DATA_LEN - 1);
+      last_datastr[MAX_DATA_LEN - 1] = '\0';
     } else {
       gotData = false;
     }
