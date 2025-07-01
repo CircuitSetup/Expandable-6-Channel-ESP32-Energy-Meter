@@ -96,9 +96,10 @@ packages:
       - Software/ESPHome/meter_sensors/6chan_addon1.yaml
 
       # Additional power quality sensors per CT/Phase
+      # Uncomment to enable
       # details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
-      - Software/ESPHome/power_quality/6chan_main_power_quality.yaml
-      - Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
       
       # Enables text status fields for each CT/Phase
       # details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
