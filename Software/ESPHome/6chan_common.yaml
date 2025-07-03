@@ -45,6 +45,11 @@ sensor:
     cpu_frequency:
       name: "CPU Frequency"
 
+  - platform: uptime
+    name: Uptime
+    id: uptime_sensor
+    entity_category: diagnostic
+
 text_sensor:
   - platform: debug
     device:
@@ -52,9 +57,11 @@ text_sensor:
     reset_reason:
       name: "Reset Reason"
 
-switch:
+button:
   - platform: restart
-    name: ${disp_name} Restart
+    name: Restart
+    id: restart_button
+    entity_category: config
 
 time:
   - platform: homeassistant
