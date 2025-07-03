@@ -11,7 +11,7 @@ esp32:
 logger:
 
 debug:
-  update_interval: 5s
+  update_interval: 10s
   
 spi:
   clk_pin: 18
@@ -38,12 +38,12 @@ sensor:
   - platform: debug
     free:
       name: "Heap Free"
-    block:
-      name: "Heap Max Block"
+      id: heap_free_sensor
+      entity_category: diagnostic
     loop_time:
       name: "Loop Time"
-    cpu_frequency:
-      name: "CPU Frequency"
+      id: loop_time_sensor
+      entity_category: diagnostic
 
   - platform: uptime
     name: Uptime
@@ -52,10 +52,10 @@ sensor:
 
 text_sensor:
   - platform: debug
-    device:
-      name: "Device Info"
     reset_reason:
       name: "Reset Reason"
+      id: reset_reason_sensor
+      entity_category: diagnostic
 
 button:
   - platform: restart
