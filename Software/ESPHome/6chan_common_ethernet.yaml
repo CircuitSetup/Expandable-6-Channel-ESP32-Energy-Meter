@@ -29,6 +29,22 @@ spi:
   clk_pin: 7
   miso_pin: 5
   mosi_pin: 6
+  
+sensor:
+  - platform: debug
+    free:
+      name: "Heap Free"
+    block:
+      name: "Heap Max Block"
+    loop_time:
+      name: "Loop Time"
+    cpu_frequency:
+      name: "CPU Frequency"
+
+  - platform: uptime
+    name: Uptime
+    id: uptime_sensor
+    entity_category: diagnostic
 
 text_sensor:
   - platform: debug
@@ -37,9 +53,11 @@ text_sensor:
     reset_reason:
       name: "Reset Reason"
 
-switch:
+button:
   - platform: restart
-    name: ${disp_name} Restart
+    name: Restart
+    id: restart_button
+    entity_category: config
 
 time:
   - platform: homeassistant
