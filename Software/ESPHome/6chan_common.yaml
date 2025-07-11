@@ -6,8 +6,8 @@ esphome:
   name_add_mac_suffix: true
   min_version: '2025.7.0'
   project:
-    name: ${project_dev.name}
-    version: ${project_dev.version}
+    name: ${project_var.name}
+    version: ${project_var.version}
 
 esp32:
   board: nodemcu-32s
