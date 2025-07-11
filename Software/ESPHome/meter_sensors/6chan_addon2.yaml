@@ -6,6 +6,7 @@ sensor:
 ############
   - platform: atm90e32
     cs_pin: 27
+    release_device: true
     id: ${addon2_id1}
     phase_a:
       current:
@@ -42,6 +43,7 @@ sensor:
 #IC2 AddOn 2
 ############
   - platform: atm90e32
+    release_device: true
     cs_pin: 17
     id: ${addon2_id2}
     phase_a:
