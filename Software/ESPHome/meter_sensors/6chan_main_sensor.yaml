@@ -2,6 +2,7 @@ sensor:
 # Main IC1
 #########
   - platform: atm90e32
+    release_device: true
     cs_pin: 5
     id: ${main_meter_id1}
     phase_a:
@@ -53,6 +54,7 @@ sensor:
 # Main IC2
 ##########
   - platform: atm90e32
+    release_device: true
     cs_pin: 4
     id: ${main_meter_id2}
     phase_a:
