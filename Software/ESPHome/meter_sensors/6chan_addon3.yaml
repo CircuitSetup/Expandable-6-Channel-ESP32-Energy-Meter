@@ -11,13 +11,13 @@ sensor:
     id: ${addon3_id1}
     phase_a:
       current:
-        name: ${ct25_name} Amps
-        id: ct25Amps
+        name: ${ct19_name} Amps
+        id: ct19Amps
       power:
-        name: ${ct25_name} Watts
-        id: ct25Watts
+        name: ${ct19_name} Watts
+        id: ct19Watts
       gain_voltage: ${voltage_cal1}
-      gain_ct: ${current_cal_ct25}
+      gain_ct: ${current_cal_ct19}
     phase_b:
       current:
         name: ${ct20_name} Amps
@@ -84,7 +84,7 @@ sensor:
   - platform: template
     name: ${friendly_name} Total Amps Add-on3
     id: totalAmpsAddOn3
-    lambda: return id(ct25Amps).state + id(ct20Amps).state + id(ct21Amps).state + id(ct22Amps).state + id(ct23Amps).state + id(ct24Amps).state ;
+    lambda: return id(ct19Amps).state + id(ct20Amps).state + id(ct21Amps).state + id(ct22Amps).state + id(ct23Amps).state + id(ct24Amps).state ;
     accuracy_decimals: 2
     unit_of_measurement: A
     device_class: current
@@ -94,7 +94,7 @@ sensor:
   - platform: template
     name: ${friendly_name} Total Watts Add-on3
     id: totalWattsAddOn3
-    lambda: return id(ct25Watts).state + id(ct20Watts).state + id(ct21Watts).state + id(ct22Watts).state + id(ct23Watts).state + id(ct24Watts).state ;
+    lambda: return id(ct19Watts).state + id(ct20Watts).state + id(ct21Watts).state + id(ct22Watts).state + id(ct23Watts).state + id(ct24Watts).state ;
     accuracy_decimals: 2
     unit_of_measurement: W
     device_class: power
