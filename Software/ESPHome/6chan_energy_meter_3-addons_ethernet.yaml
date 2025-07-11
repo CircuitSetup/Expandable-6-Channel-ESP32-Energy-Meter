@@ -49,12 +49,12 @@ substitutions:
   addon3_name2: Addon3 22-24
   addon3_id1: addon3_1
   addon3_id2: addon3_2
-  ct13_name: CT19
-  ct14_name: CT20
-  ct15_name: CT21
-  ct16_name: CT22
-  ct17_name: CT23
-  ct18_name: CT24
+  ct19_name: CT19
+  ct20_name: CT20
+  ct21_name: CT21
+  ct22_name: CT22
+  ct23_name: CT23
+  ct24_name: CT24
 
 ## Semi-Automatic Calibration ##
 # See https://esphome.io/components/sensor/atm90e32.html#calibration
