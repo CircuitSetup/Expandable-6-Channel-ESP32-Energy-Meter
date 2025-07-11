@@ -1,5 +1,14 @@
 # CircuitSetup 6 Channel Energy Meter ESPHome common variables
 
+esphome:
+  name: ${disp_name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: true
+  min_version: '2025.7.0'
+  project:
+    name: ${project_dev.name}
+    version: ${project_dev.version}
+
 esp32:
   board: nodemcu-32s
   cpu_frequency: 240MHz
