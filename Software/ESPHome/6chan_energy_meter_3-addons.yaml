@@ -268,3 +268,8 @@ sensor:
   unit_of_measurement: kWh
   device_class: energy
   state_class: total_increasing
+
+esphome:
+  platformio_options:
+    build_flags:
+      - -Wl,--wrap=esp_panic_handler
