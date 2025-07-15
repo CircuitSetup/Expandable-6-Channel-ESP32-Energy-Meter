@@ -5,8 +5,6 @@ substitutions:
 # Change the disp_name to something you want
   disp_name: energy-meter
   friendly_name: CircuitSetup Energy Meter 24x
-  project_name: circuitsetup.6c-energy-meter-3-addons
-  project_version: "1.7"
 # Interval of how often the power data is updated
   update_time: 10s
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
