@@ -115,6 +115,15 @@ substitutions:
   voltage_cal1: '7305'
   voltage_cal2: '7305'
 
+esphome:
+  name: ${disp_name}
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: '2025.7.0'
+  project:
+    name: circuitsetup.6c-energy-meter-3-addons
+    version: "1.7"
+
 packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
