@@ -4,7 +4,7 @@
 substitutions:
 # Change the disp_name to something you want
   disp_name: energy-meter
-  friendly_name: "CircuitSetup Energy Meter 24x"
+  friendly_name: CircuitSetup Energy Meter 24x
 # Interval of how often the power data is updated
   update_time: 10s
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
@@ -117,16 +117,16 @@ esphome:
   name: ${disp_name}
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-  min_version: '2025.5.0'
+  min_version: '2025.7.0'
   project:
     name: circuitsetup.6c-energy-meter-3-addons
-    version: "1.6"
+    version: "1.7"
 
 packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
-    ref: master
-    refresh: 1d
+    ref: dev
+    refresh: 1min
     files:
       - Software/ESPHome/6chan_common.yaml
       - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
@@ -168,7 +168,7 @@ packages:
       #- Software/ESPHome/calibration/6chan_addon3_offset_calibrations.yaml
 
 dashboard_import:
-  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_3-addons.yaml@master
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_3-addons.yaml@dev
   import_full_config: true
 
 # Enable Home Assistant API

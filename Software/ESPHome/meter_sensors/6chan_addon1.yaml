@@ -5,6 +5,7 @@ sensor:
 #IC1 AddOn 1
 ############
   - platform: atm90e32
+    release_device: true
     cs_pin: 0
     id: ${addon1_id1}
     phase_a:
@@ -30,7 +31,7 @@ sensor:
         name: ${ct9_name} Amps
         id: ct9Amps
       power:
-        name: ${ct9_name} CT9 Watts
+        name: ${ct9_name} Watts
         id: ct9Watts
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct9}
@@ -42,6 +43,7 @@ sensor:
 #IC2 AddOn 1
 ############
   - platform: atm90e32
+    release_device: true
     cs_pin: 16
     id: ${addon1_id2}
     phase_a:

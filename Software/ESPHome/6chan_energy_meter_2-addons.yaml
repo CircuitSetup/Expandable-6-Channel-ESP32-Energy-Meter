@@ -99,10 +99,10 @@ esphome:
   name: ${disp_name}
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-  min_version: '2025.5.0'
+  min_version: '2025.7.0'
   project:
     name: circuitsetup.6c-energy-meter-2-addons
-    version: "1.6"
+    version: "1.7"
 
 packages:
   remote_package:

@@ -31,7 +31,7 @@ sensor:
         name: ${ct27_name} Amps
         id: ct27Amps
       power:
-        name: ${ct27_name} ct27 Watts
+        name: ${ct27_name} Watts
         id: ct27Watts
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct27}
