@@ -66,7 +66,7 @@ esphome:
     board_build.flash_mode: dio
   project:
     name: circuitsetup.6c-energy-meter-ethernet
-    version: "1.6"
+    version: "1.7"
 
 packages:
   remote_package:
@@ -91,7 +91,6 @@ packages:
       ## details: https://esphome.io/components/sensor/atm90e32.html#calibration
       - Software/ESPHome/calibration/6chan_main_calibration.yaml
       
-      ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
       ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
       ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
       ## should not be registering anything.

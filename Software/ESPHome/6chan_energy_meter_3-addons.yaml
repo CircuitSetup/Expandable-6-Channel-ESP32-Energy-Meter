@@ -125,7 +125,7 @@ esphome:
 packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
-    ref: dev
+    ref: master
     refresh: 1d
     files:
       - Software/ESPHome/6chan_common.yaml

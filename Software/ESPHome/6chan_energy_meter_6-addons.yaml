@@ -1,11 +1,10 @@
-# CircuitSetup 6 Channel Energy Meter Main Board + 1 Add-on Board config
-# Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
+# CircuitSetup 6 Channel Energy Meter Main Board + 6 Add-on Boards config
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
 # Change the disp_name to something you want
   disp_name: energy-meter
-  friendly_name: "CircuitSetup Energy Meter 12x"
+  friendly_name: CircuitSetup Energy Meter 42x
 # Interval of how often the power data is updated
   update_time: 10s
 # Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
@@ -34,7 +33,62 @@ substitutions:
   ct10_name: CT10
   ct11_name: CT11
   ct12_name: CT12
-  
+## Addon2
+  addon2_name1: Addon2 13-15
+  addon2_name2: Addon2 16-18
+  addon2_id1: addon2_1
+  addon2_id2: addon2_2
+  ct13_name: CT13
+  ct14_name: CT14
+  ct15_name: CT15
+  ct16_name: CT16
+  ct17_name: CT17
+  ct18_name: CT18
+## Addon3
+  addon3_name1: Addon3 19-21
+  addon3_name2: Addon3 22-24
+  addon3_id1: addon3_1
+  addon3_id2: addon3_2
+  ct19_name: CT19
+  ct20_name: CT20
+  ct21_name: CT21
+  ct22_name: CT22
+  ct23_name: CT23
+  ct24_name: CT24
+## Addon4
+  addon4_name1: Addon4 25-27
+  addon4_name2: Addon4 28-30
+  addon4_id1: addon4_1
+  addon4_id2: addon4_2
+  ct25_name: CT25
+  ct26_name: CT26
+  ct27_name: CT27
+  ct28_name: CT28
+  ct29_name: CT29
+  ct30_name: CT30
+## Addon5
+  addon5_name1: Addon5 31-33
+  addon5_name2: Addon5 34-36
+  addon5_id1: addon5_1
+  addon5_id2: addon5_2
+  ct31_name: CT31
+  ct32_name: CT32
+  ct33_name: CT33
+  ct34_name: CT34
+  ct35_name: CT35
+  ct36_name: CT36
+## Addon6
+  addon6_name1: Addon6 37-39
+  addon6_name2: Addon6 40-42
+  addon6_id1: addon6_1
+  addon6_id2: addon6_2
+  ct37_name: CT37
+  ct38_name: CT38
+  ct39_name: CT39
+  ct40_name: CT40
+  ct41_name: CT41
+  ct42_name: CT42
+
 ## Semi-Automatic Calibration ##
 # See https://esphome.io/components/sensor/atm90e32.html#calibration
 # WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
@@ -73,6 +127,41 @@ substitutions:
   current_cal_ct10: '27518'
   current_cal_ct11: '27518'
   current_cal_ct12: '27518'
+## Addon2
+  current_cal_ct13: '27518'
+  current_cal_ct14: '27518'
+  current_cal_ct15: '27518'
+  current_cal_ct16: '27518'
+  current_cal_ct17: '27518'
+  current_cal_ct18: '27518'
+## Addon3
+  current_cal_ct19: '27518'
+  current_cal_ct20: '27518'
+  current_cal_ct21: '27518'
+  current_cal_ct22: '27518'
+  current_cal_ct23: '27518'
+  current_cal_ct24: '27518'
+## Addon4
+  current_cal_ct25: '27518'
+  current_cal_ct26: '27518'
+  current_cal_ct27: '27518'
+  current_cal_ct28: '27518'
+  current_cal_ct29: '27518'
+  current_cal_ct30: '27518'
+## Addon4
+  current_cal_ct31: '27518'
+  current_cal_ct32: '27518'
+  current_cal_ct33: '27518'
+  current_cal_ct34: '27518'
+  current_cal_ct35: '27518'
+  current_cal_ct36: '27518'
+## Addon4
+  current_cal_ct37: '27518'
+  current_cal_ct38: '27518'
+  current_cal_ct39: '27518'
+  current_cal_ct40: '27518'
+  current_cal_ct41: '27518'
+  current_cal_ct42: '27518'
 # This only needs to be changed if you're using something other than the  
 # Jameco 9VAC Transformer: 
   voltage_cal1: '7305'
@@ -82,11 +171,9 @@ esphome:
   name: ${disp_name}
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-  min_version: '2025.5.0'
-  platformio_options:
-    board_build.flash_mode: dio
+  min_version: '2025.7.0'
   project:
-    name: circuitsetup.6c-energy-meter-1-addon-ethernet
+    name: circuitsetup.6c-energy-meter-6-addons
     version: "1.7"
 
 packages:
@@ -95,35 +182,62 @@ packages:
     ref: master
     refresh: 1d
     files:
-      - Software/ESPHome/6chan_common_ethernet.yaml
+      - Software/ESPHome/6chan_common.yaml
       - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
       - Software/ESPHome/meter_sensors/6chan_addon1.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon2.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon3.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon4.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon5.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon6.yaml
 
       ## Additional power quality sensors per CT/Phase
       ## Uncomment to enable
-      ## details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
       #- Software/ESPHome/power_quality/6chan_main_power_quality.yaml
       #- Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon2_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon3_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon4_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon5_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon6_power_quality.yaml
       
       ## Enables text status fields for each CT/Phase
-      ## details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      ## Uncomment to enable
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
       - Software/ESPHome/status_fields/6chan_main_status.yaml
       #- Software/ESPHome/status_fields/6chan_addon1_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon2_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon3_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon4_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon5_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon6_status.yaml
       
       ## Adds semi-automatic calibration buttons and reference fields 
       ## If enabled, make sure offset & gain calibration are set to "true" above
-      ## details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      ## Uncomment to enable
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#calibration
       - Software/ESPHome/calibration/6chan_main_calibration.yaml
       #- Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon2_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon3_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon4_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon5_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon6_calibration.yaml
       
       ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
       ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
       ## should not be registering anything.
       #- Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
       #- Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon2_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon3_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon4_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon5_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon6_offset_calibrations.yaml
 
 dashboard_import:
-  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_1-addon_ethernet.yaml@master
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_6-addons.yaml@master
   import_full_config: true
 
 # Enable Home Assistant API
@@ -137,20 +251,26 @@ api:
 ota:
   - platform: esphome
 
+# Set up a wifi access point
+wifi:
+  ap:
+
+# In combination with the `ap` this allows 
+# provisioning wifi credentials to the device.
+captive_portal:
+
+# Sets up Bluetooth LE to provision wifi credentials 
+# to the device.
+esp32_improv:
+  authorizer: none
+
+# Sets up the improv via serial client for wifi provisioning
+improv_serial:
+
 web_server:
   port: 80
 
 sensor:
-# CS Pin mappings for Lilygo T-ETH-Lite ESP32S3
-- id: !extend ${main_meter_id1}
-  cs_pin: 8
-#- id: !extend ${main_meter_id2}
-#  cs_pin: 4
-#- id: !extend ${addon1_id1}
-#  cs_pin: 0
-#- id: !extend ${addon1_id2}
-#  cs_pin: 16
-
 ## The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
 ## divide the current_cal_ctx (above) by 2 (120A CT) or 4 (200A CT) and multiply the current and power values 
 ## by 2 or 4, uncommenting the below and changing the id and phase_x accordingly
@@ -182,13 +302,33 @@ sensor:
   internal: true
 - id: !extend totalWattsAddOn1
   internal: true
+- id: !extend totalAmpsAddOn2
+  internal: true
+- id: !extend totalWattsAddOn2
+  internal: true
+- id: !extend totalAmpsAddOn3
+  internal: true
+- id: !extend totalWattsAddOn3
+  internal: true
+- id: !extend totalAmpsAddOn4
+  internal: true
+- id: !extend totalWattsAddOn4
+  internal: true
+- id: !extend totalAmpsAddOn5
+  internal: true
+- id: !extend totalWattsAddOn5
+  internal: true
+- id: !extend totalAmpsAddOn6
+  internal: true
+- id: !extend totalWattsAddOn6
+  internal: true
 
 #Total Amps
 ###########
 - platform: template
   name: ${friendly_name} Total Amps
   id: totalAmps
-  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state ;
+  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state + id(totalAmpsAddOn2).state + id(totalAmpsAddOn3).state + id(totalAmpsAddOn4).state  + id(totalAmpsAddOn6).state;
   accuracy_decimals: 2
   unit_of_measurement: A
   device_class: current
@@ -199,7 +339,7 @@ sensor:
 - platform: template
   name: ${friendly_name} Total Watts
   id: totalWatts
-  lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state ;
+  lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state + id(totalWattsAddOn2).state + id(totalWattsAddOn3).state + id(totalWattsAddOn4).state + id(totalWattsAddOn5).state + id(totalWattsAddOn6).state;
   accuracy_decimals: 1
   unit_of_measurement: W
   device_class: power

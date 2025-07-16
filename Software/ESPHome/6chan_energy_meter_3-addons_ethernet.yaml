@@ -1,4 +1,5 @@
 # CircuitSetup 6 Channel Energy Meter Main Board + 3 Add-on Boards config
+# Uses the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
@@ -119,8 +120,8 @@ esphome:
   name_add_mac_suffix: true
   min_version: '2025.5.0'
   project:
-    name: circuitsetup.6c-energy-meter-3-addons
-    version: "1.6"
+    name: circuitsetup.6c-energy-meter-3-addons-ethernet
+    version: "1.7"
 
 packages:
   remote_package:
