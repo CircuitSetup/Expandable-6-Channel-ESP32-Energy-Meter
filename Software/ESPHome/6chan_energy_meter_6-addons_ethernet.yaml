@@ -149,14 +149,14 @@ substitutions:
   current_cal_ct28: '27518'
   current_cal_ct29: '27518'
   current_cal_ct30: '27518'
-## Addon4
+## Addon5
   current_cal_ct31: '27518'
   current_cal_ct32: '27518'
   current_cal_ct33: '27518'
   current_cal_ct34: '27518'
   current_cal_ct35: '27518'
   current_cal_ct36: '27518'
-## Addon4
+## Addon6
   current_cal_ct37: '27518'
   current_cal_ct38: '27518'
   current_cal_ct39: '27518'
@@ -343,7 +343,7 @@ sensor:
 - platform: template
   name: ${friendly_name} Total Amps
   id: totalAmps
-  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state + id(totalAmpsAddOn2).state + id(totalAmpsAddOn3).state + id(totalAmpsAddOn4).state  + id(totalAmpsAddOn6).state;
+  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state + id(totalAmpsAddOn2).state + id(totalAmpsAddOn3).state + id(totalAmpsAddOn4).state + id(totalAmpsAddOn5).state + id(totalAmpsAddOn6).state;
   accuracy_decimals: 2
   unit_of_measurement: A
   device_class: current
