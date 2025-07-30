@@ -63,7 +63,7 @@ esphome:
   min_version: '2025.5.0'
   project:
     name: circuitsetup.6c-energy-meter
-    version: "1.6"
+    version: "1.7"
 
 packages:
   remote_package:
@@ -89,6 +89,8 @@ packages:
       - Software/ESPHome/calibration/6chan_main_calibration.yaml
       
       ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
+      ## should not be registering anything.
       #- Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
 
 dashboard_import:

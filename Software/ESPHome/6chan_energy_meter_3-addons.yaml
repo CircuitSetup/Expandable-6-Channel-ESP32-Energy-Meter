@@ -125,8 +125,8 @@ esphome:
 packages:
   remote_package:
     url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
-    ref: dev
-    refresh: 1min
+    ref: master
+    refresh: 1d
     files:
       - Software/ESPHome/6chan_common.yaml
       - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
@@ -168,7 +168,7 @@ packages:
       #- Software/ESPHome/calibration/6chan_addon3_offset_calibrations.yaml
 
 dashboard_import:
-  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_3-addons.yaml@dev
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_3-addons.yaml@master
   import_full_config: true
 
 # Enable Home Assistant API
