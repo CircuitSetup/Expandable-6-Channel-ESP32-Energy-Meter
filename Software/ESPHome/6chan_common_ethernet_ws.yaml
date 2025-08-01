@@ -1,0 +1,64 @@
+# CircuitSetup 6 Channel Energy Meter ESPHome common variables
+# using the Lilygo T-ETH-Lite ESP32S3 and the CircuitSetup 6 Channel Energy Meter Ethernet Adapter 
+
+esp32:
+  board: esp32-s3-devkitc-1
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: DEBUG
+
+debug:
+  update_interval: 5s
+
+ethernet:
+  type: W5500
+  clk_pin: 13
+  mosi_pin: 11
+  miso_pin: 12
+  cs_pin: 14
+  interrupt_pin: 10
+  reset_pin: 9
+  clock_speed: 30Mhz
+
+spi:
+  interface: software
+  clk_pin: 36
+  miso_pin: 37
+  mosi_pin: 35
+
+sensor:
+  - platform: debug
+    free:
+      name: "Heap Free"
+      id: heap_free_sensor
+      entity_category: diagnostic
+    loop_time:
+      name: "Loop Time"
+      id: loop_time_sensor
+      entity_category: diagnostic
+
+  - platform: uptime
+    name: Uptime
+    id: uptime_sensor
+    entity_category: diagnostic
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: "Reset Reason"
+      id: reset_reason_sensor
+      entity_category: diagnostic
+
+button:
+  - platform: restart
+    name: Restart
+    id: restart_button
+    entity_category: config
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
