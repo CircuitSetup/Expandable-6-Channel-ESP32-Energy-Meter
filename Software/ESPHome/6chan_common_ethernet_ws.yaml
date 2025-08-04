@@ -3,6 +3,8 @@
 
 esp32:
   board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
   cpu_frequency: 240MHz
   framework:
     type: esp-idf
