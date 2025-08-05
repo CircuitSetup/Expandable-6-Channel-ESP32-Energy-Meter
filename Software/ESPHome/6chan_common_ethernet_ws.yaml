@@ -28,9 +28,9 @@ ethernet:
 
 spi:
   interface: software
-  clk_pin: 36
-  miso_pin: 37
-  mosi_pin: 35
+  clk_pin: 44
+  miso_pin: 45
+  mosi_pin: 43
 
 sensor:
   - platform: debug
