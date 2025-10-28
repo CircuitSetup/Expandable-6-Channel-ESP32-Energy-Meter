@@ -33,13 +33,13 @@
 #ifdef ESP32
 #include <SPIFFS.h>
 #include <WiFi.h>
-#include <AsyncTCP.h>  //https://github.com/me-no-dev/AsyncTCP
+#include <AsyncTCP.h>  //https://github.com/ESP32ASync/AsyncTCP
 #elif defined(ESP8266)
 #include <Hash.h>
 #include <ESP8266WiFi.h>
 #include <ESPAsyncTCP.h>
 #endif
-#include <ESPAsyncWebServer.h> //https://github.com/me-no-dev/ESPAsyncWebServer
+#include <ESPAsyncWebServer.h> //https://github.com/ESP32Async/ESPAsyncWebServer
 
 
 extern AsyncWebServer server;
