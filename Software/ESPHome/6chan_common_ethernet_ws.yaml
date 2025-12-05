@@ -11,6 +11,7 @@ esp32:
 
 # Enable logging
 logger:
+  hardware_uart: UART0
   level: DEBUG
 
 debug:
