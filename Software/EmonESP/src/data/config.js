@@ -194,11 +194,14 @@ function LastValuesViewModel() {
         var namevalue = namevaluepairs[z].split(":");
         var units = "";
         if (namevalue[0].indexOf("CT") === 0) units = "A";
-		if (namevalue[0].indexOf("totI") === 0) units = "A";
-		if (namevalue[0].indexOf("V") === 0) units = "V";
-		if (namevalue[0].indexOf("W") === 0) units = "W";
-		if (namevalue[0].indexOf("AW") === 0) units = "W";
+        if (namevalue[0].indexOf("totI") === 0) units = "A";
+        if (namevalue[0].indexOf("V") === 0) units = "V";
+        if (namevalue[0].indexOf("VA") === 0) units = "VA";
+        if (namevalue[0].indexOf("W") === 0) units = "W";
+        if (namevalue[0].indexOf("AW") === 0) units = "W";
         if (namevalue[0].indexOf("T") === 0) units = String.fromCharCode(176)+"C";
+        if (namevalue[0].indexOf("temp") === 0) units = String.fromCharCode(176)+"C";
+        if (namevalue[0].indexOf("freq") === 0) units = "Hz";
         vals.push({key: namevalue[0], value: namevalue[1]+units});
       }
       ko.mapping.fromJS(vals, self.values);
@@ -327,7 +330,7 @@ function EmonEspViewModel() {
   self.saveEmonCmsFetching = ko.observable(false);
   self.saveEmonCmsSuccess = ko.observable(false);
   self.saveEmonCms = function () {
-    var emoncms = { 
+    var emoncms = {
       server: self.config.emoncms_server(),
       path: self.config.emoncms_path(),
       apikey: self.config.emoncms_apikey(),
