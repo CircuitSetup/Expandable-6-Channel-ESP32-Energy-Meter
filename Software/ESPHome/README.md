@@ -4,6 +4,12 @@ This folder contains [ESPHome](https://esphome.io) configuration files used to m
 
 ---
 
+## Compiled Firmware
+
+[See here to flash your ESP32](https://circuitsetup.github.io/ESPWebInstaller/)
+
+---
+
 ## 📁 Base Config Files
 
 | File | Description |
@@ -136,8 +142,18 @@ Under `sensor:` add:
 ```
 ---
 
-## Including Files Locally
+## Changing Default CS Pins
+If you've changed the jumpers on add-on board(s) from the default, they can be changed by adding the following to your main config:
+```
+- id: !extend ${addon1_id1} #1st add-on, CTs 1-3
+  cs_pin: 16 #change to match physical jumper position
 
+- id: !extend ${addon2_id2} #2nd add-on, CTs 4-6
+  cs_pin: 27
+```
+---
+
+## Including Files Locally
 You can copy config files to your local directories and change the `packages:` part of your config to something like this:
 ```
 packages:
@@ -148,6 +164,3 @@ packages:
 ```
 ---
 
-## Compiled Firmware
-
-[See here to flash your ESP32](https://circuitsetup.github.io/ESPWebInstaller/)
