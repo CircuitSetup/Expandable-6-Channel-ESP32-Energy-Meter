@@ -107,6 +107,16 @@ bool requestPreProcess(AsyncWebServerRequest *request, AsyncResponseStream *&res
 {
   dumpRequest(request);
 
+  if (request->method() == HTTP_OPTIONS) {
+    AsyncResponseStream *optionsResponse = request->beginResponseStream(F("text/plain"));
+    optionsResponse->addHeader(F("Access-Control-Allow-Origin"), F("*"));
+    optionsResponse->addHeader(F("Access-Control-Allow-Methods"), F("GET, POST, PUT, DELETE, OPTIONS"));
+    optionsResponse->addHeader(F("Access-Control-Allow-Headers"), F("Content-Type, Authorization"));
+    optionsResponse->setCode(204);
+    request->send(optionsResponse);
+    return false;
+  }
+
   if (wifi_mode_is_sta() && www_username != "" &&
       false == request->authenticate(www_username.c_str(), www_password.c_str())) {
     request->requestAuthentication(esp_hostname);
@@ -721,6 +731,10 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient *client, AwsEventTy
 void web_server_setup()
 {
   SPIFFS.begin(); // mount the fs
+
+  DefaultHeaders::Instance().addHeader(F("Access-Control-Allow-Origin"), F("*"));
+  DefaultHeaders::Instance().addHeader(F("Access-Control-Allow-Headers"), F("Content-Type, Authorization"));
+  DefaultHeaders::Instance().addHeader(F("Access-Control-Allow-Methods"), F("GET, POST, PUT, DELETE, OPTIONS"));
 
   // Add the Web Socket server
   ws.onEvent(onWsEvent);
