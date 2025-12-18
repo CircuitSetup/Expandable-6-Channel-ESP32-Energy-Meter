@@ -94,12 +94,7 @@ void startAP() {
   WiFi.softAPConfig(apIP, apIP, netMsk);
 
   // Create Unique SSID e.g "emonESP_XXXXXX"
-  String softAP_ssid_ID =
-#ifdef ESP32
-    String(softAP_ssid) + "_" + String((uint32_t)ESP.getEfuseMac());
-#else
-    String(softAP_ssid) + "_" + String(ESP.getChipId());
-#endif
+  String softAP_ssid_ID = String(softAP_ssid) + "_" + String((uint32_t)ESP.getEfuseMac());
 
   // Pick a random channel out of 1, 6 or 11
   int channel = (random(3) * 5) + 1;
@@ -139,11 +134,7 @@ void startClient() {
   delay(100);
   WiFi.begin(esid.c_str(), epass.c_str());
   WiFi.waitForConnectResult(); //yields until wifi connects or not
-#ifdef ESP32
   WiFi.setHostname(esp_hostname);
-#else
-  WiFi.hostname(esp_hostname);
-#endif
 
   delay(50);
 }
@@ -159,8 +150,6 @@ static void wifi_start()
     startClient();
   }
 }
-
-#ifdef ESP32
 
 void WiFiEvent(WiFiEvent_t event)
 {
@@ -244,62 +233,6 @@ void WiFiEvent(WiFiEvent_t event)
   }
 }
 
-#else //ESP8266
-void wifi_onStationModeGotIP(const WiFiEventStationModeGotIP &event)
-{
-  IPAddress myAddress = WiFi.localIP();
-  char tmpStr[40];
-  sprintf(tmpStr, "%d.%d.%d.%d", myAddress[0], myAddress[1], myAddress[2], myAddress[3]);
-  ipaddress = tmpStr;
-  DBUGS.print("Connected, IP: ");
-  DBUGS.println(tmpStr);
-
-  // Copy the connected network and ipaddress to global strings for use in status request
-  connected_network = esid;
-
-  // Clear any error state
-  client_disconnects = 0;
-  client_retry = false;
-}
-
-void wifi_onStationModeDisconnected(const WiFiEventStationModeDisconnected &event)
-{
-  DBUGF("WiFi disconnected: %s",
-        WIFI_DISCONNECT_REASON_UNSPECIFIED == event.reason ? "WIFI_DISCONNECT_REASON_UNSPECIFIED" :
-        WIFI_DISCONNECT_REASON_AUTH_EXPIRE == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_EXPIRE" :
-        WIFI_DISCONNECT_REASON_AUTH_LEAVE == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_LEAVE" :
-        WIFI_DISCONNECT_REASON_ASSOC_EXPIRE == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_EXPIRE" :
-        WIFI_DISCONNECT_REASON_ASSOC_TOOMANY == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_TOOMANY" :
-        WIFI_DISCONNECT_REASON_NOT_AUTHED == event.reason ? "WIFI_DISCONNECT_REASON_NOT_AUTHED" :
-        WIFI_DISCONNECT_REASON_NOT_ASSOCED == event.reason ? "WIFI_DISCONNECT_REASON_NOT_ASSOCED" :
-        WIFI_DISCONNECT_REASON_ASSOC_LEAVE == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_LEAVE" :
-        WIFI_DISCONNECT_REASON_ASSOC_NOT_AUTHED == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_NOT_AUTHED" :
-        WIFI_DISCONNECT_REASON_DISASSOC_PWRCAP_BAD == event.reason ? "WIFI_DISCONNECT_REASON_DISASSOC_PWRCAP_BAD" :
-        WIFI_DISCONNECT_REASON_DISASSOC_SUPCHAN_BAD == event.reason ? "WIFI_DISCONNECT_REASON_DISASSOC_SUPCHAN_BAD" :
-        WIFI_DISCONNECT_REASON_IE_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_IE_INVALID" :
-        WIFI_DISCONNECT_REASON_MIC_FAILURE == event.reason ? "WIFI_DISCONNECT_REASON_MIC_FAILURE" :
-        WIFI_DISCONNECT_REASON_4WAY_HANDSHAKE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_4WAY_HANDSHAKE_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_GROUP_KEY_UPDATE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_GROUP_KEY_UPDATE_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_IE_IN_4WAY_DIFFERS == event.reason ? "WIFI_DISCONNECT_REASON_IE_IN_4WAY_DIFFERS" :
-        WIFI_DISCONNECT_REASON_GROUP_CIPHER_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_GROUP_CIPHER_INVALID" :
-        WIFI_DISCONNECT_REASON_PAIRWISE_CIPHER_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_PAIRWISE_CIPHER_INVALID" :
-        WIFI_DISCONNECT_REASON_AKMP_INVALID == event.reason ? "WIFI_DISCONNECT_REASON_AKMP_INVALID" :
-        WIFI_DISCONNECT_REASON_UNSUPP_RSN_IE_VERSION == event.reason ? "WIFI_DISCONNECT_REASON_UNSUPP_RSN_IE_VERSION" :
-        WIFI_DISCONNECT_REASON_INVALID_RSN_IE_CAP == event.reason ? "WIFI_DISCONNECT_REASON_INVALID_RSN_IE_CAP" :
-        WIFI_DISCONNECT_REASON_802_1X_AUTH_FAILED == event.reason ? "WIFI_DISCONNECT_REASON_802_1X_AUTH_FAILED" :
-        WIFI_DISCONNECT_REASON_CIPHER_SUITE_REJECTED == event.reason ? "WIFI_DISCONNECT_REASON_CIPHER_SUITE_REJECTED" :
-        WIFI_DISCONNECT_REASON_BEACON_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_BEACON_TIMEOUT" :
-        WIFI_DISCONNECT_REASON_NO_AP_FOUND == event.reason ? "WIFI_DISCONNECT_REASON_NO_AP_FOUND" :
-        WIFI_DISCONNECT_REASON_AUTH_FAIL == event.reason ? "WIFI_DISCONNECT_REASON_AUTH_FAIL" :
-        WIFI_DISCONNECT_REASON_ASSOC_FAIL == event.reason ? "WIFI_DISCONNECT_REASON_ASSOC_FAIL" :
-        WIFI_DISCONNECT_REASON_HANDSHAKE_TIMEOUT == event.reason ? "WIFI_DISCONNECT_REASON_HANDSHAKE_TIMEOUT" :
-        "UNKNOWN");
-
-  client_disconnects++;
-}
-
-#endif
-
 void wifi_setup() {
 
 #ifdef WIFI_LED
@@ -315,34 +248,14 @@ void wifi_setup() {
     if(wifi_is_client_configured()) {
       WiFi.persistent(true);
 
-      #ifdef ESP32
       WiFi.disconnect(false,true);
-      #else
-      WiFi.disconnect();
-      ESP.eraseConfig();
-      #endif
     }
 
     // Stop the WiFi module
     WiFi.persistent(false);
     WiFi.mode(WIFI_OFF);
   */
-#ifdef ESP32
   WiFi.onEvent(WiFiEvent);
-
-#else
-  static auto _onStationModeConnected = WiFi.onStationModeConnected([](const WiFiEventStationModeConnected & event) {
-    DBUGF("Connected to %s", event.ssid.c_str());
-  });
-  static auto _onStationModeGotIP = WiFi.onStationModeGotIP(wifi_onStationModeGotIP);
-  static auto _onStationModeDisconnected = WiFi.onStationModeDisconnected(wifi_onStationModeDisconnected);
-  static auto _onSoftAPModeStationConnected = WiFi.onSoftAPModeStationConnected([](const WiFiEventSoftAPModeStationConnected & event) {
-    apClients++;
-  });
-  static auto _onSoftAPModeStationDisconnected = WiFi.onSoftAPModeStationDisconnected([](const WiFiEventSoftAPModeStationDisconnected & event) {
-    apClients--;
-  });
-#endif
 
   wifi_start();
 
@@ -424,16 +337,9 @@ void wifi_loop()
 
     config_reset();
 
-#ifdef ESP32
     WiFi.disconnect(false, true);
     delay(50);
     esp_restart();
-#else
-    WiFi.disconnect();
-    ESP.eraseConfig();
-    delay(50);
-    ESP.reset();
-#endif
   }
   else if (false == apMessage && LOW == wifiButtonState && millis() > wifiButtonTimeOut + WIFI_BUTTON_AP_TIMEOUT)
   {

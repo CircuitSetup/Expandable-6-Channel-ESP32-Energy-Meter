@@ -73,11 +73,7 @@ void emoncms_publish(const char * data)
     DBUGS.println(result);
     emoncms_connection_error_count ++;
     if (emoncms_connection_error_count > 30) {
-#ifdef ESP32
       esp_restart();
-#else
-      ESP.restart();
-#endif
     }
   }
 }

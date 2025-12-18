@@ -53,10 +53,7 @@ String get_http(const char * host, const char * url, int port, const char * fing
     return ("Connection error");
   }
   http->setTimeout(HTTP_TIMEOUT);
-#ifndef ESP32
-#warning HTTPS verification not enabled
   if (!fingerprint || http->verify(fingerprint, host)) {
-#endif
     sprintf(request, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
     http->print(request);
     // Handle wait for reply and timeout
@@ -78,10 +75,8 @@ String get_http(const char * host, const char * url, int port, const char * fing
         return ("ok");
       }
     }
-#ifndef ESP32
   } else {
     return ("HTTPS fingerprint no match");
   }
-#endif
   return ("error " + String(host));
 }

@@ -63,11 +63,7 @@ boolean mqtt_connect()
   mqttclient.setSocketTimeout(MQTT_TIMEOUT);
   mqttclient.setBufferSize(MAX_DATA_LEN + 200);
 
-#ifdef ESP32
   String strID = String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
-#else
-  String strID = String(ESP.getChipId());
-#endif
 
   if (mqtt_user.length() == 0) {
     //allows for anonymous connection
@@ -177,11 +173,7 @@ void mqtt_loop()
       } else {
         mqtt_connection_error_count ++;
         if (mqtt_connection_error_count > 10) {
-#ifdef ESP32
           esp_restart();
-#else
-          ESP.restart();
-#endif
         }
       }
     }
