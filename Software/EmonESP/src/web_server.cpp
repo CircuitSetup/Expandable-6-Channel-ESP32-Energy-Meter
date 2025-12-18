@@ -159,11 +159,7 @@ void handleScan(AsyncWebServerRequest *request) {
   String json = "[";
   int n = WiFi.scanComplete();
   if (n == -2) {
-#ifdef ESP32
     WiFi.scanNetworks(true, true); //2nd true handles isHidden on ESP32
-#else
-    WiFi.scanNetworks(true);
-#endif
   } else if (n) {
     for (int i = 0; i < n; ++i) {
       if (i) json += ",";
@@ -500,12 +496,7 @@ void handleRst(AsyncWebServerRequest *request) {
 
   config_reset();
 
-#ifdef ESP32
   WiFi.disconnect(false, true);
-#else
-  WiFi.disconnect();
-  ESP.eraseConfig();
-#endif
 
   response->setCode(200);
   response->print("1");
@@ -652,7 +643,6 @@ void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t 
 
   if (!index) {
     DBUGF("Update Start: %s\n", filename.c_str());
-#ifdef ESP32
     // if filename includes spiffs, update the spiffs partition
     int cmd = (filename.indexOf("spiffs") > 0) ? U_SPIFFS : U_FLASH;
     if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
@@ -660,14 +650,6 @@ void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t 
       Update.printError(DEBUG_PORT);
 #endif
     }
-#elif defined(ESP8266)
-    Update.runAsync(true);
-    if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
-#ifdef ENABLE_DEBUG
-      Update.printError(DEBUG_PORT);
-#endif
-    }
-#endif
   }
 
   if (Update.write(data, len) != len) {
@@ -809,22 +791,14 @@ void web_server_loop() {
   if (systemRestartTime > 0 && millis() > systemRestartTime) {
     systemRestartTime = 0;
     wifi_disconnect();
-#ifdef ESP32
     esp_restart();
-#else
-    ESP.restart();
-#endif
   }
 
   // Do we need to reboot the system?
   if (systemRebootTime > 0 && millis() > systemRebootTime) {
     systemRebootTime = 0;
     wifi_disconnect();
-#ifdef ESP32
     esp_restart();
-#else
-    ESP.reset();
-#endif
   }
 
   //clean up any stray web-sockets

@@ -31,13 +31,8 @@
 
 #include <Arduino.h>
 
-#ifdef ESP32
 #include <WiFi.h>
 #include <ESPmDNS.h>              // Resolve URL for update server etc.
-#elif defined(ESP8266)
-#include <ESP8266WiFi.h>
-#include <ESP8266mDNS.h>              // Resolve URL for update server etc.
-#endif
 
 //was causing ESP to crash in AP mode
 //#include <DNSServer.h>                // Required for captive portal
