@@ -143,7 +143,7 @@ Under `sensor:` add:
 ---
 
 ## Changing Default CS Pins
-If you've changed the jumpers on add-on board(s) from the default, they can be changed by adding the following to your main config:
+If you've changed the jumpers on add-on board(s) from the default, they can be changed by adding the following to your main config under ```sensor:```:
 ```
 - id: !extend ${addon1_id1} #1st add-on, CTs 1-3
   cs_pin: 16 #change to match physical jumper position
