@@ -168,9 +168,9 @@ web_server:
 sensor:
 # CS Pin mappings for Waveshare ESP32-S3-ETH
 - id: !extend ${main_meter_id1}
-  cs_pin: 34
+  cs_pin: 47
 - id: !extend ${main_meter_id2}
-  cs_pin: 40
+  cs_pin: 48
 - id: !extend ${addon1_id1}
   cs_pin: 1
 #- id: !extend ${addon1_id2}

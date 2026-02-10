@@ -117,9 +117,9 @@ web_server:
 sensor:
 # CS Pin mappings for Waveshare ESP32-S3-ETH
 - id: !extend ${main_meter_id1}
-  cs_pin: 34
+  cs_pin: 47
 - id: !extend ${main_meter_id2}
-  cs_pin: 40
+  cs_pin: 48
 
 ## The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
 ## divide the current_cal_ctx (above) by 2 (120A CT) or 4 (200A CT) and multiply the current and power values 
