@@ -65,7 +65,7 @@ esphome:
   platformio_options:
     board_build.flash_mode: dio
   project:
-    name: circuitsetup.6c-energy-meter-ethernet-ws
+    name: circuitsetup.6c-energy-meter-ethernet-waveshare
     version: "1.7"
 
 packages:
@@ -74,7 +74,7 @@ packages:
     ref: master
     refresh: 1min
     files:
-      - Software/ESPHome/6chan_common_ethernet_ws.yaml
+      - Software/ESPHome/6chan_common_ethernet_waveshare.yaml
       - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
 
       ## Additional power quality sensors per CT/Phase
@@ -97,7 +97,7 @@ packages:
       #- Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
 
 dashboard_import:
-  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_ethernet_ws.yaml@master
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_main_ethernet_waveshare.yaml@master
   import_full_config: true
 
 # Enable Home Assistant API
