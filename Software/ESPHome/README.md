@@ -16,11 +16,29 @@ This folder contains [ESPHome](https://esphome.io) configuration files used to m
 |------|-------------|
 | `6chan_common.yaml` | Base shared configuration: sets platform (`esp32`), SPI, includes time and API components. Meant to be included in Wi-Fi-based setups. |
 | `6chan_common_ethernet.yaml` | Same as `6chan_common.yaml`, but for the [Lilygo T-ETH-Lite ESP32S3](https://lilygo.cc/products/t-eth-lite) and the [CircuitSetup 6 Channel Energy Meter Ethernet Adapter](https://circuitsetup.us/product/6-channel-energy-meter-to-lilygo-t-eth-lite-esp32s3-ethernet-adapter/) . |
+| `6chan_common_ethernet_waveshare.yaml` | Ethernet base config for the Waveshare ESP32-S3-ETH and CircuitSetup Ethernet WS adapter. |
 | `6chan_energy_meter_main_board.yaml` | Full configuration for monitoring only the main board's 6 channels via Wi-Fi. |
-| `6chan_energy_meter_main_ethernet.yaml` | Ethernet-based variant of `6chan_energy_meter_main_board.yaml`. |
-| `6chan_energy_meter_1-addon.yaml` | Main board + 1 add-on board (12 channels). |
-| `6chan_energy_meter_2-addons.yaml` | Main board + 2 add-ons (18 channels). |
-| `6chan_energy_meter_3-addons.yaml` | Main board + 3 add-ons (24 channels). |
+| `6chan_energy_meter_main_ethernet.yaml` | Ethernet-based variant of `6chan_energy_meter_main_board.yaml` (Lilygo adapter). |
+| `6chan_energy_meter_main_ethernet_waveshare.yaml` | Ethernet-based variant of `6chan_energy_meter_main_board.yaml` (Waveshare adapter). |
+| `6chan_energy_meter_1-addon.yaml` | Main board + 1 add-on board (12 channels) over Wi-Fi. |
+| `6chan_energy_meter_1-addon_ethernet.yaml` | Main board + 1 add-on board (12 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_1-addon_ethernet_waveshare.yaml` | Main board + 1 add-on board (12 channels) over Ethernet (Waveshare adapter). |
+| `6chan_energy_meter_2-addons.yaml` | Main board + 2 add-on boards (18 channels) over Wi-Fi. |
+| `6chan_energy_meter_2-addons_ethernet.yaml` | Main board + 2 add-on boards (18 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_2-addons_ethernet_waveshare.yaml` | Main board + 2 add-on boards (18 channels) over Ethernet (Waveshare adapter). |
+| `6chan_energy_meter_3-addons.yaml` | Main board + 3 add-on boards (24 channels) over Wi-Fi. |
+| `6chan_energy_meter_3-addons_2-voltages.yaml` | Main board + 3 add-on boards (24 channels) with second-voltage monitoring enabled. |
+| `6chan_energy_meter_3-addons_ethernet.yaml` | Main board + 3 add-on boards (24 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_3-addons_ethernet_waveshare.yaml` | Main board + 3 add-on boards (24 channels) over Ethernet (Waveshare adapter). |
+| `6chan_energy_meter_4-addons.yaml` | Main board + 4 add-on boards (30 channels) over Wi-Fi. |
+| `6chan_energy_meter_4-addons_ethernet.yaml` | Main board + 4 add-on boards (30 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_4-addons_ethernet_waveshare.yaml` | Main board + 4 add-on boards (30 channels) over Ethernet (Waveshare adapter). |
+| `6chan_energy_meter_5-addons.yaml` | Main board + 5 add-on boards (36 channels) over Wi-Fi. |
+| `6chan_energy_meter_5-addons_ethernet.yaml` | Main board + 5 add-on boards (36 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_5-addons_ethernet_waveshare.yaml` | Main board + 5 add-on boards (36 channels) over Ethernet (Waveshare adapter). |
+| `6chan_energy_meter_6-addons.yaml` | Main board + 6 add-on boards (42 channels) over Wi-Fi. |
+| `6chan_energy_meter_6-addons_ethernet.yaml` | Main board + 6 add-on boards (42 channels) over Ethernet (Lilygo adapter). |
+| `6chan_energy_meter_6-addons_ethernet_waveshare.yaml` | Main board + 6 add-on boards (42 channels) over Ethernet (Waveshare adapter). |
 
 ---
 
@@ -163,4 +181,3 @@ packages:
   main_cal: !include Software/ESPHome/calibration/6chan_main_calibration.yaml
 ```
 ---
-
