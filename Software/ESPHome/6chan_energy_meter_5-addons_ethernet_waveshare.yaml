@@ -1,0 +1,341 @@
+# CircuitSetup 6 Channel Energy Meter Main Board + 5 Add-on Boards config
+# Uses the Waveshare ESP32-S3-ETH and the CircuitSetup 6 Channel Energy Meter Ethernet WS Adapter 
+# See all options at https://esphome.io/components/sensor/atm90e32.html
+
+substitutions:
+# Change the disp_name to something you want
+  disp_name: energy-meter
+  friendly_name: CircuitSetup Energy Meter 36x
+# Interval of how often the power data is updated
+  update_time: 10s
+# Frequency of your electrical grid - 60Hz in North America, 50Hz otherwise
+  electric_freq: "60Hz"
+
+## The below names and IDs can be changed to whatever you want. IDs should not have spaces
+## Main board
+  main_meter_name1: Meter 1-3
+  main_meter_name2: Meter 4-6
+  main_meter_id1: meter_main1
+  main_meter_id2: meter_main2
+  ct1_name: CT1
+  ct2_name: CT2
+  ct3_name: CT3
+  ct4_name: CT4
+  ct5_name: CT5
+  ct6_name: CT6
+## Addon1
+  addon1_name1: Addon1 7-9
+  addon1_name2: Addon1 10-12
+  addon1_id1: addon1_1
+  addon1_id2: addon1_2
+  ct7_name: CT7
+  ct8_name: CT8
+  ct9_name: CT9
+  ct10_name: CT10
+  ct11_name: CT11
+  ct12_name: CT12
+## Addon2
+  addon2_name1: Addon2 13-15
+  addon2_name2: Addon2 16-18
+  addon2_id1: addon2_1
+  addon2_id2: addon2_2
+  ct13_name: CT13
+  ct14_name: CT14
+  ct15_name: CT15
+  ct16_name: CT16
+  ct17_name: CT17
+  ct18_name: CT18
+## Addon3
+  addon3_name1: Addon3 19-21
+  addon3_name2: Addon3 22-24
+  addon3_id1: addon3_1
+  addon3_id2: addon3_2
+  ct19_name: CT19
+  ct20_name: CT20
+  ct21_name: CT21
+  ct22_name: CT22
+  ct23_name: CT23
+  ct24_name: CT24
+## Addon4
+  addon4_name1: Addon4 25-27
+  addon4_name2: Addon4 28-30
+  addon4_id1: addon4_1
+  addon4_id2: addon4_2
+  ct25_name: CT25
+  ct26_name: CT26
+  ct27_name: CT27
+  ct28_name: CT28
+  ct29_name: CT29
+  ct30_name: CT30
+## Addon5
+  addon5_name1: Addon5 31-33
+  addon5_name2: Addon5 34-36
+  addon5_id1: addon5_1
+  addon5_id2: addon5_2
+  ct31_name: CT31
+  ct32_name: CT32
+  ct33_name: CT33
+  ct34_name: CT34
+  ct35_name: CT35
+  ct36_name: CT36
+
+## Semi-Automatic Calibration ##
+# See https://esphome.io/components/sensor/atm90e32.html#calibration
+# WHEN CALIBRATION IS ENABLED, calculated values for offset and gain stored in memory take priority over config values
+# To save calculated calibration values, copy them from the logs to your config
+# then use the clear buttons to clear the calibration values from memory
+# Values are stored in the variables for gain below and offsets in their corresponding files
+# under /calibration/6chan_xxxx_offset_calibrations.yaml
+  offset_calibration: "true"
+  gain_calibration: "true"
+
+## Gain Calibration Values ##
+# Change current_cal_ctX value to the corresponding CT's that you're using
+# For more precise calibration, see documentation for Semi-Auto calibration
+# Current Transformers:
+#  20A/25mA SCT-006: 11143
+#  30A/1V SCT-013-030: 8650
+#  50A/1V SCT-013-050: 15420
+#  50A/16.6mA SCT-010: 41334
+#  80A/26.6mA SCT-010: 41660
+#  100A/50ma SCT-013-000: 27518
+#  120A/40mA: SCT-016: 41787
+#  200A/100mA SCT-024: 27518
+#  200A/50mA SCT-024: 55036
+
+## Main Board
+  current_cal_ct1: '27518'
+  current_cal_ct2: '27518'
+  current_cal_ct3: '27518'
+  current_cal_ct4: '27518'
+  current_cal_ct5: '27518'
+  current_cal_ct6: '27518'
+## Addon1
+  current_cal_ct7: '27518'
+  current_cal_ct8: '27518'
+  current_cal_ct9: '27518'
+  current_cal_ct10: '27518'
+  current_cal_ct11: '27518'
+  current_cal_ct12: '27518'
+## Addon2
+  current_cal_ct13: '27518'
+  current_cal_ct14: '27518'
+  current_cal_ct15: '27518'
+  current_cal_ct16: '27518'
+  current_cal_ct17: '27518'
+  current_cal_ct18: '27518'
+## Addon3
+  current_cal_ct19: '27518'
+  current_cal_ct20: '27518'
+  current_cal_ct21: '27518'
+  current_cal_ct22: '27518'
+  current_cal_ct23: '27518'
+  current_cal_ct24: '27518'
+## Addon4
+  current_cal_ct25: '27518'
+  current_cal_ct26: '27518'
+  current_cal_ct27: '27518'
+  current_cal_ct28: '27518'
+  current_cal_ct29: '27518'
+  current_cal_ct30: '27518'
+## Addon4
+  current_cal_ct31: '27518'
+  current_cal_ct32: '27518'
+  current_cal_ct33: '27518'
+  current_cal_ct34: '27518'
+  current_cal_ct35: '27518'
+  current_cal_ct36: '27518'
+# This only needs to be changed if you're using something other than the  
+# Jameco 9VAC Transformer: 
+  voltage_cal1: '7305'
+  voltage_cal2: '7305'
+
+esphome:
+  name: ${disp_name}
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: '2025.5.0'
+  project:
+    name: circuitsetup.6c-energy-meter-5-addons-ethernet-waveshare
+    version: "1.7"
+
+packages:
+  remote_package:
+    url: https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter
+    ref: master
+    refresh: 1d
+    files:
+      - Software/ESPHome/6chan_common_ethernet_waveshare.yaml
+      - Software/ESPHome/meter_sensors/6chan_main_sensor.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon1.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon2.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon3.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon4.yaml
+      - Software/ESPHome/meter_sensors/6chan_addon5.yaml
+
+      ## Additional power quality sensors per CT/Phase
+      ## Uncomment to enable
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#configuration-variables
+      #- Software/ESPHome/power_quality/6chan_main_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon1_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon2_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon3_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon4_power_quality.yaml
+      #- Software/ESPHome/power_quality/6chan_addon5_power_quality.yaml
+      
+      ## Enables text status fields for each CT/Phase
+      ## Uncomment to enable
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#text-sensor
+      - Software/ESPHome/status_fields/6chan_main_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon1_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon2_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon3_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon4_status.yaml
+      #- Software/ESPHome/status_fields/6chan_addon5_status.yaml
+      
+      ## Adds semi-automatic calibration buttons and reference fields 
+      ## If enabled, make sure offset & gain calibration are set to "true" above
+      ## Uncomment to enable
+      ## Details: https://esphome.io/components/sensor/atm90e32.html#calibration
+      - Software/ESPHome/calibration/6chan_main_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon2_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon3_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon4_calibration.yaml
+      #- Software/ESPHome/calibration/6chan_addon5_calibration.yaml
+      
+      ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
+      ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
+      ## should not be registering anything.
+      #- Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon1_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon2_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon3_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon4_offset_calibrations.yaml
+      #- Software/ESPHome/calibration/6chan_addon5_offset_calibrations.yaml
+
+dashboard_import:
+  package_import_url: github://CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/Software/ESPHome/6chan_energy_meter_5-addons_ethernet_waveshare.yaml@master
+  import_full_config: true
+
+# Enable Home Assistant API
+# An encryption key is recommended and can be generated here:
+# https://esphome.io/components/api.html#configuration-variables
+api:
+#  encryption:
+#    key: "YOUR_ENCRYPTION_KEY_HERE"
+
+# Enable OTA updating
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
+
+sensor:
+# CS Pin mappings for Waveshare ESP32-S3-ETH
+- id: !extend ${main_meter_id1}
+  cs_pin: 47
+- id: !extend ${main_meter_id2}
+  cs_pin: 48
+- id: !extend ${addon1_id1}
+  cs_pin: 1
+#- id: !extend ${addon1_id2}
+#  cs_pin: 16
+- id: !extend ${addon2_id1}
+  cs_pin: 18
+#- id: !extend ${addon2_id2}
+#  cs_pin: 17
+#- id: !extend ${addon3_id1}
+#  cs_pin: 2
+- id: !extend ${addon3_id2}
+  cs_pin: 40
+- id: !extend ${addon4_id1}
+  cs_pin: 33
+- id: !extend ${addon4_id2}
+  cs_pin: 42
+- id: !extend ${addon5_id1}
+  cs_pin: 41
+- id: !extend ${addon5_id2}
+  cs_pin: 39
+
+## The max value for current that the meter can output is 65.535. If you expect to measure current over 65A,
+## divide the current_cal_ctx (above) by 2 (120A CT) or 4 (200A CT) and multiply the current and power values 
+## by 2 or 4, uncommenting the below and changing the id and phase_x accordingly
+#- id: !extend ${main_meter_id1} # CTs 1-3 
+#  phase_a: # CT1
+#    current:
+#      filters:
+#        - multiply: 2
+#    power:
+#      filters:
+#        - multiply: 2
+#
+## uncomment if monitoring 2 voltages
+#- id: !extend ${main_meter_id2}
+#  phase_a:
+#    voltage:
+#       name: Voltage 2
+#       id: ic2Volts
+#       accuracy_decimals: 1
+#  frequency:
+#    name: Frequency 2
+
+## Comment out to show amps and watts per meter board in Home Assistant
+- id: !extend totalAmpsMain
+  internal: true
+- id: !extend totalWattsMain
+  internal: true
+- id: !extend totalAmpsAddOn1
+  internal: true
+- id: !extend totalWattsAddOn1
+  internal: true
+- id: !extend totalAmpsAddOn2
+  internal: true
+- id: !extend totalWattsAddOn2
+  internal: true
+- id: !extend totalAmpsAddOn3
+  internal: true
+- id: !extend totalWattsAddOn3
+  internal: true
+- id: !extend totalAmpsAddOn4
+  internal: true
+- id: !extend totalWattsAddOn4
+  internal: true
+- id: !extend totalAmpsAddOn5
+  internal: true
+- id: !extend totalWattsAddOn5
+  internal: true
+
+#Total Amps
+###########
+- platform: template
+  name: ${friendly_name} Total Amps
+  id: totalAmps
+  lambda: return id(totalAmpsMain).state + id(totalAmpsAddOn1).state + id(totalAmpsAddOn2).state + id(totalAmpsAddOn3).state + id(totalAmpsAddOn4).state + id(totalAmpsAddOn5).state;
+  accuracy_decimals: 2
+  unit_of_measurement: A
+  device_class: current
+  update_interval: ${update_time}
+   
+#Total Watts
+############
+- platform: template
+  name: ${friendly_name} Total Watts
+  id: totalWatts
+  lambda: return id(totalWattsMain).state + id(totalWattsAddOn1).state + id(totalWattsAddOn2).state + id(totalWattsAddOn3).state + id(totalWattsAddOn4).state + id(totalWattsAddOn5).state;
+  accuracy_decimals: 1
+  unit_of_measurement: W
+  device_class: power
+  update_interval: ${update_time}
+    
+#kWh
+####
+- platform: total_daily_energy
+  name: ${friendly_name} Total kWh
+  power_id: totalWatts
+  filters:
+    - multiply: 0.001
+  unit_of_measurement: kWh
+  device_class: energy
+  state_class: total_increasing

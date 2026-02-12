@@ -47,14 +47,14 @@ The Expandable 6 Channel ESP32 Energy Meter can read 6 current channels and 2 vo
 	* [SCT-024 200A/50mA](https://circuitsetup.us/product/200a-50ma-current-transformer-yhdc-sct-024-24mm/) (24mm opening - 3.5mm connectors)
 	* Others can also be used as long as they're rated for the amount of power that you are wanting to measure, and have a current output no more than 720mV RMS, or 33mA at peak output.
 * **AC Transformer (NOT DC):** 
-	* North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. The positive pin must be 2.5mm (some are 2.1)
+	* North America: [Jameco Reliapro 120V to 9V AC-AC](https://circuitsetup.us/product/jameco-ac-to-ac-wall-adapter-transformer-9-volt-1000ma-black-straight-2-5mm-female-plug/) or 12v. (Also [available on Amazon.com](https://amzn.to/4qy97ak))The positive pin must be 2.5mm (some are 2.1)
 	* Europe: 240V to 9V or 12V AC-AC at least 500mA - [See a list of some recommended transformers here](https://learn.openenergymonitor.org/electricity-monitoring/voltage-sensing/different-acac-power-adapters)
 * **ESP32** (choose one):
-	* [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
+	* [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/) [Also available on Amazon.com](https://amzn.to/4aweG3l)
 	* [Espressif ESP32-DevKitC-32E](https://amzn.to/3zRmY7x)
 	* [Espressif ESP32-DevKitC-VIE](https://amzn.to/3Ngp2c9) if you need better wifi reception.
 	* Anything else with the same pinouts as the above, which are usually 19 pins per side with 3v3 in the upper left & CLK in the lower right
-  	* Ethernet: [CircuitSetup ESP32S3 Ethernet Adapter](https://circuitsetup.us/product/6-channel-energy-meter-to-lilygo-t-eth-lite-esp32s3-ethernet-adapter/) & the [Lilygo T-ETH-Lite ESP32S3](https://www.lilygo.cc/products/t-eth-lite?variant=43120880779445) (for ESPHome only, at the moment)
+  	* Ethernet: [CircuitSetup ESP32S3 Ethernet Adapter](https://circuitsetup.us/product/6-channel-energy-meter-ethernet-adapter/), the [Lilygo T-ETH-Lite ESP32S3](https://www.lilygo.cc/products/t-eth-lite?variant=43120880779445) or the [Waveshare ESP32-S3 ETH](https://www.waveshare.com/esp32-s3-eth.htm?sku=28972) (for ESPHome only, at the moment)
 * **Software** (choose one):
 	* Our custom version of [EmonESP](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/EmonESP) and the [ATM90E32](https://github.com/CircuitSetup/ATM90E32) Arduino library
 	* The current release of [ESPHome.](https://esphome.io/components/sensor/atm90e32.html) Details on [integrating with Home Assistant are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#esphomehome-assistant) and [here on ESPHome.io](https://esphome.io/components/sensor/atm90e32.html). [More examples of configs are located here.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master/Software/ESPHome)
