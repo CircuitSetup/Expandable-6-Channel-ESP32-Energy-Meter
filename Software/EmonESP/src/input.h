@@ -39,6 +39,18 @@ extern char last_datastr[MAX_DATA_LEN];
 extern char input_string[MAX_DATA_LEN];
 
 // -------------------------------------------------------------------
+// Set the latest input payload and note whether it came from the
+// onboard ATM90E32 polling path or an external/manual source.
+// -------------------------------------------------------------------
+extern void input_set(const char * data, bool from_energy_meter);
+
+// -------------------------------------------------------------------
+// Return true when the last successful input_get() returned data that
+// originated from the ATM90E32 polling path.
+// -------------------------------------------------------------------
+extern bool input_last_data_from_energy_meter();
+
+// -------------------------------------------------------------------
 // Read input sent via the web_server or serial.
 //
 // data: if true is returned data will be updated with the new line of

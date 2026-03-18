@@ -40,7 +40,11 @@
 #endif
 
 #ifndef MAX_DATA_LEN
-#define MAX_DATA_LEN 4096
+#define MAX_DATA_LEN 6144
+#endif
+
+#ifndef MQTT_STATE_JSON_SIZE
+#define MQTT_STATE_JSON_SIZE 12288
 #endif
 
 #ifndef HTTP_TIMEOUT

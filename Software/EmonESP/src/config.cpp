@@ -65,6 +65,14 @@ float pow_mul[NUM_CHANNELS] = { 0.0 };
 //Configuration flags
 struct config_flags_t config_flags = { 0 };
 
+static constexpr uint16_t CONFIG_FLAGS_VERSION_MARKER = 0x8000;
+static constexpr uint16_t CONFIG_FLAG_MQTT_LEGACY_FLAT = 0x0001;
+static constexpr uint16_t CONFIG_FLAG_MQTT_JSON = 0x0002;
+static constexpr uint16_t CONFIG_FLAG_MQTT_HOME_ASSISTANT = 0x0004;
+static constexpr uint16_t CONFIG_FLAG_MQTT_METRIC_REACTIVE_POWER = 0x0008;
+static constexpr uint16_t CONFIG_FLAG_MQTT_METRIC_PHASE_ANGLE = 0x0010;
+static constexpr uint16_t CONFIG_FLAG_MQTT_METRIC_TOTALS = 0x0020;
+
 #define EEPROM_ESID_SIZE          32
 #define EEPROM_EPASS_SIZE         64
 #define EEPROM_EMON_API_KEY_SIZE  33
@@ -135,13 +143,60 @@ struct config_flags_t config_flags = { 0 };
 #define EEPROM_CONFIG_FLAGS_END   (EEPROM_CONFIG_FLAGS_START + EEPROM_CONFIG_FLAGS_SIZE)
 #define EEPROM_NAME_CT_START      EEPROM_CONFIG_FLAGS_END
 #define EEPROM_NAME_CT_END        (EEPROM_NAME_CT_START + EEPROM_NAME_CT_SIZE*NUM_CHANNELS)
-#define EEPROM_CONFIG_END         EEPROM_NAME_CT_MUL_END
+#define EEPROM_CONFIG_END         EEPROM_NAME_CT_END
 
 #if EEPROM_CONFIG_END > EEPROM_SIZE
 #error EEPROM_SIZE too small
 #endif
 
 #define CHECKSUM_SEED 128
+
+static uint16_t pack_config_flags()
+{
+  uint16_t raw = CONFIG_FLAGS_VERSION_MARKER;
+
+  if (config_flags.mqtt_legacy_flat) {
+    raw |= CONFIG_FLAG_MQTT_LEGACY_FLAT;
+  }
+  if (config_flags.mqtt_json) {
+    raw |= CONFIG_FLAG_MQTT_JSON;
+  }
+  if (config_flags.mqtt_home_assistant) {
+    raw |= CONFIG_FLAG_MQTT_HOME_ASSISTANT;
+  }
+  if (config_flags.mqtt_metric_reactive_power) {
+    raw |= CONFIG_FLAG_MQTT_METRIC_REACTIVE_POWER;
+  }
+  if (config_flags.mqtt_metric_phase_angle) {
+    raw |= CONFIG_FLAG_MQTT_METRIC_PHASE_ANGLE;
+  }
+  if (config_flags.mqtt_metric_totals) {
+    raw |= CONFIG_FLAG_MQTT_METRIC_TOTALS;
+  }
+
+  return raw;
+}
+
+static void unpack_config_flags(uint16_t raw)
+{
+  if ((raw & CONFIG_FLAGS_VERSION_MARKER) == 0) {
+    const bool legacy_json = (raw & 0x0001) != 0;
+    config_flags.mqtt_legacy_flat = !legacy_json;
+    config_flags.mqtt_json = legacy_json;
+    config_flags.mqtt_home_assistant = false;
+    config_flags.mqtt_metric_reactive_power = false;
+    config_flags.mqtt_metric_phase_angle = false;
+    config_flags.mqtt_metric_totals = false;
+    return;
+  }
+
+  config_flags.mqtt_legacy_flat = (raw & CONFIG_FLAG_MQTT_LEGACY_FLAT) != 0;
+  config_flags.mqtt_json = (raw & CONFIG_FLAG_MQTT_JSON) != 0;
+  config_flags.mqtt_home_assistant = (raw & CONFIG_FLAG_MQTT_HOME_ASSISTANT) != 0;
+  config_flags.mqtt_metric_reactive_power = (raw & CONFIG_FLAG_MQTT_METRIC_REACTIVE_POWER) != 0;
+  config_flags.mqtt_metric_phase_angle = (raw & CONFIG_FLAG_MQTT_METRIC_PHASE_ANGLE) != 0;
+  config_flags.mqtt_metric_totals = (raw & CONFIG_FLAG_MQTT_METRIC_TOTALS) != 0;
+}
 
 // -------------------------------------------------------------------
 // Reset EEPROM, wipes all settings
@@ -344,7 +399,7 @@ void config_load_settings()
   }
 
   // Configuration flags
-  *((uint16_t *)&config_flags) = EEPROM_read_ushort(EEPROM_CONFIG_FLAGS_START, 0);
+  unpack_config_flags(EEPROM_read_ushort(EEPROM_CONFIG_FLAGS_START, 0));
 
   // Web server credentials
   EEPROM_read_string(EEPROM_WWW_USER_START, EEPROM_WWW_USER_SIZE, www_username);
@@ -381,11 +436,26 @@ void config_save_emoncms(String server, String path, String node, String apikey,
   EEPROM.end();
 }
 
-void config_save_mqtt(String server, String topic, String prefix, String user, String pass, bool json)
+void config_save_mqtt(String server,
+                      String topic,
+                      String prefix,
+                      String user,
+                      String pass,
+                      bool legacy_flat,
+                      bool json,
+                      bool home_assistant,
+                      bool metric_reactive_power,
+                      bool metric_phase_angle,
+                      bool metric_totals)
 {
   EEPROM.begin(EEPROM_SIZE);
 
+  config_flags.mqtt_legacy_flat = legacy_flat;
   config_flags.mqtt_json = json;
+  config_flags.mqtt_home_assistant = home_assistant;
+  config_flags.mqtt_metric_reactive_power = metric_reactive_power;
+  config_flags.mqtt_metric_phase_angle = metric_phase_angle;
+  config_flags.mqtt_metric_totals = metric_totals;
   mqtt_server = server;
   mqtt_topic = topic;
   mqtt_feed_prefix = prefix;
@@ -408,7 +478,7 @@ void config_save_mqtt(String server, String topic, String prefix, String user, S
   EEPROM_write_string(EEPROM_MQTT_PASS_START, EEPROM_MQTT_PASS_SIZE, mqtt_pass);
 
   // Configuration flags
-  EEPROM_write_ushort(EEPROM_CONFIG_FLAGS_START, *((uint16_t *)&config_flags));
+  EEPROM_write_ushort(EEPROM_CONFIG_FLAGS_START, pack_config_flags());
 
   EEPROM.end();
 }

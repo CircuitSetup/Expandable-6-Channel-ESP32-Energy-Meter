@@ -28,11 +28,14 @@
 #include "emoncms.h"
 #include "input.h"
 #include "config.h"
-#include "mqtt.h"
+#include "board_profile.h"
 
 // for ATM90E32 energy meter
 #include <SPI.h>
 #include <ATM90E32.h>
+#include <stdarg.h>
+#include <string.h>
+#include <math.h>
 
 #ifdef ENABLE_OLED_DISPLAY
 #include <Adafruit_GFX.h>
@@ -53,22 +56,97 @@ const int period = 1000; //time interval in ms to send data
 
 /****** Chip Select Pins ******/
 /*
-   Each chip has its own CS pin (2 per board). The main board must be pins 5 and 4.
+   Each chip has its own CS pin (2 per board). These are selected by the
+   compile-time board profile to match the host board and adapter wiring.
 */
-const int CS1[NUM_BOARDS] = { 5, 0, 27, 2, 13, 14, 15 };
-const int CS2[NUM_BOARDS] = { 4, 16, 17, 21, 22, 25, 26 };
-
-char measurement[16];
+static_assert(NUM_BOARDS == BOARD_PROFILE_NUM_BOARDS, "NUM_BOARDS must match board profile CS arrays");
+const int CS1[NUM_BOARDS] = {
+  BOARD_PROFILE_CS1_PINS[0],
+  BOARD_PROFILE_CS1_PINS[1],
+  BOARD_PROFILE_CS1_PINS[2],
+  BOARD_PROFILE_CS1_PINS[3],
+  BOARD_PROFILE_CS1_PINS[4],
+  BOARD_PROFILE_CS1_PINS[5],
+  BOARD_PROFILE_CS1_PINS[6]
+};
+const int CS2[NUM_BOARDS] = {
+  BOARD_PROFILE_CS2_PINS[0],
+  BOARD_PROFILE_CS2_PINS[1],
+  BOARD_PROFILE_CS2_PINS[2],
+  BOARD_PROFILE_CS2_PINS[3],
+  BOARD_PROFILE_CS2_PINS[4],
+  BOARD_PROFILE_CS2_PINS[5],
+  BOARD_PROFILE_CS2_PINS[6]
+};
 
 /* Initialize ATM90E32 library for each IC */
 ATM90E32 sensor_ic1[NUM_BOARDS]{};
 ATM90E32 sensor_ic2[NUM_BOARDS]{};
+static energy_meter_snapshot_t g_snapshot{};
+
+static bool append_to_buffer(char *buffer, size_t buffer_size, size_t &offset, const char *format, ...)
+{
+  if (offset >= buffer_size) {
+    return false;
+  }
+
+  va_list args;
+  va_start(args, format);
+  const int written = vsnprintf(buffer + offset, buffer_size - offset, format, args);
+  va_end(args);
+
+  if (written < 0) {
+    return false;
+  }
+
+  if (static_cast<size_t>(written) >= (buffer_size - offset)) {
+    offset = buffer_size - 1;
+    buffer[offset] = '\0';
+    return false;
+  }
+
+  offset += static_cast<size_t>(written);
+  return true;
+}
+
+static bool meter_ic_is_online(ATM90E32 &sensor)
+{
+  const unsigned short sys0 = sensor.GetSysStatus0();
+  return sys0 != 0 && sys0 != 0xFFFF;
+}
+
+static void clear_snapshot(energy_meter_snapshot_t &snapshot)
+{
+  memset(&snapshot, 0, sizeof(snapshot));
+#ifdef THREE_PHASE
+  snapshot.three_phase = true;
+#else
+  snapshot.three_phase = false;
+#endif
+}
+
+bool energy_meter_snapshot_valid()
+{
+  return g_snapshot.valid;
+}
+
+const energy_meter_snapshot_t & energy_meter_get_snapshot()
+{
+  return g_snapshot;
+}
 
 // -------------------------------------------------------------------
 // SETUP
 // -------------------------------------------------------------------
 void energy_meter_setup() {
   int i;
+
+  SPI.begin(
+    BOARD_PROFILE_METER_SPI_SCK,
+    BOARD_PROFILE_METER_SPI_MISO,
+    BOARD_PROFILE_METER_SPI_MOSI,
+    -1
+  );
 
   /*Initialise the ATM90E32 & Pass CS pin and calibrations to its library */
   Serial.println("Start ATM90E32");
@@ -101,10 +179,12 @@ void energy_meter_setup() {
 // -------------------------------------------------------------------
 void energy_meter_loop()
 {
-  int i, j = 0;
-
-  char * result = input_string;
-  char * result_json = input_json;
+  int i;
+  energy_meter_snapshot_t snapshot;
+  clear_snapshot(snapshot);
+  char result[MAX_DATA_LEN] = "";
+  size_t result_offset = 0;
+  bool haveAnyChannel = false;
 
   /*get the current "time" (actually the number of milliseconds since the program started)*/
   currentMillis = millis();
@@ -118,16 +198,6 @@ void energy_meter_loop()
     return;
   }
   startMillis = currentMillis;
-
-  /*Repeatedly fetch some values from the ATM90E32 */
-  #ifdef THREE_PHASE
-  float temp, freq, voltage1, voltage2, voltage3, voltageCT[NUM_INPUTS], currentCT[NUM_INPUTS],
-        realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
-  #else
-  float temp, freq, voltage1, voltage2, voltageCT[NUM_INPUTS], currentCT[NUM_INPUTS],
-        realPowerCT[NUM_INPUTS], vaPowerCT[NUM_INPUTS], powerFactorCT[NUM_INPUTS];
-  #endif
-
 
   unsigned short sys0 = sensor_ic1[0].GetSysStatus0();  //EMMState0
   unsigned short sys1 = sensor_ic1[0].GetSysStatus1();  //EMMState1
@@ -145,59 +215,43 @@ void energy_meter_loop()
   Serial.println("Meter Status 2: E0:0x" + String(en0_2, HEX) + " E1:0x" + String(en1_2, HEX));
   delay(10);
 
-  /* only 1 voltage channel is used on each IC */
-  /* modified for 3 phase voltage output */
-  #ifdef THREE_PHASE
-  voltage1 = sensor_ic1[0].GetLineVoltageA();
-  voltage2 = sensor_ic1[3].GetLineVoltageA();
-  voltage3 = sensor_ic1[5].GetLineVoltageA();
-  #else
-  voltage1 = sensor_ic1[0].GetLineVoltageA();
-  voltage2 = sensor_ic2[0].GetLineVoltageA();
-  #endif
+  const bool primary_board_valid = meter_ic_is_online(sensor_ic1[0]) && meter_ic_is_online(sensor_ic2[0]);
 
-  freq = sensor_ic1[0].GetFrequency();
-  temp = sensor_ic1[0].GetTemperature();
+  if (primary_board_valid)
+  {
+#ifdef THREE_PHASE
+    snapshot.voltage_l1_v = sensor_ic1[0].GetLineVoltageA();
+    snapshot.voltage_l2_v = sensor_ic1[3].GetLineVoltageA();
+    snapshot.voltage_l3_v = sensor_ic1[5].GetLineVoltageA();
+#else
+    snapshot.voltage_l1_v = sensor_ic1[0].GetLineVoltageA();
+    snapshot.voltage_l2_v = sensor_ic2[0].GetLineVoltageA();
+#endif
+    snapshot.frequency_hz = sensor_ic1[0].GetFrequency();
+    snapshot.temperature_c = sensor_ic1[0].GetTemperature();
+  }
 
-  Serial.println("Temp:" + String(temp) + "C");
-  Serial.println("Freq:" + String(freq) + "Hz");
-  
-  #ifdef THREE_PHASE
-   /* modified for 3 phase voltage output */
-  Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V   V3:" + String(voltage3) + "V");
-  #else
-  Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V");
-  #endif
+  Serial.println("Temp:" + String(snapshot.temperature_c) + "C");
+  Serial.println("Freq:" + String(snapshot.frequency_hz) + "Hz");
+#ifdef THREE_PHASE
+  Serial.println("V1:" + String(snapshot.voltage_l1_v) + "V   V2:" + String(snapshot.voltage_l2_v) + "V   V3:" + String(snapshot.voltage_l3_v) + "V");
+#else
+  Serial.println("V1:" + String(snapshot.voltage_l1_v) + "V   V2:" + String(snapshot.voltage_l2_v) + "V");
+#endif
 
-  strcpy(result, "temp:");
-  dtostrf(temp, 2, 1, measurement);
-  strcat(result, measurement);
-
-  strcat(result, ",freq:");
-  dtostrf(freq, 2, 2, measurement);
-  strcat(result, measurement);
-
-  strcat(result, ",V1:");
-  dtostrf(voltage1, 2, 2, measurement);
-  strcat(result, measurement);
-
-  strcat(result, ",V2:");
-  dtostrf(voltage2, 2, 2, measurement);
-  strcat(result, measurement);
-
-  #ifdef THREE_PHASE
-  strcat(result, ",V3:");
-  dtostrf(voltage3, 2, 2, measurement);
-  strcat(result, measurement);
-  #endif
-
-  result_json += sprintf(result_json, "{\"temp\":%.1f,\"freq\":%.2f,\"sensors\":[", temp, freq);
+  if (primary_board_valid) {
+    append_to_buffer(result, sizeof(result), result_offset, "temp:%.1f", snapshot.temperature_c);
+    append_to_buffer(result, sizeof(result), result_offset, ",freq:%.2f", snapshot.frequency_hz);
+    append_to_buffer(result, sizeof(result), result_offset, ",V1:%.2f", snapshot.voltage_l1_v);
+    append_to_buffer(result, sizeof(result), result_offset, ",V2:%.2f", snapshot.voltage_l2_v);
+#ifdef THREE_PHASE
+    append_to_buffer(result, sizeof(result), result_offset, ",V3:%.2f", snapshot.voltage_l3_v);
+#endif
+  }
 
   for (i = 0; i < NUM_BOARDS; i ++)
   {
-    unsigned short sys0_1 = sensor_ic1[i].GetSysStatus0();  //EMMState0
-    unsigned short sys0_2 = sensor_ic2[i].GetSysStatus0();
-    if (sys0_1 == 65535 || sys0_1 == 0 || sys0_2 == 65535 || sys0_2 == 0)
+    if (!meter_ic_is_online(sensor_ic1[i]) || !meter_ic_is_online(sensor_ic2[i]))
     {
       /* Print error message if we can't talk to the master board */
       if (i == 0) DBUGS.println("Error: Not receiving data from the energy meter - check your connections");
@@ -205,91 +259,115 @@ void energy_meter_loop()
       continue;
     }
 
-    /* get current readings from each IC */
-    voltageCT[0] = sensor_ic1[i].GetLineVoltageA();
-    voltageCT[1] = sensor_ic1[i].GetLineVoltageB();
-    voltageCT[2] = sensor_ic1[i].GetLineVoltageC();
-    voltageCT[3] = sensor_ic2[i].GetLineVoltageA();
-    voltageCT[4] = sensor_ic2[i].GetLineVoltageB();
-    voltageCT[5] = sensor_ic2[i].GetLineVoltageC();
+    const float currentCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetLineCurrentA()),
+      static_cast<float>(sensor_ic1[i].GetLineCurrentB()),
+      static_cast<float>(sensor_ic1[i].GetLineCurrentC()),
+      static_cast<float>(sensor_ic2[i].GetLineCurrentA()),
+      static_cast<float>(sensor_ic2[i].GetLineCurrentB()),
+      static_cast<float>(sensor_ic2[i].GetLineCurrentC())
+    };
+    const float realPowerCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetActivePowerA()),
+      static_cast<float>(sensor_ic1[i].GetActivePowerB()),
+      static_cast<float>(sensor_ic1[i].GetActivePowerC()),
+      static_cast<float>(sensor_ic2[i].GetActivePowerA()),
+      static_cast<float>(sensor_ic2[i].GetActivePowerB()),
+      static_cast<float>(sensor_ic2[i].GetActivePowerC())
+    };
+    const float reactivePowerCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetReactivePowerA()),
+      static_cast<float>(sensor_ic1[i].GetReactivePowerB()),
+      static_cast<float>(sensor_ic1[i].GetReactivePowerC()),
+      static_cast<float>(sensor_ic2[i].GetReactivePowerA()),
+      static_cast<float>(sensor_ic2[i].GetReactivePowerB()),
+      static_cast<float>(sensor_ic2[i].GetReactivePowerC())
+    };
+    const float apparentPowerCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetApparentPowerA()),
+      static_cast<float>(sensor_ic1[i].GetApparentPowerB()),
+      static_cast<float>(sensor_ic1[i].GetApparentPowerC()),
+      static_cast<float>(sensor_ic2[i].GetApparentPowerA()),
+      static_cast<float>(sensor_ic2[i].GetApparentPowerB()),
+      static_cast<float>(sensor_ic2[i].GetApparentPowerC())
+    };
+    const float powerFactorCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetPowerFactorA()),
+      static_cast<float>(sensor_ic1[i].GetPowerFactorB()),
+      static_cast<float>(sensor_ic1[i].GetPowerFactorC()),
+      static_cast<float>(sensor_ic2[i].GetPowerFactorA()),
+      static_cast<float>(sensor_ic2[i].GetPowerFactorB()),
+      static_cast<float>(sensor_ic2[i].GetPowerFactorC())
+    };
+    const float phaseAngleCT[NUM_INPUTS] = {
+      static_cast<float>(sensor_ic1[i].GetPhaseA()),
+      static_cast<float>(sensor_ic1[i].GetPhaseB()),
+      static_cast<float>(sensor_ic1[i].GetPhaseC()),
+      static_cast<float>(sensor_ic2[i].GetPhaseA()),
+      static_cast<float>(sensor_ic2[i].GetPhaseB()),
+      static_cast<float>(sensor_ic2[i].GetPhaseC())
+    };
 
-    currentCT[0] = sensor_ic1[i].GetLineCurrentA();
-    currentCT[1] = sensor_ic1[i].GetLineCurrentB();
-    currentCT[2] = sensor_ic1[i].GetLineCurrentC();
-    currentCT[3] = sensor_ic2[i].GetLineCurrentA();
-    currentCT[4] = sensor_ic2[i].GetLineCurrentB();
-    currentCT[5] = sensor_ic2[i].GetLineCurrentC();
-
-    realPowerCT[0] = sensor_ic1[i].GetActivePowerA();
-    realPowerCT[1] = sensor_ic1[i].GetActivePowerB();
-    realPowerCT[2] = sensor_ic1[i].GetActivePowerC();
-    realPowerCT[3] = sensor_ic2[i].GetActivePowerA();
-    realPowerCT[4] = sensor_ic2[i].GetActivePowerB();
-    realPowerCT[5] = sensor_ic2[i].GetActivePowerC();
-
-    vaPowerCT[0] = sensor_ic1[i].GetApparentPowerA();
-    vaPowerCT[1] = sensor_ic1[i].GetApparentPowerB();
-    vaPowerCT[2] = sensor_ic1[i].GetApparentPowerC();
-    vaPowerCT[3] = sensor_ic2[i].GetApparentPowerA();
-    vaPowerCT[4] = sensor_ic2[i].GetApparentPowerB();
-    vaPowerCT[5] = sensor_ic2[i].GetApparentPowerC();
-
-    powerFactorCT[0] = sensor_ic1[i].GetPowerFactorA();
-    powerFactorCT[1] = sensor_ic1[i].GetPowerFactorB();
-    powerFactorCT[2] = sensor_ic1[i].GetPowerFactorC();
-    powerFactorCT[3] = sensor_ic2[i].GetPowerFactorA();
-    powerFactorCT[4] = sensor_ic2[i].GetPowerFactorB();
-    powerFactorCT[5] = sensor_ic2[i].GetPowerFactorC();
-
-    for (j = 0; j < NUM_INPUTS; j ++)
+    for (int j = 0; j < NUM_INPUTS; j ++)
     {
+      const int channelIndex = i*NUM_INPUTS+j;
+      const float scale = pow_mul[channelIndex] * cur_mul[channelIndex];
       /* determine if negative - current registers are not signed, so this is an easy way to tell */
-      if (realPowerCT[j] < 0) currentCT[j] *= -1;
-
-      /* flip sign of power factor if current multiplier is negative */
-      if (cur_mul[i*NUM_INPUTS+j] < 0) powerFactorCT[j] *= -1;
-
-      /* scale current and power using multipliers */
-      currentCT[j] *=  cur_mul[i*NUM_INPUTS+j];
-      realPowerCT[j] *= pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j];
-
-      /* apparent power is always positive */
-      vaPowerCT[j] *= fabs(pow_mul[i*NUM_INPUTS+j] * cur_mul[i*NUM_INPUTS+j]);
-
-      Serial.println("I" + String(i) + "_CT" + String(j+1) + ": " + String(currentCT[j]) + "A");
-
-      if (i != 0 || j != 0)
-      {
-        result_json += sprintf(result_json, ",");
+      float current = currentCT[j];
+      if (realPowerCT[j] < 0) {
+        current *= -1;
       }
 
-      result_json += sprintf(result_json, "{\"ct\":%d", i*NUM_INPUTS+j+1);
-      result_json += sprintf(result_json, ",\"name\":\"%s\"", ct_name[i*NUM_INPUTS+j].c_str());
-      result_json += sprintf(result_json, ",\"w\":%.2f", realPowerCT[j]);
-      result_json += sprintf(result_json, ",\"a\":%.4f", currentCT[j]);
-      result_json += sprintf(result_json, ",\"pf\":%.3f", powerFactorCT[j]);
-      result_json += sprintf(result_json, ",\"va\":%.2f", vaPowerCT[j]);
-      result_json += sprintf(result_json, ",\"v\":%.2f}", voltageCT[j]);
+      /* flip sign of power factor if current multiplier is negative */
+      float powerFactor = powerFactorCT[j];
+      float phaseAngle = phaseAngleCT[j];
+      if (cur_mul[channelIndex] < 0) {
+        powerFactor *= -1;
+        phaseAngle *= -1;
+      }
 
-      sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
-      dtostrf(currentCT[j], 2, 4, measurement);
-      strcat(result, measurement);
+      /* scale current and power using multipliers */
+      current *= cur_mul[channelIndex];
+      const float realPower = realPowerCT[j] * scale;
+      const float reactivePower = reactivePowerCT[j] * scale;
 
-      sprintf(result + strlen(result), ",PF%d:", i*NUM_INPUTS+j+1);
-      dtostrf(powerFactorCT[j], 2, 3, measurement);
-      strcat(result, measurement);
+      /* apparent power is always positive */
+      const float apparentPower = apparentPowerCT[j] * fabsf(scale);
 
-      sprintf(result + strlen(result), ",W%d:", i*NUM_INPUTS+j+1);
-      dtostrf(realPowerCT[j], 2, 2, measurement);
-      strcat(result, measurement);
+      energy_channel_snapshot_t &channel = snapshot.channels[channelIndex];
+      channel.valid = true;
+      channel.current_a = current;
+      channel.power_w = realPower;
+      channel.power_factor = powerFactor;
+      channel.apparent_power_va = apparentPower;
+      channel.reactive_power_var = reactivePower;
+      channel.phase_angle_deg = phaseAngle;
 
-      sprintf(result + strlen(result), ",VA%d:", i*NUM_INPUTS+j+1);
-      dtostrf(vaPowerCT[j], 2, 2, measurement);
-      strcat(result, measurement);
+      snapshot.total_power_w += realPower;
+      snapshot.total_apparent_power_va += apparentPower;
+      snapshot.total_reactive_power_var += reactivePower;
+      haveAnyChannel = true;
+
+      Serial.println("I" + String(i) + "_CT" + String(j+1) + ": " + String(current) + "A");
+
+      const char *prefix = result_offset ? "," : "";
+      append_to_buffer(result, sizeof(result), result_offset, "%sCT%d:%.4f", prefix, channelIndex + 1, current);
+      append_to_buffer(result, sizeof(result), result_offset, ",PF%d:%.3f", channelIndex + 1, powerFactor);
+      append_to_buffer(result, sizeof(result), result_offset, ",W%d:%.2f", channelIndex + 1, realPower);
+      append_to_buffer(result, sizeof(result), result_offset, ",VA%d:%.2f", channelIndex + 1, apparentPower);
     }
     Serial.println("");
   }
-  strcpy(result_json, "]}");
+
+  snapshot.valid = haveAnyChannel || primary_board_valid;
+  if (fabsf(snapshot.total_apparent_power_va) > 0.0001f) {
+    snapshot.total_power_factor = snapshot.total_power_w / snapshot.total_apparent_power_va;
+  }
+  g_snapshot = snapshot;
+
+  if (result[0] != '\0') {
+    input_set(result, true);
+  }
 
 #ifdef ENABLE_OLED_DISPLAY
   /* Write meter data to the display */
@@ -297,15 +375,15 @@ void energy_meter_loop()
   display.setCursor(0, 0);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.println("V1:" + String(voltage1) + "V");
-  display.println("V2:" + String(voltage2) + "V");
-  display.println("CT1:" + String(currentCT1) + "A");
-  display.println("CT2:" + String(currentCT2) + "A");
-  display.println("CT3:" + String(currentCT3) + "A");
-  display.println("CT4:" + String(currentCT4) + "A");
-  display.println("CT5:" + String(currentCT5) + "A");
-  display.println("CT6:" + String(currentCT6) + "A");
-  display.println("Total W:" + String(totalWatts) + "W");
+  display.println("V1:" + String(snapshot.voltage_l1_v) + "V");
+  display.println("V2:" + String(snapshot.voltage_l2_v) + "V");
+  display.println("CT1:" + String(snapshot.channels[0].current_a) + "A");
+  display.println("CT2:" + String(snapshot.channels[1].current_a) + "A");
+  display.println("CT3:" + String(snapshot.channels[2].current_a) + "A");
+  display.println("CT4:" + String(snapshot.channels[3].current_a) + "A");
+  display.println("CT5:" + String(snapshot.channels[4].current_a) + "A");
+  display.println("CT6:" + String(snapshot.channels[5].current_a) + "A");
+  display.println("Total W:" + String(snapshot.total_power_w) + "W");
   /*
     display.println("Freq: " + String(freq) + "Hz");
     display.println("PF: " + String(powerFactor));

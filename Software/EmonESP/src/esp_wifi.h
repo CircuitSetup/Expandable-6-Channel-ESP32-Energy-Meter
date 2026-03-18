@@ -33,6 +33,7 @@
 
 #include <WiFi.h>
 #include <ESPmDNS.h>              // Resolve URL for update server etc.
+#include "board_profile.h"
 
 //was causing ESP to crash in AP mode
 //#include <DNSServer.h>                // Required for captive portal
@@ -112,17 +113,20 @@ extern void wifi_disconnect();
 extern void wifi_turn_off_ap();
 extern void wifi_turn_on_ap();
 extern bool wifi_client_connected();
-
-#define wifi_is_client_configured()   (WiFi.SSID() != "")
-
-// Wifi mode
-#define wifi_mode_is_sta()            (WIFI_STA == (WiFi.getMode() & WIFI_STA))
-#define wifi_mode_is_sta_only()       (WIFI_STA == WiFi.getMode())
-#define wifi_mode_is_ap()             (WIFI_AP == (WiFi.getMode() & WIFI_AP))
-
-// Performing a scan enables STA so we end up in AP+STA mode so treat AP+STA with no
-// ssid set as AP only
-#define wifi_mode_is_ap_only()        ((WIFI_AP == WiFi.getMode()) || \
-                                       (WIFI_AP_STA == WiFi.getMode() && !wifi_is_client_configured()))
+extern bool wifi_is_client_configured();
+extern bool wifi_mode_is_sta();
+extern bool wifi_mode_is_sta_only();
+extern bool wifi_mode_is_ap();
+extern bool wifi_mode_is_ap_only();
+extern bool wifi_mode_is_eth();
+extern bool wifi_mode_is_eth_only();
+extern bool wifi_mode_is_eth_ap();
+extern bool wifi_link_up();
+extern bool wifi_scan_supported();
+extern bool wifi_transport_is_ethernet();
+extern bool wifi_should_authenticate_requests();
+extern const char *wifi_transport_type();
+extern String wifi_mode_string();
+extern int wifi_signal_strength();
 
 #endif // _EMONESP_WIFI_H

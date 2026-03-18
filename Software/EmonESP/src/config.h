@@ -76,7 +76,12 @@ extern float pow_mul[NUM_CHANNELS];
 
 struct config_flags_t
 {
-  bool mqtt_json:1;
+  bool mqtt_legacy_flat;
+  bool mqtt_json;
+  bool mqtt_home_assistant;
+  bool mqtt_metric_reactive_power;
+  bool mqtt_metric_phase_angle;
+  bool mqtt_metric_totals;
 };
 
 extern config_flags_t config_flags;
@@ -94,7 +99,17 @@ extern void config_save_emoncms(String server, String path, String node, String 
 // -------------------------------------------------------------------
 // Save the MQTT broker details
 // -------------------------------------------------------------------
-extern void config_save_mqtt(String server, String topic, String prefix, String user, String pass, bool json);
+extern void config_save_mqtt(String server,
+                             String topic,
+                             String prefix,
+                             String user,
+                             String pass,
+                             bool legacy_flat,
+                             bool json,
+                             bool home_assistant,
+                             bool metric_reactive_power,
+                             bool metric_phase_angle,
+                             bool metric_totals);
 
 // -------------------------------------------------------------------
 // Save the Calibration details

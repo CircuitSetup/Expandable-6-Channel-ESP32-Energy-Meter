@@ -51,17 +51,17 @@ void ota_setup()
       String type;
       if (ArduinoOTA.getCommand() == U_FLASH)
         type = "sketch";
-      else // U_SPIFFS
+      else // filesystem
       {
         type = "filesystem";
-        SPIFFS.end(); // unmount filesystem
+        LittleFS.end(); // unmount filesystem
       }
       DBUGS.println("Start updating " + type);
     })
     .onEnd([]() {
       DBUGS.println("\nOTA Update Complete");
       if (ArduinoOTA.getCommand() == U_SPIFFS)
-        SPIFFS.begin();
+        LittleFS.begin();
     })
     #ifdef WIFI_LED
     .onProgress([](unsigned int pos, unsigned int size) {
@@ -98,12 +98,12 @@ String ota_get_latest_version()
 
 t_httpUpdate_return ota_http_update()
 {
-  WiFiClient client;
+  NetworkClient client;
   #ifdef ENABLE_WDT
     feedLoopWDT();
   #endif
-  SPIFFS.end(); // unmount filesystem
+  LittleFS.end(); // unmount filesystem
   t_httpUpdate_return ret = httpUpdate.update(client,"http://" + String(u_host) + String(u_url) + "?tag=" + currentfirmware);
-  SPIFFS.begin(); //mount-file system
+  LittleFS.begin(); // mount file system
   return ret;
 }

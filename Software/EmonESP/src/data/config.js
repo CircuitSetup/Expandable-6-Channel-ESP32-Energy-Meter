@@ -55,6 +55,8 @@ function StatusViewModel() {
 
   BaseViewModel.call(self, {
     "mode": "ERR",
+    "transport": "wifi",
+    "link_up": false,
     "networks": [],
     "rssi": [],
     "srssi": "",
@@ -70,8 +72,23 @@ function StatusViewModel() {
   self.isWifiClient = ko.pureComputed(function () {
     return ("STA" == self.mode()) || ("STA+AP" == self.mode());
   });
+  self.isEthernetTransport = ko.pureComputed(function () {
+    return "ethernet" == self.transport();
+  });
+  self.hasRoutedUplink = ko.pureComputed(function () {
+    return ("STA" == self.mode()) || ("STA+AP" == self.mode()) || ("ETH" == self.mode()) || ("ETH+AP" == self.mode());
+  });
   self.isWifiAccessPoint = ko.pureComputed(function () {
-    return ("AP" == self.mode()) || ("STA+AP" == self.mode());
+    return ("AP" == self.mode()) || ("STA+AP" == self.mode()) || ("ETH+AP" == self.mode());
+  });
+  self.showWifiSetup = ko.pureComputed(function () {
+    return !self.isEthernetTransport() && !self.hasRoutedUplink();
+  });
+  self.transportLabel = ko.pureComputed(function () {
+    return self.isEthernetTransport() ? "Ethernet (W5500)" : "Wi-Fi";
+  });
+  self.linkLabel = ko.pureComputed(function () {
+    return (self.link_up() === true || self.link_up() === "true" || self.link_up() === "1") ? "Up" : "Down";
   });
   self.fullMode = ko.pureComputed(function () {
     switch (self.mode()) {
@@ -81,6 +98,10 @@ function StatusViewModel() {
         return "Client (STA)";
       case "STA+AP":
         return "Client + Access Point (STA+AP)";
+      case "ETH":
+        return "Ethernet (ETH)";
+      case "ETH+AP":
+        return "Ethernet + Access Point (ETH+AP)";
     }
 
     return "Unknown (" + self.mode() + ")";
@@ -168,7 +189,12 @@ function SensorConfigViewModel(baseconfig, baselast) {
         }
       });
       self.sensors = ko.observableArray(vals);
-      self.config.mqtt_json = ko.observable(self.config.mqtt_json() != "false");
+      self.config.mqtt_legacy_flat(self.config.mqtt_legacy_flat() != "false");
+      self.config.mqtt_json(self.config.mqtt_json() != "false");
+      self.config.mqtt_home_assistant(self.config.mqtt_home_assistant() != "false");
+      self.config.mqtt_metric_reactive_power(self.config.mqtt_metric_reactive_power() != "false");
+      self.config.mqtt_metric_phase_angle(self.config.mqtt_metric_phase_angle() != "false");
+      self.config.mqtt_metric_totals(self.config.mqtt_metric_totals() != "false");
       after();
    }
 }
@@ -193,9 +219,12 @@ function LastValuesViewModel() {
       for (var z in namevaluepairs) {
         var namevalue = namevaluepairs[z].split(":");
         var units = "";
+        if (namevalue[0].indexOf("ANGLE") === 0) units = "deg";
+        if (namevalue[0].indexOf("VAR") === 0) units = "VAR";
+        if (namevalue[0].indexOf("VA") === 0) units = "VA";
         if (namevalue[0].indexOf("CT") === 0) units = "A";
 		if (namevalue[0].indexOf("totI") === 0) units = "A";
-		if (namevalue[0].indexOf("V") === 0) units = "V";
+		if (units === "" && namevalue[0].indexOf("V") === 0) units = "V";
 		if (namevalue[0].indexOf("W") === 0) units = "W";
 		if (namevalue[0].indexOf("AW") === 0) units = "W";
         if (namevalue[0].indexOf("T") === 0) units = String.fromCharCode(176)+"C";
@@ -233,6 +262,7 @@ function EmonEspViewModel() {
     self.updating(true);
     self.config.update(function () {
       self.status.update(function () {
+        ipaddress = self.status.ipaddress();
         self.last.update(function () {
           self.sensorconfig.update(function () {
             ko.applyBindings(self);
@@ -259,6 +289,7 @@ function EmonEspViewModel() {
       updateTimer = null;
     }
     self.status.update(function () {
+      ipaddress = self.status.ipaddress();
       self.last.update(function () {
         updateTimer = setTimeout(self.update, updateTime);
         self.updating(false);
@@ -268,9 +299,12 @@ function EmonEspViewModel() {
 
   self.wifiConnecting = ko.observable(false);
   self.status.mode.subscribe(function (newValue) {
-    if(newValue === "STA+AP" || newValue === "STA") {
+    if(newValue === "STA+AP" || newValue === "STA" || newValue === "ETH+AP" || newValue === "ETH") {
       self.wifiConnecting(false);
     }
+  });
+  self.status.ipaddress.subscribe(function (newValue) {
+    ipaddress = newValue;
   });
 
   // -----------------------------------------------------------------------
@@ -279,6 +313,10 @@ function EmonEspViewModel() {
   self.saveNetworkFetching = ko.observable(false);
   self.saveNetworkSuccess = ko.observable(false);
   self.saveNetwork = function () {
+    if (self.status.isEthernetTransport()) {
+      alert("Wi-Fi client configuration is disabled on Ethernet builds");
+      return;
+    }
     if (self.config.ssid() === "") {
       alert("Please select network");
     } else {
@@ -366,7 +404,12 @@ function EmonEspViewModel() {
       prefix: self.config.mqtt_feed_prefix(),
       user: self.config.mqtt_user(),
       pass: self.config.mqtt_pass(),
-      json: self.config.mqtt_json()
+      flat: self.config.mqtt_legacy_flat(),
+      json: self.config.mqtt_json(),
+      home_assistant: self.config.mqtt_home_assistant(),
+      metric_reactive_power: self.config.mqtt_metric_reactive_power(),
+      metric_phase_angle: self.config.mqtt_metric_phase_angle(),
+      metric_totals: self.config.mqtt_metric_totals()
     };
 
 	  self.saveMqttFetching(true);

@@ -31,6 +31,26 @@
 
 char input_string[MAX_DATA_LEN] = "";
 char last_datastr[MAX_DATA_LEN] = "";
+static bool pending_data_from_energy_meter = false;
+static bool last_data_from_energy_meter = false;
+
+void input_set(const char * data, bool from_energy_meter)
+{
+  if (!data) {
+    input_string[0] = '\0';
+    pending_data_from_energy_meter = false;
+    return;
+  }
+
+  strncpy(input_string, data, MAX_DATA_LEN - 1);
+  input_string[MAX_DATA_LEN - 1] = '\0';
+  pending_data_from_energy_meter = from_energy_meter;
+}
+
+bool input_last_data_from_energy_meter()
+{
+  return last_data_from_energy_meter;
+}
 
 boolean input_get(char * data)
 {
@@ -41,6 +61,8 @@ boolean input_get(char * data)
     strncpy(data, input_string, MAX_DATA_LEN - 1);
     data[MAX_DATA_LEN - 1] = '\0'; // Ensure null-termination
     input_string[0] = '\0';        // Clear buffer safely
+    last_data_from_energy_meter = pending_data_from_energy_meter;
+    pending_data_from_energy_meter = false;
     gotData = true;
   }
 #ifdef USE_SERIAL_INPUT
@@ -48,6 +70,7 @@ boolean input_get(char * data)
   else if (Serial.available()) {
     // Could check for string integrity here
     data = Serial.readStringUntil('\n');
+    last_data_from_energy_meter = false;
     gotData = true;
   }
 #endif

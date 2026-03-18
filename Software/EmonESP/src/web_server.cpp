@@ -117,7 +117,7 @@ bool requestPreProcess(AsyncWebServerRequest *request, AsyncResponseStream *&res
     return false;
   }
 
-  if (wifi_mode_is_sta() && www_username != "" &&
+  if (wifi_should_authenticate_requests() && www_username != "" &&
       false == request->authenticate(www_username.c_str(), www_password.c_str())) {
     request->requestAuthentication(esp_hostname);
     return false;
@@ -141,15 +141,15 @@ void handleHome(AsyncWebServerRequest *request) {
   if (www_username != ""
       && !request->authenticate(www_username.c_str(),
                                 www_password.c_str())
-      && wifi_mode_is_sta()) {
+      && wifi_should_authenticate_requests()) {
     return request->requestAuthentication();
   }
 
-  if (SPIFFS.exists("/home.html")) {
-    request->send(SPIFFS, "/home.html");
+  if (LittleFS.exists("/home.html")) {
+    request->send(LittleFS, "/home.html");
   } else {
     request->send(200, "text/plain",
-                  "/home.html not found, have you flashed the SPIFFS?");
+                  "/home.html not found, have you flashed the LittleFS image?");
   }
 }
 
@@ -163,6 +163,11 @@ void handleHome(AsyncWebServerRequest *request) {
 void handleScan(AsyncWebServerRequest *request) {
   AsyncResponseStream *response;
   if (false == requestPreProcess(request, response)) {
+    return;
+  }
+
+  if (!wifi_scan_supported()) {
+    request->send(200, "text/json", "[]");
     return;
   }
 
@@ -205,7 +210,7 @@ void handleAPOff(AsyncWebServerRequest *request) {
   request->send(response);
 
   DBUGLN("Turning AP Off");
-  systemRebootTime = millis() + 1000;
+  wifi_turn_off_ap();
 }
 
 // -------------------------------------------------------------------
@@ -289,12 +294,24 @@ void handleSaveMqtt(AsyncWebServerRequest *request) {
     pass = mqtt_pass;
   }
 
+  const bool legacyFlat = request->hasArg("flat") ? request->arg("flat") != "false" : config_flags.mqtt_legacy_flat;
+  const bool jsonState = request->hasArg("json") ? request->arg("json") != "false" : config_flags.mqtt_json;
+  const bool homeAssistant = request->hasArg("home_assistant") ? request->arg("home_assistant") != "false" : config_flags.mqtt_home_assistant;
+  const bool reactivePower = request->hasArg("metric_reactive_power") ? request->arg("metric_reactive_power") != "false" : config_flags.mqtt_metric_reactive_power;
+  const bool phaseAngle = request->hasArg("metric_phase_angle") ? request->arg("metric_phase_angle") != "false" : config_flags.mqtt_metric_phase_angle;
+  const bool totals = request->hasArg("metric_totals") ? request->arg("metric_totals") != "false" : config_flags.mqtt_metric_totals;
+
   config_save_mqtt(request->arg("server"),
                    request->arg("topic"),
                    request->arg("prefix"),
                    request->arg("user"),
                    pass,
-                   request->arg("json") != "false");
+                   legacyFlat,
+                   jsonState,
+                   homeAssistant,
+                   reactivePower,
+                   phaseAngle,
+                   totals);
 
   char tmpStr[200];
   snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", mqtt_server.c_str(),
@@ -378,17 +395,19 @@ void handleStatus(AsyncWebServerRequest *request) {
   }
 
   String s = "{";
-  if (wifi_mode_is_sta_only()) {
-    s += "\"mode\":\"STA\",";
-  } else if (wifi_mode_is_ap_only()) {
-    s += "\"mode\":\"AP\",";
-  } else if (wifi_mode_is_ap() && wifi_mode_is_sta()) {
-    s += "\"mode\":\"STA+AP\",";
-  }
+  s += "\"mode\":\"" + wifi_mode_string() + "\",";
+  s += "\"transport\":\"" + String(wifi_transport_type()) + "\",";
+  s += "\"link_up\":\"" + String(wifi_link_up()) + "\",";
   s += "\"networks\":[" + st + "],";
   s += "\"rssi\":[" + rssi + "],";
 
-  s += "\"srssi\":\"" + String(WiFi.RSSI()) + "\",";
+  s += "\"srssi\":\"";
+  if (wifi_transport_is_ethernet()) {
+    s += "";
+  } else {
+    s += String(wifi_signal_strength());
+  }
+  s += "\",";
   s += "\"ipaddress\":\"" + ipaddress + "\",";
   s += "\"emoncms_connected\":\"" + String(emoncms_connected) + "\",";
   s += "\"packets_sent\":\"" + String(packets_sent) + "\",";
@@ -453,6 +472,41 @@ void handleConfig(AsyncWebServerRequest *request) {
     s += "false";
   }
   s += "\",";
+  s += "\"mqtt_legacy_flat\":\"";
+  if (config_flags.mqtt_legacy_flat) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
+  s += "\"mqtt_home_assistant\":\"";
+  if (config_flags.mqtt_home_assistant) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
+  s += "\"mqtt_metric_reactive_power\":\"";
+  if (config_flags.mqtt_metric_reactive_power) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
+  s += "\"mqtt_metric_phase_angle\":\"";
+  if (config_flags.mqtt_metric_phase_angle) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
+  s += "\"mqtt_metric_totals\":\"";
+  if (config_flags.mqtt_metric_totals) {
+    s += "true";
+  } else {
+    s += "false";
+  }
+  s += "\",";
   s += "\"www_username\":\"" + www_username + "\",";
   s += "\"www_password\":\"";
   if (www_password != 0) {
@@ -506,7 +560,7 @@ void handleRst(AsyncWebServerRequest *request) {
 
   config_reset();
 
-  WiFi.disconnect(false, true);
+  wifi_disconnect();
 
   response->setCode(200);
   response->print("1");
@@ -543,8 +597,7 @@ void handleInput(AsyncWebServerRequest *request) {
     return;
   }
 
-  strncpy(input_string, request->arg("string").c_str(), sizeof(input_string) - 1);
-  input_string[sizeof(input_string) - 1] = '\0'; // null-terminate for safety
+  input_set(request->arg("string").c_str(), false);
 
   response->setCode(200);
   response->print(input_string);
@@ -653,8 +706,9 @@ void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t 
 
   if (!index) {
     DBUGF("Update Start: %s\n", filename.c_str());
-    // if filename includes spiffs, update the spiffs partition
-    int cmd = (filename.indexOf("spiffs") > 0) ? U_SPIFFS : U_FLASH;
+    // If the filename looks like a filesystem image, update the filesystem partition.
+    const bool isFilesystemImage = (filename.indexOf("littlefs") >= 0) || (filename.indexOf("spiffs") >= 0);
+    int cmd = isFilesystemImage ? U_SPIFFS : U_FLASH;
     if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
 #ifdef ENABLE_DEBUG
       Update.printError(DEBUG_PORT);
@@ -730,7 +784,7 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient *client, AwsEventTy
 
 void web_server_setup()
 {
-  SPIFFS.begin(); // mount the fs
+  LittleFS.begin(); // mount the fs
 
   DefaultHeaders::Instance().addHeader(F("Access-Control-Allow-Origin"), F("*"));
   DefaultHeaders::Instance().addHeader(F("Access-Control-Allow-Headers"), F("Content-Type, Authorization"));
@@ -741,9 +795,8 @@ void web_server_setup()
   server.addHandler(&ws);
 
   // Setup the static files
-  server.serveStatic("/", SPIFFS, "/")
-  .setDefaultFile("index.html")
-  .setAuthentication(www_username.c_str(), www_password.c_str());
+  server.serveStatic("/", LittleFS, "/")
+  .setDefaultFile("index.html");
 
   // Start server & server root html /
   server.on("/", handleHome);

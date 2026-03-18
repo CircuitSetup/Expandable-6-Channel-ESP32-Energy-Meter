@@ -28,10 +28,37 @@
 #include "emonesp.h"
 #include "http.h"
 
-WiFiClient client;                  // Create class for HTTP TCP connections get_http()
-WiFiClientSecure client_ssl;        // Create class for HTTPS TCP connections get_https()
+NetworkClient client;               // Create class for HTTP TCP connections get_http()
+NetworkClientSecure client_ssl;     // Create class for HTTPS TCP connections get_https()
 
 static char request[MAX_DATA_LEN+100];
+
+static String execute_http_request(Client &http, const char * host, const char * url)
+{
+  snprintf(request, sizeof(request), "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
+  http.print(request);
+
+  unsigned long timeout = millis();
+  while (http.available() == 0) {
+    if (millis() - timeout > (HTTP_TIMEOUT * 1000)) {
+      http.stop();
+      return ("Client Timeout");
+    }
+#ifdef ENABLE_WDT
+    feedLoopWDT();
+#endif
+  }
+
+  while (http.available()) {
+    String line = http.readStringUntil('\r');
+    DBUGS.println(line);      //debug
+    if (line.startsWith("HTTP/1.1 200 OK")) {
+      return ("ok");
+    }
+  }
+
+  return ("error " + String(host));
+}
 
 // -------------------------------------------------------------------
 // HTTP or HTTPS GET Request
@@ -39,44 +66,23 @@ static char request[MAX_DATA_LEN+100];
 // -------------------------------------------------------------------
 
 String get_http(const char * host, const char * url, int port, const char * fingerprint) {
-  WiFiClientSecure * http;
-
   if (fingerprint) {
-    http = &client_ssl;
-  } else {
-    http = (WiFiClientSecure *) &client;
+    if (!client_ssl.connect(host, port, HTTP_TIMEOUT * 1000)) {
+      DBUGS.printf("%s:%d\n", host, port);      //debug
+      return ("Connection error");
+    }
+    client_ssl.setTimeout(HTTP_TIMEOUT * 1000);
+    if (!client_ssl.verify(fingerprint, host)) {
+      client_ssl.stop();
+      return ("HTTPS fingerprint no match");
+    }
+    return execute_http_request(client_ssl, host, url);
   }
 
-  // Use WiFiClient class to create TCP connections
-  if (!http->connect(host, port, HTTP_TIMEOUT*1000)) {
+  if (!client.connect(host, port, HTTP_TIMEOUT * 1000)) {
     DBUGS.printf("%s:%d\n", host, port);      //debug
     return ("Connection error");
   }
-  http->setTimeout(HTTP_TIMEOUT);
-  if (!fingerprint || http->verify(fingerprint, host)) {
-    sprintf(request, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
-    http->print(request);
-    // Handle wait for reply and timeout
-    unsigned long timeout = millis();
-    while (http->available() == 0) {
-      if (millis() - timeout > (HTTP_TIMEOUT*1000)) {
-        http->stop();
-        return ("Client Timeout");
-      }
-#ifdef ENABLE_WDT
-      feedLoopWDT();
-#endif
-    }
-    // Handle message receive
-    while (http->available()) {
-      String line = http->readStringUntil('\r');
-      DBUGS.println(line);      //debug
-      if (line.startsWith("HTTP/1.1 200 OK")) {
-        return ("ok");
-      }
-    }
-  } else {
-    return ("HTTPS fingerprint no match");
-  }
-  return ("error " + String(host));
+  client.setTimeout(HTTP_TIMEOUT * 1000);
+  return execute_http_request(client, host, url);
 }

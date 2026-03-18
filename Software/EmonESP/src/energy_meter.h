@@ -72,7 +72,36 @@
 */
 #define CURRENT_GAIN_DEFAULT 27961
 
+struct energy_channel_snapshot_t
+{
+  bool valid;
+  float current_a;
+  float power_w;
+  float power_factor;
+  float apparent_power_va;
+  float reactive_power_var;
+  float phase_angle_deg;
+};
+
+struct energy_meter_snapshot_t
+{
+  bool valid;
+  bool three_phase;
+  float temperature_c;
+  float frequency_hz;
+  float voltage_l1_v;
+  float voltage_l2_v;
+  float voltage_l3_v;
+  float total_power_w;
+  float total_apparent_power_va;
+  float total_reactive_power_var;
+  float total_power_factor;
+  energy_channel_snapshot_t channels[NUM_CHANNELS];
+};
+
 extern void energy_meter_setup();
 extern void energy_meter_loop();
+extern bool energy_meter_snapshot_valid();
+extern const energy_meter_snapshot_t & energy_meter_get_snapshot();
 
 #endif

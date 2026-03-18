@@ -28,9 +28,9 @@
 #ifndef _EMONESP_WEB_SERVER_H
 #define _EMONESP_WEB_SERVER_H
 
-#include <FS.h>                       // SPIFFS file-system: store web server html, CSS etc.
+#include <FS.h>                       // LittleFS file-system: store web server html, CSS etc.
 #include <Arduino.h>
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>  // https://github.com/ESP32Async/AsyncTCP
 #include <ESPAsyncWebServer.h> // https://github.com/ESP32Async/ESPAsyncWebServer

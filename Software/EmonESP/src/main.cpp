@@ -26,6 +26,8 @@
    Boston, MA 02111-1307, USA.
 */
 
+#include <Arduino.h>
+
 // See energy meter specific configuration in energy_meter.h
 #define ENABLE_ENERGY_METER
 

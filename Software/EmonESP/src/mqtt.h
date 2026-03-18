@@ -34,7 +34,7 @@
 
 #include <Arduino.h>
 #include <PubSubClient.h>             // MQTT https://github.com/knolleary/pubsubclient PlatformIO lib: 89
-#include <WiFiClient.h>
+#include <NetworkClient.h>
 #include "emonesp.h"
 
 #ifndef MQTT_TIMEOUT
@@ -64,10 +64,6 @@ extern void mqtt_restart();
 // Return true if we are connected to an MQTT broker, false if not
 // -------------------------------------------------------------------
 extern boolean mqtt_connected();
-
-String uint64ToString(uint64_t input);
-
-extern char input_json[MAX_DATA_LEN];
 
 
 #endif // _EMONESP_MQTT_H

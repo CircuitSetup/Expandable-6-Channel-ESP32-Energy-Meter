@@ -19,7 +19,7 @@
   <div id="page">
     <div class="box">
       <h1>emon<span>ESP</span></h1>
-      <h3>WiFi Emoncms Link for CircuitSetup Energy Meters</h3>
+      <h3>Network Emoncms Link for CircuitSetup Energy Meters</h3>
     </div>
 
     <div class="loading" data-bind="visible: !initialised()">
@@ -28,28 +28,37 @@
 
     <div id="left-hand-container" data-bind="visible: initialised" style="display: none">
       <div id="one">
-        <h2>1. WiFi Network</h2>
+        <h2>1. Network</h2>
         <div class="itembody-wrapper">
           <p><b>Mode:</b> <span id="mode" data-bind="text: status.fullMode"></span></p>
+          <p><b>Transport:</b> <span data-bind="text: status.transportLabel"></span></p>
+          <p><b>Link:</b> <span data-bind="text: status.linkLabel"></span></p>
+          <p><b>IP Address:</b><br><a data-bind="text: status.ipaddress, attr: {href: 'http://'+status.ipaddress()}"></a></p>
 
-          <div id="client-view" data-bind="visible: status.isWifiClient">
-            <table>
-              <tr>
-                <th>Network</th>
-                <th>RSSI dBm</th>
-              </tr>
-                <tbody id="sta-ssid">
-                  <tr>
-                    <td data-bind="text: config.ssid"></td>
-                    <td data-bind="text: status.srssi"></td>
-                  </tr>
-                </tbody>
-            </table>
-            <p><b>IP Address:</b><br><a data-bind="text: status.ipaddress, attr: {href: 'http://'+status.ipaddress()}"></a></p>
+          <div id="client-view" data-bind="visible: status.hasRoutedUplink">
+            <div data-bind="visible: status.isWifiClient">
+              <table>
+                <tr>
+                  <th>Network</th>
+                  <th>RSSI dBm</th>
+                </tr>
+                  <tbody id="sta-ssid">
+                    <tr>
+                      <td data-bind="text: config.ssid"></td>
+                      <td data-bind="text: status.srssi"></td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
             <button id="apoff" data-bind="visible: status.isWifiAccessPoint">Turn off Access Point</button>
           </div>
 
-          <div id="ap-view" data-bind="visible: !status.isWifiClient() &amp;&amp; !wifiConnecting()">
+          <div data-bind="visible: status.isEthernetTransport">
+            <p>Ethernet uplink uses DHCP over the W5500 adapter.</p>
+            <p data-bind="visible: !status.hasRoutedUplink()">Connect the Ethernet cable to bring the uplink online.</p>
+          </div>
+
+          <div id="ap-view" data-bind="visible: status.showWifiSetup() &amp;&amp; !wifiConnecting()">
             <p>Connect to network:</p>
             <table>
               <tr>
@@ -130,21 +139,43 @@
             <input data-bind="textInput: config.mqtt_topic" type="text"><br/>
             <span class="small-text">
               e.g 'emon/emonesp', 'emon/heatpump'<br>
-              Data will be published to sub topic e.g. 'emon/emonesp/CT1'
+              Legacy flat topics publish under this root, JSON state publishes to &#60;base-topic&#62;/state,
+              and availability publishes to &#60;base-topic&#62;/status.
             </span>
           </p>
           <p><b>MQTT Feed-name prefix:</b><br>
             <input data-bind="textInput: config.mqtt_feed_prefix" type="text"><br/>
             <span class="small-text">
-              Value to prefix the feed names with: &#60;base-topic&#62;/&#60;prefix&#62;&#60;feed-name&#62;. Required for posting to AdafruitIO.
+              Legacy flat-topic prefix only: &#60;base-topic&#62;/&#60;prefix&#62;&#60;feed-name&#62;.
               Leave blank for no prefix.
             </span>
           </p>
-          <p><b>JSON format:</b>
+          <p><b>Legacy flat topics:</b>
+            <input data-bind="checked: config.mqtt_legacy_flat" type="checkbox"><br/>
+            <span class="small-text">
+              Publish the existing per-measurement MQTT topics for broad broker compatibility.
+            </span>
+          </p>
+          <p><b>JSON state topic:</b>
             <input data-bind="checked: config.mqtt_json" type="checkbox"><br/>
             <span class="small-text">
-              Use JSON formatting for sending data over MQTT.  The measurements from each sensor will be grouped into one packet.
+              Publish a structured JSON payload to &#60;base-topic&#62;/state for generic MQTT consumers.
             </span>
+          </p>
+          <p><b>Home Assistant discovery:</b>
+            <input data-bind="checked: config.mqtt_home_assistant" type="checkbox"><br/>
+            <span class="small-text">
+              Publish Home Assistant MQTT discovery under the default &#60;homeassistant&#62; prefix using the same JSON state topic. Disabled by default.
+            </span>
+          </p>
+          <p><b>Additional live metrics:</b><br>
+            <label><input data-bind="checked: config.mqtt_metric_reactive_power" type="checkbox"> Reactive power (VAR)</label><br/>
+            <label><input data-bind="checked: config.mqtt_metric_phase_angle" type="checkbox"> Phase angle (deg)</label><br/>
+            <label><input data-bind="checked: config.mqtt_metric_totals" type="checkbox"> Whole-device totals</label><br/>
+            <span class="small-text">
+              Energy counters are not exposed here yet because the ATM90E32 energy registers clear when they are read.
+            </span>
+          </p>
           <p><b>Username:</b><br>
             <input data-bind="textInput: config.mqtt_user" type="text"><br/>
             <span class="small-text">Leave blank for no authentication</span>
