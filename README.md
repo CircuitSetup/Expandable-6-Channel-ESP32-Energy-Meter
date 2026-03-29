@@ -56,13 +56,11 @@ The fastest way to get the meter running is to flash ESPHome directly from the [
 7. If you flashed a Wi-Fi build, provision Wi-Fi after the flash
 8. Once the device is online, adjust names, calibration values, and extra sensors as needed
 
-<img src="Images/esphome_web_installer_ready.png" alt="CircuitSetup ESPHome Installer showing add-on count, connection type, firmware version, and Connect button" width="520">
-
 The current Wi-Fi configs in this repo already include `captive_portal`, `esp32_improv`, and `improv_serial`, so the device can be provisioned before it is ever adopted into Home Assistant.
 
-### Optional: Adopt Into Home Assistant or ESPHome Device Builder Later
+### Adopt Into Home Assistant/ESPHome Device Builder
 
-If you want UI-based management, dashboard imports, OTA updates from Home Assistant, or YAML editing inside the add-on, install ESPHome Device Builder after the first flash. That step is optional for the initial install.
+If you want UI-based management, dashboard imports, OTA updates from Home Assistant, to change default meter/CT names, and do any other YAML editing, install ESPHome Device Builder after the first flash.
 
 1. Open `Settings > Add-ons > Add-on Store`
 2. Search for `ESPHome Device Builder`
@@ -71,9 +69,9 @@ If you want UI-based management, dashboard imports, OTA updates from Home Assist
 
 ![ESPHome add-on install](Images/esphome_add-on_install.png)
 
-After adoption, the default repo configs use `dashboard_import`, `name_add_mac_suffix: true`, and `ota: - platform: esphome`. The device should then appear in ESPHome Device Builder and in Home Assistant under `Settings > Devices & services`.
+The device should then appear in ESPHome Device Builder and in Home Assistant under `Settings > Devices & services`.
 
-For package layout, local copies, calibration files, CS-pin changes, and advanced YAML examples, see [Software/ESPHome/README.md](Software/ESPHome/README.md).
+For package layout, local copies, calibration files, CS-pin changes, and advanced YAML examples, see [Software/ESPHome/](Software/ESPHome/).
 
 ## What You Will Need
 
