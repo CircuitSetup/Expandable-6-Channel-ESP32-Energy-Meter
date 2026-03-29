@@ -6,6 +6,17 @@ The CircuitSetup Expandable 6 Channel ESP32 Energy Meter is a real-time power an
 
 The first AC-AC adapter powers the main board and provides the primary voltage reference. A second voltage can be measured on the main board, and stacked systems can monitor additional voltage references when the hardware is configured for it.
 
+## Table of Contents
+
+- [Typical Uses](#typical-uses)
+- [Features](#features)
+- [Quick Start: ESPHome via ESP Web Installer](#quick-start-esphome-via-esp-web-installer)
+- [What You Will Need](#what-you-will-need)
+- [Setting Up the Meter](#setting-up-the-meter)
+- [Software Options](#software-options)
+- [FAQ](#faq)
+- [More Resources](#more-resources)
+
 ## Typical Uses
 
 - North American split-phase 120V/240V 60Hz service: mains, solar, subpanels, and individual circuits
@@ -25,6 +36,44 @@ The first AC-AC adapter powers the main board and provides the primary voltage r
 - Energy pulse outputs, IRQ outputs, warning output, and zero-crossing signals are available on the board
 - Typical metering IC accuracy is 0.1 percent with a 6000:1 dynamic range
 - Current gain selection is available up to 4x
+
+## Quick Start: ESPHome via ESP Web Installer
+
+The fastest way to get the meter running is to flash ESPHome directly from the [CircuitSetup ESP Web Installer](https://circuitsetup.github.io/ESPWebInstaller/), connect it to your network, then adopt the device into Home Assistant.
+
+### Flash Now With the Web Installer
+
+![CircuitSetup ESPHome Installer options](Images/esphome_web_installer_ready.png)
+
+1. Open the [CircuitSetup ESP Web Installer](https://circuitsetup.github.io/ESPWebInstaller/)
+2. Under `6 Channel Meter`, choose:
+   - the number of add-on boards
+   - the connection type: `Wi-Fi`, `Ethernet (Lilygo)`, or `Ethernet (Waveshare)`
+3. Choose the firmware version
+4. Connect the ESP32 to your computer with a USB data cable
+5. Click `Connect`, choose the correct serial port, and start the flash
+6. If the board does not enter the bootloader automatically, hold the right or `IO0` button while the installer starts
+7. If you flashed a Wi-Fi build, provision Wi-Fi after the flash
+8. Once the device is online, adjust names, calibration values, and extra sensors as needed
+
+<img src="Images/esphome_web_installer_ready.png" alt="CircuitSetup ESPHome Installer showing add-on count, connection type, firmware version, and Connect button" width="520">
+
+The current Wi-Fi configs in this repo already include `captive_portal`, `esp32_improv`, and `improv_serial`, so the device can be provisioned before it is ever adopted into Home Assistant.
+
+### Optional: Adopt Into Home Assistant or ESPHome Device Builder Later
+
+If you want UI-based management, dashboard imports, OTA updates from Home Assistant, or YAML editing inside the add-on, install ESPHome Device Builder after the first flash. That step is optional for the initial install.
+
+1. Open `Settings > Add-ons > Add-on Store`
+2. Search for `ESPHome Device Builder`
+3. Install it, then click `Start`
+4. Click `Open Web UI`
+
+![ESPHome add-on install](Images/esphome_add-on_install.png)
+
+After adoption, the default repo configs use `dashboard_import`, `name_add_mac_suffix: true`, and `ota: - platform: esphome`. The device should then appear in ESPHome Device Builder and in Home Assistant under `Settings > Devices & services`.
+
+For package layout, local copies, calibration files, CS-pin changes, and advanced YAML examples, see [Software/ESPHome/README.md](Software/ESPHome/README.md).
 
 ## What You Will Need
 
@@ -222,38 +271,12 @@ If a CT is tied to a different phase than its voltage reference, active power an
 
 ### ESPHome and Home Assistant
 
-ESPHome is the recommended path for most new installs. It integrates cleanly with Home Assistant, supports Wi-Fi or Ethernet, uses the live CircuitSetup ESP Web Installer, and the repo already includes maintained YAML packages for the main board and every add-on count.
+ESPHome is still the recommended software path. If you just want to get firmware onto the meter, use the quick-start section above. The rest of this section covers what the maintained ESPHome configs already include after the device is flashed.
 
-If you are using Home Assistant, start by installing ESPHome Device Builder. The official getting-started guide is here:
+Useful references:
 
 - [Getting Started with ESPHome and Home Assistant](https://esphome.io/guides/getting_started_hassio/)
-
-The current Home Assistant add-on install flow is:
-
-1. Open `Settings > Add-ons > Add-on Store`
-2. Search for `ESPHome Device Builder`
-3. Install it, then click `Start`
-4. Click `Open Web UI`
-
-![ESPHome add-on install](Images/esphome_add-on_install.png)
-
-### Flashing With the CircuitSetup ESP Web Installer
-
-The easiest way to get started is the live installer:
-
-- [CircuitSetup ESP Web Installer](https://circuitsetup.github.io/ESPWebInstaller/)
-
-Current installer flow for the 6 Channel Meter:
-
-1. Choose the number of add-on boards, from `None` to `6`
-2. Choose the connection type:
-   - `Wi-Fi`
-   - `Ethernet (Lilygo)`
-   - `Ethernet (Waveshare)`
-3. Choose the firmware version
-4. Connect the ESP32 to your computer with a USB data cable
-5. Click `Connect`, pick the correct serial port, and install the firmware
-6. If the board does not enter the bootloader automatically, hold the right or `IO0` button while starting the install
+- [ESPHome ATM90E32 docs](https://esphome.io/components/sensor/atm90e32/)
 
 ### What the Default ESPHome Config Already Includes
 
