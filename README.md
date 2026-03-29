@@ -8,8 +8,6 @@ The first AC-AC adapter powers the main board and provides the primary voltage r
 
 ## Table of Contents
 
-- [Typical Uses](#typical-uses)
-- [Features](#features)
 - [Quick Start: ESPHome via ESP Web Installer](#quick-start-esphome-via-esp-web-installer)
 - [What You Will Need](#what-you-will-need)
 - [Setting Up the Meter](#setting-up-the-meter)
