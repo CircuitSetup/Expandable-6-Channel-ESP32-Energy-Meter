@@ -339,8 +339,6 @@ The key output from semi-automatic calibration is written to the ESPHome logs th
 Useful references:
 
 - [ESPHome ATM90E32 calibration docs](https://esphome.io/components/sensor/atm90e32/#calibration)
-- [ESPHome ATM90E32 component source](https://api-docs.esphome.io/atm90e32_8cpp_source)
-- [ESPHome ATM90E32 button source](https://api-docs.esphome.io/atm90e32__button_8cpp_source)
 - [Software/ESPHome/README.md](Software/ESPHome/README.md)
 
 ### Home Assistant Energy Dashboard
