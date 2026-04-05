@@ -295,18 +295,52 @@ If you want the maintained package-based configs, start from the files in [Softw
 
 ### ESPHome Calibration
 
-Default calibration values are usually good enough to get started, but ESPHome now makes calibration much easier than the older manual-only flow.
+Default calibration values are usually good enough to get started, but calibration is strongly recommended if you are using custom CTs, a different AC-AC transformer, longer CT leads, or if you want especially accurate readings.
 
-The configs in this repo include optional semi-automatic calibration controls that let you:
+On the main board, calibration is done through two separate ATM90E32 chips, not one 6-channel block. `main_meter_id1` / `Meter 1-3` handles CTs `1-3`, and `main_meter_id2` / `Meter 4-6` handles CTs `4-6`. Each `Run ... Calibration` button in Home Assistant acts on only one of those chips, so calibrate CTs `1-3` and CTs `4-6` separately.
 
-- enter known current and voltage references
-- calculate gain values
-- calculate offset values when you see non-zero readings at no load
-- copy the calculated values from the logs back into your YAML
+In the CircuitSetup YAML, the normal starting points are `current_cal_ct1` through `current_cal_ct6`, plus `voltage_cal1` and `voltage_cal2` in the top-level config file you flashed or imported from [Software/ESPHome](Software/ESPHome). Under the hood, those map to ESPHome's `gain_ct` and `gain_voltage` values for each ATM90E32 phase. [Software/ESPHome/calibration/6chan_main_calibration.yaml](Software/ESPHome/calibration/6chan_main_calibration.yaml) adds the Home Assistant calibration buttons and the runtime reference number entities. [Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml](Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml) is where copied offset values can be persisted in YAML.
+
+To use the semi-automatic calibration workflow, make sure `offset_calibration` and `gain_calibration` are set to `"true"` and that the calibration package is included. After the meter is adopted into Home Assistant, open the meter device page. There you will see:
+
+- `${main_meter_name1} Ref V 1` and `CT1 Ref Current` through `CT3 Ref Current` for the first ATM90E32
+- `${main_meter_name2} Ref V 2` and `CT4 Ref Current` through `CT6 Ref Current` for the second ATM90E32
+- `Run ... Offset Cal`, `Run ... Power Offset Cal`, `Run ... Gain Cal`, and matching `Clear ...` buttons for each chip
+
+If you renamed the meter groups in YAML, the button labels will follow those names instead of the default `Meter 1-3` and `Meter 4-6`.
+
+In practice:
+
+- gain calibration fixes scaling when the meter reads high or low under a known load
+- offset calibration fixes false zero-level readings when current or voltage should be at or very near zero
+- power-offset calibration fixes false power readings when voltage is present but CT current is zero
+
+Recommended workflow:
+
+1. Start with the closest known values for your CTs and AC transformer by setting `current_cal_ct1` through `current_cal_ct6` and `voltage_cal1`/`voltage_cal2` to the nearest matching starting values.
+2. Open the meter device page in Home Assistant and choose which ATM90E32 you are calibrating: `Meter 1-3` for CTs `1-3`, or `Meter 4-6` for CTs `4-6`. For that chip, phase A/B/C in the ESPHome logs correspond to CT1/CT2/CT3 or CT4/CT5/CT6 respectively.
+3. For gain calibration, restore the meter to normal wiring, apply a stable known load, and use a trusted reference meter or clamp meter to get the real voltage and current. Enter that chip's real voltage into its `Ref V` field. For the CircuitSetup 6-channel meter, that reference voltage is used across that chip's phases. Then enter the real current into the matching `CTx Ref Current` field for each CT you want to calibrate.
+4. Press that chip's `Run ... Gain Cal` button. ESPHome then logs a calibration table showing phase A/B/C, measured voltage, measured current, reference voltage, reference current, and the old-to-new `V_gain` and `I_gain` values for that chip. If a reference voltage or reference current is left at `0`, ESPHome skips recalculating that part and logs a warning instead.
+5. Open the ESPHome logs and copy the reported values back into YAML. In the standard workflow that means opening `LOGS` in ESPHome Device Builder for the device, but serial logs or `esphome logs` work too. For `Meter 1-3`, map the logged gain results back to `voltage_cal1` and `current_cal_ct1` through `current_cal_ct3`. For `Meter 4-6`, map them back to `voltage_cal2` and `current_cal_ct4` through `current_cal_ct6`.
+6. Only run offset calibration if idle baselines are not clean. For this step, the ATM90E32 button code and docs both expect current and voltage inputs to be at `0`, so the practical approach is USB power only with the AC transformer and CTs disconnected. Press the matching `Run ... Offset Cal` button for the chip you want to clean up. The logs will show a table of `offset_voltage` and `offset_current` for phases A/B/C on that chip.
+7. Only run power-offset calibration if power still shows a small non-zero value with voltage present but CT current at zero. For this step, the voltage reference should be connected but CT current should be `0`. Press that chip's `Run ... Power Offset Cal` button. The logs will show `offset_active_power` and `offset_reactive_power` for phases A/B/C on that chip.
+8. If you want offset values persisted in config, copy them into [Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml](Software/ESPHome/calibration/6chan_main_offset_calibrations.yaml). ESPHome's button logs refer to `gain_ct`, `gain_voltage`, `offset_voltage`, `offset_current`, `offset_active_power`, and `offset_reactive_power` under each `phase_x`; in this repo those results map back to the `current_cal_ctX` and `voltage_cal1/2` substitutions plus the offset include file.
+9. After those values are saved in YAML, press the matching `Clear ...` buttons for that same chip so the temporary calibration values stored in flash no longer override your YAML. The component stores gain, offset, and power-offset calibration values in memory and applies them immediately, so clearing them is the step that hands control back to the YAML values.
+
+What the logs will show:
+
+- gain calibration logs a table with `V_meas (V)`, `I_meas (A)`, `V_ref`, `I_ref`, `V_gain (old→new)`, and `I_gain (old→new)` for phases A/B/C of the selected chip
+- offset calibration logs a table of `offset_voltage` and `offset_current` for phases A/B/C of the selected chip
+- power-offset calibration logs a table of `offset_active_power` and `offset_reactive_power` for phases A/B/C of the selected chip
+- the button press itself also logs guidance such as `Use gain_ct: & gain_voltage:` or `Use offset_voltage: & offset_current:` and reminds you about the required wiring conditions for offset and power-offset calibration
+
+The key output from semi-automatic calibration is written to the ESPHome logs through `logger`, not into the Home Assistant entity state itself. The normal CircuitSetup workflow is: run the correct chip's calibration button from the Home Assistant device page, watch the output in ESPHome Device Builder `LOGS`, copy the values into YAML, clear the stored chip calibration for that same button group, then reboot or reload and verify against your reference meter.
 
 Useful references:
 
 - [ESPHome ATM90E32 calibration docs](https://esphome.io/components/sensor/atm90e32/#calibration)
+- [ESPHome ATM90E32 component source](https://api-docs.esphome.io/atm90e32_8cpp_source)
+- [ESPHome ATM90E32 button source](https://api-docs.esphome.io/atm90e32__button_8cpp_source)
 - [Software/ESPHome/README.md](Software/ESPHome/README.md)
 
 ### Home Assistant Energy Dashboard
