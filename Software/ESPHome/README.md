@@ -105,6 +105,75 @@ Under `sensor:` add:
 ```
 ---
 
+## Measuring Solar Return to Grid Power
+The meter reads negative watts on mains as power that is being sent back to the grid. In other words, this is excess power that you are not using. To read this properly you can add templates to your config that look like this. These sensors can then be mapped to Home Assistant's Energy Dashboard. This assumes 2 CTs measuring mains are on CT1 (`ct1Watts`) and CT2 (`ct2Watts`)
+
+```
+#Total House Watts
+- platform: template
+  name: Total House Watts
+  id: totalHouseWatts
+  lambda: return id(ct1Watts).state + id(ct2Watts).state ;
+  accuracy_decimals: 2
+  unit_of_measurement: W
+  device_class: power
+  state_class: measurement
+  update_interval: ${update_time}
+
+#Total House Return to Grid Watts
+  - platform: template
+    name: Total House Return To Grid Watts
+    id: returnToGridWatts
+    lambda: |-
+      if (id(totalHouseWatts).state > 0) {
+        return 0;
+      } else {
+        return abs(id(totalHouseWatts).state) ;
+      }
+    accuracy_decimals: 2
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    update_interval: ${update_time}
+    
+#House kWh Return to Grid
+  - platform: total_daily_energy
+    name: House Return To Grid kWh
+    power_id: returnToGridWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+    
+ #Total House Watts Usage
+  - platform: template
+    name: Total House Positive Watts
+    id: totalHousePositiveWatts
+    lambda: |-
+      if (id(totalHouseWatts).state < 0) {
+        return 0;
+      } else {
+        return id(totalHouseWatts).state ;
+      }
+    accuracy_decimals: 2
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    update_interval: ${update_time}
+    
+#House positive kWh
+  - platform: total_daily_energy
+    name: House kWh
+    power_id: totalHousePositiveWatts
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
+    device_class: energy
+    state_class: total_increasing
+```
+---
+
 ## Monitoring More Than 1 Voltage
 By default, all voltage channels are connected, and set up to monitor a single phase. [See here on what needs to be done with hardware if monitoring more than 1 voltage.](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/tree/master?tab=readme-ov-file#measuring-a-second-voltage)
 
