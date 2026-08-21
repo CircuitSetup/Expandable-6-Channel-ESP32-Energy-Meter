@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+import pytest
 
 ESPHOME_DIR = Path(__file__).resolve().parents[1]
 
@@ -55,19 +56,27 @@ def atm90e32_voltage_phases(package: Path) -> list[set[str]]:
     return voltage_phases
 
 
-def calibration_reference_phases(package: Path) -> list[tuple[str, str]]:
+def calibration_reference_phases(package: Path) -> list[tuple[str, str, str]]:
     references = []
     for kind, reference in re.findall(
         r"(?ms)^    reference_(voltage|current):\n(.*?)(?=^    reference_|^  - platform:|\Z)",
         package.read_text(encoding="utf-8"),
     ):
         references.extend(
-            (kind, phase)
-            for phase, _ in re.findall(
+            (kind, phase, phase_config)
+            for phase, phase_config in re.findall(
                 r"(?ms)^      phase_([abc]):\n(.*?)(?=^      phase_|\Z)", reference
             )
         )
     return references
+
+
+def assert_reference_bounds(references: list[tuple[str, str, str]]):
+    for kind, _, phase_config in references:
+        expected_maximum = "260.0" if kind == "voltage" else "200.0"
+        assert "min_value: 0.0" in phase_config
+        assert f"max_value: {expected_maximum}" in phase_config
+        assert "step: 0.1" in phase_config
 
 
 def test_official_meter_configs_include_every_declared_calibration_package():
@@ -98,14 +107,23 @@ def test_official_meter_configs_expose_voltage_for_every_atm90e32_phase():
 def test_calibration_reference_phases_accept_zero():
     """Fails if ESPHome cannot expose a zero-capable per-phase reference number."""
     for package in (ESPHOME_DIR / "calibration").glob("6chan_*_calibration.yaml"):
-        text = package.read_text(encoding="utf-8")
-        for kind, phase in calibration_reference_phases(package):
-            expected_maximum = "260.0" if kind == "voltage" else "200.0"
-            phase_config = re.search(
-                rf"(?ms)^    reference_{kind}:.*?^      phase_{phase}:\n(.*?)(?=^      phase_|^    reference_|^  - platform:|\Z)",
-                text,
-            )
-            assert phase_config, package.name
-            assert "min_value: 0.0" in phase_config.group(1), package.name
-            assert f"max_value: {expected_maximum}" in phase_config.group(1), package.name
-            assert "step: 0.1" in phase_config.group(1), package.name
+        assert_reference_bounds(calibration_reference_phases(package))
+
+
+def test_calibration_reference_bounds_reject_a_malformed_second_group(tmp_path: Path):
+    """Fails if parsing reuses the first group while the second group is malformed."""
+    source = (ESPHOME_DIR / "calibration" / "6chan_main_calibration.yaml").read_text(
+        encoding="utf-8"
+    )
+    broken = tmp_path / "broken_calibration.yaml"
+    broken.write_text(
+        source.replace(
+            "${main_meter_name2} Ref V 2\" \n        min_value: 0.0\n        max_value: 260.0",
+            "${main_meter_name2} Ref V 2\" \n        min_value: 0.0\n        max_value: 999.0",
+        ),
+        encoding="utf-8",
+    )
+    references = calibration_reference_phases(broken)
+    assert all(len(reference) == 3 for reference in references)
+    with pytest.raises(AssertionError):
+        assert_reference_bounds(references)
