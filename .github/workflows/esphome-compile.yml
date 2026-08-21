@@ -1,0 +1,44 @@
+name: ESPHome compile
+
+on:
+  pull_request:
+    paths:
+      - 'Software/ESPHome/**'
+      - '.github/workflows/esphome-compile.yml'
+  push:
+    paths:
+      - 'Software/ESPHome/**'
+      - '.github/workflows/esphome-compile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: esphome-compile-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.generate.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: generate
+        run: echo "matrix=$(python Software/ESPHome/tests/compile_matrix.py)" >> "$GITHUB_OUTPUT"
+
+  compile:
+    needs: matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install esphome==2026.8.0
+      - run: esphome compile ${{ matrix.configurations }}
