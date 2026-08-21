@@ -87,7 +87,7 @@ esphome:
     board_build.flash_mode: dio
   project:
     name: circuitsetup.6c-energy-meter-1-addon-ethernet-waveshare
-    version: "1.7"
+    version: "1.8"
 
 packages:
   remote_package:
@@ -114,7 +114,7 @@ packages:
       ## If enabled, make sure offset & gain calibration are set to "true" above
       ## details: https://esphome.io/components/sensor/atm90e32.html#calibration
       - Software/ESPHome/calibration/6chan_main_calibration.yaml
-      #- Software/ESPHome/calibration/6chan_addon1_calibration.yaml
+      - Software/ESPHome/calibration/6chan_addon1_calibration.yaml
       
       ## Additional offset calibration fields that should be copied per CT/Phase from the ESPHome logs
       ## These do not need to be set unless you are seeing non-zero values when CTs or Voltage 
