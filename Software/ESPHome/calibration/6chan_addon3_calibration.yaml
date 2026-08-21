@@ -51,47 +51,59 @@ number:
   - platform: atm90e32
     id: ${addon3_id1}
     reference_voltage:
-      min_value: 0.0
-      max_value: 260.0
-      step: 0.1
       # will copy to phase_b/c for calibration reference
       phase_a:
         name: "${addon3_name1} Ref V 1"
+        min_value: 0.0
+        max_value: 260.0
+        step: 0.1
         disabled_by_default: true
     reference_current:
-      min_value: 0.0
-      max_value: 200.0
-      step: 0.1
       phase_a:
         name: "${ct19_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true
       phase_b:
         name: "${ct20_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true
       phase_c:
         name: "${ct21_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true
 
   - platform: atm90e32
     id: ${addon3_id2}
     reference_voltage:
-      min_value: 0.0
-      max_value: 260.0
-      step: 0.1
       # needed to calibrate voltage registers even if not output
       phase_a:
         name: "${addon3_name2} Ref V 2" 
+        min_value: 0.0
+        max_value: 260.0
+        step: 0.1
         disabled_by_default: true
     reference_current:
-      min_value: 0.0
-      max_value: 200.0
-      step: 0.1
       phase_a:
         name: "${ct22_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true
       phase_b:
         name: "${ct23_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true
       phase_c:
         name: "${ct24_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
         disabled_by_default: true

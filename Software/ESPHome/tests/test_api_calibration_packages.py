@@ -55,6 +55,21 @@ def atm90e32_voltage_phases(package: Path) -> list[set[str]]:
     return voltage_phases
 
 
+def calibration_reference_phases(package: Path) -> list[tuple[str, str]]:
+    references = []
+    for kind, reference in re.findall(
+        r"(?ms)^    reference_(voltage|current):\n(.*?)(?=^    reference_|^  - platform:|\Z)",
+        package.read_text(encoding="utf-8"),
+    ):
+        references.extend(
+            (kind, phase)
+            for phase, _ in re.findall(
+                r"(?ms)^      phase_([abc]):\n(.*?)(?=^      phase_|\Z)", reference
+            )
+        )
+    return references
+
+
 def test_official_meter_configs_include_every_declared_calibration_package():
     """Fails if a configured ATM90E32 group loses its API calibration package."""
     for config in ESPHOME_DIR.glob("6chan_energy_meter*.yaml"):
@@ -78,3 +93,19 @@ def test_official_meter_configs_expose_voltage_for_every_atm90e32_phase():
         assert sum(len(phase_set) for phase_set in phases) == 6 * (
             declared_addon_count(config) + 1
         ), config.name
+
+
+def test_calibration_reference_phases_accept_zero():
+    """Fails if ESPHome cannot expose a zero-capable per-phase reference number."""
+    for package in (ESPHOME_DIR / "calibration").glob("6chan_*_calibration.yaml"):
+        text = package.read_text(encoding="utf-8")
+        for kind, phase in calibration_reference_phases(package):
+            expected_maximum = "260.0" if kind == "voltage" else "200.0"
+            phase_config = re.search(
+                rf"(?ms)^    reference_{kind}:.*?^      phase_{phase}:\n(.*?)(?=^      phase_|^    reference_|^  - platform:|\Z)",
+                text,
+            )
+            assert phase_config, package.name
+            assert "min_value: 0.0" in phase_config.group(1), package.name
+            assert f"max_value: {expected_maximum}" in phase_config.group(1), package.name
+            assert "step: 0.1" in phase_config.group(1), package.name
