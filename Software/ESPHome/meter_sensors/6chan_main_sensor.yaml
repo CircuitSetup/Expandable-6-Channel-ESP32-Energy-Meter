@@ -25,6 +25,12 @@ sensor:
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct1}
     phase_b:
+      voltage:
+        name: "${main_meter_name1} Voltage B Calibration"
+        id: meter_main1_voltage_b_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct2_name} Amps
         id: ct2Amps
@@ -34,6 +40,12 @@ sensor:
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct2}
     phase_c:
+      voltage:
+        name: "${main_meter_name1} Voltage C Calibration"
+        id: meter_main1_voltage_c_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct3_name} Amps
         id: ct3Amps
@@ -58,6 +70,12 @@ sensor:
     cs_pin: 4
     id: ${main_meter_id2}
     phase_a:
+      voltage:
+        name: "${main_meter_name2} Voltage A Calibration"
+        id: meter_main2_voltage_a_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
 #this voltage is only needed if monitoring 2 voltages
 #     voltage:
 #       name: Voltage 2
@@ -72,6 +90,12 @@ sensor:
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct4}
     phase_b:
+      voltage:
+        name: "${main_meter_name2} Voltage B Calibration"
+        id: meter_main2_voltage_b_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct5_name} Amps
         id: ct5Amps
@@ -81,6 +105,12 @@ sensor:
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct5}
     phase_c:
+      voltage:
+        name: "${main_meter_name2} Voltage C Calibration"
+        id: meter_main2_voltage_c_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct6_name} Amps
         id: ct6Amps
