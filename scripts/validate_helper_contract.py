@@ -2,6 +2,7 @@
 from pathlib import Path
 import re
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ESP = ROOT / "Software" / "ESPHome"
@@ -18,15 +19,27 @@ def lines(path):
 def count_key(text, key):
     return sum(bool(re.match(rf"^[ \t]*{re.escape(key)}[ \t]*:", line)) for line in text.splitlines())
 
+def mapping_keys(text, section="substitutions"):
+    rows = text.splitlines(); start = next((i for i, x in enumerate(rows) if re.match(rf"^\s*{section}:\s*$", x)), None)
+    if start is None: return {}
+    base = len(rows[start]) - len(rows[start].lstrip()); out = {}
+    for line in rows[start + 1:]:
+        if line.strip() and not line.lstrip().startswith("#"):
+            indent = len(line) - len(line.lstrip())
+            if indent <= base: break
+            match = re.match(r"^(\s*)([A-Za-z0-9_]+)\s*:", line)
+            if match and len(match.group(1)) == base + 2: out.setdefault(match.group(2), 0); out[match.group(2)] += 1
+    return out
+
 
 def validate_config(path):
     text = "\n".join(lines(path))
-    substitutions = text.split("\nesphome:", 1)[0]
+    substitutions = mapping_keys(text)
     errors = []
     if count_key(text, "csemh_config_contract") != 1 or not re.search(r'^[ \t]*csemh_config_contract[ \t]*:[ \t]*["\']2["\'][ \t]*$', text, re.M):
         errors.append('csemh_config_contract must be "2" exactly once')
     for key in REQUIRED:
-        if count_key(substitutions, key) != 1:
+        if substitutions.get(key, 0) != 1:
             errors.append(f"{key} must exist exactly once")
     active = sorted({int(n) for n in re.findall(r"^[ \t]*ct(\d+)_name[ \t]*:", text, re.M)})
     for n in active:
@@ -38,7 +51,7 @@ def validate_config(path):
     for include in set(includes):
         if includes.count(include) > 1:
             errors.append(f"duplicate package include: {include}")
-    required_totals = ("totalAmps", "totalWatts", "totalEnergyDaily") if "-addons" in path.name else ("totalEnergyDaily",)
+    required_totals = ("totalAmps", "totalWatts", "totalEnergyDaily") if "addon" in path.stem else ("totalEnergyDaily",)
     for key in required_totals:
         present = len(re.findall(rf"^[ \t]+id:[ \t]*{key}[ \t]*$", text, re.M)) == 1
         if not present:
@@ -50,8 +63,9 @@ def validate_status():
     errors = []
     for path in sorted(STATUS.glob("6chan_*_status.yaml")):
         text = "\n".join(lines(path))
-        names = list(re.finditer(r"^[ \t]+name:", text, re.M))
-        if not names or any(not re.search(r"entity_category:[ \t]+diagnostic", text[m.end():m.end()+120]) or not re.search(r"disabled_by_default:[ \t]+true", text[m.end():m.end()+120]) for m in names):
+        rows = text.splitlines(); names = [(i, len(x) - len(x.lstrip())) for i, x in enumerate(rows) if re.match(r"^[ \t]+name:\s*", x) and not x.lstrip().startswith("#")]
+        valid = all(any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "entity_category: diagnostic" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) and any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "disabled_by_default: true" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) for i, indent in names)
+        if not names or not valid:
             errors.append(f"{path.name}: every status entity must be diagnostic and disabled_by_default")
     return errors
 
@@ -70,8 +84,16 @@ def validate(paths):
 
 def self_test():
     good = """substitutions:\n  csemh_config_contract: \"2\"\n  friendly_name: Meter\n  update_time: 10s\n  electric_freq: 60Hz\n  voltage_cal1: 1\n  voltage_cal2: 1\n  ct1_name: CT1\n  current_cal_ct1: 1\n  id: totalAmps\n  id: totalWatts\n  id: totalEnergyDaily\n"""
-    assert count_key(good, "friendly_name") == 1
-    assert count_key(good + "  friendly_name: duplicate\n", "friendly_name") == 2
+    assert mapping_keys(good)["friendly_name"] == 1
+    bad = good.replace("  friendly_name: Meter", "wifi:\n    friendly_name: Meter")
+    assert mapping_keys(bad).get("friendly_name", 0) == 0
+    with tempfile.TemporaryDirectory() as directory:
+        fixture = Path(directory) / "6chan_energy_meter_1-addon.yaml"
+        source = ESP / "6chan_energy_meter_1-addon.yaml"
+        fixture.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+        assert not validate_config(fixture), validate_config(fixture)
+        fixture.write_text(fixture.read_text(encoding="utf-8").replace("  id: totalAmps\n", ""), encoding="utf-8")
+        assert "totalAmps must have one definition" in validate_config(fixture)
 
 
 def main():
