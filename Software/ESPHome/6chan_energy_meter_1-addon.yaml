@@ -2,6 +2,7 @@
 # See all options at https://esphome.io/components/sensor/atm90e32.html
 
 substitutions:
+  csemh_config_contract: "2"
 # Change the disp_name to something you want
   disp_name: energy-meter
   friendly_name: "CircuitSetup Energy Meter 12x"
@@ -211,6 +212,7 @@ sensor:
 #kWh
 ####
 - platform: total_daily_energy
+  id: totalEnergyDaily
   name: ${friendly_name} Total kWh
   power_id: totalWatts
   filters:
