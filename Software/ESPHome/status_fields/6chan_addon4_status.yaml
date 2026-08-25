@@ -9,17 +9,23 @@ text_sensor:
     phase_status:
       phase_a:
         name: "${ct25_name} Status"
+        entity_category: diagnostic
       phase_b:
         name: "${ct26_name} Status"
+        entity_category: diagnostic
       phase_c:
         name: "${ct27_name} Status"
+        entity_category: diagnostic
 
   - platform: atm90e32
     id: ${addon4_id2}
     phase_status:
       phase_a:
         name: "${ct28_name} Status"
+        entity_category: diagnostic
       phase_b:
         name: "${ct29_name} Status"
+        entity_category: diagnostic
       phase_c:
         name: "${ct30_name} Status"
+        entity_category: diagnostic
