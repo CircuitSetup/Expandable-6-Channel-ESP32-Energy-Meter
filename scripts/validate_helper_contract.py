@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ESP = ROOT / "Software" / "ESPHome"
 REQUIRED = ("friendly_name", "update_time", "electric_freq", "voltage_cal1", "voltage_cal2")
 STATUS = ESP / "status_fields"
+EXPECTED = {f"6chan_energy_meter_{n}-{'addon' if n == 1 else 'addons'}{suffix}.yaml" for n in range(1, 7) for suffix in ("", "_ethernet", "_ethernet_waveshare")} | {"6chan_energy_meter_main_board.yaml", "6chan_energy_meter_main_ethernet.yaml", "6chan_energy_meter_main_ethernet_waveshare.yaml", "6chan_energy_meter_3-addons_2-voltages.yaml"}
+EXPECTED_STATUS = {f"6chan_{kind}_status.yaml" for kind in ("main", "addon1", "addon2", "addon3", "addon4", "addon5", "addon6")}
 
 
 def lines(path):
@@ -32,12 +34,13 @@ def validate_config(path):
             errors.append(f"active CT{n} lacks current_cal_ct{n}")
     if count_key(text, "board_revision"):
         errors.append("board_revision is not permitted")
-    for package in ("power_quality", "status_fields"):
-        if len(re.findall(rf"^[ \t]*- .*{package}/", text, re.M)) > 1:
-            errors.append(f"{package} package is included more than once")
-    required_totals = ("totalAmps", "totalWatts", "totalEnergyDaily") if "-addons" in path.name else ()
+    includes = re.findall(r"^[ \t]*- (Software/ESPHome/(?:power_quality|status_fields)/[^\s#]+\.yaml)[ \t]*$", text, re.M)
+    for include in set(includes):
+        if includes.count(include) > 1:
+            errors.append(f"duplicate package include: {include}")
+    required_totals = ("totalAmps", "totalWatts", "totalEnergyDaily") if "-addons" in path.name else ("totalEnergyDaily",)
     for key in required_totals:
-        present = key in text if key in ("totalAmpsMain", "totalWattsMain") and "-addons" not in path.name else len(re.findall(rf"^[ \t]+id:[ \t]*{key}[ \t]*$", text, re.M)) == 1
+        present = len(re.findall(rf"^[ \t]+id:[ \t]*{key}[ \t]*$", text, re.M)) == 1
         if not present:
             errors.append(f"{key} must have one definition")
     return errors
@@ -47,16 +50,18 @@ def validate_status():
     errors = []
     for path in sorted(STATUS.glob("6chan_*_status.yaml")):
         text = "\n".join(lines(path))
-        entities = len(re.findall(r"^\s+name:\s+", text, re.M))
-        if entities == 0 or count_key(text, "entity_category") != entities or count_key(text, "disabled_by_default") != entities:
+        names = list(re.finditer(r"^[ \t]+name:", text, re.M))
+        if not names or any(not re.search(r"entity_category:[ \t]+diagnostic", text[m.end():m.end()+120]) or not re.search(r"disabled_by_default:[ \t]+true", text[m.end():m.end()+120]) for m in names):
             errors.append(f"{path.name}: every status entity must be diagnostic and disabled_by_default")
-        if any(line.strip().startswith("entity_category:") and line.strip() != "entity_category: diagnostic" for line in text.splitlines()) or any(line.strip().startswith("disabled_by_default:") and line.strip() != "disabled_by_default: true" for line in text.splitlines()):
-            errors.append(f"{path.name}: invalid status entity flags")
     return errors
 
 
 def validate(paths):
     errors = validate_status()
+    shared = "\n".join(lines(ESP / "meter_sensors" / "6chan_main_sensor.yaml"))
+    for key in ("totalAmpsMain", "totalWattsMain"):
+        if len(re.findall(rf"^[ \t]+id:[ \t]*{key}[ \t]*$", shared, re.M)) != 1:
+            errors.append(f"shared main sensor must define {key} exactly once")
     for path in paths:
         errors.extend(f"{path.name}: {error}" for error in validate_config(path))
     if errors:
@@ -74,10 +79,12 @@ def main():
         self_test()
         return
     paths = sorted(ESP.glob("6chan_energy_meter*.yaml"))
-    if not paths:
+    if {p.name for p in paths} != EXPECTED:
         raise SystemExit("no official top-level meter configurations found")
     validate(paths)
-    print(f"validated {len(paths)} official configs and {len(list(STATUS.glob('6chan_*_status.yaml')))} status packages")
+    if {p.name for p in STATUS.glob("6chan_*_status.yaml")} != EXPECTED_STATUS:
+        raise AssertionError("status package inventory mismatch")
+    print(f"validated {len(paths)} official configs and {len(EXPECTED_STATUS)} status packages")
 
 
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ BASE_PROJECT_NAMES = {
 }
 REPRESENTATIVES = (
     "6chan_energy_meter_main_board.yaml",
+    "6chan_energy_meter_main_ethernet.yaml",
+    "6chan_energy_meter_main_ethernet_waveshare.yaml",
     "6chan_energy_meter_1-addon.yaml",
     "6chan_energy_meter_2-addons.yaml",
     "6chan_energy_meter_3-addons.yaml",
