@@ -54,7 +54,7 @@ def validate_config(path):
         errors.append("substitutions must be one top-level mapping")
         direct = {}
     contract = direct.get("csemh_config_contract", [])
-    if len(contract) != 1 or not re.fullmatch(r"[\"']2[\"']", contract[0]):
+    if len(contract) != 1 or not re.fullmatch(r'(?:"2"|\'2\')', contract[0]):
         errors.append('csemh_config_contract must be "2" exactly once')
     for key in REQUIRED:
         if len(direct.get(key, [])) != 1:
@@ -151,6 +151,8 @@ def validate_status():
 
 
 def official_paths():
+    if {path.name for path in ESP.glob("6chan_energy_meter*.yaml")} != EXPECTED:
+        raise SystemExit("official top-level meter configuration inventory mismatch")
     paths = [ESP / name for name in sorted(EXPECTED)]
     if not all(path.is_file() for path in paths):
         raise SystemExit("no official top-level meter configurations found")
@@ -193,6 +195,12 @@ def self_test():
         unquoted_contract = fixture.with_name("6chan_energy_meter_unquoted.yaml")
         unquoted_contract.write_text(source.read_text(encoding="utf-8").replace('  csemh_config_contract: "2"', "  csemh_config_contract: 2"), encoding="utf-8")
         assert 'csemh_config_contract must be "2" exactly once' in validate_config(unquoted_contract)
+        single_quoted_contract = fixture.with_name("6chan_energy_meter_1-addon_single_quoted.yaml")
+        single_quoted_contract.write_text(source.read_text(encoding="utf-8").replace('  csemh_config_contract: "2"', "  csemh_config_contract: '2'"), encoding="utf-8")
+        assert not validate_config(single_quoted_contract), validate_config(single_quoted_contract)
+        mismatched_contract = fixture.with_name("6chan_energy_meter_1-addon_mismatched.yaml")
+        mismatched_contract.write_text(source.read_text(encoding="utf-8").replace('  csemh_config_contract: "2"', "  csemh_config_contract: \"2'"), encoding="utf-8")
+        assert 'csemh_config_contract must be "2" exactly once' in validate_config(mismatched_contract)
         duplicate_substitutions = fixture.with_name("6chan_energy_meter_duplicate.yaml")
         duplicate_substitutions.write_text(source.read_text(encoding="utf-8") + "\nsubstitutions:\n  csemh_config_contract: \"2\"\n", encoding="utf-8")
         assert "substitutions must be one top-level mapping" in validate_config(duplicate_substitutions)
@@ -219,6 +227,17 @@ def self_test():
         addon_mutation = fixture.with_name("6chan_addon6_status.yaml")
         addon_mutation.write_text(addon_status.read_text(encoding="utf-8").replace("id: ${addon6_id2}", "id: ${wrong_parent}"), encoding="utf-8")
         assert validate_status_file(addon_mutation)
+    extra = ESP / "6chan_energy_meter_7-addons.yaml"
+    try:
+        extra.write_text("# mutation\n", encoding="utf-8")
+        try:
+            official_paths()
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("official_paths accepted an extra configuration")
+    finally:
+        extra.unlink(missing_ok=True)
 
 
 def main():

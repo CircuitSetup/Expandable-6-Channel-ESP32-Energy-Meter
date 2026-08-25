@@ -2,6 +2,8 @@
 
 import json
 import re
+import subprocess
+import tempfile
 from pathlib import Path
 
 
@@ -120,6 +122,12 @@ def self_test() -> None:
     assert len(matrix) == 13
     assert not LOCAL_STATUS_HARNESS.match("6chan_energy_meter*.yaml")
     assert LOCAL_STATUS_HARNESS.relative_to(REPOSITORY_DIR).as_posix() in matrix
+    with tempfile.TemporaryDirectory() as directory:
+        clone = Path(directory)
+        (clone / ".gitignore").write_text((REPOSITORY_DIR / ".gitignore").read_text(encoding="utf-8"), encoding="utf-8")
+        subprocess.run(("git", "init", "-q"), cwd=clone, check=True)
+        ignored = subprocess.run(("git", "check-ignore", "-q", "--no-index", LOCAL_STATUS_HARNESS.relative_to(REPOSITORY_DIR).as_posix()), cwd=clone)
+        assert ignored.returncode == 0, "generated harness must be ignored in a fresh clone"
 
 
 if __name__ == "__main__":
