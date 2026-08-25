@@ -10,15 +10,19 @@ text_sensor:
       phase_a:
         name: "${ct1_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
       phase_b:
         name: "${ct2_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
       phase_c:
         name: "${ct3_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
     frequency_status:
       name: "Frequency Status 1"
-      entity_category: diagnostic
+        entity_category: diagnostic
+        disabled_by_default: true
 
   - platform: atm90e32
     id: ${main_meter_id2}
@@ -26,12 +30,15 @@ text_sensor:
       phase_a:
         name: "${ct4_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
       phase_b:
         name: "${ct5_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
       phase_c:
         name: "${ct6_name} Status"
         entity_category: diagnostic
+        disabled_by_default: true
 #this is only needed if monitoring 2 voltages
 #   freq_status:
 #     name: "Frequency Status 2"
