@@ -21,8 +21,8 @@ text_sensor:
         disabled_by_default: true
     frequency_status:
       name: "Frequency Status 1"
-        entity_category: diagnostic
-        disabled_by_default: true
+      entity_category: diagnostic
+      disabled_by_default: true
 
   - platform: atm90e32
     id: ${main_meter_id2}
