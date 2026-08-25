@@ -12,18 +12,9 @@ sensor:
     apparent_power:
       name: ${ct13_name} VA
       id: ct13VA
-    harmonic_power:
-      name: ${ct13_name} Harmonic
-      id: ct13Har
     power_factor:
       name: ${ct13_name} Power Factor
       id: ct13PF
-    phase_angle:
-      name: ${ct13_name} Phase Angle
-      id: ct13Angle
-    peak_current:
-      name: ${ct13_name} Peak A
-      id: ct13Peak
   phase_b:
     reactive_power:
       name: ${ct14_name} VAR
@@ -31,18 +22,9 @@ sensor:
     apparent_power:
       name: ${ct14_name} VA
       id: ct14VA
-    harmonic_power:
-      name: ${ct14_name} Harmonic
-      id: ct14Har
     power_factor:
       name: ${ct14_name} Power Factor
       id: ct14PF
-    phase_angle:
-      name: ${ct14_name} Phase Angle
-      id: ct14Angle
-    peak_current:
-      name: ${ct14_name} Peak A
-      id: ct14Peak
   phase_c:
     reactive_power:
       name: ${ct15_name} VAR
@@ -50,18 +32,9 @@ sensor:
     apparent_power:
       name: ${ct15_name} VA
       id: ct15VA
-    harmonic_power:
-      name: ${ct15_name} Harmonic
-      id: ct15Har
     power_factor:
       name: ${ct15_name} Power Factor
       id: ct15PF
-    phase_angle:
-      name: ${ct15_name} Phase Angle
-      id: ct15Angle
-    peak_current:
-      name: ${ct15_name} Peak A
-      id: ct15Peak
 
 - id: !extend ${addon2_id2}
   phase_a:
@@ -71,18 +44,9 @@ sensor:
     apparent_power:
       name: ${ct16_name} VA
       id: ct16VA
-    harmonic_power:
-      name: ${ct16_name} Harmonic
-      id: ct16Har
     power_factor:
       name: ${ct16_name} Power Factor
       id: ct16PF
-    phase_angle:
-      name: ${ct16_name} Phase Angle
-      id: ct16Angle
-    peak_current:
-      name: ${ct16_name} Peak A
-      id: ct16Peak
   phase_b:
     reactive_power:
       name: ${ct17_name} VAR
@@ -90,18 +54,9 @@ sensor:
     apparent_power:
       name: ${ct17_name} VA
       id: ct17VA
-    harmonic_power:
-      name: ${ct17_name} Harmonic
-      id: ct17Har
     power_factor:
       name: ${ct17_name} Power Factor
       id: ct17PF
-    phase_angle:
-      name: ${ct17_name} Phase Angle
-      id: ct17Angle
-    peak_current:
-      name: ${ct17_name} Peak A
-      id: ct17Peak
   phase_c:
     reactive_power:
       name: ${ct18_name} VAR
@@ -109,15 +64,6 @@ sensor:
     apparent_power:
       name: ${ct18_name} VA
       id: ct18VA
-    harmonic_power:
-      name: ${ct18_name} Harmonic
-      id: ct18Har
     power_factor:
       name: ${ct18_name} Power Factor
       id: ct18PF
-    phase_angle:
-      name: ${ct18_name} Phase Angle
-      id: ct18Angle
-    peak_current:
-      name: ${ct18_name} Peak A
-      id: ct18Peak
