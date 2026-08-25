@@ -109,6 +109,13 @@ def self_test():
         valid_status = "text_sensor:\n  - platform: atm90e32\n    phase_status:\n      phase_a:\n        name: Status\n        entity_category: diagnostic\n        disabled_by_default: true\n"
         status.write_text(valid_status, encoding="utf-8")
         assert not validate_status_file(status)
+        moved = fixture.with_name("6chan_energy_meter_moved.yaml")
+        moved.write_text(source.read_text(encoding="utf-8").replace('  friendly_name: "CircuitSetup Energy Meter 12x"\n', "wifi:\n  friendly_name: misplaced\n"), encoding="utf-8")
+        assert "friendly_name must exist exactly once" in validate_config(moved)
+        status.write_text("""text_sensor:\n  - platform: atm90e32\n    phase_status:\n      phase_a:\n        name: Missing flags\n      phase_b:\n        name: Valid\n        entity_category: diagnostic\n        disabled_by_default: true\n""", encoding="utf-8")
+        assert validate_status_file(status)
+        status.write_text("""text_sensor:\n  - platform: atm90e32\n    phase_status:\n      phase_a:\n        name: Unrelated flags\n      other:\n        entity_category: diagnostic\n        disabled_by_default: true\n""", encoding="utf-8")
+        assert validate_status_file(status)
         status.write_text(valid_status.replace("entity_category: diagnostic", "# entity_category: diagnostic"), encoding="utf-8")
         assert validate_status_file(status)
         status.write_text(valid_status.replace("disabled_by_default: true", "# disabled_by_default: true"), encoding="utf-8")
