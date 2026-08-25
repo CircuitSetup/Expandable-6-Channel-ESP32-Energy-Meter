@@ -62,11 +62,16 @@ def validate_config(path):
 def validate_status():
     errors = []
     for path in sorted(STATUS.glob("6chan_*_status.yaml")):
-        text = "\n".join(lines(path))
-        rows = text.splitlines(); names = [(i, len(x) - len(x.lstrip())) for i, x in enumerate(rows) if re.match(r"^[ \t]+name:\s*", x) and not x.lstrip().startswith("#")]
-        valid = all(any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "entity_category: diagnostic" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) and any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "disabled_by_default: true" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) for i, indent in names)
-        if not names or not valid:
-            errors.append(f"{path.name}: every status entity must be diagnostic and disabled_by_default")
+        errors.extend(validate_status_file(path))
+    return errors
+
+def validate_status_file(path):
+    errors = []
+    text = "\n".join(lines(path))
+    rows = text.splitlines(); names = [(i, len(x) - len(x.lstrip())) for i, x in enumerate(rows) if re.match(r"^[ \t]+name:\s*", x) and not x.lstrip().startswith("#")]
+    valid = all(any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "entity_category: diagnostic" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) and any(len(rows[j]) - len(rows[j].lstrip()) == indent and rows[j].strip() == "disabled_by_default: true" for j in range(i + 1, next((k for k in range(i + 1, len(rows)) if rows[k].strip() and len(rows[k]) - len(rows[k].lstrip()) < indent), len(rows)))) for i, indent in names)
+    if not names or not valid:
+        errors.append(f"{path.name}: every status entity must be diagnostic and disabled_by_default")
     return errors
 
 
@@ -94,6 +99,20 @@ def self_test():
         assert not validate_config(fixture), validate_config(fixture)
         fixture.write_text(fixture.read_text(encoding="utf-8").replace("  id: totalAmps\n", ""), encoding="utf-8")
         assert "totalAmps must have one definition" in validate_config(fixture)
+        duplicate = fixture.with_name("6chan_energy_meter_2-addons.yaml")
+        duplicate.write_text(source.read_text(encoding="utf-8").replace("6chan_main_status.yaml", "6chan_main_status.yaml\n      - Software/ESPHome/status_fields/6chan_main_status.yaml"), encoding="utf-8")
+        assert any("duplicate package include" in e for e in validate_config(duplicate))
+        distinct = fixture.with_name("6chan_energy_meter_3-addons.yaml")
+        distinct.write_text(source.read_text(encoding="utf-8").replace("6chan_main_status.yaml", "6chan_main_status.yaml\n      - Software/ESPHome/status_fields/6chan_addon1_status.yaml"), encoding="utf-8")
+        assert not any("duplicate package include" in e for e in validate_config(distinct))
+        status = fixture.with_name("6chan_main_status.yaml")
+        valid_status = "text_sensor:\n  - platform: atm90e32\n    phase_status:\n      phase_a:\n        name: Status\n        entity_category: diagnostic\n        disabled_by_default: true\n"
+        status.write_text(valid_status, encoding="utf-8")
+        assert not validate_status_file(status)
+        status.write_text(valid_status.replace("entity_category: diagnostic", "# entity_category: diagnostic"), encoding="utf-8")
+        assert validate_status_file(status)
+        status.write_text(valid_status.replace("disabled_by_default: true", "# disabled_by_default: true"), encoding="utf-8")
+        assert validate_status_file(status)
 
 
 def main():
