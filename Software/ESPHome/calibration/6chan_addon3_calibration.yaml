@@ -6,31 +6,43 @@ button:
     id: ${addon3_id1}
     run_offset_calibration:
       name: "1. Run ${addon3_name1} Offset Cal"
+      disabled_by_default: true
     clear_offset_calibration:
       name: "z1. Clear ${addon3_name1} Offset Cal"
+      disabled_by_default: true
     run_power_offset_calibration:
       name: "2. Run ${addon3_name1} Power Offset Cal"
+      disabled_by_default: true
     clear_power_offset_calibration:
       name: "z2. Clear ${addon3_name1} Power Offset Cal"
+      disabled_by_default: true
     run_gain_calibration:
       name: "3. Run ${addon3_name1} Gain Cal"
+      disabled_by_default: true
     clear_gain_calibration:
       name: "z3. Clear ${addon3_name1} Gain Cal"
+      disabled_by_default: true
 
   - platform: atm90e32
     id: ${addon3_id2}
     run_offset_calibration:
       name: "1. Run ${addon3_name2} Offset Cal"
+      disabled_by_default: true
     clear_offset_calibration:
       name: "z1. Clear ${addon3_name2} Offset Cal"
+      disabled_by_default: true
     run_power_offset_calibration:
       name: "2. Run ${addon3_name2} Power Offset Cal"
+      disabled_by_default: true
     clear_power_offset_calibration:
       name: "z2. Clear ${addon3_name2} Power Offset Cal"
+      disabled_by_default: true
     run_gain_calibration:
       name: "3. Run ${addon3_name2} Gain Cal"
+      disabled_by_default: true
     clear_gain_calibration:
       name: "z3. Clear ${addon3_name2} Gain Cal"
+      disabled_by_default: true
 
 # V & I Calibration Reference Fields
 ####################################
@@ -42,13 +54,29 @@ number:
       # will copy to phase_b/c for calibration reference
       phase_a:
         name: "${addon3_name1} Ref V 1"
+        min_value: 0.0
+        max_value: 260.0
+        step: 0.1
+        disabled_by_default: true
     reference_current:
       phase_a:
         name: "${ct19_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true
       phase_b:
         name: "${ct20_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true
       phase_c:
         name: "${ct21_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true
 
   - platform: atm90e32
     id: ${addon3_id2}
@@ -56,10 +84,26 @@ number:
       # needed to calibrate voltage registers even if not output
       phase_a:
         name: "${addon3_name2} Ref V 2" 
+        min_value: 0.0
+        max_value: 260.0
+        step: 0.1
+        disabled_by_default: true
     reference_current:
       phase_a:
         name: "${ct22_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true
       phase_b:
         name: "${ct23_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true
       phase_c:
         name: "${ct24_name} Ref Current"
+        min_value: 0.0
+        max_value: 200.0
+        step: 0.1
+        disabled_by_default: true

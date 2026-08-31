@@ -9,17 +9,29 @@ text_sensor:
     phase_status:
       phase_a:
         name: "${ct31_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true
       phase_b:
         name: "${ct32_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true
       phase_c:
         name: "${ct33_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true
 
   - platform: atm90e32
     id: ${addon5_id2}
     phase_status:
       phase_a:
         name: "${ct34_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true
       phase_b:
         name: "${ct35_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true
       phase_c:
         name: "${ct36_name} Status"
+        entity_category: diagnostic
+        disabled_by_default: true

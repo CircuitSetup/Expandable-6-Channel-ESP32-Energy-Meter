@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "presets": [
+    {
+      "model_id": "sct_006_20a_25ma",
+      "label": "SCT-006 20A/25mA",
+      "rated_current_a": 20,
+      "secondary": "25mA",
+      "default_gain_ct": 11143,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_013_030_30a_1v",
+      "label": "SCT-013-030 30A/1V",
+      "rated_current_a": 30,
+      "secondary": "1V",
+      "default_gain_ct": 8650,
+      "requires_burden_jumper_cut": true,
+      "notes": "Cut the matching burden jumper."
+    },
+    {
+      "model_id": "sct_013_050_50a_1v",
+      "label": "SCT-013-050 50A/1V",
+      "rated_current_a": 50,
+      "secondary": "1V",
+      "default_gain_ct": 15420,
+      "requires_burden_jumper_cut": true,
+      "notes": "Cut the matching burden jumper."
+    },
+    {
+      "model_id": "sct_010_50a_16_6ma",
+      "label": "SCT-010 50A/16.6mA",
+      "rated_current_a": 50,
+      "secondary": "16.6mA",
+      "default_gain_ct": 41334,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_010_80a_26_6ma",
+      "label": "SCT-010 80A/26.6mA",
+      "rated_current_a": 80,
+      "secondary": "26.6mA",
+      "default_gain_ct": 41660,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_013_000_100a_50ma",
+      "label": "SCT-013-000 100A/50mA",
+      "rated_current_a": 100,
+      "secondary": "50mA",
+      "default_gain_ct": 27518,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_016_120a_40ma",
+      "label": "SCT-016 120A/40mA",
+      "rated_current_a": 120,
+      "secondary": "40mA",
+      "default_gain_ct": 41787,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_024_200a_100ma",
+      "label": "SCT-024 200A/100mA",
+      "rated_current_a": 200,
+      "secondary": "100mA",
+      "default_gain_ct": 27518,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    },
+    {
+      "model_id": "sct_024_200a_50ma",
+      "label": "SCT-024 200A/50mA",
+      "rated_current_a": 200,
+      "secondary": "50mA",
+      "default_gain_ct": 55036,
+      "requires_burden_jumper_cut": false,
+      "notes": "Retain onboard burden."
+    }
+  ]
+}

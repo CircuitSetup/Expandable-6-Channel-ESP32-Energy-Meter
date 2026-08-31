@@ -10,6 +10,12 @@ sensor:
     cs_pin: 2
     id: ${addon3_id1}
     phase_a:
+      voltage:
+        name: "${addon3_name1} Voltage A Calibration"
+        id: addon3_1_voltage_a_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct19_name} Amps
         id: ct19Amps
@@ -19,6 +25,12 @@ sensor:
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct19}
     phase_b:
+      voltage:
+        name: "${addon3_name1} Voltage B Calibration"
+        id: addon3_1_voltage_b_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct20_name} Amps
         id: ct20Amps
@@ -28,6 +40,12 @@ sensor:
       gain_voltage: ${voltage_cal1}
       gain_ct: ${current_cal_ct20}
     phase_c:
+      voltage:
+        name: "${addon3_name1} Voltage C Calibration"
+        id: addon3_1_voltage_c_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct21_name} Amps
         id: ct21Amps
@@ -48,6 +66,12 @@ sensor:
     cs_pin: 21
     id: ${addon3_id2}
     phase_a:
+      voltage:
+        name: "${addon3_name2} Voltage A Calibration"
+        id: addon3_2_voltage_a_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct22_name} Amps
         id: ct22Amps
@@ -57,6 +81,12 @@ sensor:
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct22}
     phase_b:
+      voltage:
+        name: "${addon3_name2} Voltage B Calibration"
+        id: addon3_2_voltage_b_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct23_name} Amps
         id: ct23Amps
@@ -66,6 +96,12 @@ sensor:
       gain_voltage: ${voltage_cal2}
       gain_ct: ${current_cal_ct23}
     phase_c:
+      voltage:
+        name: "${addon3_name2} Voltage C Calibration"
+        id: addon3_2_voltage_c_calibration
+        accuracy_decimals: 2
+        entity_category: diagnostic
+        disabled_by_default: true
       current:
         name: ${ct24_name} Amps
         id: ct24Amps

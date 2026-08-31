@@ -42,6 +42,22 @@ This folder contains [ESPHome](https://esphome.io) configuration files used to m
 
 ---
 
+## Helper configuration contract
+
+Official top-level meter configurations publish `csemh_config_contract: "2"`.
+Generic add-on totals use stable IDs `totalAmps`, `totalWatts`, and
+`totalEnergyDaily`. Main-only configurations retain `totalAmpsMain` and
+`totalWattsMain`, plus `totalEnergyDaily`. Status text entities are
+diagnostic and disabled by default so the helper can manage their visibility
+consistently.
+
+Manually composed ESPHome configurations may retain or include the full
+power-quality set, including harmonic power and peak current. CircuitSetup
+Energy Meter Helper intentionally omits harmonic power and peak current from
+its managed configuration.
+
+---
+
 ## 📂 calibration/
 
 When these files are included, and calibration is enabled, semi-automatic calibration can be done for each current and voltage channel by providing a current and voltage reference. Calculated values for offset and gain stored in memory take priority over config values.
