@@ -3,7 +3,6 @@
 import json
 import re
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
@@ -87,22 +86,6 @@ def substitution_indices(config: Path, prefix: str, suffix: str) -> set[int]:
     }
 
 
-def localize_packages(source: str) -> str:
-    pattern = r"^packages:\n  remote_package:\n.*?(?=^[A-Za-z_][A-Za-z0-9_]*:|\Z)"
-    package = re.search(pattern, source, re.MULTILINE | re.DOTALL)
-    if not package:
-        raise ValueError("missing remote package block")
-    entries = re.findall(r"^      - (.+)$", package.group(), re.MULTILINE)
-    prefix = "Software/ESPHome/"
-    if not entries or any(not entry.startswith(prefix) for entry in entries):
-        raise ValueError("unexpected remote package files")
-    includes = "".join(
-        f"  local_{index}: !include {entry.removeprefix(prefix)}\n"
-        for index, entry in enumerate(entries)
-    )
-    return source[:package.start()] + "packages:\n" + includes + "\n" + source[package.end():]
-
-
 def generate_local_status_harness() -> Path:
     source = (ESPHOME_DIR / "6chan_energy_meter_6-addons.yaml").read_text(encoding="utf-8")
     local = "packages:\n" + "\n".join(
@@ -130,16 +113,6 @@ def compile_matrix() -> dict[str, list[str]]:
 
 
 def self_test() -> None:
-    for config in official_configurations():
-        source = config.read_text(encoding="utf-8")
-        localized = localize_packages(source)
-        assert "remote_package:" not in localized, config
-        assert "package_import_url:" in localized, config
-        active_files = re.findall(r"^      - Software/ESPHome/(.+\.yaml)$", source, re.MULTILINE)
-        assert active_files, config
-        assert re.findall(r"!include (.+\.yaml)$", localized, re.MULTILINE) == active_files, config
-        assert all((ESPHOME_DIR / file).is_file() for file in active_files), config
-
     generated = generate_local_status_harness()
     text = generated.read_text(encoding="utf-8")
     assert "remote_package:" not in text
@@ -158,12 +131,7 @@ def self_test() -> None:
 
 
 if __name__ == "__main__":
-    if sys.argv[1:] == ["--self-test"]:
+    if "--self-test" in __import__("sys").argv:
         self_test()
-    elif sys.argv[1:2] == ["--localize"]:
-        config = Path(sys.argv[2]).resolve()
-        if config != LOCAL_STATUS_HARNESS:
-            source = config.read_text(encoding="utf-8")
-            config.write_text(localize_packages(source), encoding="utf-8", newline="\n")
     else:
         print(json.dumps(compile_matrix(), sort_keys=True, separators=(",", ":")))
