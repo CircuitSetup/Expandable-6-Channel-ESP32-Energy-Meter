@@ -47,7 +47,9 @@ boolean input_get(char * data)
   // If data received on serial
   else if (Serial.available()) {
     // Could check for string integrity here
-    data = Serial.readStringUntil('\n');
+    String line = Serial.readStringUntil('\n');
+    line.trim();
+    line.toCharArray(data, MAX_DATA_LEN);
     gotData = true;
   }
 #endif

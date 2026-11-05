@@ -28,7 +28,9 @@
 #include "emoncms.h"
 #include "input.h"
 #include "config.h"
+#include <WiFi.h>
 #include "mqtt.h"
+#include "json.h"
 
 // for ATM90E32 energy meter
 #include <SPI.h>
@@ -57,8 +59,6 @@ const int period = 1000; //time interval in ms to send data
 */
 const int CS1[NUM_BOARDS] = { 5, 0, 27, 2, 13, 14, 15 };
 const int CS2[NUM_BOARDS] = { 4, 16, 17, 21, 22, 25, 26 };
-
-char measurement[16];
 
 /* Initialize ATM90E32 library for each IC */
 ATM90E32 sensor_ic1[NUM_BOARDS]{};
@@ -103,8 +103,8 @@ void energy_meter_loop()
 {
   int i, j = 0;
 
-  char * result = input_string;
-  char * result_json = input_json;
+  char *result = input_string;
+  input_json.remove(0);
 
   /*get the current "time" (actually the number of milliseconds since the program started)*/
   currentMillis = millis();
@@ -169,29 +169,29 @@ void energy_meter_loop()
   Serial.println("V1:" + String(voltage1) + "V   V2:" + String(voltage2) + "V");
   #endif
 
-  strcpy(result, "temp:");
-  dtostrf(temp, 2, 1, measurement);
-  strcat(result, measurement);
+  int length = snprintf(result, MAX_DATA_LEN, "temp:%.1f,freq:%.2f,V1:%.2f,V2:%.2f",
+                        temp, freq, voltage1, voltage2);
+  if (length < 0 || length >= MAX_DATA_LEN) {
+    result[0] = '\0';
+    return;
+  }
+#ifdef THREE_PHASE
+  const int extra = snprintf(result + length, MAX_DATA_LEN - length, ",V3:%.2f", voltage3);
+  if (extra < 0 || extra >= MAX_DATA_LEN - length) {
+    result[0] = '\0';
+    return;
+  }
+  length += extra;
+#endif
 
-  strcat(result, ",freq:");
-  dtostrf(freq, 2, 2, measurement);
-  strcat(result, measurement);
-
-  strcat(result, ",V1:");
-  dtostrf(voltage1, 2, 2, measurement);
-  strcat(result, measurement);
-
-  strcat(result, ",V2:");
-  dtostrf(voltage2, 2, 2, measurement);
-  strcat(result, measurement);
-
-  #ifdef THREE_PHASE
-  strcat(result, ",V3:");
-  dtostrf(voltage3, 2, 2, measurement);
-  strcat(result, measurement);
-  #endif
-
-  result_json += sprintf(result_json, "{\"temp\":%.1f,\"freq\":%.2f,\"sensors\":[", temp, freq);
+  char fields[256];
+  bool jsonReady = config_flags.mqtt_json;
+  bool firstSensor = true;
+  if (jsonReady) {
+    const int count = snprintf(fields, sizeof(fields), "{\"temp\":%.1f,\"freq\":%.2f,\"sensors\":[", temp, freq);
+    jsonReady = isfinite(temp) && isfinite(freq) && count >= 0 && count < sizeof(fields) &&
+                input_json.concat(fields);
+  }
 
   for (i = 0; i < NUM_BOARDS; i ++)
   {
@@ -258,38 +258,40 @@ void energy_meter_loop()
 
       Serial.println("I" + String(i) + "_CT" + String(j+1) + ": " + String(currentCT[j]) + "A");
 
-      if (i != 0 || j != 0)
-      {
-        result_json += sprintf(result_json, ",");
+      const int channel = i * NUM_INPUTS + j + 1;
+      const int count = snprintf(result + length, MAX_DATA_LEN - length,
+                                 ",CT%d:%.4f,PF%d:%.3f,W%d:%.2f,VA%d:%.2f",
+                                 channel, currentCT[j], channel, powerFactorCT[j],
+                                 channel, realPowerCT[j], channel, vaPowerCT[j]);
+      if (count < 0 || count >= MAX_DATA_LEN - length) {
+        result[0] = '\0';
+        input_json.remove(0);
+        return;
       }
+      length += count;
 
-      result_json += sprintf(result_json, "{\"ct\":%d", i*NUM_INPUTS+j+1);
-      result_json += sprintf(result_json, ",\"name\":\"%s\"", ct_name[i*NUM_INPUTS+j].c_str());
-      result_json += sprintf(result_json, ",\"w\":%.2f", realPowerCT[j]);
-      result_json += sprintf(result_json, ",\"a\":%.4f", currentCT[j]);
-      result_json += sprintf(result_json, ",\"pf\":%.3f", powerFactorCT[j]);
-      result_json += sprintf(result_json, ",\"va\":%.2f", vaPowerCT[j]);
-      result_json += sprintf(result_json, ",\"v\":%.2f}", voltageCT[j]);
-
-      sprintf(result + strlen(result), ",CT%d:", i*NUM_INPUTS+j+1);
-      dtostrf(currentCT[j], 2, 4, measurement);
-      strcat(result, measurement);
-
-      sprintf(result + strlen(result), ",PF%d:", i*NUM_INPUTS+j+1);
-      dtostrf(powerFactorCT[j], 2, 3, measurement);
-      strcat(result, measurement);
-
-      sprintf(result + strlen(result), ",W%d:", i*NUM_INPUTS+j+1);
-      dtostrf(realPowerCT[j], 2, 2, measurement);
-      strcat(result, measurement);
-
-      sprintf(result + strlen(result), ",VA%d:", i*NUM_INPUTS+j+1);
-      dtostrf(vaPowerCT[j], 2, 2, measurement);
-      strcat(result, measurement);
+      if (jsonReady) {
+        const int prefix = snprintf(fields, sizeof(fields), "%s{\"ct\":%d,\"name\":\"",
+                                    firstSensor ? "" : ",", channel);
+        jsonReady = prefix >= 0 && prefix < sizeof(fields) && input_json.concat(fields) &&
+                    input_json.concat(jsonEscape(ct_name[channel - 1]));
+        const int values = snprintf(fields, sizeof(fields),
+                                    "\",\"w\":%.2f,\"a\":%.4f,\"pf\":%.3f,\"va\":%.2f,\"v\":%.2f}",
+                                    realPowerCT[j], currentCT[j], powerFactorCT[j], vaPowerCT[j], voltageCT[j]);
+        jsonReady = jsonReady && isfinite(realPowerCT[j]) && isfinite(currentCT[j]) &&
+                    isfinite(powerFactorCT[j]) && isfinite(vaPowerCT[j]) && isfinite(voltageCT[j]) &&
+                    values >= 0 && values < sizeof(fields) && input_json.concat(fields);
+        firstSensor = false;
+      }
     }
     Serial.println("");
   }
-  strcpy(result_json, "]}");
+  if (jsonReady) {
+    const int count = snprintf(fields, sizeof(fields), "],\"freeram\":%lu,\"rssi\":%d}",
+                               (unsigned long)ESP.getFreeHeap(), WiFi.RSSI());
+    jsonReady = count >= 0 && count < sizeof(fields) && input_json.concat(fields);
+  }
+  if (!jsonReady) input_json.remove(0);
 
 #ifdef ENABLE_OLED_DISPLAY
   /* Write meter data to the display */
