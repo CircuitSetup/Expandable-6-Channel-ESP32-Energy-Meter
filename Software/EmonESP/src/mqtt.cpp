@@ -29,21 +29,20 @@
 #include "emonesp.h"
 #include "mqtt.h"
 #include "config.h"
-#include "esp_wifi.h"
+#include <WiFi.h>
 #include "energy_meter.h"
 
 WiFiClient espClient;                 // Create client for MQTT
 PubSubClient mqttclient(espClient);   // Create client for MQTT
 
-long lastMqttReconnectAttempt = 0;
+unsigned long lastMqttReconnectAttempt = 0;
 int clientTimeout = 0;
 int i = 0;
 
-char input_json[MAX_DATA_LEN];
+String input_json;
 
 static char mqtt_topic_prefix[128] = "";
 static char mqtt_data[64] = "";
-static int mqtt_connection_error_count = 0;
 
 // -------------------------------------------------------------------
 // MQTT Connect
@@ -96,63 +95,46 @@ boolean mqtt_connect()
 // -------------------------------------------------------------------
 void mqtt_publish(const char * data)
 {
-  if (config_flags.mqtt_json)
-  {
-    // add some data onto the end
-    sprintf(input_json+strlen(input_json)-1,
-      ",\"freeram\":%lu,\"rssi\":%d}", (unsigned long)ESP.getFreeHeap(), WiFi.RSSI());
-
-    if (!mqttclient.publish(mqtt_topic.c_str(), input_json, false))
-    {
-      return;
-    }
+  if (config_flags.mqtt_json) {
+    if (input_json.length() == 0) return;
+    const size_t packetSize = input_json.length() + mqtt_topic.length() + 7;
+    if (packetSize > UINT16_MAX) return;
+    if (packetSize > mqttclient.getBufferSize() && !mqttclient.setBufferSize(packetSize)) return;
+    mqttclient.publish(mqtt_topic.c_str(), input_json.c_str(), false);
+    return;
   }
-  else
-  {
-    const char * data_ptr = data;
-    char * topic_ptr = mqtt_topic_prefix;
-    topic_ptr += sprintf(mqtt_topic_prefix, "%s/%s", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
 
-    do
-    {
-      int pos = strcspn(data_ptr, ":");
-      strncpy(topic_ptr, data_ptr, pos);
-      topic_ptr[pos] = 0;
-      data_ptr += pos;
-      if (*data_ptr++ == 0) {
-        break;
-      }
+  const int prefixLength = snprintf(mqtt_topic_prefix, sizeof(mqtt_topic_prefix), "%s/%s",
+                                   mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
+  if (prefixLength < 0 || prefixLength >= sizeof(mqtt_topic_prefix)) return;
+  char *suffix = mqtt_topic_prefix + prefixLength;
+  const size_t suffixSize = sizeof(mqtt_topic_prefix) - prefixLength;
+  if (suffixSize <= strlen("freeram")) return;
 
-      pos = strcspn(data_ptr, ",");
-      strncpy(mqtt_data, data_ptr, pos);
-      mqtt_data[pos] = 0;
-      data_ptr += pos;
+  while (*data) {
+    const size_t keyLength = strcspn(data, ":,");
+    if (data[keyLength] != ':' || keyLength == 0 || keyLength >= suffixSize) return;
+    const char *value = data + keyLength + 1;
+    const size_t valueLength = strcspn(value, ",");
+    if (valueLength >= sizeof(mqtt_data)) return;
 
-      // send data via mqtt
-      //delay(100);
-      //DBUGS.printf("%s = %s\r\n", mqtt_topic_prefix, mqtt_data);
-      if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
-      {
-        return;
-      }
-    } while (*data_ptr++ != 0);
+    memcpy(suffix, data, keyLength);
+    suffix[keyLength] = '\0';
+    memcpy(mqtt_data, value, valueLength);
+    mqtt_data[valueLength] = '\0';
+    if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data)) return;
 
-    // send esp free ram
-    sprintf(mqtt_topic_prefix, "%s/%sfreeram", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
-    sprintf(mqtt_data, "%lu", (unsigned long)ESP.getFreeHeap());
-    if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
-    {
-      return;
-    }
-
-    // send wifi signal strength
-    sprintf(mqtt_topic_prefix, "%s/%srssi", mqtt_topic.c_str(), mqtt_feed_prefix.c_str());
-    sprintf(mqtt_data, "%d", WiFi.RSSI());
-    if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data))
-    {
-      return;
-    }
+    data = value + valueLength;
+    if (*data) ++data;
   }
+
+  strcpy(suffix, "freeram");
+  snprintf(mqtt_data, sizeof(mqtt_data), "%lu", (unsigned long)ESP.getFreeHeap());
+  if (!mqttclient.publish(mqtt_topic_prefix, mqtt_data)) return;
+
+  strcpy(suffix, "rssi");
+  snprintf(mqtt_data, sizeof(mqtt_data), "%d", WiFi.RSSI());
+  mqttclient.publish(mqtt_topic_prefix, mqtt_data);
 }
 
 // -------------------------------------------------------------------
@@ -163,19 +145,11 @@ void mqtt_publish(const char * data)
 void mqtt_loop()
 {
   if (!mqttclient.connected()) {
-    long now = millis();
+    const unsigned long now = millis();
     // try and reconnect continuously for first 5s then try again once every 10s
     if ( (now < 5000) || ((now - lastMqttReconnectAttempt)  > 10000) ) {
       lastMqttReconnectAttempt = now;
-      if (mqtt_connect()) { // Attempt to reconnect
-        lastMqttReconnectAttempt = 0;
-        mqtt_connection_error_count = 0;
-      } else {
-        mqtt_connection_error_count ++;
-        if (mqtt_connection_error_count > 10) {
-          esp_restart();
-        }
-      }
+      if (mqtt_connect()) lastMqttReconnectAttempt = 0;
     }
   } else {
     // if MQTT connected

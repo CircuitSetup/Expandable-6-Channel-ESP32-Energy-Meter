@@ -28,6 +28,7 @@
 #include "emonesp.h"
 #include "esp_wifi.h"
 #include "config.h"
+#include "json.h"
 
 /*
 DNSServer dnsServer;                  // Create class DNS server, captive portal re-direct
@@ -324,13 +325,13 @@ void wifi_loop()
       apMessage = false;
     } else {
       DBUGS.println("Button released");
-      if (millis() > wifiButtonTimeOut + WIFI_BUTTON_AP_TIMEOUT) {
+      if (millis() - wifiButtonTimeOut >= WIFI_BUTTON_AP_TIMEOUT) {
         wifi_turn_on_ap();
       }
     }
   }
 
-  if (LOW == wifiButtonState && millis() > wifiButtonTimeOut + WIFI_BUTTON_FACTORY_RESET_TIMEOUT)
+  if (LOW == wifiButtonState && millis() - wifiButtonTimeOut >= WIFI_BUTTON_FACTORY_RESET_TIMEOUT)
   {
     DBUGS.println("Factory reset");
     delay(1000);
@@ -341,7 +342,7 @@ void wifi_loop()
     delay(50);
     esp_restart();
   }
-  else if (false == apMessage && LOW == wifiButtonState && millis() > wifiButtonTimeOut + WIFI_BUTTON_AP_TIMEOUT)
+  else if (false == apMessage && LOW == wifiButtonState && millis() - wifiButtonTimeOut >= WIFI_BUTTON_AP_TIMEOUT)
   {
     DBUGS.println("Access point");
     apMessage = true;
@@ -395,7 +396,7 @@ void wifi_scan() {
   st = "";
   rssi = "";
   for (int i = 0; i < n; ++i) {
-    st += "\"" + WiFi.SSID(i) + "\"";
+    st += "\"" + jsonEscape(WiFi.SSID(i)) + "\"";
     rssi += "\"" + String(WiFi.RSSI(i)) + "\"";
     if (i < n - 1)
       st += ",";

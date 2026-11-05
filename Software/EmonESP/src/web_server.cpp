@@ -36,9 +36,11 @@
 #include "emoncms.h"
 #include "ota.h"
 #include "debug.h"
+#include "json.h"
 
 AsyncWebServer server(80);          //Create class for Web server
 AsyncWebSocket ws("/ws");
+static AsyncStaticWebHandler *staticFiles = nullptr;
 
 bool enableCors = true;
 
@@ -56,48 +58,7 @@ static const char _DUMMY_PASSWORD[] PROGMEM = "_DUMMY_PASSWORD";
 String currentfirmware = ESCAPEQUOTE(BUILD_TAG);
 
 void dumpRequest(AsyncWebServerRequest *request) {
-  if (request->method() == HTTP_GET) {
-    DBUGF("GET");
-  } else if (request->method() == HTTP_POST) {
-    DBUGF("POST");
-  } else if (request->method() == HTTP_DELETE) {
-    DBUGF("DELETE");
-  } else if (request->method() == HTTP_PUT) {
-    DBUGF("PUT");
-  } else if (request->method() == HTTP_PATCH) {
-    DBUGF("PATCH");
-  } else if (request->method() == HTTP_HEAD) {
-    DBUGF("HEAD");
-  } else if (request->method() == HTTP_OPTIONS) {
-    DBUGF("OPTIONS");
-  } else {
-    DBUGF("UNKNOWN");
-  }
-  DBUGF(" http://%s%s", request->host().c_str(), request->url().c_str());
-
-  if (request->contentLength()) {
-    DBUGF("_CONTENT_TYPE: %s", request->contentType().c_str());
-    DBUGF("_CONTENT_LENGTH: %u", request->contentLength());
-  }
-
-  int headers = request->headers();
-  int i;
-  for (i = 0; i < headers; i++) {
-    const AsyncWebHeader* h = request->getHeader(i);
-    DBUGF("_HEADER[%s]: %s", h->name().c_str(), h->value().c_str());
-  }
-
-  int params = request->params();
-  for (i = 0; i < params; i++) {
-    const AsyncWebParameter* p = request->getParam(i);
-    if (p->isFile()) {
-      DBUGF("_FILE[%s]: %s, size: %u", p->name().c_str(), p->value().c_str(), p->size());
-    } else if (p->isPost()) {
-      DBUGF("_POST[%s]: %s", p->name().c_str(), p->value().c_str());
-    } else {
-      DBUGF("_GET[%s]: %s", p->name().c_str(), p->value().c_str());
-    }
-  }
+  DBUGF("HTTP %u %s", request->method(), request->url().c_str());
 }
 
 // -------------------------------------------------------------------
@@ -117,7 +78,7 @@ bool requestPreProcess(AsyncWebServerRequest *request, AsyncResponseStream *&res
     return false;
   }
 
-  if (wifi_mode_is_sta() && www_username != "" &&
+  if (www_username != "" &&
       false == request->authenticate(www_username.c_str(), www_password.c_str())) {
     request->requestAuthentication(esp_hostname);
     return false;
@@ -140,8 +101,7 @@ bool requestPreProcess(AsyncWebServerRequest *request, AsyncResponseStream *&res
 void handleHome(AsyncWebServerRequest *request) {
   if (www_username != ""
       && !request->authenticate(www_username.c_str(),
-                                www_password.c_str())
-      && wifi_mode_is_sta()) {
+                                www_password.c_str())) {
     return request->requestAuthentication();
   }
 
@@ -170,12 +130,12 @@ void handleScan(AsyncWebServerRequest *request) {
   int n = WiFi.scanComplete();
   if (n == -2) {
     WiFi.scanNetworks(true, true); //2nd true handles isHidden on ESP32
-  } else if (n) {
+  } else if (n >= 0) {
     for (int i = 0; i < n; ++i) {
       if (i) json += ",";
       json += "{";
       json += "\"rssi\":" + String(WiFi.RSSI(i));
-      json += ",\"ssid\":\"" + WiFi.SSID(i) + "\"";
+      json += ",\"ssid\":\"" + jsonEscape(WiFi.SSID(i)) + "\"";
       json += ",\"bssid\":\"" + WiFi.BSSIDstr(i) + "\"";
       json += ",\"channel\":" + String(WiFi.channel(i));
       json += ",\"secure\":" + String(WiFi.encryptionType(i));
@@ -187,7 +147,8 @@ void handleScan(AsyncWebServerRequest *request) {
     }
   }
   json += "]";
-  request->send(200, "text/json", json);
+  response->print(json);
+  request->send(response);
 }
 
 // -------------------------------------------------------------------
@@ -260,17 +221,8 @@ void handleSaveEmoncms(AsyncWebServerRequest *request) {
                       apikey,
                       request->arg("fingerprint"));
 
-  char tmpStr[200];
-  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s",
-           emoncms_server.c_str(),
-           emoncms_path.c_str(),
-           emoncms_node.c_str(),
-           emoncms_apikey.c_str(),
-           emoncms_fingerprint.c_str());
-  DBUGLN(tmpStr);
-
   response->setCode(200);
-  response->print(tmpStr);
+  response->print("saved");
   request->send(response);
 }
 
@@ -296,13 +248,8 @@ void handleSaveMqtt(AsyncWebServerRequest *request) {
                    pass,
                    request->arg("json") != "false");
 
-  char tmpStr[200];
-  snprintf(tmpStr, sizeof(tmpStr), "Saved: %s %s %s %s %s", mqtt_server.c_str(),
-           mqtt_topic.c_str(), mqtt_feed_prefix.c_str(), mqtt_user.c_str(), mqtt_pass.c_str());
-  DBUGLN(tmpStr);
-
   response->setCode(200);
-  response->print(tmpStr);
+  response->print("saved");
   request->send(response);
 
   // If connected disconnect MQTT to trigger re-connect with new details
@@ -319,7 +266,12 @@ void handleSaveCal(AsyncWebServerRequest *request) {
     return;
   }
 
-  config_save_cal(request);
+  if (!config_save_cal(request)) {
+    response->setCode(400);
+    response->print("Invalid calibration settings");
+    request->send(response);
+    return;
+  }
 
   response->setCode(200);
   request->send(response);
@@ -345,7 +297,16 @@ void handleSaveAdmin(AsyncWebServerRequest *request) {
     qpass = www_password;
   }
 
+  // Each 16-byte EEPROM slot reserves one byte for the checksum.
+  if (quser.length() > 15 || qpass.length() > 15) {
+    response->setCode(400);
+    response->print("Admin username and password must each be 15 bytes or less");
+    request->send(response);
+    return;
+  }
+
   config_save_admin(quser, qpass);
+  staticFiles->setAuthentication(www_username.c_str(), www_password.c_str());
 
   response->setCode(200);
   response->print("saved");
@@ -422,25 +383,25 @@ void handleConfig(AsyncWebServerRequest *request) {
   s += "\"espflash\":\"" + String(ESP.getFlashChipSize()) + "\",";
   s += "\"version\":\"" + currentfirmware + "\",";
 
-  s += "\"ssid\":\"" + esid + "\",";
+  s += "\"ssid\":\"" + jsonEscape(esid) + "\",";
   s += "\"pass\":\"";
   if (epass != 0) {
     s += dummyPassword;
   }
   s += "\",";
-  s += "\"emoncms_server\":\"" + emoncms_server + "\",";
-  s += "\"emoncms_path\":\"" + emoncms_path + "\",";
-  s += "\"emoncms_node\":\"" + emoncms_node + "\",";
+  s += "\"emoncms_server\":\"" + jsonEscape(emoncms_server) + "\",";
+  s += "\"emoncms_path\":\"" + jsonEscape(emoncms_path) + "\",";
+  s += "\"emoncms_node\":\"" + jsonEscape(emoncms_node) + "\",";
   s += "\"emoncms_apikey\":\"";
   if (emoncms_apikey != 0) {
     s += dummyPassword;
   }
   s += "\",";
-  s += "\"emoncms_fingerprint\":\"" + emoncms_fingerprint + "\",";
-  s += "\"mqtt_server\":\"" + mqtt_server + "\",";
-  s += "\"mqtt_topic\":\"" + mqtt_topic + "\",";
-  s += "\"mqtt_feed_prefix\":\"" + mqtt_feed_prefix + "\",";
-  s += "\"mqtt_user\":\"" + mqtt_user + "\",";
+  s += "\"emoncms_fingerprint\":\"" + jsonEscape(emoncms_fingerprint) + "\",";
+  s += "\"mqtt_server\":\"" + jsonEscape(mqtt_server) + "\",";
+  s += "\"mqtt_topic\":\"" + jsonEscape(mqtt_topic) + "\",";
+  s += "\"mqtt_feed_prefix\":\"" + jsonEscape(mqtt_feed_prefix) + "\",";
+  s += "\"mqtt_user\":\"" + jsonEscape(mqtt_user) + "\",";
   s += "\"mqtt_pass\":\"";
   if (mqtt_pass != 0) {
     s += dummyPassword;
@@ -453,7 +414,7 @@ void handleConfig(AsyncWebServerRequest *request) {
     s += "false";
   }
   s += "\",";
-  s += "\"www_username\":\"" + www_username + "\",";
+  s += "\"www_username\":\"" + jsonEscape(www_username) + "\",";
   s += "\"www_password\":\"";
   if (www_password != 0) {
     s += dummyPassword;
@@ -481,7 +442,7 @@ void handleConfig(AsyncWebServerRequest *request) {
   }
   for (int i = 0; i < NUM_CHANNELS; i ++)
   {
-    s += "\"ct" + String(i+1) + "_name\":\"" + ct_name[i] + "\",";
+    s += "\"ct" + String(i+1) + "_name\":\"" + jsonEscape(ct_name[i]) + "\",";
     s += "\"ct" + String(i+1) + "_cal\":\"" + ct_cal[i] + "\",";
     s += "\"cur" + String(i+1) + "_mul\":\"" + cur_mul[i] + "\",";
     s += "\"pow" + String(i+1) + "_mul\":\"" + pow_mul[i] + "\",";
@@ -637,9 +598,26 @@ void handleUpdateGet(AsyncWebServerRequest *request) {
   request->send(response);
 }
 
+static AsyncWebServerRequest *updateUploadRequest = nullptr;
+
+static void releaseUpdateUpload(AsyncWebServerRequest *request) {
+  if (updateUploadRequest != request) {
+    return;
+  }
+  if (!request->getAttribute("updateComplete", false)) {
+    Update.abort();
+  }
+  updateUploadRequest = nullptr;
+}
+
 void handleUpdatePost(AsyncWebServerRequest *request) {
-  bool shouldReboot = !Update.hasError();
-  AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", shouldReboot ? "Update Complete. Rebooting in 20 seconds." : "Update FAIL");
+  releaseUpdateUpload(request);
+  if (www_username != "" && !request->authenticate(www_username.c_str(), www_password.c_str())) {
+    request->requestAuthentication();
+    return;
+  }
+  bool shouldReboot = request->getAttribute("updateComplete", false);
+  AsyncWebServerResponse *response = request->beginResponse(shouldReboot ? 200 : 400, "text/plain", shouldReboot ? "Update Complete. Rebooting." : "Update FAIL");
   response->addHeader("Refresh", "20");
   response->addHeader("Location", "/");
   request->send(response);
@@ -650,31 +628,49 @@ void handleUpdatePost(AsyncWebServerRequest *request) {
 }
 
 void handleUpdateUpload(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+  // Upload callbacks run before the POST handler, so authenticate before writing flash.
+  if (www_username != "" && !request->authenticate(www_username.c_str(), www_password.c_str())) {
+    return;
+  }
 
   if (!index) {
+    if (updateUploadRequest) {
+      return;
+    }
     DBUGF("Update Start: %s\n", filename.c_str());
     // if filename includes spiffs, update the spiffs partition
-    int cmd = (filename.indexOf("spiffs") > 0) ? U_SPIFFS : U_FLASH;
+    int cmd = (filename.indexOf("spiffs") >= 0) ? U_SPIFFS : U_FLASH;
     if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
 #ifdef ENABLE_DEBUG
       Update.printError(DEBUG_PORT);
 #endif
+      return;
     }
+    updateUploadRequest = request;
+    request->onDisconnect([request]() { releaseUpdateUpload(request); });
+  }
+
+  if (updateUploadRequest != request || request->getAttribute("updateComplete", false)) {
+    return;
   }
 
   if (Update.write(data, len) != len) {
 #ifdef ENABLE_DEBUG
     Update.printError(DEBUG_PORT);
 #endif
+    releaseUpdateUpload(request);
+    return;
   }
 
   if (final) {
     if (Update.end(true)) {
+      request->setAttribute("updateComplete", true);
       DBUGF("Update Success: %uB\n", index + len);
     } else {
 #ifdef ENABLE_DEBUG
       Update.printError(DEBUG_PORT);
 #endif
+      updateUploadRequest = nullptr;
     }
   }
 }
@@ -741,9 +737,8 @@ void web_server_setup()
   server.addHandler(&ws);
 
   // Setup the static files
-  server.serveStatic("/", SPIFFS, "/")
-  .setDefaultFile("index.html")
-  .setAuthentication(www_username.c_str(), www_password.c_str());
+  staticFiles = &server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
+  staticFiles->setAuthentication(www_username.c_str(), www_password.c_str());
 
   // Start server & server root html /
   server.on("/", handleHome);

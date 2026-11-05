@@ -28,8 +28,8 @@
 #include "emonesp.h"
 #include "emoncms.h"
 #include "config.h"
+#include <WiFi.h>
 #include "http.h"
-#include "esp_wifi.h"
 
 //EMONCMS SERVER strings
 const char* e_url = "/input/post.json?json=";
@@ -37,18 +37,21 @@ boolean emoncms_connected = false;
 
 unsigned long packets_sent = 0;
 unsigned long packets_success = 0;
-unsigned long emoncms_connection_error_count = 0;
 
 static char url[MAX_DATA_LEN+100];
 
 void emoncms_publish(const char * data)
 {
   // We now create a URL for server data upload
-  sprintf(url, "%s%s{%s,psent:%lu,psuccess:%lu,freeram:%lu,rssi:%d}&node=%s&apikey=%s",
+  const int urlLength = snprintf(url, sizeof(url), "%s%s{%s,psent:%lu,psuccess:%lu,freeram:%lu,rssi:%d}&node=%s&apikey=%s",
     emoncms_path.c_str(), e_url, data, packets_sent, packets_success, ESP.getFreeHeap(),
     WiFi.RSSI(), emoncms_node.c_str(), emoncms_apikey.c_str());
 
-  DBUGLN(url); delay(10);
+  if (urlLength < 0 || urlLength >= sizeof(url)) {
+    emoncms_connected = false;
+    DBUGS.println("Emoncms request too long");
+    return;
+  }
   packets_sent++;
 
   // Send data to Emoncms server
@@ -65,15 +68,10 @@ void emoncms_publish(const char * data)
   if (result == "ok") {
     packets_success++;
     emoncms_connected = true;
-    emoncms_connection_error_count = 0;
   }
   else {
     emoncms_connected = false;
     DBUGS.print("Emoncms error: ");
     DBUGS.println(result);
-    emoncms_connection_error_count ++;
-    if (emoncms_connection_error_count > 30) {
-      esp_restart();
-    }
   }
 }

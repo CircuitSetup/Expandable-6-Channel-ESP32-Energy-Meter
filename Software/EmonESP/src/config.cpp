@@ -29,6 +29,9 @@
 #include "emonesp.h"
 #include "energy_meter.h"
 #include "config.h"
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 // Wifi Network Strings
 String esid = "";
@@ -135,7 +138,7 @@ struct config_flags_t config_flags = { 0 };
 #define EEPROM_CONFIG_FLAGS_END   (EEPROM_CONFIG_FLAGS_START + EEPROM_CONFIG_FLAGS_SIZE)
 #define EEPROM_NAME_CT_START      EEPROM_CONFIG_FLAGS_END
 #define EEPROM_NAME_CT_END        (EEPROM_NAME_CT_START + EEPROM_NAME_CT_SIZE*NUM_CHANNELS)
-#define EEPROM_CONFIG_END         EEPROM_NAME_CT_MUL_END
+#define EEPROM_CONFIG_END         EEPROM_NAME_CT_END
 
 #if EEPROM_CONFIG_END > EEPROM_SIZE
 #error EEPROM_SIZE too small
@@ -158,6 +161,7 @@ void ResetEEPROM() {
 }
 
 void EEPROM_read_string(int start, int count, String & val, String defaultVal = "") {
+  val = "";
   byte checksum = CHECKSUM_SEED;
   for (int i = 0; i < count - 1; ++i) {
     byte c = EEPROM.read(start + i);
@@ -171,9 +175,7 @@ void EEPROM_read_string(int start, int count, String & val, String defaultVal = 
 
   // Check the checksum
   byte c = EEPROM.read(start + (count - 1));
-  DBUGF("Got '%s' %d == %d @ %d:%d", val.c_str(), c, checksum, start, count);
   if (c != checksum) {
-    DBUGF("Using default '%s'", defaultVal.c_str());
     val = defaultVal;
   }
 }
@@ -214,12 +216,13 @@ unsigned short EEPROM_read_ushort(int start, unsigned short defaultVal = 0) {
 
   // Check the checksum
   c[i] = EEPROM.read(start + i);
-  //DBUGF("Got '%u' %d == %d @ %d:%d", *((unsigned short *)&c), c[i], checksum, start, i);
   if (c[i] != checksum) {
     DBUGF("Using default '%u'", defaultVal);
     return defaultVal;
   }
-  return *((unsigned short *)&c);
+  unsigned short val;
+  memcpy(&val, c, sizeof(val));
+  return val;
 }
 
 float EEPROM_read_float(int start, float defaultVal = 0) {
@@ -234,12 +237,13 @@ float EEPROM_read_float(int start, float defaultVal = 0) {
 
   // Check the checksum
   c[i] = EEPROM.read(start + i);
-  //DBUGF("Got '%f' %d == %d @ %d:%d", *((float *)&c), c[i], checksum, start, i);
   if (c[i] != checksum) {
     DBUGF("Using default '%f'", defaultVal);
     return defaultVal;
   }
-  return *((float *)&c);
+  float val;
+  memcpy(&val, c, sizeof(val));
+  return val;
 }
 
 void EEPROM_write_string(int start, int count, String val) {
@@ -253,20 +257,17 @@ void EEPROM_write_string(int start, int count, String val) {
     }
   }
   EEPROM.write(start + (count - 1), checksum);
-  DBUGF("Saved '%s' %d @ %d:%d", val.c_str(), checksum, start, count);
 }
 
 void EEPROM_write_fingerprint(int start, int count, String val) {
   byte checksum = CHECKSUM_SEED;
   for (int i = 0; i < count - 1; ++i) {
+    unsigned int b = 0;
     if (i*3 < val.length()) {
-      byte b;
-      sscanf(&val.c_str()[i*3], "%x", (unsigned int*)&b);
-      checksum ^= b;
-      EEPROM.write(start + i, b);
-    } else {
-      EEPROM.write(start + i, 0);
+      sscanf(&val.c_str()[i*3], "%2x", &b);
     }
+    checksum ^= b;
+    EEPROM.write(start + i, b);
   }
   EEPROM.write(start + (count - 1), checksum);
   DBUGF("Saved '%s' %d @ %d:%d", val.c_str(), checksum, start, count);
@@ -343,8 +344,8 @@ void config_load_settings()
     gain_cal[i] = EEPROM_read_ushort(EEPROM_CAL_GAIN_START + (i*EEPROM_CAL_GAIN_SIZE), PGA_GAIN_DEFAULT);
   }
 
-  // Configuration flags
-  *((uint16_t *)&config_flags) = EEPROM_read_ushort(EEPROM_CONFIG_FLAGS_START, 0);
+  // MQTT JSON occupies bit zero in the stored flags word.
+  config_flags.mqtt_json = EEPROM_read_ushort(EEPROM_CONFIG_FLAGS_START, 0) & 1;
 
   // Web server credentials
   EEPROM_read_string(EEPROM_WWW_USER_START, EEPROM_WWW_USER_SIZE, www_username);
@@ -408,15 +409,58 @@ void config_save_mqtt(String server, String topic, String prefix, String user, S
   EEPROM_write_string(EEPROM_MQTT_PASS_START, EEPROM_MQTT_PASS_SIZE, mqtt_pass);
 
   // Configuration flags
-  EEPROM_write_ushort(EEPROM_CONFIG_FLAGS_START, *((uint16_t *)&config_flags));
+  EEPROM_write_ushort(EEPROM_CONFIG_FLAGS_START, config_flags.mqtt_json);
 
   EEPROM.end();
 }
 
-//for CircuitSetup 6 channel energy meter
-void config_save_cal(AsyncWebServerRequest * request)
+static long calibrationInteger(const String &arg)
+{
+  const char *start = arg.c_str();
+  char *end;
+  long value = strtol(start, &end, 10);
+  return end != start && *end == '\0' && value >= 0 && value <= 65535 ? value : -1;
+}
+
+static bool validCalibrationMultiplier(const String &arg)
+{
+  const char *start = arg.c_str();
+  char *end;
+  float value = strtof(start, &end);
+  return end != start && *end == '\0' && isfinite(value);
+}
+
+bool config_save_cal(AsyncWebServerRequest * request)
 {
   char req[12];
+  if (calibrationInteger(request->arg("voltage_cal")) < 0 ||
+      calibrationInteger(request->arg("voltage2_cal")) < 0 ||
+      calibrationInteger(request->arg("freq_cal")) < 0) {
+    return false;
+  }
+  for (int i = 1; i <= NUM_CHANNELS; ++i) {
+    sprintf(req, "ct%d_name", i);
+    if (!request->hasArg(req) || request->arg(req).length() >= EEPROM_NAME_CT_SIZE) {
+      return false;
+    }
+    sprintf(req, "ct%d_cal", i);
+    if (calibrationInteger(request->arg(req)) < 0) {
+      return false;
+    }
+    sprintf(req, "cur%d_mul", i);
+    if (!validCalibrationMultiplier(request->arg(req))) {
+      return false;
+    }
+    sprintf(req, "pow%d_mul", i);
+    if (!validCalibrationMultiplier(request->arg(req))) {
+      return false;
+    }
+    sprintf(req, "gain%d_cal", i);
+    long gain = calibrationInteger(request->arg(req));
+    if (gain != 1 && gain != 2 && gain != 4) {
+      return false;
+    }
+  }
 
   EEPROM.begin(EEPROM_SIZE);
 
@@ -469,6 +513,7 @@ void config_save_cal(AsyncWebServerRequest * request)
   }
 
   EEPROM.end();
+  return true;
 }
 
 void config_save_admin(String user, String pass)
