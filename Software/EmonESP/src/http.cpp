@@ -27,56 +27,82 @@
 */
 #include "emonesp.h"
 #include "http.h"
+#include <mbedtls/sha1.h>
+#include <strings.h>
 
-WiFiClient client;                  // Create class for HTTP TCP connections get_http()
-WiFiClientSecure client_ssl;        // Create class for HTTPS TCP connections get_https()
+static bool verifyFingerprint(WiFiClientSecure &client, const char *fingerprint, const char *host)
+{
+  // EEPROM stores the original 20-byte SHA-1 certificate fingerprint.
+  unsigned char sha1[20];
+  const mbedtls_x509_crt *certificate = client.getPeerCertificate();
+  if (strlen(fingerprint) != sizeof(sha1) * 3 - 1 || !certificate ||
+      mbedtls_sha1_ret(certificate->raw.p, certificate->raw.len, sha1) != 0) {
+    return false;
+  }
+  for (size_t i = 0; i < sizeof(sha1); ++i) {
+    char pair[3];
+    snprintf(pair, sizeof(pair), "%02x", static_cast<unsigned int>(sha1[i]));
+    const char *byte = fingerprint + i * 3;
+    if (strncasecmp(byte, pair, 2) != 0 || (i + 1 < sizeof(sha1) && byte[2] != ':' && byte[2] != ' ')) {
+      return false;
+    }
+  }
 
-static char request[MAX_DATA_LEN+100];
+  // The Arduino verifier takes SHA-256 and also checks the certificate hostname.
+  unsigned char sha256[32];
+  if (!client.getFingerprintSHA256(sha256)) return false;
+  char sha256Hex[sizeof(sha256) * 2 + 1];
+  for (size_t i = 0; i < sizeof(sha256); ++i) {
+    snprintf(sha256Hex + i * 2, 3, "%02x", static_cast<unsigned int>(sha256[i]));
+  }
+  return client.verify(sha256Hex, host);
+}
 
-// -------------------------------------------------------------------
-// HTTP or HTTPS GET Request
-// url: N/A
-// -------------------------------------------------------------------
-
-String get_http(const char * host, const char * url, int port, const char * fingerprint) {
-  WiFiClientSecure * http;
-
+String get_http(const char *host, const char *url, int port, const char *fingerprint)
+{
+  WiFiClient client;
+  WiFiClientSecure client_ssl;
   if (fingerprint) {
-    http = &client_ssl;
-  } else {
-    http = (WiFiClientSecure *) &client;
+    client_ssl.setInsecure(); // Verify the configured pin before sending the request.
+    client_ssl.setHandshakeTimeout(HTTP_TIMEOUT);
+  }
+  WiFiClient &http = fingerprint ? static_cast<WiFiClient &>(client_ssl) : client;
+  if (!http.connect(host, port, HTTP_TIMEOUT * 1000)) {
+    DBUGS.printf("%s:%d\n", host, port);
+    return "Connection error";
+  }
+  http.setTimeout(HTTP_TIMEOUT);
+  if (fingerprint && !verifyFingerprint(client_ssl, fingerprint, host)) {
+    http.stop();
+    return "HTTPS fingerprint no match";
   }
 
-  // Use WiFiClient class to create TCP connections
-  if (!http->connect(host, port, HTTP_TIMEOUT*1000)) {
-    DBUGS.printf("%s:%d\n", host, port);      //debug
-    return ("Connection error");
+  const char *format = "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n";
+  const int length = snprintf(nullptr, 0, format, url, host);
+  if (length < 0 || http.printf(format, url, host) != static_cast<size_t>(length)) {
+    http.stop();
+    return "Request write error";
   }
-  http->setTimeout(HTTP_TIMEOUT);
-  if (!fingerprint || http->verify(fingerprint, host)) {
-    sprintf(request, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url, host);
-    http->print(request);
-    // Handle wait for reply and timeout
-    unsigned long timeout = millis();
-    while (http->available() == 0) {
-      if (millis() - timeout > (HTTP_TIMEOUT*1000)) {
-        http->stop();
-        return ("Client Timeout");
-      }
+
+  const unsigned long start = millis();
+  char status[sizeof("HTTP/1.1 200 ")] = "";
+  size_t count = 0;
+  while (millis() - start <= HTTP_TIMEOUT * 1000) {
+    const int byte = http.read();
+    if (byte == '\n') {
+      http.stop();
+      if (strcmp(status, "HTTP/1.1 200 ") == 0 || strcmp(status, "HTTP/1.0 200 ") == 0) return "ok";
+      return "error " + String(host);
+    }
+    if (byte >= 0) {
+      if (count < sizeof(status) - 1) status[count++] = byte;
+    } else {
 #ifdef ENABLE_WDT
       feedLoopWDT();
 #endif
+      delay(1);
     }
-    // Handle message receive
-    while (http->available()) {
-      String line = http->readStringUntil('\r');
-      DBUGS.println(line);      //debug
-      if (line.startsWith("HTTP/1.1 200 OK")) {
-        return ("ok");
-      }
-    }
-  } else {
-    return ("HTTPS fingerprint no match");
   }
-  return ("error " + String(host));
+  http.stop();
+  return "Client Timeout";
 }

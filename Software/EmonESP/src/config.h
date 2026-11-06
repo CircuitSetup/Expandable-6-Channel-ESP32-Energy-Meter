@@ -97,9 +97,9 @@ extern void config_save_emoncms(String server, String path, String node, String 
 extern void config_save_mqtt(String server, String topic, String prefix, String user, String pass, bool json);
 
 // -------------------------------------------------------------------
-// Save the Calibration details
+// Save the calibration details after validating every field.
 // -------------------------------------------------------------------
-extern void config_save_cal(AsyncWebServerRequest * request);
+extern bool config_save_cal(AsyncWebServerRequest * request);
 // -------------------------------------------------------------------
 // Save the admin/web interface details
 // -------------------------------------------------------------------

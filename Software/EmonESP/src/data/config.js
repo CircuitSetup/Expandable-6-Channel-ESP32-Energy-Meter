@@ -20,7 +20,7 @@ function scaleString(string, scale, precision) {
 }
 
 function isNumber(val) {
-     return (val != undefined && val != null && val.toString().length > 0 && val.toString().match(/[^0-9\.\-]/g) == null);
+  return /^-?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)$/.test(val) && Number.isFinite(Number(val));
 }
 
 function BaseViewModel(defaults, remoteUrl, mappings) {
@@ -306,8 +306,9 @@ function EmonEspViewModel() {
 		pass: self.config.www_password()
 	};
 
-	if (adminsave.user.length > 16 || adminsave.pass.length > 16) {
-		alert("Please enter a username and password that is 16 characters or less");
+	const encoder = new TextEncoder();
+	if (encoder.encode(adminsave.user).length > 15 || encoder.encode(adminsave.pass).length > 15) {
+		alert("Please keep the username and password to 15 bytes each. Some characters use more than one byte.");
 	} else {
     self.saveAdminFetching(true);
     self.saveAdminSuccess(false);
@@ -389,7 +390,7 @@ function EmonEspViewModel() {
       if (!isNumber(self.config[`ct${i}_cal`]()) || !isNumber(self.config[`cur${i}_mul`]()) || !isNumber(self.config[`pow${i}_mul`]())) {
         alert("Please enter a number for calibration values");
         return;
-      } else if (self.config[`ct${i}_cal`] > 65535) {
+      } else if (self.config[`ct${i}_cal`]() > 65535) {
         alert("Please enter calibration settings less than 65535");
         return;
       }
