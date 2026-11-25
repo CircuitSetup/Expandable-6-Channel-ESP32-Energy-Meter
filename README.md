@@ -96,10 +96,12 @@ The meter requires an AC output transformer, not a DC wall adapter.
 Supported and documented controller options:
 
 - [NodeMCU 32s](https://circuitsetup.us/product/nodemcu-32s-esp32-esp-wroom-32-development-board/)
-- Espressif ESP32-DevKitC-32E
-- Espressif ESP32-DevKitC-VIE
-- Boards with the same 19-pin-per-side pinout as the boards above
+- Espressif ESP32-DevKitC-32E (recommended for stock ESPHome configurations with add-ons)
+- Espressif ESP32-DevKitC-VIE (external antenna; see the add-on and case notes below)
+- Boards with the same 19-pin-per-side pinout and the GPIOs required by your configuration
 - Ethernet options for ESPHome only: [CircuitSetup ESP32-S3 Ethernet Adapter](https://circuitsetup.us/product/6-channel-energy-meter-ethernet-adapter/), [LilyGO T-ETH-Lite ESP32-S3](https://www.lilygo.cc/products/t-eth-lite?variant=43120880779445), or [Waveshare ESP32-S3 ETH](https://www.waveshare.com/esp32-s3-eth.htm?sku=28972)
+
+The DevKitC-VIE uses an ESP32-WROVER-IE module, which reserves GPIO16 and GPIO17. The stock ESPHome configurations use those pins for CS2 on the first and second add-on boards, respectively, so the VIE is not a drop-in option for add-ons. If you already have a VIE and one Wi-Fi add-on, see the [GPIO21 jumper and custom ESPHome configuration](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/issues/236#issuecomment-6457456185). This workaround was verified for one add-on only and requires GPIO21 to be free. Separately, [check the external antenna connector clearance](https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter/issues/218) if using a 3D-printed case.
 
 Boards with different pin maps are not drop-in compatible just because they are "ESP32" boards. For example, ESP32-C6 dev boards use different pins and are not part of the documented support path for this repo.
 If you are comparing boards visually, the documented dev boards are usually 19 pins per side, with `3V3` at the upper-left corner and `CLK` at the lower-right corner when installed correctly.
@@ -462,7 +464,7 @@ If the main board works by itself and both boards stop reporting as soon as the 
 
 **Q: Which ESP32 dev boards are supported?**
 
-**A:** Use a NodeMCU 32s, an ESP32-DevKitC-32E, an ESP32-DevKitC-VIE, or another board with the same pinout. Ethernet is supported with the documented LilyGO or Waveshare ESP32-S3 options plus the proper adapter and matching YAML. Boards with different pin maps, including ESP32-C6 dev boards, are not documented drop-in replacements for this repo.
+**A:** Use a NodeMCU 32s, an ESP32-DevKitC-32E, or another board with the same pinout and required GPIOs. For add-ons with stock ESPHome, choose the ESP32-DevKitC-32E. If you already have a DevKitC-VIE, see the [controller notes above](#esp32) for the GPIO16/17 limitation, the one-add-on workaround, and case clearance. Ethernet is supported with the documented LilyGO or Waveshare ESP32-S3 options plus the proper adapter and matching YAML. Boards with different pin maps, including ESP32-C6 dev boards, are not documented drop-in replacements for this repo.
 
 **Q: Can I connect the meter to Ethernet?**
 
